@@ -22,17 +22,17 @@ export function MarqueeBrands() {
         {/* DDI Style Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
           <div className="p-4">
-            <h3 className="text-5xl font-bold mb-2 tracking-tight">8,750+</h3>
+            <h2 className="text-5xl font-bold mb-2 tracking-tight">8,750+</h2>
             <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Jam Terselamatkan</p>
             <p className="text-xs text-gray-400 mt-1">Setiap Tahunnya</p>
           </div>
           <div className="p-4">
-            <h3 className="text-5xl font-bold mb-2 tracking-tight">300%</h3>
+            <h2 className="text-5xl font-bold mb-2 tracking-tight">300%</h2>
             <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Peningkatan Omzet</p>
             <p className="text-xs text-gray-400 mt-1">Rata-rata UMKM</p>
           </div>
           <div className="p-4">
-            <h3 className="text-5xl font-bold mb-2 tracking-tight">1.5</h3>
+            <h2 className="text-5xl font-bold mb-2 tracking-tight">1.5</h2>
             <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Detik Load Time</p>
             <p className="text-xs text-gray-400 mt-1">Sangat Cepat</p>
           </div>

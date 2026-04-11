@@ -424,6 +424,8 @@ export function Pricing() {
                            <button 
                              onClick={() => updateAddon(addon.id, "toggle")}
                              className={`w-10 h-5 rounded-full relative transition-colors flex-shrink-0 ${isSelected ? 'bg-accent-orange' : 'bg-gray-600'}`}
+                             aria-label={`Aktifkan ${addon.name}`}
+                             aria-pressed={isSelected}
                            >
                              <div className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${isSelected ? 'translate-x-5' : ''}`} />
                            </button>
@@ -441,13 +443,15 @@ export function Pricing() {
                                 onClick={() => updateAddon(addon.id, "counter", -1)}
                                 className={`text-gray-400 hover:text-white transition-colors ${qty === 0 ? 'opacity-30 cursor-not-allowed' : ''}`}
                                 disabled={qty === 0}
+                                aria-label={`Kurangi jumlah ${addon.name}`}
                               >
                                 <Minus size={14} />
                               </button>
-                              <span className="text-white text-xs font-black w-4 text-center">{qty}</span>
+                              <span className="text-white text-xs font-black w-4 text-center" aria-live="polite">{qty}</span>
                               <button 
                                 onClick={() => updateAddon(addon.id, "counter", 1)}
                                 className="text-gray-400 hover:text-white transition-colors"
+                                aria-label={`Tambah jumlah ${addon.name}`}
                               >
                                 <Plus size={14} />
                               </button>

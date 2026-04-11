@@ -69,11 +69,7 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-6">
-            <button className="text-primary-navy hover:text-accent-orange transition-colors">
-              <Search className="w-5 h-5" />
-            </button>
             <a href="#cta" className="bg-primary-navy hover:bg-secondary-blue text-white px-6 py-2.5 rounded text-sm font-bold transition-all shadow-sm">
               Konsultasi Gratis
             </a>
@@ -87,8 +83,9 @@ export function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(true)}
               className="text-primary-navy p-2 bg-gray-100 rounded-md"
+              aria-label="Buka Menu"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -116,9 +113,10 @@ export function Navbar() {
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 bg-gray-100 rounded-full text-primary-navy"
+                className="p-2 bg-gray-100 rounded-full text-primary-navy border border-gray-200"
+                aria-label="Tutup Menu"
               >
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6" aria-hidden="true" />
               </button>
             </div>
 

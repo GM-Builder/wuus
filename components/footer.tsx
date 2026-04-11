@@ -33,13 +33,14 @@ export function Footer() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-[1.02]"
+                title="Lokasi Kantor WUUS di Google Maps"
               />
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-primary-navy text-lg mb-6">Navigasi</h4>
+            <h3 className="font-bold text-primary-navy text-lg mb-6">Navigasi</h3>
             <ul className="space-y-4">
               <li><a href="#services" className="text-gray-500 hover:text-accent-orange transition-colors">Layanan Biz</a></li>
               <li><a href="#portfolio" className="text-gray-500 hover:text-accent-orange transition-colors">Portfolio Karya</a></li>
@@ -51,7 +52,7 @@ export function Footer() {
 
           {/* Contacts */}
           <div>
-            <h4 className="font-bold text-primary-navy text-lg mb-6">Hubungi Kami</h4>
+            <h3 className="font-bold text-primary-navy text-lg mb-6">Hubungi Kami</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-gray-500">
                 <MapPin size={18} className="text-accent-orange mt-1 shrink-0" />
@@ -68,11 +69,11 @@ export function Footer() {
             </ul>
 
             <div className="flex gap-4 mt-8">
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-navy hover:text-white hover:bg-accent-orange transition-colors shadow-sm">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-navy hover:text-white hover:bg-accent-orange transition-colors shadow-sm" aria-label="Kunjungi Instagram WUUS">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-navy hover:text-white hover:bg-accent-orange transition-colors shadow-sm">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-navy hover:text-white hover:bg-accent-orange transition-colors shadow-sm" aria-label="Kunjungi Facebook WUUS">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
               </a>
             </div>
           </div>

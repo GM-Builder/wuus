@@ -73,10 +73,11 @@ export function RoiCalculator() {
               className="bg-primary-navy rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-2xl border-b-8 border-accent-orange text-white"
             >
               <div className="mb-6 md:mb-8">
-                <label className="block text-xs md:text-sm font-bold text-gray-300 mb-3 md:mb-4">
+                <label htmlFor="monthly-customers" className="block text-xs md:text-sm font-bold text-gray-300 mb-3 md:mb-4">
                   Rata-rata Pelanggan per Bulan: <span className="text-white text-base md:text-lg ml-2">{monthlyCustomers}</span>
                 </label>
                 <input 
+                  id="monthly-customers"
                   type="range" 
                   min="10" 
                   max="500" 
@@ -84,14 +85,16 @@ export function RoiCalculator() {
                   value={monthlyCustomers}
                   onChange={(e) => setMonthlyCustomers(Number(e.target.value))}
                   className="w-full h-1.5 md:h-2 bg-secondary-blue rounded-lg appearance-none cursor-pointer accent-accent-orange"
+                  aria-label="Jumlah pelanggan rata-rata per bulan"
                 />
               </div>
 
               <div className="mb-6 md:mb-8">
-                <label className="block text-xs md:text-sm font-bold text-gray-300 mb-3 md:mb-4">
+                <label htmlFor="avg-transaction" className="block text-xs md:text-sm font-bold text-gray-300 mb-3 md:mb-4">
                   Rata-rata Transaksi: <span className="text-white text-base md:text-lg ml-2">{formatIDR(avgTransaction)}</span>
                 </label>
                 <input 
+                  id="avg-transaction"
                   type="range" 
                   min="10000" 
                   max="500000" 
@@ -99,6 +102,7 @@ export function RoiCalculator() {
                   value={avgTransaction}
                   onChange={(e) => setAvgTransaction(Number(e.target.value))}
                   className="w-full h-1.5 md:h-2 bg-secondary-blue rounded-lg appearance-none cursor-pointer accent-accent-orange"
+                  aria-label="Rata-rata nilai transaksi"
                 />
               </div>
 

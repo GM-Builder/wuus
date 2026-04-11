@@ -95,7 +95,7 @@ export function Testimonial() {
               </p>
 
               <div className="mt-auto border-t border-gray-100 pt-6">
-                <h4 className="font-bold text-primary-navy text-lg">{testimonial.name}</h4>
+                <h3 className="font-bold text-primary-navy text-lg">{testimonial.name}</h3>
                 <p className="text-sm font-bold tracking-widest text-gray-400 uppercase">{testimonial.role}</p>
               </div>
             </motion.div>
@@ -130,7 +130,7 @@ export function Testimonial() {
                     </p>
 
                     <div className="mt-auto border-t border-gray-100 pt-6 text-left">
-                      <h4 className="font-bold text-primary-navy text-lg">{testimonial.name}</h4>
+                      <h3 className="font-bold text-primary-navy text-lg">{testimonial.name}</h3>
                       <p className="text-sm font-bold tracking-widest text-gray-400 uppercase">{testimonial.role}</p>
                     </div>
                   </div>
