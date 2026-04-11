@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
 export function CtaSection() {
-  const whatsappNumber = "6281234567890";
+  const whatsappNumber = "6281383521750";
   const waUrl = `https://wa.me/${whatsappNumber}?text=Halo%20tim%20WUUS,%20saya%20ingin%20konsultasi%20pembuatan%20website.`;
 
   return (
@@ -48,3 +48,4 @@ export function CtaSection() {
     </section>
   );
 }
+

@@ -24,7 +24,7 @@ export function Hero() {
       <div className="container mx-auto px-4 max-w-7xl relative z-20 flex flex-col items-center">
         
         {/* Main Content constraints */}
-        <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center">
+        <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6">
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -35,19 +35,18 @@ export function Hero() {
             {/* Top Badge */}
             <div className="inline-flex flex-col items-center mb-8 relative">
               <span className="text-gray-400 font-bold tracking-[0.2em] text-xs uppercase mb-4">
-                Redefining Digital Presence
+                Solusi Digital UMKM
               </span>
               <div className="w-px h-12 bg-gray-200" />
             </div>
 
-            <h1 className="text-[2.75rem] min-[375px]:text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-primary-navy tracking-tight leading-[1.1] mb-6">
+            <h1 className="text-[2.5rem] min-[375px]:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-primary-navy tracking-tight leading-[1.05] mb-8">
               Website <span className="bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent italic">Mewah</span>, <br className="hidden md:block" />
               Harga Ramah<span className="text-accent-orange">.</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mb-12 font-medium">
-              Objective website development and personalized digital solutions <br className="hidden md:block"/>
-              for today's UMKM challenges—and tomorrow's.
+            <p className="text-base md:text-lg lg:text-xl text-gray-500 max-w-2xl mb-12 font-medium leading-relaxed">
+              Hadirkan website dengan standar teknologi perusahaan besar untuk usaha Anda. Kami membantu UMKM tampil lebih profesional, dipercaya pelanggan, dan siap tumbuh lebih besar.
             </p>
             
             {/* Action Buttons (DDI Style: Solid Orange & White w/ Outline) */}
@@ -67,7 +66,7 @@ export function Hero() {
         {/* Left Floating Image Box */}
         <motion.div 
           style={{ y: y1 }}
-          className="absolute left-4 lg:left-12 top-48 hidden lg:block"
+          className="absolute left-2 xl:left-8 top-48 hidden lg:block"
         >
           <div className="relative">
             <div className="absolute -left-6 -top-6 w-[120px] fill-accent-orange/20 z-0">
@@ -97,7 +96,7 @@ export function Hero() {
         {/* Right Floating Stat Box */}
         <motion.div 
           style={{ y: y2 }}
-          className="absolute right-4 lg:right-12 top-64 hidden lg:block"
+          className="absolute right-2 xl:right-8 top-64 hidden lg:block"
         >
           <div className="relative">
              {/* DDI style brush accent under right photo */}

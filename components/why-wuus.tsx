@@ -5,60 +5,46 @@ import { Rocket, Gem, Clock, Palette, ShieldCheck, Handshake, HeartHandshake } f
 
 const reasons = [
   {
-    title: "Performa\nNext-Gen",
-    description:
-      "Kami pakai teknologi yang sama dengan perusahaan besar Fortune 500. Hasilnya? Website Anda terbuka kilat tanpa bikin pengunjung kabur duluan.",
-    icon: Rocket,
+    title: "Selesai dalam\n7 Hari",
+    description: "Bisnis tidak boleh menunggu lama. Kami bekerja dengan sistem yang presisi agar website Anda siap melayani pelanggan dalam hitungan hari.",
+    icon: Clock,
     gradient: "from-[#1C2733] to-[#233746]",
     iconColor: "text-accent-orange",
   },
   {
-    title: "Investasi\nCerdas",
-    description:
-      "Kualitas desain kelas agensi besar, dengan harga yang memang masuk akal buat pemilik usaha. Semua biaya sudah jelas dari awal.",
-    icon: Gem,
+    title: "Terima Beres &\nTanpa Ribet",
+    description: "Anda tidak perlu pusing soal pendaftaran nama web atau teknis lainnya. Cukup ceritakan kebutuhan bisnis Anda, kami urus semuanya dari A sampai Z.",
+    icon: ShieldCheck,
     gradient: "from-[#F59E0B] to-[#FBBF24]",
     iconColor: "text-primary-navy",
   },
   {
-    title: "Go-Digital\ndalam 3 Hari",
-    description:
-      "Proses pengerjaan yang cepat dan terstruktur khas WUUS, tanpa mengorbankan detail kualitas. Bisnis Anda siap online dalam hitungan hari.",
-    icon: Clock,
+    title: "Tampilan Mewah &\nBerkelas",
+    description: "Kami memberikan sentuhan desain premium yang biasanya hanya dimiliki brand besar, kini hadir untuk memperkuat citra usaha Anda.",
+    icon: Palette,
     gradient: "from-[#1C2733] to-[#2d4a5e]",
     iconColor: "text-accent-orange",
   },
   {
-    title: "Branding\nBerkelas",
-    description:
-      "Desain bersih, modern, dan elegan yang membuat pelanggan percaya pada bisnis Anda sejak detik pertama mereka mampir.",
-    icon: Palette,
+    title: "Sangat Ringan &\nMudah Diakses",
+    description: "Website kami dirancang agar terbuka instan di HP tipe apa pun, bahkan dengan koneksi internet yang terbatas sekalipun.",
+    icon: Rocket,
     gradient: "from-[#F59E0B] to-[#D97706]",
     iconColor: "text-primary-navy",
   },
   {
-    title: "Tidak Perlu\nPaham Teknis",
-    description:
-      "Tidak tahu domain, hosting, atau coding? Tidak masalah. Kami urus semuanya dari nol. Anda cukup cerita kebutuhan bisnis Anda.",
-    icon: ShieldCheck,
+    title: "Harga Jujur &\nTransparan",
+    description: "Semua biaya jelas sejak awal. Tidak ada biaya tambahan yang tiba-tiba muncul di tengah jalan.",
+    icon: Handshake,
     gradient: "from-[#1C2733] to-[#233746]",
     iconColor: "text-accent-orange",
   },
   {
-    title: "Harga Jelas\nTanpa Kejutan",
-    description:
-      "Tidak ada biaya tersembunyi yang tiba-tiba muncul di akhir. Semua yang disepakati di awal tetap sama sampai proyek selesai.",
-    icon: Handshake,
+    title: "Pendampingan\nPersonal",
+    description: "Butuh bantuan setelah website jadi? Tim kami siap mendampingi lewat WhatsApp kapan pun Anda butuh penyesuaian.",
+    icon: HeartHandshake,
     gradient: "from-[#F59E0B] to-[#FBBF24]",
     iconColor: "text-primary-navy",
-  },
-  {
-    title: "Ada Terus\nSetelah Launching",
-    description:
-      "Setelah website tayang, kami tidak hilang begitu saja. Ada pertanyaan atau perlu perubahan kecil? Hubungi kami kapan saja lewat WhatsApp.",
-    icon: HeartHandshake,
-    gradient: "from-[#1C2733] to-[#2d4a5e]",
-    iconColor: "text-accent-orange",
   },
 ];
 
@@ -85,7 +71,7 @@ export function WhyWuus() {
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 pb-64 relative flex flex-col gap-12 z-10">
+      <div className="max-w-5xl mx-auto px-6 pb-32 relative flex flex-col gap-12 z-10">
         {reasons.map((reason, i) => (
           <motion.div
             key={reason.title}
@@ -93,41 +79,52 @@ export function WhyWuus() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-            className="sticky w-full rounded-[2rem] md:rounded-[4rem] p-10 md:p-14 shadow-[0_40px_100px_-20px_rgba(28,39,51,0.12)] flex flex-col md:flex-row items-center gap-10 md:gap-14 border border-white bg-white/80 backdrop-blur-3xl"
+            className="sticky w-full rounded-[2.5rem] md:rounded-[4.5rem] p-10 md:p-16 shadow-[0_50px_100px_-30px_rgba(28,39,51,0.15)] flex flex-col md:flex-row items-center gap-10 md:gap-16 border border-white/60 bg-white/70 backdrop-blur-2xl overflow-hidden group"
             style={{ 
               top: `calc(10vh + ${i * 40}px)`, 
               zIndex: i + 10 
             }}
           >
+            {/* Background Decor: Floating Circles */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent-orange/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-primary-navy/5 rounded-full blur-3xl pointer-events-none" />
+
             {/* Icon Block */}
             <div
-              className={`w-20 h-20 md:w-44 md:h-44 rounded-2xl md:rounded-[2.5rem] shrink-0 flex items-center justify-center bg-gradient-to-br ${reason.gradient} shadow-2xl relative overflow-hidden`}
+              className={`w-24 h-24 md:w-52 md:h-52 rounded-3xl md:rounded-[3rem] shrink-0 flex items-center justify-center bg-gradient-to-br ${reason.gradient} shadow-2xl relative overflow-hidden z-10 group-hover:rotate-3 transition-transform duration-500`}
             >
-              <div className="absolute inset-0 border-t border-l border-white/20" />
+              {/* Glass Overlays */}
+              <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10" />
+              <div className="absolute inset-0 border border-white/20 rounded-[inherit]" />
+              
               <reason.icon
-                className={`${reason.iconColor} relative z-10 w-8 h-8 md:w-16 md:h-16 shadow-2xl`}
+                className={`${reason.iconColor} relative z-10 w-10 h-10 md:w-20 md:h-20 shadow-2xl drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]`}
                 strokeWidth={1}
               />
             </div>
 
             {/* Text */}
-            <div className="text-center md:text-left flex-1">
-              <span className="text-[10px] md:text-xs font-black tracking-[0.2em] text-accent-orange uppercase mb-2 block">
-                {String(i + 1).padStart(2, "0")} / {String(reasons.length).padStart(2, "0")}
-              </span>
-              <h3 className="text-3xl md:text-5xl font-black text-primary-navy mb-4 md:mb-6 tracking-tighter leading-tight whitespace-pre-line">
-                {reason.title}
+            <div className="text-center md:text-left flex-1 relative z-10">
+              <h3 className="text-4xl md:text-6xl font-black text-primary-navy mb-5 md:mb-8 tracking-tighter leading-[0.95] whitespace-pre-line">
+                {reason.title.split('\n').map((line, idx) => (
+                  <span key={idx} className="block">
+                    {idx === 1 ? <span className="font-serif italic font-light text-gray-400">{line}</span> : line}
+                  </span>
+                ))}
               </h3>
-              <p className="text-base md:text-2xl text-gray-500 leading-relaxed font-normal">
+              
+              <p className="text-base md:text-2xl text-gray-500 leading-relaxed font-normal max-w-2xl">
                 {reason.description}
               </p>
             </div>
+
           </motion.div>
+
         ))}
       </div>
 
       {/* ─── Bottom Trust Banner ─── */}
-      <div className="mt-32 relative z-50 px-6">
+      <div className="mt-16 relative z-10 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="bg-primary-navy rounded-[2rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-secondary-blue/40 rounded-full blur-[80px] pointer-events-none" />

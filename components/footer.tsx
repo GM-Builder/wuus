@@ -14,7 +14,7 @@ export function Footer() {
               <img src="/logo.png" alt="WUUS Logo" className="h-10 w-auto object-contain" />
             </a>
             <p className="text-gray-500 mb-8 max-w-md leading-relaxed">
-              WUUS adalah solusi digitalisasi khusus untuk UMKM di Indonesia. Kami membuat website mewah dengan harga yang bersahabat agar bisnis Anda dapat berkembang maksimal.
+              WUUS adalah mitra transformasi digital khusus UMKM Indonesia. Kami menghadirkan website mewah dengan standar korporasi agar bisnis lokal bisa bersaing dan tumbuh maksimal.
             </p>
 
             <div className="rounded-xl overflow-hidden shadow-sm border border-gray-200 h-48 max-w-md">

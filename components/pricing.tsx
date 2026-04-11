@@ -143,7 +143,7 @@ export function Pricing() {
     return sum + ((addonState[item.id] || 0) * item.price);
   }, 0);
 
-  const selectedPlan = plans.find(p => p.id === selectedPlanId);
+  const selectedPlan = plans.find(p => p.id === selectedPlanId) || (redesignPlans as any[]).find(p => p.id === selectedPlanId);
   const selectedPlanPrice = selectedPlan ? selectedPlan.basePromoPrice : 0;
   const grandTotal = selectedPlanPrice + totalAddonPrice;
 
@@ -169,7 +169,7 @@ export function Pricing() {
       });
     }
     msg += `\n\nTotal: ${formatPrice(grandTotal)}`;
-    return `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/6281383521750?text=${encodeURIComponent(msg)}`;
   };
 
   return (
@@ -256,7 +256,7 @@ export function Pricing() {
                   ))}
                 </ul>
                 
-                <div className="mt-auto pt-2">
+                <div className="mt-auto pt-2 flex flex-col gap-2">
                   <div
                     className={`w-full py-3.5 text-center font-black rounded-xl text-sm uppercase tracking-wide flex items-center justify-center gap-2
                       ${isSelected 
@@ -268,7 +268,15 @@ export function Pricing() {
                   >
                     {isSelected ? <><Check size={16} /> Paket Terpilih</> : 'Pilih Paket Ini'}
                   </div>
-                  <p className="text-[10px] text-gray-400 text-center mt-3 font-medium px-2 leading-tight">
+                  {isSelected && (
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); setSelectedPlanId(null); }}
+                      className="text-[10px] font-bold text-gray-400 hover:text-red-500 transition-colors uppercase tracking-widest text-center"
+                    >
+                      [ Batal Pilih ]
+                    </button>
+                  )}
+                  <p className="text-[10px] text-gray-400 text-center mt-1 font-medium px-2 leading-tight">
                     *Promo berlaku untuk <span className="font-bold text-accent-orange">5 klien pertama</span> bulan ini.
                   </p>
                 </div>
@@ -282,30 +290,57 @@ export function Pricing() {
         <div className="flex flex-col lg:flex-row items-stretch gap-8 max-w-6xl mx-auto pt-10 border-t border-gray-200">
           
           {/* LEFT: REDESIGN */}
-          <div className="w-full lg:w-2/3 flex flex-col gap-6">
-             <div className="mb-2">
-                <h3 className="text-3xl font-black text-primary-navy flex items-center gap-3">
-                   <RefreshCcw className="text-accent-orange" size={28} />
-                   Punya Website tapi Kurang Puas?
-                </h3>
-                <p className="text-gray-600 mt-3 text-base leading-relaxed">
-                   Jangan hapus website Anda. Kami rubah tampilannya menjadi terlihat mewah, modern, dan cepat terbuka.
-                   <br/><span className="font-bold text-accent-orange text-sm">*Gratis biaya pindahan data untuk 3 halaman pertama.</span>
-                </p>
-             </div>
+          <div className="w-full lg:w-2/3 flex flex-col gap-8">
+             {/* Redesign Hero Card */}
+             <motion.div 
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+               className="relative p-8 md:p-10 rounded-[2.5rem] bg-white border border-white shadow-2xl shadow-primary-navy/5 overflow-hidden"
+             >
+                {/* Decorative Elements */}
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent-orange/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-navy/5 rounded-full blur-3xl pointer-events-none" />
+                
+                <div className="relative z-10">
+                   <div className="inline-flex items-center gap-2 mb-6 bg-accent-orange/10 px-4 py-2 rounded-full">
+                      <div className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
+                      <span className="text-[10px] font-extrabold tracking-[0.2em] text-accent-orange uppercase">WUUS Transformation</span>
+                   </div>
+                   
+                   <h3 className="text-3xl md:text-5xl font-black text-primary-navy leading-[1.1] mb-6 tracking-tight">
+                      Website Anda Terasa <br className="hidden sm:block" />
+                      <span className="text-accent-orange">Lambat</span> & <span className="font-serif italic font-light text-gray-400">Ketinggalan Zaman?</span>
+                   </h3>
+                   
+                   <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-2xl">
+                      Jangan biarkan wajah digital yang kurang maksimal menghambat potensi bisnis Anda. Kami bantu transformasikan website lama menjadi <span className="font-bold text-primary-navy underline decoration-accent-orange/30 decoration-4 underline-offset-4">mesin pertumbuhan</span> yang segar, modern, dan super ringan.
+                   </p>
+                </div>
+             </motion.div>
 
+             {/* Redesign Plans Grid */}
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {redesignPlans.map((rd) => (
-                  <div key={rd.id} className="bg-white border border-gray-200 rounded-[2rem] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
-                    <div className="mb-4">
-                      <div className="text-[10px] font-black tracking-widest uppercase text-accent-orange mb-1">{rd.subtitle}</div>
-                      <h4 className="text-xl font-bold text-primary-navy">{rd.name}</h4>
-                      <p className="text-xs text-gray-500 mt-1 italic">{rd.target}</p>
+                {redesignPlans.map((rd, idx) => (
+                  <motion.div 
+                    key={rd.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="bg-white border border-gray-100 rounded-[2.5rem] p-8 shadow-sm hover:shadow-2xl hover:border-accent-orange/20 hover:-translate-y-2 transition-all duration-500 flex flex-col group"
+                  >
+                    <div className="mb-6">
+                      <div className="text-[10px] font-black tracking-widest uppercase text-accent-orange mb-2 bg-accent-orange/5 px-3 py-1 rounded-lg inline-block">{rd.subtitle}</div>
+                      <h4 className="text-2xl font-black text-primary-navy group-hover:text-accent-orange transition-colors">{rd.name}</h4>
+                      <p className="text-xs text-gray-400 mt-2 italic font-medium">{rd.target}</p>
                     </div>
 
-                    <div className="mb-6">
-                      <span className="text-xs text-gray-400 line-through decoration-gray-300 font-medium italic block">{rd.normalPrice}</span>
-                      <span className="text-3xl font-black text-primary-navy">{formatPrice(rd.basePromoPrice)}</span>
+                    <div className="mb-6 p-4 bg-light-grey rounded-2xl border border-gray-50 flex flex-col">
+                      <span className="text-xs text-gray-400 line-through decoration-gray-300 font-medium italic block mb-1">{rd.normalPrice}</span>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-3xl font-black text-primary-navy">{formatPrice(rd.basePromoPrice)}</span>
+                      </div>
                     </div>
 
                     <div className="bg-light-grey p-4 rounded-xl mb-6 space-y-3">
@@ -323,25 +358,46 @@ export function Pricing() {
                       </div>
                     </div>
 
-                    <ul className="space-y-2 mb-8 flex-grow">
+                    <ul className="space-y-3 mb-8 bg-off-white p-5 rounded-2xl border border-dashed border-gray-200">
                        {rd.highlights.map((hl, i) => (
-                         <li key={i} className="flex items-start gap-2 text-[11px] text-gray-600 font-medium">
-                            <Check size={14} className="text-green-500 shrink-0 mt-0.5" />
-                            <span>{hl}</span>
+                         <li key={i} className="flex items-start gap-3 text-[11px] text-gray-600 font-medium">
+                            <Check size={14} className="text-accent-orange shrink-0 mt-0.5" />
+                            <span className="leading-snug">{hl}</span>
                          </li>
                        ))}
                     </ul>
 
-                    <a href="#cta" className="mt-auto block w-full py-3 text-center bg-gray-100 hover:bg-accent-orange hover:text-white text-primary-navy font-bold rounded-xl transition-colors text-xs uppercase tracking-wide">
-                      Redesain Sekarang
-                    </a>
-                  </div>
+                    <div className="mt-auto flex flex-col gap-2">
+                      <button 
+                        onClick={() => {
+                          setSelectedPlanId(rd.id);
+                          document.getElementById('checkout-card')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className={`flex items-center justify-center gap-2 w-full py-4 text-center font-bold rounded-2xl transition-all duration-300 text-xs uppercase tracking-widest shadow-lg
+                          ${selectedPlanId === rd.id 
+                            ? 'bg-accent-orange text-white shadow-accent-orange/30' 
+                            : 'bg-primary-navy text-white hover:bg-accent-orange shadow-primary-navy/10 hover:shadow-accent-orange/30'
+                          }`}
+                      >
+                        {selectedPlanId === rd.id ? <><Check size={14} /> Paket Terpilih</> : <>Redesain Sekarang <ChevronRight size={14} /></>}
+                      </button>
+                      {selectedPlanId === rd.id && (
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); setSelectedPlanId(null); }}
+                          className="text-[10px] font-bold text-gray-400 hover:text-red-500 transition-colors uppercase tracking-widest text-center"
+                        >
+                          [ Batal Pilih ]
+                        </button>
+                      )}
+                    </div>
+                  </motion.div>
                 ))}
              </div>
           </div>
 
+
           {/* RIGHT: ADD-ONS + CHECKOUT */}
-          <div className="w-full lg:w-1/3 flex flex-col">
+          <div id="checkout-card" className="w-full lg:w-1/3 flex flex-col">
             <div className="bg-primary-navy rounded-[2rem] p-6 lg:p-8 shadow-2xl flex flex-col border border-secondary-blue relative overflow-hidden h-full">
               <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-secondary-blue rounded-full blur-[60px] pointer-events-none opacity-50" />
               

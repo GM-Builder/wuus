@@ -3,7 +3,7 @@
 import { MapPin, MessageCircle, PhoneCall, Mail } from "lucide-react";
 
 export function FooterCta() {
-  const whatsappNumber = "6281234567890"; // Dummy number
+  const whatsappNumber = "6281383521750"; // Tim WUUS Official
   const waUrl = `https://wa.me/${whatsappNumber}?text=Halo%20tim%20WUUS,%20saya%20ingin%20konsultasi%20pembuatan%20website%20untuk%20usaha%20saya.`;
 
   return (
