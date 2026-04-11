@@ -34,7 +34,7 @@ export function Hero() {
           >
             {/* Top Badge */}
             <div className="inline-flex flex-col items-center mb-8 relative">
-              <span className="text-gray-400 font-bold tracking-[0.2em] text-xs uppercase mb-4">
+              <span className="text-accent-orange font-bold tracking-[0.2em] text-xs uppercase mb-4">
                 Solusi Digital UMKM
               </span>
               <div className="w-px h-12 bg-gray-200" />
