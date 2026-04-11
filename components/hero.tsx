@@ -77,10 +77,11 @@ export function Hero() {
             <div className="w-64 h-72 bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col">
               <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
                  <Image 
-                   src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                   src="/Hero1.png"
                    alt="Business Owner"
                    fill
                    priority
+                   loading="eager"
                    sizes="(max-width: 768px) 100vw, 400px"
                    className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
                  />
@@ -100,22 +101,23 @@ export function Hero() {
         >
           <div className="relative">
              {/* DDI style brush accent under right photo */}
-             <div className="absolute -inset-8 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 z-0" />
+             <div className="absolute -inset-8 bg-[url('/patterns/cubes.png')] opacity-10 z-0" />
              
              <div className="w-72 h-auto bg-white rounded-3xl p-5 shadow-2xl relative z-10 border border-gray-100">
                 <div className="h-48 rounded-2xl bg-gray-100 overflow-hidden relative mb-6">
                    <Image 
-                     src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                     src="/Hero2.png"
                      alt="Team Working"
                      fill
-                     priority
-                     sizes="(max-width: 768px) 100vw, 400px"
+                      priority
+                      loading="eager"
+                      sizes="(max-width: 768px) 100vw, 400px"
                      className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
                    />
                 </div>
                 
                 {/* Floating chat bubble stat style */}
-                <div className="absolute -left-12 bottom-12 bg-white rounded-xl p-4 shadow-xl border border-gray-100 flex items-start gap-3 w-64 transform -rotate-2">
+                <div className="absolute -left-12 bottom-[-12px] bg-white rounded-xl p-4 shadow-xl border border-gray-100 flex items-start gap-3 w-64 transform -rotate-4">
                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                      <CheckCircle2 fill="white" className="text-accent-orange w-8 h-8" />
                    </div>

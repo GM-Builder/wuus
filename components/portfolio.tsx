@@ -4,14 +4,35 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const projects = [
-  { id: 1, title: "Company Profile Manufaktur", category: "B2B Industri", img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-  { id: 2, title: "E-Commerce Lokal", category: "Retail & F&B", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-  { id: 3, title: "Klinik Kecantikan Web", category: "Kesehatan & Beauty", img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
+  { 
+    id: 1, 
+    title: "Kopi Senja Utama", 
+    category: "F&B", 
+    tagline: "Transformasi Menu Fisik ke Digital.",
+    detail: "Website interaktif untuk akses katalog menu instan melalui pemindaian QR Code di setiap meja, mempermudah proses pemesanan.",
+    img: "/kopi-senja.png"
+  },
+  { 
+    id: 2, 
+    title: "Lawana Law Firm", 
+    category: "Professional Service", 
+    tagline: "Membangun Wajah Digital yang Terpercaya.",
+    detail: "Portal profesional yang menyajikan rekam jejak tim pengacara dan sistem reservasi jadwal konsultasi hukum secara terintegrasi.",
+    img: "/lawana-law-v2.png"
+  },
+  { 
+    id: 3, 
+    title: "Kain Nusantara", 
+    category: "Retail/UMKM", 
+    tagline: "Katalog Digital untuk Jangkauan Nasional.",
+    detail: "Platform e-commerce dengan galeri cerah beresolusi tinggi yang dioptimalkan agar tetap cepat diakses melalui perangkat seluler standar.",
+    img: "/kain-nusantara.png"
+  }
 ];
 
 export function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 bg-white">
+    <section id="portfolio" className="relative py-24 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
@@ -44,6 +65,7 @@ export function Portfolio() {
                   alt={project.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={index < 2}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary-navy/20 group-hover:bg-transparent transition-colors duration-500" />
@@ -54,11 +76,14 @@ export function Portfolio() {
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold text-primary-navy mb-2 group-hover:text-accent-orange transition-colors">
+              <h3 className="text-xl font-bold text-primary-navy mb-1 group-hover:text-accent-orange transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gray-500 text-sm font-medium">
-                Desain responsif dengan load time &lt; 1.5 detik.
+              <p className="font-semibold text-sm text-secondary-blue mb-2 italic">
+                "{project.tagline}"
+              </p>
+              <p className="text-gray-500 text-sm font-medium leading-relaxed">
+                {project.detail}
               </p>
             </motion.div>
           ))}

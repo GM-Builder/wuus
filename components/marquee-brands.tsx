@@ -1,11 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Coffee, WashingMachine, Wrench, Stethoscope, Shirt, Camera, Home, GraduationCap, ShoppingBag } from "lucide-react";
 
 const brands = [
-  "Warung Kopi Senja", "Laundry Express", "Berkah Motor", "Toko Maju Jaya", 
-  "Klinik Gigi Sehat", "Bimbel Prestasi", "Cafe Ruang Hati", "Distro Kekinian",
-  "Apotek Keluarga", "Catering Ibu"
+  { name: "Restoran & Cafe", icon: Coffee },
+  { name: "Jasa Laundry & Cleaning", icon: WashingMachine },
+  { name: "Bengkel & Otomotif", icon: Wrench },
+  { name: "Klinik & Kesehatan", icon: Stethoscope },
+  { name: "Fashion & Boutique", icon: Shirt },
+  { name: "Studio Kreatif", icon: Camera },
+  { name: "Property & Agent", icon: Home },
+  { name: "Lembaga Kursus", icon: GraduationCap },
+  { name: "Toko Online & UMKM", icon: ShoppingBag }
 ];
 
 export function MarqueeBrands() {
@@ -34,7 +41,7 @@ export function MarqueeBrands() {
 
       <div className="text-center mb-8">
         <p className="text-sm font-semibold text-gray-400 uppercase tracking-[0.2em]">
-          Dipercaya oleh UMKM Seluruh Indonesia
+          Solusi Digital yang Pas Banget Buat:
         </p>
       </div>
       
@@ -46,14 +53,17 @@ export function MarqueeBrands() {
           className="flex whitespace-nowrap items-center gap-16 px-8"
         >
           {/* Double array for seamless looping */}
-          {[...brands, ...brands].map((brand, i) => (
-            <div key={i} className="flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-bold text-lg">
-                {brand.charAt(0)}
+          {[...brands, ...brands].map((brand, i) => {
+            const Icon = brand.icon;
+            return (
+              <div key={i} className="flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                  <Icon size={20} className="text-gray-300" strokeWidth={1.5} />
+                </div>
+                <span className="text-xl font-bold text-gray-300 tracking-wide">{brand.name}</span>
               </div>
-              <span className="text-xl font-bold text-gray-300 tracking-wide">{brand}</span>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
     </section>

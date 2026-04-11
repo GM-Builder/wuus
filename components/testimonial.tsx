@@ -8,24 +8,24 @@ import Image from "next/image";
 const testimonials = [
   {
     id: 1,
-    name: "Bapak Budi",
-    role: "Pemilik Cafe Senja",
+    name: "Mas Angga",
+    role: "Pemilik Kopi Senja",
     content: "Semenjak dibuatkan website oleh WUUS, banyak reservasi datang langsung dari Google. Loadnya cepat sekali, tidak seperti web saya sebelumnya yang bikin pelanggan kabur.",
-    img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+    img: "/foto-testi2.png"
   },
   {
     id: 2,
-    name: "Ibu Siti",
-    role: "Klinik Kecantikan Mawar",
+    name: "Ibu Resti",
+    role: "Butik Cantika",
     content: "Desainnya benar-benar terasa mewah layaknya perusahaan besar, padahal harganya sangat ramah untuk UMKM seperti kami. Adminnya juga komunikatif saat konsultasi.",
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+    img: "/foto-testi1.png"
   },
   {
     id: 3,
-    name: "Anton",
+    name: "Bapak Anton",
     role: "Jasa Laundry Express",
     content: "Fitur tombol WhatsApp otomatisnya sangat membantu konversi. Orang buka web, lihat harga transparan, lalu klik tombol WA langsung terhubung ke admin kami. Sangat praktis!",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+    img: "/foto-testi3.png"
   }
 ];
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe, Search } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { name: "Layanan Kami", href: "#services" },
@@ -46,7 +47,14 @@ export function Navbar() {
 
           {/* Logo Area */}
           <Link href="/" className="flex items-center">
-            <img src="/logo.png" alt="WUUS Logo" className="h-10 w-auto object-contain" />
+            <Image 
+              src="/logo.png" 
+              alt="WUUS Logo" 
+              width={142} 
+              height={40} 
+              priority
+              className="h-10 w-auto object-contain" 
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -99,7 +107,13 @@ export function Navbar() {
           >
             <div className="flex justify-between items-center mb-12">
               <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
-                <img src="/logo.png" alt="WUUS Logo" className="h-10 w-auto object-contain" />
+                <Image 
+                  src="/logo.png" 
+                  alt="WUUS Logo" 
+                  width={142} 
+                  height={40} 
+                  className="h-10 w-auto object-contain" 
+                />
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}

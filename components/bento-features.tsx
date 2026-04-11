@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, Activity, CheckCircle, ArrowRight, TrendingUp } from "lucide-react";
+import Image from "next/image";
 
 const features = [
   {
@@ -47,8 +48,8 @@ export function BentoFeatures() {
   return (
     <section id="services" className="py-24 bg-light-grey relative overflow-hidden">
       
-      {/* Background texture */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[1.75] pointer-events-none z-0" />
+      {/* Background texture localized */}
+      <div className="absolute inset-0 bg-[url('/patterns/cubes.png')] opacity-[1.75] pointer-events-none z-0" />
       
       {/* Depth lighting blobs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-70 pointer-events-none" />
@@ -87,13 +88,15 @@ export function BentoFeatures() {
               className="bg-white rounded-2xl md:rounded-[2rem] flex flex-col group cursor-pointer relative overflow-hidden border border-gray-100/60 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] transition-colors duration-300"
               style={{ transformOrigin: "center bottom" }}
             >
-              {/* Background image (only for card with bgImage) */}
+              {/* Background image optimized */}
               {feature.bgImage && (
                 <div className="absolute inset-0 z-0">
-                  <img
+                  <Image
                     src={feature.bgImage}
                     alt=""
-                    className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-white/80 to-white/95" />
                 </div>
@@ -124,7 +127,7 @@ export function BentoFeatures() {
         </div>
 
         {/* Paper Clipping Quote */}
-        <style dangerouslySetInnerHTML={{ __html: `@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap');` }} />
+
 
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
@@ -159,7 +162,7 @@ export function BentoFeatures() {
             </div>
             <p
               className="text-2xl text-primary-navy leading-relaxed text-center px-2"
-              style={{ fontFamily: "'Caveat', cursive", fontWeight: 600 }}
+              style={{ fontFamily: "var(--font-caveat)", fontWeight: 600 }}
             >
               "WUUS menyadari bahwa masa depan usaha Anda dipertaruhkan oleh kualitas tampilan digital. Kami membuatnya sempurna."
             </p>

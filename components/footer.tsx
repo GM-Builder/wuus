@@ -1,6 +1,7 @@
 "use client";
 
 import { MapPin, PhoneCall, Mail, Globe } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -11,19 +12,27 @@ export function Footer() {
           {/* Brand & Map Info */}
           <div className="lg:col-span-2">
             <a href="/" className="flex items-center mb-6">
-              <img src="/logo.png" alt="WUUS Logo" className="h-10 w-auto object-contain" />
+              <Image 
+                src="/logo.png" 
+                alt="WUUS Logo" 
+                width={142} 
+                height={40} 
+                className="h-10 w-auto object-contain" 
+              />
             </a>
             <p className="text-gray-500 mb-8 max-w-md leading-relaxed">
               WUUS adalah mitra transformasi digital khusus UMKM Indonesia. Kami menghadirkan website mewah dengan standar korporasi agar bisnis lokal bisa bersaing dan tumbuh maksimal.
             </p>
 
-            <div className="rounded-xl overflow-hidden shadow-sm border border-gray-200 h-48 max-w-md">
+            <div className="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white h-52 max-w-md group transition-all duration-500">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.24009761565!2d106.75936496677943!3d-6.22974653696894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x100c5e82dd4b820!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1689000000000!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.533838466155!2d106.7541558118344!3d-6.193067260650871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f710ddd28e99%3A0x4fda30c569b2e71d!2sApartmen%20Puri%20Parkview!5e0!3m2!1sid!2sid!4v1775916857687!5m2!1sid!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-[1.02]"
               />
             </div>
           </div>
@@ -46,16 +55,16 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-gray-500">
                 <MapPin size={18} className="text-accent-orange mt-1 shrink-0" />
-                <span>Gedung Graha WUUS, Lt. 3<br />Jakarta Selatan 12340</span>
+                <span><strong>WUUS - Digital Studio</strong><br />Puri Parkview Apartment, <br /> Jakarta Barat, DKI Jakarta <br /> 11620, Indonesia</span>
               </li>
               <li className="flex items-center gap-3 text-gray-500">
                 <PhoneCall size={18} className="text-accent-orange shrink-0" />
-                <span>+62 812-3456-7890</span>
+                <span>+62 813-8352-1750</span>
               </li>
-              <li className="flex items-center gap-3 text-gray-500">
+              {/* <li className="flex items-center gap-3 text-gray-500">
                 <Mail size={18} className="text-accent-orange shrink-0" />
                 <span>hello@webuntukusaha.com</span>
-              </li>
+              </li> */}
             </ul>
 
             <div className="flex gap-4 mt-8">
