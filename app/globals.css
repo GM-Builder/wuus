@@ -1,26 +1,24 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-primary-navy: #1C2733;
+  --color-secondary-blue: #233746;
+  --color-accent-orange: #F59E0B;
+  --color-accent-yellow: #FBBF24;
+  --color-light-grey: #F9FAFB;
+  --color-off-white: #FCFDFD;
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-light-grey);
+  color: var(--color-primary-navy);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom utility for the jagged brush edge used in the reference */
+.brush-edge-bottom {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 100' fill='none' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0 100V40C150 40 200 10 350 25C480 38 520 15 650 30C780 43 850 15 1000 35V100H0Z' fill='black'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
 }

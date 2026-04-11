@@ -1,0 +1,146 @@
+"use client";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { CheckCircle2, Globe } from "lucide-react";
+import Image from "next/image";
+import { useRef } from "react";
+
+export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  return (
+    <section ref={containerRef} className="relative bg-off-white pt-36 pb-32 lg:pt-48 lg:pb-48 overflow-hidden z-10">
+      {/* Ambient background glows */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-secondary-blue/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent-orange/10 rounded-full blur-[100px] pointer-events-none" />
+      
+      <div className="container mx-auto px-4 max-w-7xl relative z-20 flex flex-col items-center">
+        
+        {/* Main Content constraints */}
+        <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center">
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center w-full"
+          >
+            {/* Top Badge */}
+            <div className="inline-flex flex-col items-center mb-8 relative">
+              <span className="text-gray-400 font-bold tracking-[0.2em] text-xs uppercase mb-4">
+                Redefining Digital Presence
+              </span>
+              <div className="w-px h-12 bg-gray-200" />
+            </div>
+
+            <h1 className="text-[2.75rem] min-[375px]:text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-primary-navy tracking-tight leading-[1.1] mb-6">
+              Website <span className="bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent italic">Mewah</span>, <br className="hidden md:block" />
+              Harga Ramah<span className="text-accent-orange">.</span>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mb-12 font-medium">
+              Objective website development and personalized digital solutions <br className="hidden md:block"/>
+              for today's UMKM challenges—and tomorrow's.
+            </p>
+            
+            {/* Action Buttons (DDI Style: Solid Orange & White w/ Outline) */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-md mx-auto relative z-30">
+              <a href="#cta" className="w-full sm:w-auto px-8 py-3.5 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-sm tracking-wide transition-all shadow-[6px_6px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto">
+                Mulai Sekarang
+              </a>
+              <a href="#portfolio" className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-gray-50 text-primary-navy font-bold text-sm tracking-wide transition-all shadow-[6px_6px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto">
+                Lihat Portfolio
+              </a>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* Floating Mockup Elements alongside text as requested (DDI has left/right photos) */}
+        {/* Left Floating Image Box */}
+        <motion.div 
+          style={{ y: y1 }}
+          className="absolute left-4 lg:left-12 top-48 hidden lg:block"
+        >
+          <div className="relative">
+            <div className="absolute -left-6 -top-6 w-[120px] fill-accent-orange/20 z-0">
+               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M40.5 12C45.2 3.5 54.8 3.5 59.5 12L88.7 64C93.4 72.5 88.6 83 79.2 83H20.8C11.4 83 6.6 72.5 11.3 64L40.5 12Z" />
+               </svg>
+            </div>
+            <div className="w-64 h-72 bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col">
+              <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
+                 <Image 
+                   src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                   alt="Business Owner"
+                   fill
+                   priority
+                   sizes="(max-width: 768px) 100vw, 400px"
+                   className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                 />
+              </div>
+              
+              <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-accent-orange rounded-2xl flex items-center justify-center shadow-lg transform rotate-6 border-4 border-white">
+                <Globe className="text-white w-8 h-8" />
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Right Floating Stat Box */}
+        <motion.div 
+          style={{ y: y2 }}
+          className="absolute right-4 lg:right-12 top-64 hidden lg:block"
+        >
+          <div className="relative">
+             {/* DDI style brush accent under right photo */}
+             <div className="absolute -inset-8 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 z-0" />
+             
+             <div className="w-72 h-auto bg-white rounded-3xl p-5 shadow-2xl relative z-10 border border-gray-100">
+                <div className="h-48 rounded-2xl bg-gray-100 overflow-hidden relative mb-6">
+                   <Image 
+                     src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                     alt="Team Working"
+                     fill
+                     priority
+                     sizes="(max-width: 768px) 100vw, 400px"
+                     className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                   />
+                </div>
+                
+                {/* Floating chat bubble stat style */}
+                <div className="absolute -left-12 bottom-12 bg-white rounded-xl p-4 shadow-xl border border-gray-100 flex items-start gap-3 w-64 transform -rotate-2">
+                   <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                     <CheckCircle2 fill="white" className="text-accent-orange w-8 h-8" />
+                   </div>
+                   <div>
+                     <p className="text-xs font-bold text-primary-navy">Live Visitor Counter</p>
+                     <p className="text-[10px] text-gray-500 mt-1">Web Anda dikunjungi 120 orang hari ini.</p>
+                   </div>
+                </div>
+
+                <div className="absolute -top-8 -right-8 w-20 h-20">
+                   <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full rotate-12">
+                     <circle cx="50" cy="50" r="40" fill="#FF9900" fillOpacity="0.2"/>
+                     <circle cx="50" cy="50" r="25" fill="#FF9900"/>
+                     <path d="M40 50L46.5 56.5L60 43" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                   </svg>
+                </div>
+             </div>
+          </div>
+        </motion.div>
+
+      </div>
+
+      {/* DDI Style Jagged Brush Border Bottom */}
+      <div className="absolute bottom-0 left-0 w-full h-[100px] md:h-[150px] bg-secondary-blue brush-edge-bottom z-10 translate-y-[2px]"></div>
+    </section>
+  );
+}
