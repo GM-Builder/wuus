@@ -79,10 +79,11 @@ export function WhyWuus() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-            className="sticky w-full rounded-[2.5rem] md:rounded-[4.5rem] p-10 md:p-16 shadow-[0_50px_100px_-30px_rgba(28,39,51,0.15)] flex flex-col md:flex-row items-center gap-10 md:gap-16 border border-white/60 bg-white/70 backdrop-blur-2xl overflow-hidden group"
+            className="sticky w-full rounded-[2.5rem] md:rounded-[4.5rem] p-10 md:p-16 shadow-[0_50px_100px_-30px_rgba(28,39,51,0.15)] flex flex-col md:flex-row items-center gap-10 md:gap-16 border border-white/60 bg-white/90 backdrop-blur-sm overflow-hidden group will-change-transform transform-gpu"
             style={{ 
               top: `calc(10vh + ${i * 40}px)`, 
-              zIndex: i + 10 
+              zIndex: i + 10,
+              transform: 'translateZ(0)'
             }}
           >
             {/* Background Decor: Floating Circles */}

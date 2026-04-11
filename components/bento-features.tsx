@@ -85,8 +85,8 @@ export function BentoFeatures() {
                 y: -8,
                 boxShadow: `0 14px 28px -6px ${feature.shadow}`,
               }}
-              className="bg-white rounded-2xl md:rounded-[2rem] flex flex-col group cursor-pointer relative overflow-hidden border border-gray-100/60 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] transition-colors duration-300"
-              style={{ transformOrigin: "center bottom" }}
+              className="bg-white rounded-2xl md:rounded-[2rem] flex flex-col group cursor-pointer relative overflow-hidden border border-gray-100/60 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] transition-colors duration-300 transform-gpu will-change-transform"
+              style={{ transformOrigin: "center bottom", transform: "translateZ(0)" }}
             >
               {/* Background image optimized */}
               {feature.bgImage && (
@@ -149,10 +149,9 @@ export function BentoFeatures() {
           >
             {/* Tape strip */}
             <div
-              className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-20 h-7 bg-white/75 border border-white/30"
+              className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-20 h-7 bg-white/90 border border-white/40"
               style={{
                 transform: "translateX(-50%) rotate(-2deg)",
-                backdropFilter: "blur(4px)",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
               }}
             />

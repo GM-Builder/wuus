@@ -50,7 +50,8 @@ export function MarqueeBrands() {
         <motion.div 
           animate={{ x: ["0%", "-50%"] }}
           transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
-          className="flex whitespace-nowrap items-center gap-16 px-8"
+          className="flex whitespace-nowrap items-center gap-16 px-8 transform-gpu will-change-transform"
+          style={{ transform: "translateZ(0)" }}
         >
           {/* Double array for seamless looping */}
           {[...brands, ...brands].map((brand, i) => {

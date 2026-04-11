@@ -71,7 +71,7 @@ export function Portfolio() {
                 <div className="absolute inset-0 bg-primary-navy/20 group-hover:bg-transparent transition-colors duration-500" />
                 
                 {/* Floating Tag */}
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-primary-navy">
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-primary-navy transform-gpu" style={{ transform: "translateZ(0)" }}>
                   {project.category}
                 </div>
               </div>

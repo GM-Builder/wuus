@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X, Globe, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,14 +17,12 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Handle scroll to add borders/shadows to navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { scrollY } = useScroll();
+  
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 20 && !isScrolled) setIsScrolled(true);
+    else if (latest <= 20 && isScrolled) setIsScrolled(false);
+  });
 
   // Handle resize to close mobile menu on desktop
   useEffect(() => {
@@ -40,8 +38,9 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3" : "bg-transparent py-5"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu will-change-transform ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3" : "bg-transparent py-5"
           }`}
+        style={{ transform: "translateZ(0)" }}
       >
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
 
