@@ -6,27 +6,27 @@ import Image from "next/image";
 const projects = [
   { 
     id: 1, 
-    title: "Kopi Senja Utama", 
-    category: "F&B", 
-    tagline: "Transformasi Menu Fisik ke Digital.",
-    detail: "Website interaktif untuk akses katalog menu instan melalui pemindaian QR Code di setiap meja, mempermudah proses pemesanan.",
-    img: "/kopi-senja.png"
+    title: "Savoria Elegance", 
+    category: "Kuliner", 
+    tagline: "Restoran Fine-Dining Berkelas.",
+    detail: "Website multi-halaman dengan estetika gelap yang elegan, menampilkan menu interaktif dan sistem reservasi kelas atas.",
+    img: "/Savoria-mockup.png"
   },
   { 
     id: 2, 
-    title: "Lawana Law Firm", 
-    category: "Professional Service", 
-    tagline: "Membangun Wajah Digital yang Terpercaya.",
-    detail: "Portal profesional yang menyajikan rekam jejak tim pengacara dan sistem reservasi jadwal konsultasi hukum secara terintegrasi.",
-    img: "/lawana-law-v2.png"
+    title: "Trust Architect", 
+    category: "Jasa Profesional", 
+    tagline: "Presisi dalam Setiap Struktur.",
+    detail: "Platform profil perusahaan untuk firma arsitektur B2B yang menekankan pada portofolio proyek dan kepercayaan klien.",
+    img: "/trust-mockup.png"
   },
   { 
     id: 3, 
-    title: "Kain Nusantara", 
-    category: "Retail/UMKM", 
-    tagline: "Katalog Digital untuk Jangkauan Nasional.",
-    detail: "Platform e-commerce dengan galeri cerah beresolusi tinggi yang dioptimalkan agar tetap cepat diakses melalui perangkat seluler standar.",
-    img: "/kain-nusantara.png"
+    title: "Urban Threads", 
+    category: "Toko Online", 
+    tagline: "Fashion Minimalis & Berkelanjutan.",
+    detail: "Katalog e-commerce dengan desain bersih yang menonjolkan produk koleksi fashion dengan navigasi yang sangat halus.",
+    img: "/urbanThreads-mockup.png"
   }
 ];
 
@@ -44,7 +44,7 @@ export function Portfolio() {
               <span className="italic font-serif text-gray-500">Milik Klien Kami</span>
             </h2>
           </div>
-          <a href="#cta" className="hidden md:inline-flex px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#F59E0B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#F59E0B] border-2 border-secondary-blue">
+          <a href="https://preview.webuntukusaha.com" target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#F59E0B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#F59E0B] border-2 border-secondary-blue">
             Lihat Lebih Banyak
           </a>
         </div>
@@ -90,7 +90,7 @@ export function Portfolio() {
         </div>
         
         <div className="mt-10 md:hidden flex justify-center">
-          <a href="#cta" className="px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide">
+          <a href="https://preview.webuntukusaha.com" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide">
             Lihat Lebih Banyak
           </a>
         </div>
