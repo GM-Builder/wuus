@@ -2,6 +2,7 @@
 
 import { MapPin, PhoneCall, Mail, Globe } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -56,7 +57,7 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-gray-500">
                 <MapPin size={18} className="text-accent-orange mt-1 shrink-0" />
-                <span><strong>WUUS - Digital Studio</strong><br />Puri Parkview Apartment, <br /> Jakarta Barat, DKI Jakarta <br /> 11620, Indonesia</span>
+                <span><strong>WUUS - Digital Studio</strong> <br /> Jakarta Barat, DKI Jakarta <br /> 11620, Indonesia</span>
               </li>
               <li className="flex items-center gap-3 text-gray-500">
                 <PhoneCall size={18} className="text-accent-orange shrink-0" />
@@ -86,9 +87,9 @@ export function Footer() {
             &copy; {new Date().getFullYear()} WebUntukUsaha.com. All rights reserved.
           </p>
           <div className="flex gap-4 text-sm text-gray-400 font-medium">
-            <a href="#" className="hover:text-primary-navy">Syarat & Ketentuan</a>
+            <Link href="/syarat-ketentuan" className="hover:text-primary-navy">Syarat & Ketentuan</Link>
             <span>|</span>
-            <a href="#" className="hover:text-primary-navy">Kebijakan Privasi</a>
+            <Link href="/kebijakan-privasi" className="hover:text-primary-navy">Kebijakan Privasi</Link>
           </div>
         </div>
       </div>
