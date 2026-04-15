@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -63,9 +64,16 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="google-adsense-account" content="ca-pub-5739160252356689" />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-light-grey text-primary-navy">
         {children}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5739160252356689"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
