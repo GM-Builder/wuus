@@ -10,7 +10,7 @@ const features = [
     id: 1,
     title: "Citra Profesional",
     description: "Desain yang membangun kepercayaan sejak interaksi pertama.",
-    image: "/images/card1-carousel.png",
+    image: "/images/Card1-carousel.png",
   },
   {
     id: 2,
