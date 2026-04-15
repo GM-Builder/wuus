@@ -58,14 +58,14 @@ export function Portfolio() {
               className="group cursor-pointer"
             >
               <div className="relative h-[300px] w-full rounded-2xl overflow-hidden mb-6 border border-gray-200">
-                <Image
-                  src={project.img}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={index < 2}
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                  <Image
+                    src={project.img}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index < 2}
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 <div className="absolute inset-0 bg-primary-navy/20 group-hover:bg-transparent transition-colors duration-500" />
 
                 {/* Floating Tag */}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 
 const steps = [
   {
@@ -20,12 +21,15 @@ const steps = [
     id: 3,
     title: "Mesin Sales Profesional",
     description: "Lebih dari sekadar tampilan. Website dirancang cepat, elegan, dan mendukung keputusan pelanggan dengan lebih percaya diri.",
-    image: "/logo.png",
+    image: "/wuus-bg-navy.jpg",
+    hoverImage: "/logo.png",
     isAccent: true
   },
 ];
 
 export function Storytelling() {
+  const [isAccentHovered, setIsAccentHovered] = useState(false);
+
   return (
     <section className="py-24 md:py-32 bg-accent-orange relative overflow-hidden">
       
@@ -60,6 +64,8 @@ export function Storytelling() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                onMouseEnter={() => step.isAccent && setIsAccentHovered(true)}
+                onMouseLeave={() => step.isAccent && setIsAccentHovered(false)}
                 className={`flex-1 relative flex flex-col items-center text-center transition-all duration-700 group overflow-hidden
                   ${index === 0 ? "rounded-t-[3rem] md:rounded-t-none md:rounded-l-[4rem]" : ""}
                   ${index === 2 ? "rounded-b-[3rem] md:rounded-b-none md:rounded-r-[4rem]" : ""}
@@ -71,20 +77,65 @@ export function Storytelling() {
                   <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent rounded-[inherit] pointer-events-none" />
                 )}
 
-                {/* Image Container with Padding for breathability */}
-                <div className="w-full px-6 pt-6 md:px-8 md:pt-8 relative z-10">
-                  <div className={`w-full h-48 md:h-56 relative overflow-hidden rounded-3xl transition-colors duration-700 ease-in-out
-                    ${step.isAccent ? 'bg-white/5 border border-white/10 group-hover:bg-white inset-shadow' : 'bg-gray-100 border border-gray-100 shadow-inner'}
+                {/* Image Container */}
+                <div className={`w-full relative z-10 ${step.isAccent ? '' : 'px-6 pt-6 md:px-8 md:pt-8'}`}>
+                  <div className={`w-full relative overflow-hidden transition-colors duration-700 ease-in-out
+                    ${step.isAccent ? 'h-56 md:h-64 bg-white/5 border-b border-white/10 group-hover:bg-white inset-shadow' : 'h-48 md:h-56 bg-gray-100 border border-gray-100 shadow-inner rounded-3xl'}
                   `}>
-                    <Image 
-                      src={step.image} 
-                      alt={step.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className={`transition-transform duration-700 ease-in-out w-full h-full
-                        ${step.isAccent ? 'object-contain scale-[0.6] group-hover:scale-[0.45]' : 'object-cover group-hover:scale-110'}
-                      `}
-                    />
+                    {step.isAccent ? (
+                      <>
+                        <Image 
+                          src={step.image} 
+                          alt={step.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        {step.hoverImage && (
+                          <motion.div 
+                            initial={false}
+                            animate={{ clipPath: isAccentHovered ? 'inset(0 0 0 0)' : 'inset(0 0 0 100%)' }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="absolute inset-0 bg-white flex items-center justify-center"
+                          >
+                            <div className="relative w-full h-full p-12">
+                                <Image 
+                                src={step.hoverImage} 
+                                alt={`${step.title} Hover`}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                className="object-contain p-12"
+                                />
+                            </div>
+                            
+                            {/* Vertical Divider Line */}
+                            <motion.div 
+                                initial={false}
+                                animate={{ left: isAccentHovered ? '0%' : '100%' }}
+                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                className="absolute top-0 bottom-0 w-1 bg-accent-orange z-30 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
+                                style={{ transform: 'translateX(-50%)' }}
+                            >
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center border-2 border-white shadow-lg">
+                                    <div className="flex gap-1">
+                                        <div className="w-1 h-3 bg-white rounded-full opacity-50" />
+                                        <div className="w-1 h-3 bg-white rounded-full" />
+                                        <div className="w-1 h-3 bg-white rounded-full opacity-50" />
+                                    </div>
+                                </div>
+                            </motion.div>
+                          </motion.div>
+                        )}
+                      </>
+                    ) : (
+                      <Image 
+                        src={step.image} 
+                        alt={step.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                      />
+                    )}
                   </div>
                 </div>
                 
