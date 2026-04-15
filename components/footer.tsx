@@ -13,16 +13,16 @@ export function Footer() {
           {/* Brand & Map Info */}
           <div className="lg:col-span-2">
             <a href="/" className="flex items-center mb-6">
-              <Image 
-                src="/logo.png" 
-                alt="WUUS Logo" 
-                width={142} 
-                height={40} 
-                className="h-10 w-auto object-contain" 
+              <Image
+                src="/logo.png"
+                alt="WUUS Logo"
+                width={142}
+                height={40}
+                className="h-10 w-auto object-contain"
               />
             </a>
             <p className="text-gray-500 mb-8 max-w-md leading-relaxed">
-              WUUS adalah mitra transformasi digital khusus UMKM Indonesia. Kami menghadirkan website mewah dengan standar korporasi agar bisnis lokal bisa bersaing dan tumbuh maksimal.
+              WUUS adalah mitra digital untuk bisnis yang ingin tampil lebih profesional dan dipercaya. Kami membantu membangun website dengan standar visual dan teknis yang terukur.
             </p>
 
             <div className="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white h-52 max-w-md group transition-all duration-500">

@@ -18,7 +18,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { scrollY } = useScroll();
-  
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 20 && !isScrolled) setIsScrolled(true);
     else if (latest <= 20 && isScrolled) setIsScrolled(false);
@@ -46,13 +46,13 @@ export function Navbar() {
 
           {/* Logo Area */}
           <Link href="/" className="flex items-center">
-            <Image 
-              src="/logo.png" 
-              alt="WUUS Logo" 
-              width={142} 
-              height={40} 
+            <Image
+              src="/logo.png"
+              alt="WUUS Logo"
+              width={142}
+              height={40}
               priority
-              className="h-10 w-auto object-contain" 
+              className="h-10 w-auto object-contain"
             />
           </Link>
 
@@ -103,12 +103,12 @@ export function Navbar() {
           >
             <div className="flex justify-between items-center mb-12">
               <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
-                <Image 
-                  src="/logo.png" 
-                  alt="WUUS Logo" 
-                  width={142} 
-                  height={40} 
-                  className="h-10 w-auto object-contain" 
+                <Image
+                  src="/logo.png"
+                  alt="WUUS Logo"
+                  width={142}
+                  height={40}
+                  className="h-10 w-auto object-contain"
                 />
               </Link>
               <button

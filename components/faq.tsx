@@ -6,20 +6,20 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Berapa lama proses pembuatan website?",
-    answer: "Sangat cepat! Untuk paket standar, website Anda siap online dalam waktu 3-7 hari kerja setelah semua data dan materi (foto/teks) kami terima."
-  },
-  {
-    question: "Apakah saya harus mengerti coding?",
-    answer: "Sama sekali tidak! Fokus urus bisnis Anda, biar urusan pusing kode dan server kami yang tangani sepenuhnya. Ini adalah sistem beres terima jadi."
+    question: "Kenapa WUUS tidak menggunakan WordPress?",
+    answer: "Kami menggunakan teknologi modern yang dirancang untuk performa tinggi, keamanan lebih baik, dan fleksibilitas jangka panjang."
   },
   {
     question: "Apakah sudah termasuk Domain dan Hosting?",
-    answer: "Ya! Paket layanan kami sudah mencakup nama domain profesional (.com/.id) dan hosting berkecepatan tinggi selama 1 tahun pertama."
+    answer: "Sudah pasti. Anda akan mendapatkan Domain kustom (.com/.id/lainnya) dan server standar Enterprise selama 1 tahun. Kami menggunakan infrastruktur server berkualitas tinggi agar website Anda stabil dan cepat diakses."
   },
   {
-    question: "Bagaimana jika saya ingin tambah halaman di kemudian hari?",
-    answer: "Anda cukup membeli Add-ons berupa halaman tambahan dengan biaya yang sangat terjangkau, tanpa harus membuat website baru dari nol."
+    question: "Berapa kali revisi yang saya dapatkan?",
+    answer: "Kami menggunakan fase 'Discovery' presisi sebelum desain dimulai, sehingga revisi besar jarang terjadi. Namun kami memberi kebebasan 2 kali revisi minor pada fase desain untuk memastikan standar visual Bright Lux selaras dengan brand Anda."
+  },
+  {
+    question: "Berapa lama proses pembuatan website?",
+    answer: "Dengan alur kerja spesialis kami yang tanpa hambatan (seamless), website premium Anda biasanya siap meluncur (Go-Live) dalam rentang waktu 3-7 hari kerja."
   }
 ];
 
@@ -41,7 +41,7 @@ export function Faq() {
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div 
+            <div
               key={index}
               className={`border rounded-2xl overflow-hidden transition-all duration-300 ${openIndex === index ? 'border-accent-orange shadow-md' : 'border-gray-200 hover:border-gray-300'}`}
             >
@@ -56,7 +56,7 @@ export function Faq() {
                   {openIndex === index ? <Minus size={16} /> : <Plus size={16} />}
                 </span>
               </button>
-              
+
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.div

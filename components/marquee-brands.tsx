@@ -22,18 +22,18 @@ export function MarqueeBrands() {
         {/* DDI Style Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
           <div className="p-4">
-            <h2 className="text-5xl font-bold mb-2 tracking-tight">8,750+</h2>
-            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Jam Terselamatkan</p>
-            <p className="text-xs text-gray-400 mt-1">Setiap Tahunnya</p>
+            <h2 className="text-5xl font-bold mb-2 tracking-tight">100/100</h2>
+            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">SEO & Best Practices Score</p>
+            <p className="text-xs text-gray-400 mt-1">Google PageSpeed</p>
           </div>
           <div className="p-4">
-            <h2 className="text-5xl font-bold mb-2 tracking-tight">300%</h2>
-            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Peningkatan Omzet</p>
-            <p className="text-xs text-gray-400 mt-1">Rata-rata UMKM</p>
+            <h2 className="text-5xl font-bold mb-2 tracking-tight">0%</h2>
+            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Zero Security Breach</p>
+            <p className="text-xs text-gray-400 mt-1">Aman & Terenkripsi</p>
           </div>
           <div className="p-4">
-            <h2 className="text-5xl font-bold mb-2 tracking-tight">1.5</h2>
-            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Detik Load Time</p>
+            <h2 className="text-5xl font-bold mb-2 tracking-tight">1.5s</h2>
+            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Average Load Time</p>
             <p className="text-xs text-gray-400 mt-1">Sangat Cepat</p>
           </div>
         </div>
@@ -41,7 +41,7 @@ export function MarqueeBrands() {
 
       <div className="text-center mb-8">
         <p className="text-sm font-semibold text-gray-400 uppercase tracking-[0.2em]">
-          Solusi Digital yang Pas Banget Buat:
+          Dirancang untuk Berbagai Jenis Bisnis
         </p>
       </div>
       
@@ -57,11 +57,11 @@ export function MarqueeBrands() {
           {[...brands, ...brands].map((brand, i) => {
             const Icon = brand.icon;
             return (
-              <div key={i} className="flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                  <Icon size={20} className="text-gray-300" strokeWidth={1.5} />
+              <div key={i} className="flex-shrink-0 opacity-50 hover:opacity-100 transition-all duration-300 flex items-center gap-3 group grayscale hover:grayscale-0">
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-accent-orange/30">
+                  <Icon size={20} className="text-gray-400 group-hover:text-accent-orange" strokeWidth={1.5} />
                 </div>
-                <span className="text-xl font-bold text-gray-300 tracking-wide">{brand.name}</span>
+                <span className="text-xl font-bold text-gray-300 tracking-wide group-hover:text-white">{brand.name}</span>
               </div>
             );
           })}

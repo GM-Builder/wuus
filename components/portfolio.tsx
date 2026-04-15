@@ -4,26 +4,26 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const projects = [
-  { 
-    id: 1, 
-    title: "Savoria Elegance", 
-    category: "Kuliner", 
-    tagline: "Restoran Fine-Dining Berkelas.",
-    detail: "Website multi-halaman dengan estetika gelap yang elegan, menampilkan menu interaktif dan sistem reservasi kelas atas.",
+  {
+    id: 1,
+    title: "Savoria Elegance",
+    category: "Kuliner",
+    tagline: "Website Restoran Fine-Dining dengan Nuansa Elegan.",
+    detail: "Website multi-halaman dengan estetika gelap yang dirancang untuk menghadirkan pengalaman visual yang berkelas.",
     img: "/Savoria-mockup.png"
   },
-  { 
-    id: 2, 
-    title: "Trust Architect", 
-    category: "Jasa Profesional", 
+  {
+    id: 2,
+    title: "Trust Architect",
+    category: "Jasa Profesional",
     tagline: "Presisi dalam Setiap Struktur.",
     detail: "Platform profil perusahaan untuk firma arsitektur B2B yang menekankan pada portofolio proyek dan kepercayaan klien.",
     img: "/trust-mockup.png"
   },
-  { 
-    id: 3, 
-    title: "Urban Threads", 
-    category: "Toko Online", 
+  {
+    id: 3,
+    title: "Urban Threads",
+    category: "Toko Online",
     tagline: "Fashion Minimalis & Berkelanjutan.",
     detail: "Katalog e-commerce dengan desain bersih yang menonjolkan produk koleksi fashion dengan navigasi yang sangat halus.",
     img: "/urbanThreads-mockup.png"
@@ -36,12 +36,10 @@ export function Portfolio() {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <span className="text-sm font-bold tracking-[0.2em] text-accent-orange uppercase mb-4 block">
-              Bukti Nyata
-            </span>
+
             <h2 className="text-4xl md:text-5xl font-bold text-primary-navy">
-              Karya Website Berkualitas <br className="hidden md:block"/>
-              <span className="italic font-serif text-gray-500">Milik Klien Kami</span>
+              Karya Website Berkualitas <br className="hidden md:block" />
+              <span className="italic font-serif text-accent-orange">Milik Klien Kami</span>
             </h2>
           </div>
           <a href="https://preview.webuntukusaha.com" target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#F59E0B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#F59E0B] border-2 border-secondary-blue">
@@ -69,13 +67,13 @@ export function Portfolio() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary-navy/20 group-hover:bg-transparent transition-colors duration-500" />
-                
+
                 {/* Floating Tag */}
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-primary-navy transform-gpu" style={{ transform: "translateZ(0)" }}>
                   {project.category}
                 </div>
               </div>
-              
+
               <h3 className="text-xl font-bold text-primary-navy mb-1 group-hover:text-accent-orange transition-colors">
                 {project.title}
               </h3>
@@ -88,7 +86,7 @@ export function Portfolio() {
             </motion.div>
           ))}
         </div>
-        
+
         <div className="mt-10 md:hidden flex justify-center">
           <a href="https://preview.webuntukusaha.com" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide">
             Lihat Lebih Banyak

@@ -16,39 +16,34 @@ export function Hero() {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
-    <section ref={containerRef} className="relative bg-off-white pt-36 pb-32 lg:pt-48 lg:pb-48 overflow-hidden z-10">
+    <section ref={containerRef} className="relative bg-off-white pt-36 pb-32 lg:pt-48 lg:pb-48 overflow-hidden z-10" style={{ position: "relative" }}>
       {/* Ambient background glows */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-secondary-blue/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent-orange/10 rounded-full blur-[100px] pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 max-w-7xl relative z-20 flex flex-col items-center">
-        
+
         {/* Main Content constraints */}
         <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6">
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center w-full"
           >
-            {/* Top Badge */}
-            <div className="inline-flex flex-col items-center mb-8 relative">
-              <span className="text-accent-orange font-bold tracking-[0.2em] text-xs uppercase mb-4">
-                Solusi Digital UMKM
-              </span>
-              <div className="w-px h-12 bg-gray-200" />
-            </div>
+
 
             <h1 className="text-[2.5rem] min-[375px]:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-primary-navy tracking-tight leading-[1.05] mb-8">
-              Website <span className="bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent italic">Mewah</span>, <br className="hidden md:block" />
-              Harga Ramah<span className="text-accent-orange">.</span>
+              Jangan Biarkan <br className="hidden md:block" />
+              Bisnis Anda <br className="hidden md:block" />
+              Terlihat <span className="bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent italic">Amatir.</span>
             </h1>
-            
+
             <p className="text-base md:text-lg lg:text-xl text-gray-500 max-w-2xl mb-12 font-medium leading-relaxed">
-              Hadirkan website dengan standar teknologi perusahaan besar untuk usaha Anda. Kami membantu UMKM tampil lebih profesional, dipercaya pelanggan, dan siap tumbuh lebih besar.
+              Kami merancang website yang cepat, elegan, dan dirancang untuk membangun kepercayaan sejak interaksi pertama.
             </p>
-            
+
             {/* Action Buttons (DDI Style: Solid Orange & White w/ Outline) */}
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-md mx-auto relative z-30">
               <a href="#cta" className="w-full sm:w-auto px-8 py-3.5 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-sm tracking-wide transition-all shadow-[6px_6px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto">
@@ -64,29 +59,29 @@ export function Hero() {
 
         {/* Floating Mockup Elements alongside text as requested (DDI has left/right photos) */}
         {/* Left Floating Image Box */}
-        <motion.div 
+        <motion.div
           style={{ y: y1 }}
-          className="absolute left-2 xl:left-8 top-48 hidden lg:block"
+          className="absolute -left-4 xl:-left-20 top-48 hidden lg:block"
         >
           <div className="relative">
             <div className="absolute -left-6 -top-6 w-[120px] fill-accent-orange/20 z-0">
-               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                 <path d="M40.5 12C45.2 3.5 54.8 3.5 59.5 12L88.7 64C93.4 72.5 88.6 83 79.2 83H20.8C11.4 83 6.6 72.5 11.3 64L40.5 12Z" />
-               </svg>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40.5 12C45.2 3.5 54.8 3.5 59.5 12L88.7 64C93.4 72.5 88.6 83 79.2 83H20.8C11.4 83 6.6 72.5 11.3 64L40.5 12Z" />
+              </svg>
             </div>
             <div className="w-64 h-72 bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col">
               <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
-                 <Image 
-                   src="/Hero1.png"
-                   alt="Business Owner"
-                   fill
-                   priority
-                   loading="eager"
-                   sizes="(max-width: 768px) 100vw, 400px"
-                   className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                 />
+                <Image
+                  src="/Hero1.png"
+                  alt="Business Owner"
+                  fill
+                  priority
+                  loading="eager"
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                />
               </div>
-              
+
               <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-accent-orange rounded-2xl flex items-center justify-center shadow-lg transform rotate-6 border-4 border-white">
                 <Globe className="text-white w-8 h-8" />
               </div>
@@ -95,52 +90,40 @@ export function Hero() {
         </motion.div>
 
         {/* Right Floating Stat Box */}
-        <motion.div 
+        <motion.div
           style={{ y: y2 }}
-          className="absolute right-2 xl:right-8 top-64 hidden lg:block"
+          className="absolute -right-4 xl:-right-20 top-64 hidden lg:block"
         >
           <div className="relative">
-             {/* DDI style brush accent under right photo */}
-             <div className="absolute -inset-8 bg-[url('/patterns/cubes.png')] opacity-10 z-0" />
-             
-             <div className="w-72 h-auto bg-white rounded-3xl p-5 shadow-2xl relative z-10 border border-gray-100">
-                <div className="h-48 rounded-2xl bg-gray-100 overflow-hidden relative mb-6">
-                   <Image 
-                     src="/Hero2.png"
-                     alt="Team Working"
-                     fill
-                      priority
-                      loading="eager"
-                      sizes="(max-width: 768px) 100vw, 400px"
-                     className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                   />
-                </div>
-                
-                {/* Floating chat bubble stat style */}
-                <div className="absolute -left-12 bottom-[-12px] bg-white rounded-xl p-4 shadow-xl border border-gray-100 flex items-start gap-3 w-64 transform -rotate-4">
-                   <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                     <CheckCircle2 fill="white" className="text-accent-orange w-8 h-8" />
-                   </div>
-                   <div>
-                     <p className="text-xs font-bold text-primary-navy">Live Visitor Counter</p>
-                     <p className="text-[10px] text-gray-500 mt-1">Web Anda dikunjungi 120 orang hari ini.</p>
-                   </div>
-                </div>
+            {/* DDI style brush accent under right photo */}
+            <div className="absolute -inset-8 bg-[url('/patterns/cubes.png')] opacity-10 z-0" />
 
-                <div className="absolute -top-8 -right-8 w-20 h-20">
-                   <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full rotate-12">
-                     <circle cx="50" cy="50" r="40" fill="#FF9900" fillOpacity="0.2"/>
-                     <circle cx="50" cy="50" r="25" fill="#FF9900"/>
-                     <path d="M40 50L46.5 56.5L60 43" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-                   </svg>
-                </div>
-             </div>
+            <div className="w-84 h-auto bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 rotate-8">
+              <div className="h-54 rounded-2xl bg-gray-100 overflow-hidden relative">
+                <Image
+                  src="/Hero2.png"
+                  alt="Team Working"
+                  fill
+                  priority
+                  loading="eager"
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                />
+              </div>
+
+              <div className="absolute -top-8 -right-8 w-20 h-20">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full rotate-12">
+                  <circle cx="50" cy="50" r="40" fill="#FF9900" fillOpacity="0.2" />
+                  <circle cx="50" cy="50" r="25" fill="#FF9900" />
+                  <path d="M40 50L46.5 56.5L60 43" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
           </div>
         </motion.div>
 
       </div>
 
-      {/* DDI Style Jagged Brush Border Bottom */}
       <div className="absolute bottom-0 left-0 w-full h-[100px] md:h-[150px] bg-secondary-blue brush-edge-bottom z-10 translate-y-[2px]"></div>
     </section>
   );

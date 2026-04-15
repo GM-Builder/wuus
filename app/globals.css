@@ -22,3 +22,8 @@ body {
   mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 100' fill='none' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0 100V40C150 40 200 10 350 25C480 38 520 15 650 30C780 43 850 15 1000 35V100H0Z' fill='black'/%3E%3C/svg%3E");
   mask-size: 100% 100%;
 }
+
+/* Exclusive Tag Style Build */
+.tag-exclusive {
+  @apply px-4 py-1.5 rounded-full border border-blue-100 bg-blue-50/30 text-blue-600 text-[10px] uppercase tracking-widest font-bold whitespace-nowrap inline-flex items-center;
+}
