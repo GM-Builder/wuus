@@ -57,11 +57,11 @@ export function Hero() {
 
         </div>
 
-        {/* Floating Mockup Elements alongside text as requested (DDI has left/right photos) */}
+        {/* Floating Mockup Elements alongside text as requested */}
         {/* Left Floating Image Box */}
         <motion.div
           style={{ y: y1 }}
-          className="absolute -left-4 xl:-left-20 top-48 hidden lg:block"
+          className="absolute lg:left-0 2xl:-left-12 top-48 z-10 lg:scale-[0.6] xl:scale-[0.8] 2xl:scale-100 origin-left hidden lg:block"
         >
           <div className="relative">
             <div className="absolute -left-6 -top-6 w-[120px] fill-accent-orange/20 z-0">
@@ -69,7 +69,7 @@ export function Hero() {
                 <path d="M40.5 12C45.2 3.5 54.8 3.5 59.5 12L88.7 64C93.4 72.5 88.6 83 79.2 83H20.8C11.4 83 6.6 72.5 11.3 64L40.5 12Z" />
               </svg>
             </div>
-            <div className="w-64 h-72 bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col">
+            <div className="w-[260px] h-[300px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col">
               <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
                 <Image
                   src="/Hero1.png"
@@ -92,14 +92,14 @@ export function Hero() {
         {/* Right Floating Stat Box */}
         <motion.div
           style={{ y: y2 }}
-          className="absolute -right-4 xl:-right-20 top-64 hidden lg:block"
+          className="absolute lg:right-0 2xl:-right-12 top-64 z-10 lg:scale-[0.6] xl:scale-[0.8] 2xl:scale-100 origin-right hidden lg:block"
         >
           <div className="relative">
             {/* DDI style brush accent under right photo */}
             <div className="absolute -inset-8 bg-[url('/patterns/cubes.png')] opacity-10 z-0" />
 
-            <div className="w-84 h-auto bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 rotate-8">
-              <div className="h-54 rounded-2xl bg-gray-100 overflow-hidden relative">
+            <div className="w-[280px] sm:w-[320px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 rotate-8">
+              <div className="h-[200px] sm:h-[220px] rounded-2xl bg-gray-100 overflow-hidden relative">
                 <Image
                   src="/Hero2.png"
                   alt="Team Working"
