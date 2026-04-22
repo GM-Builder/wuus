@@ -46,7 +46,7 @@ export function Footer() {
               <li><a href="#services" className="text-gray-500 hover:text-accent-orange transition-colors">Layanan Biz</a></li>
               <li><a href="#portfolio" className="text-gray-500 hover:text-accent-orange transition-colors">Portfolio Karya</a></li>
               <li><a href="#pricing" className="text-gray-500 hover:text-accent-orange transition-colors">Harga Paket</a></li>
-              <li><a href="#roi" className="text-gray-500 hover:text-accent-orange transition-colors">Kalkulator Modal</a></li>
+              {/* <li><a href="#roi" className="text-gray-500 hover:text-accent-orange transition-colors">Kalkulator Modal</a></li> */}
               <li><a href="#faq" className="text-gray-500 hover:text-accent-orange transition-colors">Pusat Bantuan</a></li>
             </ul>
           </div>

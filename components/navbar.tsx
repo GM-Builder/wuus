@@ -9,7 +9,7 @@ import Image from "next/image";
 const navLinks = [
   { name: "Layanan Kami", href: "#services" },
   { name: "Portfolio", href: "#portfolio" },
-  { name: "Kalkulator ROI", href: "#roi" },
+  // { name: "Kalkulator ROI", href: "#roi" },
   { name: "FAQ", href: "#faq" },
 ];
 
