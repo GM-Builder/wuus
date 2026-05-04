@@ -22,6 +22,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.webuntukusaha.com'),
   title: "WUUS - Jasa Pembuatan Website Untuk Usaha (UMKM)",
   description: "Website Beres, Usaha Sukses! Jasa pembuatan website mewah, profesional, dengan harga ramah untuk mendigitalisasi UMKM Anda. Proses cepat secepat WUUS!",
   keywords: ["Jasa Web Murah", "Web Untuk Usaha", "Jasa Website UMKM", "Bikin Web Murah", "Website Siap Pakai", "Website Mewah Harga Ramah, bikin website murah, bikin web Tasikmalaya, Bikin Web Jakarta Barat, Jasa Buat Website Jakarta, Jasa Pembuatan Website Jakarta Barat, Jasa Pembuatan Website Jakarta Selatan, Jasa Pembuatan Website Jakarta Pusat, Jasa Pembuatan Website Jakarta Timur, Jasa Pembuatan Website Jakarta Utara, Jasa Pembuatan Website Depok, Jasa Pembuatan Website Tangerang, Jasa Pembuatan Website Bekasi, Jasa Pembuatan Website Bogor, Jasa Pembuatan Website Bandung, Jasa Pembuatan Website Surabaya, Jasa Pembuatan Webiste UMKM, "],

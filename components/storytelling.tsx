@@ -111,7 +111,13 @@ export function Storytelling() {
                     >
                       {/* Small Thumbnail Image */}
                       <div className="relative w-full h-[180px] rounded-2xl overflow-hidden">
-                        <Image src={step.image} alt={step.title} fill className="object-cover opacity-60" />
+                        <Image 
+                          src={step.image} 
+                          alt={step.title} 
+                          fill 
+                          sizes="(max-width: 1024px) 100vw, 400px"
+                          className="object-cover opacity-60" 
+                        />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#020617] to-transparent" />
                       </div>
 
