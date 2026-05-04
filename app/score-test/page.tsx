@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { ChevronRight, ArrowLeft, RefreshCcw, CheckCircle2 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 // --- Data Kuisioner ---
 const questions = [
@@ -165,6 +166,37 @@ export default function ScoreTestPage() {
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [answers, setAnswers] = useState<number[]>(Array(questions.length).fill(-1));
   const [isFinished, setIsFinished] = useState(false);
+  const [hasTracked, setHasTracked] = useState(false);
+
+  // --- Tracking Logic ---
+  useEffect(() => {
+    if (isFinished && !hasTracked) {
+      const saveScore = async () => {
+        const finalScore = calculateScore();
+        const feedback = getResultFeedback(finalScore);
+        
+        try {
+          const { error } = await supabase
+            .from('business_scores')
+            .insert([
+              { 
+                score: finalScore, 
+                category: feedback.title,
+                created_at: new Date().toISOString()
+              }
+            ]);
+          
+          if (error) throw error;
+          setHasTracked(true);
+          console.log("Score tracked successfully");
+        } catch (err) {
+          console.error("Error tracking score:", err);
+        }
+      };
+
+      saveScore();
+    }
+  }, [isFinished, hasTracked]);
 
   const handleOptionSelect = (optionScore: number) => {
     const newAnswers = [...answers];
