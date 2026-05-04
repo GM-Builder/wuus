@@ -7,7 +7,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="bg-light-grey border-t border-gray-200 pt-20 pb-10">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
           {/* Brand & Map Info */}
@@ -43,11 +43,11 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-primary-navy text-lg mb-6">Navigasi</h3>
             <ul className="space-y-4">
-              <li><a href="#services" className="text-gray-500 hover:text-accent-orange transition-colors">Layanan Biz</a></li>
-              <li><a href="#portfolio" className="text-gray-500 hover:text-accent-orange transition-colors">Portfolio Karya</a></li>
-              <li><a href="#pricing" className="text-gray-500 hover:text-accent-orange transition-colors">Harga Paket</a></li>
-              {/* <li><a href="#roi" className="text-gray-500 hover:text-accent-orange transition-colors">Kalkulator Modal</a></li> */}
-              <li><a href="#faq" className="text-gray-500 hover:text-accent-orange transition-colors">Pusat Bantuan</a></li>
+              <li><Link href="/#services" className="text-gray-500 hover:text-accent-orange transition-colors">Layanan Biz</Link></li>
+              <li><Link href="/#portfolio" className="text-gray-500 hover:text-accent-orange transition-colors">Portfolio Karya</Link></li>
+              <li><Link href="/#pricing" className="text-gray-500 hover:text-accent-orange transition-colors">Harga Paket</Link></li>
+              {/* <li><Link href="/#roi" className="text-gray-500 hover:text-accent-orange transition-colors">Kalkulator Modal</Link></li> */}
+              <li><Link href="/#faq" className="text-gray-500 hover:text-accent-orange transition-colors">Pusat Bantuan</Link></li>
             </ul>
           </div>
 

@@ -3,6 +3,7 @@
 
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 export function CtaSection() {
   const whatsappNumber = "6281383521750";
@@ -30,15 +31,12 @@ export function CtaSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-accent-orange hover:bg-accent-yellow text-primary-navy rounded-sm font-black text-lg shadow-[6px_6px_0px_0px_white] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_white] transition-all uppercase tracking-wide"
+              <Link
+                href="/inquiries"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 bg-accent-orange hover:bg-accent-yellow text-primary-navy rounded-sm font-black text-lg shadow-[6px_6px_0px_0px_white] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_white] transition-all uppercase tracking-wide text-center"
               >
-                <MessageCircle size={24} />
-                Diskusikan Kebutuhan Website Anda
-              </a>
+                Dapatkan Estimasi Proyek Gratis
+              </Link>
             </div>
 
             <p className="mt-6 text-sm text-gray-400 font-medium">Kami membantu Anda menentukan solusi terbaik untuk bisnis Anda.</p>

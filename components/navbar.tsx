@@ -7,10 +7,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const navLinks = [
-  { name: "Layanan Kami", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
-  // { name: "Kalkulator ROI", href: "#roi" },
-  { name: "FAQ", href: "#faq" },
+  { name: "Layanan Kami", href: "/#services" },
+  { name: "Portfolio", href: "/#portfolio" },
+  // { name: "Kalkulator ROI", href: "/#roi" },
+  { name: "FAQ", href: "/#faq" },
 ];
 
 export function Navbar() {
@@ -42,7 +42,7 @@ export function Navbar() {
           }`}
         style={{ transform: "translateZ(0)" }}
       >
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)] flex items-center justify-between">
 
           {/* Logo Area */}
           <Link href="/" className="flex items-center">
@@ -70,12 +70,12 @@ export function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-6">
-            <a href="#cta" className="bg-primary-navy hover:bg-secondary-blue text-white px-6 py-2.5 rounded text-sm font-bold transition-all shadow-sm">
-              Konsultasi Gratis
-            </a>
-            <a href="#cta" className="bg-accent-orange hover:bg-accent-yellow text-primary-navy px-6 py-2.5 rounded text-sm font-bold transition-all shadow-sm">
-              Mulai Sekarang
-            </a>
+            <Link href="/score-test" className="bg-primary-navy hover:bg-secondary-blue text-white px-6 py-2.5 rounded text-sm font-bold transition-all shadow-sm">
+              Cek Score Bisnis
+            </Link>
+            <Link href="/inquiries" className="bg-accent-orange hover:bg-accent-yellow text-primary-navy px-6 py-2.5 rounded text-sm font-bold transition-all shadow-sm">
+              Estimasi Proyek Gratis
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -134,12 +134,12 @@ export function Navbar() {
             </nav>
 
             <div className="mt-auto flex flex-col gap-4">
-              <a href="#cta" onClick={() => setMobileMenuOpen(false)} className="w-full text-center bg-primary-navy text-white px-6 py-4 rounded-lg font-bold text-lg">
-                Konsultasi Gratis
-              </a>
-              <a href="#cta" onClick={() => setMobileMenuOpen(false)} className="w-full text-center bg-accent-orange text-primary-navy px-6 py-4 rounded-lg font-bold text-lg">
-                Mulai Sekarang
-              </a>
+              <Link href="/score-test" onClick={() => setMobileMenuOpen(false)} className="w-full text-center bg-primary-navy text-white px-6 py-4 rounded-lg font-bold text-lg">
+                Cek Score Bisnis
+              </Link>
+              <Link href="/inquiries" onClick={() => setMobileMenuOpen(false)} className="w-full text-center bg-accent-orange text-primary-navy px-6 py-4 rounded-lg font-bold text-lg">
+                Estimasi Proyek Gratis
+              </Link>
             </div>
           </motion.div>
         )}

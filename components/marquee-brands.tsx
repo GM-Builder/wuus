@@ -17,28 +17,7 @@ const brands = [
 
 export function MarqueeBrands() {
   return (
-    <section className="bg-secondary-blue text-white pb-16 pt-4 relative z-10 border-b-8 border-accent-orange">
-      <div className="container mx-auto px-4 max-w-7xl mb-12 relative z-30 -mt-8 md:-mt-20">
-        {/* DDI Style Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
-          <div className="p-4">
-            <h2 className="text-5xl font-bold mb-2 tracking-tight">100/100</h2>
-            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">SEO & Best Practices Score</p>
-            <p className="text-xs text-gray-400 mt-1">Google PageSpeed</p>
-          </div>
-          <div className="p-4">
-            <h2 className="text-5xl font-bold mb-2 tracking-tight">0%</h2>
-            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Zero Security Breach</p>
-            <p className="text-xs text-gray-400 mt-1">Aman & Terenkripsi</p>
-          </div>
-          <div className="p-4">
-            <h2 className="text-5xl font-bold mb-2 tracking-tight">1.5s</h2>
-            <p className="text-xs uppercase tracking-widest text-gray-300 font-bold">Average Load Time</p>
-            <p className="text-xs text-gray-400 mt-1">Sangat Cepat</p>
-          </div>
-        </div>
-      </div>
-
+    <section className="bg-secondary-blue text-white pt-8 pb-12 relative z-20 border-b-8 border-accent-orange -mt-8 md:-mt-20">
       <div className="text-center mb-8">
         <p className="text-sm font-semibold text-gray-400 uppercase tracking-[0.2em]">
           Dirancang untuk Berbagai Jenis Bisnis

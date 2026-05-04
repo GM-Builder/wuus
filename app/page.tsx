@@ -3,15 +3,16 @@ import dynamic from 'next/dynamic';
 const Navbar = dynamic(() => import('@/components/navbar').then(mod => mod.Navbar));
 const Hero = dynamic(() => import('@/components/hero').then(mod => mod.Hero));
 const MarqueeBrands = dynamic(() => import('@/components/marquee-brands').then(mod => mod.MarqueeBrands));
-const BentoFeatures = dynamic(() => import('@/components/bento-features').then(mod => mod.BentoFeatures));
-const TechAuthority = dynamic(() => import('@/components/tech-authority').then(mod => mod.TechAuthority));
+// const BentoFeatures = dynamic(() => import('@/components/bento-features').then(mod => mod.BentoFeatures));
+// const TechAuthority = dynamic(() => import('@/components/tech-authority').then(mod => mod.TechAuthority));
 const Storytelling = dynamic(() => import('@/components/storytelling').then(mod => mod.Storytelling));
 // const RoiCalculator = dynamic(() => import('@/components/roi-calculator').then(mod => mod.RoiCalculator));
+const Services = dynamic(() => import('@/components/services').then(mod => mod.Services));
 const Portfolio = dynamic(() => import('@/components/portfolio').then(mod => mod.Portfolio));
 const Workflow = dynamic(() => import('@/components/workflow').then(mod => mod.Workflow));
 const WhyWuus = dynamic(() => import('@/components/why-wuus').then(mod => mod.WhyWuus));
 const Faq = dynamic(() => import('@/components/faq').then(mod => mod.Faq));
-const Testimonial = dynamic(() => import('@/components/testimonial').then(mod => mod.Testimonial));
+// const Testimonial = dynamic(() => import('@/components/testimonial').then(mod => mod.Testimonial));
 // const Pricing = dynamic(() => import('@/components/pricing').then(mod => mod.Pricing));
 const CtaSection = dynamic(() => import('@/components/cta-section').then(mod => mod.CtaSection));
 const Footer = dynamic(() => import('@/components/footer').then(mod => mod.Footer));
@@ -23,15 +24,16 @@ export default function Home() {
       <Navbar />
       <Hero />
       <MarqueeBrands />
+      <Services />
       <Portfolio />
-      <BentoFeatures />
+      {/* <BentoFeatures /> */}
       <Storytelling />
       {/* <RoiCalculator /> */}
       <WhyWuus />
       <Workflow />
-      <TechAuthority />
+      {/* <TechAuthority /> */}
       <Faq />
-      <Testimonial />
+      {/* <Testimonial /> */}
       {/* <Pricing /> */}
       <CtaSection />
       <Footer />

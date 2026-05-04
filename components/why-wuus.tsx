@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import { Rocket, Gem, Clock, Palette, ShieldCheck, Handshake, HeartHandshake } from "lucide-react";
 
 const reasons = [
@@ -8,131 +9,175 @@ const reasons = [
     title: "Selesai dalam\n7 Hari",
     description: "Waktu adalah aset bisnis. Website Anda disiapkan dengan sistem yang efisien dan terukur.",
     icon: Clock,
-    gradient: "from-[#1C2733] to-[#233746]",
     iconColor: "text-accent-orange",
   },
   {
     title: "Pendekatan\nMenyeluruh",
     description: "Kami menangani seluruh kebutuhan teknis, dari awal hingga website siap digunakan.",
     icon: ShieldCheck,
-    gradient: "from-[#F59E0B] to-[#FBBF24]",
     iconColor: "text-primary-navy",
   },
   {
     title: "Desain yang\nTerukur",
     description: "Setiap elemen dirancang dengan standar visual yang konsisten dan elegan.",
     icon: Palette,
-    gradient: "from-[#1C2733] to-[#2d4a5e]",
     iconColor: "text-accent-orange",
   },
   {
     title: "Sangat Ringan &\nMudah Diakses",
-    description: "Website kami dirancang agar terbuka instan di HP tipe apa pun, bahkan dengan koneksi internet yang terbatas sekalipun.",
+    description: "Website kami dirancang agar terbuka instan di HP tipe apa pun, bahkan dengan koneksi terbatas.",
     icon: Rocket,
-    gradient: "from-[#F59E0B] to-[#D97706]",
     iconColor: "text-primary-navy",
   },
   {
     title: "Harga Jujur &\nTransparan",
     description: "Semua biaya jelas sejak awal. Tidak ada biaya tambahan yang tiba-tiba muncul di tengah jalan.",
     icon: Handshake,
-    gradient: "from-[#1C2733] to-[#233746]",
     iconColor: "text-accent-orange",
   },
   {
     title: "Pendampingan\nPersonal",
-    description: "Butuh bantuan setelah website jadi? Tim kami siap mendampingi lewat WhatsApp kapan pun Anda butuh penyesuaian.",
+    description: "Butuh bantuan setelah website jadi? Tim kami siap mendampingi lewat WhatsApp kapan pun Anda butuh.",
     icon: HeartHandshake,
-    gradient: "from-[#F59E0B] to-[#FBBF24]",
     iconColor: "text-primary-navy",
   },
 ];
 
-export function WhyWuus() {
+function StickyHorizontalCard({ reason, i, scrollX, dims, isMobile }: { reason: any, i: number, scrollX: any, dims: any, isMobile: boolean }) {
+  const startPos = dims.startOffset + i * (dims.cardW + dims.gap);
+  const stickyOffset = dims.startOffset + i * dims.stackOffset;
+
+  // Simulate native position: sticky
+  const x = useTransform(scrollX, (sx: number) => Math.max(startPos - sx, stickyOffset));
+
   return (
-    <section id="why-wuus" className="relative bg-[#F8F7F4] py-32">
-      {/* Background Soul (Optional, matching BDN pattern) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-accent-orange/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-primary-navy/5 rounded-full blur-[120px]" />
+    <motion.div
+      style={{ x, zIndex: i, width: dims.cardW }}
+      className={`absolute top-0 bottom-0 left-0 my-auto ${isMobile ? 'h-[400px] p-6' : 'h-[450px] md:h-[480px] p-8 md:p-12'} rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(28,39,51,0.12)] bg-white/95 backdrop-blur-xl border border-gray-100 flex flex-col justify-center origin-left group hover:shadow-[0_30px_80px_-15px_rgba(28,39,51,0.2)] transition-shadow duration-500`}
+    >
+      {/* Luxury Glass Reflection Line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-50" />
+      
+      {/* Background Decor */}
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent-orange/5 rounded-full blur-2xl pointer-events-none" />
+
+      {/* Number and Icon Block */}
+      <div className={`flex justify-between items-start ${isMobile ? 'mb-4' : 'mb-8'} relative z-10`}>
+        <span className={`${isMobile ? 'text-[3.5rem]' : 'text-[4rem] md:text-[5rem]'} font-serif italic text-gray-100 leading-none group-hover:text-accent-orange/30 transition-colors duration-500`}>
+          0{i + 1}
+        </span>
+        <div className={`${isMobile ? 'w-10 h-10' : 'w-14 h-14'} rounded-2xl bg-gray-50 flex items-center justify-center ${reason.iconColor} border border-gray-100 group-hover:scale-110 transition-transform duration-500`}>
+          <reason.icon size={isMobile ? 20 : 28} strokeWidth={1.5} />
+        </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 text-center mb-32 relative z-10">
-
-        <h2 className="text-4xl md:text-7xl font-black text-primary-navy leading-none tracking-tight mb-6">
-          Mengapa Banyak Bisnis<br />
-          <span className="font-serif italic font-light text-accent-orange">Memilih WUUS?</span>
-        </h2>
-        <p className="text-gray-500 text-lg md:text-xl leading-relaxed">
-          WUUS bukan sekedar tempat bikin website. Kami tahu persis bagaimana tampilan digital yang tepat bisa mengubah pengunjung yang ragu menjadi pembeli yang yakin.
+      {/* Text Content */}
+      <div className="relative z-10">
+        <h3 className={`${isMobile ? 'text-xl' : 'text-3xl md:text-4xl'} font-black text-primary-navy mb-4 tracking-tight whitespace-pre-line leading-tight`}>
+          {reason.title.split('\n').map((line: string, idx: number) => (
+            <span key={idx} className="block">
+              {idx === 1 ? <span className="font-serif italic font-light text-accent-orange">{line}</span> : line}
+            </span>
+          ))}
+        </h3>
+        <p className={`text-gray-500 leading-relaxed font-medium ${isMobile ? 'text-xs' : 'md:text-lg'}`}>
+          {reason.description}
         </p>
       </div>
+    </motion.div>
+  );
+}
 
-      <div className="max-w-5xl mx-auto px-6 pb-32 relative flex flex-col gap-12 z-10">
-        {reasons.map((reason, i) => (
-          <motion.div
-            key={reason.title}
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-            className="sticky w-full rounded-[3rem] md:rounded-[4rem] p-12 md:p-16 shadow-[0_30px_80px_-20px_rgba(28,39,51,0.12)] flex flex-col md:flex-row items-center gap-10 md:gap-20 border border-white bg-white/95 backdrop-blur-xl overflow-hidden group will-change-transform transform-gpu hover:shadow-[0_50px_100px_-20px_rgba(28,39,51,0.2)] transition-shadow duration-700"
-            style={{
-              top: `calc(10vh + ${i * 40}px)`,
-              zIndex: i + 10,
-              transform: 'translateZ(0)'
-            }}
-          >
-            {/* Luxury Glass Reflection Line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
-            {/* Background Decor: Floating Circles */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent-orange/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-primary-navy/5 rounded-full blur-3xl pointer-events-none" />
+export function WhyWuus() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-            {/* Typography Number Block */}
-            <div className="w-20 h-20 md:w-32 md:h-32 shrink-0 flex flex-col items-center justify-center relative z-10 transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3">
-              <span className="text-[5rem] md:text-[8rem] font-serif italic text-gray-200 group-hover:text-accent-orange group-hover:drop-shadow-[0_10px_15px_rgba(245,158,11,0.3)] transition-all duration-500 leading-none">
-                0{i + 1}
-              </span>
-            </div>
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-            {/* Text */}
-            <div className="text-center md:text-left flex-1 relative z-10">
-              <h3 className="text-4xl md:text-6xl font-black text-primary-navy mb-5 md:mb-8 tracking-tighter leading-[0.95] whitespace-pre-line">
-                {reason.title.split('\n').map((line, idx) => (
-                  <span key={idx} className="block">
-                    {idx === 1 ? <span className="font-serif italic font-light text-gray-400">{line}</span> : line}
-                  </span>
-                ))}
-              </h3>
+  const { scrollYProgress } = useScroll({ target: targetRef });
 
-              <p className="text-base md:text-2xl text-gray-500 leading-relaxed font-normal max-w-2xl">
-                {reason.description}
-              </p>
-            </div>
+  const [dims, setDims] = useState({ cardW: 500, gap: 48, startOffset: 100, stackOffset: 40 });
 
-          </motion.div>
-        ))}
-      </div>
+  useEffect(() => {
+    const w = window.innerWidth;
+    if (w < 768) {
+      setDims({
+        cardW: w * 0.85,
+        gap: 24,
+        startOffset: 24,
+        stackOffset: 12
+      });
+    } else {
+      setDims({
+        cardW: 500,
+        gap: 48,
+        startOffset: Math.max(60, w * 0.05),
+        stackOffset: 40
+      });
+    }
+  }, [isMobile]);
 
-      {/* ─── Bottom Trust Banner ─── */}
-      <div className="mt-16 relative z-10 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-primary-navy rounded-[2rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-secondary-blue/40 rounded-full blur-[80px] pointer-events-none" />
-            <p className="text-white text-xl md:text-2xl font-bold leading-relaxed max-w-xl relative z-10">
-              Bukan sekadar website, tapi{" "}
-              <span className="text-accent-orange italic font-serif font-normal">partner digital</span>{" "}
-              untuk pertumbuhan usaha Anda. Mari mulai konsultasi gratis hari ini.
+  // Total scrolling distance calculation
+  const maxScroll = (reasons.length - 1) * (dims.cardW + dims.gap);
+  const scrollX = useTransform(scrollYProgress, [0, 1], [0, maxScroll + 200]);
+
+  return (
+    <section id="why-wuus" ref={targetRef} className="relative bg-[#F8F7F4] h-[350vh]">
+      {/* Sticky Container */}
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center pt-10 pb-10">
+        
+        {/* Background Soul */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-accent-orange/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-primary-navy/5 rounded-full blur-[120px]" />
+        </div>
+
+        {/* Header Text */}
+        <div className="container mx-auto px-6 text-left md:text-center mb-8 relative z-10" style={{ paddingLeft: isMobile ? 24 : dims.startOffset }}>
+          <h2 className="text-4xl md:text-5xl font-black text-primary-navy leading-none tracking-tight mb-4 md:mb-6">
+            Mengapa Banyak Bisnis<br />
+            <span className="font-serif italic font-light text-accent-orange">Memilih WUUS?</span>
+          </h2>
+          <p className="text-gray-500 md:text-lg leading-relaxed max-w-2xl md:mx-auto">
+            Kami merancang tampilan digital yang elegan untuk mengubah pengunjung menjadi pembeli yang yakin.
+          </p>
+        </div>
+
+        {/* Stacking Cards Area */}
+        <div className={`relative w-full ${isMobile ? 'h-[400px]' : 'h-[450px] md:h-[480px]'} mb-8`}>
+          {reasons.map((reason, i) => (
+            <StickyHorizontalCard 
+              key={reason.title} 
+              reason={reason} 
+              i={i} 
+              scrollX={scrollX} 
+              dims={dims} 
+              isMobile={isMobile}
+            />
+          ))}
+        </div>
+
+        {/* Bottom Trust Banner */}
+        {/* <div className="container mx-auto px-6 relative z-20 mt-auto" style={{ paddingLeft: isMobile ? 24 : dims.startOffset, paddingRight: isMobile ? 24 : dims.startOffset }}>
+          <div className="bg-primary-navy rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-secondary-blue/40 rounded-full blur-[60px] pointer-events-none" />
+            <p className="text-white text-base md:text-lg font-bold leading-relaxed max-w-xl relative z-10 text-center md:text-left">
+              Mari mulai <span className="text-accent-orange italic font-serif font-normal">pertumbuhan usaha</span> Anda hari ini.
             </p>
             <a
               href="#cta"
-              className="shrink-0 relative z-10 inline-flex items-center gap-3 bg-accent-orange text-white font-black text-sm px-8 py-4 rounded-full hover:bg-amber-400 transition-all shadow-[0_10px_25px_-8px_rgba(245,158,11,0.5)] hover:shadow-[0_15px_30px_-8px_rgba(245,158,11,0.6)] hover:-translate-y-0.5 whitespace-nowrap"
+              className="shrink-0 relative z-10 inline-flex items-center gap-2 bg-accent-orange text-white font-bold text-sm px-6 py-3 rounded-full hover:bg-amber-400 transition-all shadow-[0_10px_25px_-8px_rgba(245,158,11,0.5)] whitespace-nowrap"
             >
               Konsultasi Gratis
             </a>
           </div>
-        </div>
+        </div> */}
+
       </div>
     </section>
   );

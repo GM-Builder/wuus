@@ -2,98 +2,176 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
+import { ArrowUpRight, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 
 const projects = [
   {
     id: 1,
     title: "Savoria Elegance",
-    category: "Kuliner",
-    tagline: "Website Restoran Fine-Dining dengan Nuansa Elegan.",
-    detail: "Website multi-halaman dengan estetika gelap yang dirancang untuk menghadirkan pengalaman visual yang berkelas.",
-    img: "/Savoria-mockup.png"
+    category: "F&B / Restaurant",
+    img: "/Savoria-mockup.png",
+    accent: "#d4af37",
+    logo: "/logo.png"
   },
   {
     id: 2,
     title: "Trust Architect",
-    category: "Jasa Profesional",
-    tagline: "Presisi dalam Setiap Struktur.",
-    detail: "Platform profil perusahaan untuk firma arsitektur B2B yang menekankan pada portofolio proyek dan kepercayaan klien.",
-    img: "/trust-mockup.png"
+    category: "Corporate / B2B",
+    img: "/trust-mockup.png",
+    accent: "#0056b3",
+    logo: "/logo.png"
   },
   {
     id: 3,
     title: "Urban Threads",
-    category: "Toko Online",
-    tagline: "Fashion Minimalis & Berkelanjutan.",
-    detail: "Katalog e-commerce dengan desain bersih yang menonjolkan produk koleksi fashion dengan navigasi yang sangat halus.",
-    img: "/urbanThreads-mockup.png"
+    category: "E-Commerce",
+    img: "/urbanThreads-mockup.png",
+    accent: "#a88a64",
+    logo: "/logo.png"
+  },
+  {
+    id: 4,
+    title: "Dressy Rent",
+    category: "Sewa Gaun Premium",
+    img: "/dressy-rent-mockup.png",
+    accent: "#d84d5c",
+    logo: "/logo.png"
+  },
+  {
+    id: 5,
+    title: "Socks Indonesia",
+    category: "E-Commerce",
+    img: "/socks-indonesia-mockup.png",
+    accent: "#ffcc00",
+    logo: "/logo.png"
+  },
+  {
+    id: 6,
+    title: "Kain Nusantara",
+    category: "Fashion & Budaya",
+    img: "/kain-nusantara-mockup.png",
+    accent: "#8b4513",
+    logo: "/logo.png"
   }
 ];
 
 export function Portfolio() {
-  return (
-    <section id="portfolio" className="relative py-24 bg-white">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-navy">
-              Karya Website Berkualitas <br className="hidden md:block" />
-              <span className="italic font-serif text-accent-orange">Milik Klien Kami</span>
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section id="portfolio" className="relative py-24 lg:py-32 bg-white overflow-hidden">
+      
+      {/* Section Header */}
+      <div className="container mx-auto px-6 mb-16 lg:mb-20 relative z-10">
+        <div className="flex items-center justify-between gap-8">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl lg:text-5xl font-black text-[#020617] leading-none tracking-tight">
+              Eksplorasi <br />
+              <span className="font-serif italic font-light text-accent-orange text-5xl lg:text-6xl">Desain</span>
             </h2>
           </div>
-          <a href="https://preview.webuntukusaha.com" target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#F59E0B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#F59E0B] border-2 border-secondary-blue">
-            Lihat Lebih Banyak
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group cursor-pointer"
+          
+          {/* Navigation Buttons */}
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => scroll('left')}
+              className="w-14 h-14 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#020617] hover:text-white transition-all group active:scale-95"
+              aria-label="Previous Project"
             >
-              <div className="relative h-[300px] w-full rounded-2xl overflow-hidden mb-6 border border-gray-200">
-                  <Image
-                    src={project.img}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority={index < 2}
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                <div className="absolute inset-0 bg-primary-navy/20 group-hover:bg-transparent transition-colors duration-500" />
-
-                {/* Floating Tag */}
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-primary-navy transform-gpu" style={{ transform: "translateZ(0)" }}>
-                  {project.category}
-                </div>
-              </div>
-
-              <h3 className="text-xl font-bold text-primary-navy mb-1 group-hover:text-accent-orange transition-colors">
-                {project.title}
-              </h3>
-              <p className="font-semibold text-sm text-secondary-blue mb-2 italic">
-                "{project.tagline}"
-              </p>
-              <p className="text-gray-500 text-sm font-medium leading-relaxed">
-                {project.detail}
-              </p>
-            </motion.div>
-          ))}
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="w-14 h-14 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[#020617] hover:text-white transition-all group active:scale-95"
+              aria-label="Next Project"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
+      </div>
 
-        <div className="mt-10 md:hidden flex justify-center">
-          <a href="https://preview.webuntukusaha.com" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-secondary-blue text-white font-bold text-sm tracking-wide">
-            Lihat Lebih Banyak
+      {/* Perspective Grid Container */}
+      <div 
+        ref={scrollRef}
+        className="flex overflow-x-auto pb-20 px-6 lg:px-[10vw] no-scrollbar gap-8 lg:gap-12 snap-x scroll-smooth"
+      >
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="flex-shrink-0 w-[85vw] lg:w-[400px] snap-center group cursor-pointer"
+          >
+            {/* The Slanted Card */}
+            <div 
+              className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden transition-all duration-700 ease-out group-hover:-translate-y-4 shadow-xl"
+              style={{ 
+                backgroundColor: project.accent,
+                clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
+                transform: "perspective(1000px) rotateY(-5deg)"
+              }}
+            >
+              {/* Full Image Area */}
+              <div className="absolute inset-0 z-10 transition-transform duration-1000 group-hover:scale-110">
+                <Image
+                  src={project.img}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  sizes="400px"
+                />
+                
+                {/* Visual Polish Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+              </div>
+            </div>
+
+            {/* Bottom Info (Outside Slant) */}
+            <div className="mt-8 flex justify-between items-center px-2">
+              <div>
+                <span className="text-accent-orange font-bold text-[10px] tracking-[0.3em] uppercase block mb-1">
+                  {project.category}
+                </span>
+                <h4 className="text-[#020617] font-black text-xl uppercase tracking-tight">
+                  {project.title}
+                </h4>
+              </div>
+              <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#020617] group-hover:border-[#020617] transition-all">
+                <ArrowUpRight size={20} className="text-[#020617] group-hover:text-white transition-colors" />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+
+        <div className="flex-shrink-0 w-[85vw] lg:w-[400px] snap-center flex items-center justify-center">
+          <a 
+            href="https://preview.webuntukusaha.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center gap-6"
+          >
+            <div className="w-32 h-32 rounded-full border-4 border-dashed border-gray-200 flex items-center justify-center group-hover:border-accent-orange transition-colors">
+              <Plus size={48} className="text-gray-300 group-hover:text-accent-orange transition-colors" />
+            </div>
+            <span className="font-black uppercase tracking-[0.2em] text-sm text-gray-400 group-hover:text-[#020617] transition-colors">
+              Explorasi Lainnya
+            </span>
           </a>
         </div>
-
       </div>
+
     </section>
   );
 }
