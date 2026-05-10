@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const navLinks = [
+  { name: "AI Builder", href: "https://build.webuntukusaha.com", isNew: true },
   { name: "Layanan Kami", href: "/#services" },
   { name: "Portfolio", href: "/#portfolio" },
   // { name: "Kalkulator ROI", href: "/#roi" },
@@ -62,9 +63,16 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-primary-navy font-semibold text-sm hover:text-accent-orange transition-colors"
+                className={`font-semibold text-sm transition-colors flex items-center gap-1 ${
+                  link.isNew 
+                    ? "text-accent-orange hover:text-accent-yellow" 
+                    : "text-primary-navy hover:text-accent-orange"
+                }`}
               >
                 {link.name}
+                {link.isNew && (
+                  <span className="bg-accent-orange text-primary-navy text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter shadow-sm">New</span>
+                )}
               </Link>
             ))}
           </nav>
@@ -126,9 +134,14 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-2xl font-bold text-primary-navy border-b border-gray-100 pb-4"
+                  className={`text-2xl font-bold border-b border-gray-100 pb-4 flex items-center justify-between ${
+                    link.isNew ? "text-accent-orange" : "text-primary-navy"
+                  }`}
                 >
                   {link.name}
+                  {link.isNew && (
+                    <span className="bg-accent-orange text-primary-navy text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-tighter">New</span>
+                  )}
                 </Link>
               ))}
             </nav>

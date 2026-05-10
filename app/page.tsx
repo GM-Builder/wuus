@@ -9,6 +9,7 @@ const Storytelling = dynamic(() => import('@/components/storytelling').then(mod 
 // const RoiCalculator = dynamic(() => import('@/components/roi-calculator').then(mod => mod.RoiCalculator));
 const Services = dynamic(() => import('@/components/services').then(mod => mod.Services));
 const Portfolio = dynamic(() => import('@/components/portfolio').then(mod => mod.Portfolio));
+const AIBuilderSection = dynamic(() => import('@/components/ai-builder-section').then(mod => mod.AIBuilderSection));
 const Workflow = dynamic(() => import('@/components/workflow').then(mod => mod.Workflow));
 const WhyWuus = dynamic(() => import('@/components/why-wuus').then(mod => mod.WhyWuus));
 const Faq = dynamic(() => import('@/components/faq').then(mod => mod.Faq));
@@ -26,6 +27,7 @@ export default function Home() {
       <MarqueeBrands />
       <Services />
       <Portfolio />
+      <AIBuilderSection />
       {/* <BentoFeatures /> */}
       <Storytelling />
       {/* <RoiCalculator /> */}

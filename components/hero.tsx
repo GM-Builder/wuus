@@ -47,12 +47,12 @@ export function Hero() {
 
             {/* Action Buttons (DDI Style: Solid Orange & White w/ Outline) */}
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-2xl mx-auto relative z-30">
-              <Link href="/inquiries" className="w-full sm:w-auto px-6 py-3 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto text-center">
-                Dapatkan Estimasi Proyek Gratis
+              <Link href="https://build.webuntukusaha.com" className="w-full sm:w-auto px-8 py-3 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto text-center flex items-center justify-center gap-2 group">
+                🚀 Bikin Web 1x Klik
               </Link>
-              <a href="#portfolio" className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto text-center">
-                Lihat Portfolio
-              </a>
+              <Link href="/inquiries" className="w-full sm:w-auto px-8 py-3 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto text-center">
+                Estimasi Proyek Gratis
+              </Link>
             </div>
           </motion.div>
 
