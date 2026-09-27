@@ -5,6 +5,17 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-09-27
+
+### Changed
+- **Visual Identity Alignment for Hospitality (`/hospitality`)**:
+  - Completely aligned `/hospitality` with the primary Indonesian brand design system (`bg-light-grey`, `bg-off-white`, `text-primary-navy`, `bg-accent-orange`).
+  - Swapped generic placeholders with official brand assets (`/logo.png`, `/Hero1.png`, `/Hero2.png`, and `/wuus-bg-navy.jpg`).
+  - Integrated real portfolio mockups (`/Savoria-mockup.png`, `/trust-mockup.png`, `/kain-nusantara-mockup.png`, `/urbanThreads-mockup.png`, and `/dressy-rent-mockup.png`).
+  - Added signature neo-brutalist studio aesthetics: sharp contrast action buttons (`shadow-[4px_4px_0px_0px_#1C2733]`), brush edge section transitions (`.brush-edge-bottom`), dark contrast storytelling block (`#020617`), and studio office map embed.
+  - Replaced generic AI template vibes with human studio craftsmanship, transparent pricing (€1,450+), and bespoke async workflow communication.
+  - Bumped version to `0.2.1`.
+
 ## [0.2.0] - 2026-09-27
 
 ### Added
