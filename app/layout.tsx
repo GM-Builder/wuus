@@ -73,7 +73,7 @@ export default function RootLayout({
         {children}
         
         {/* Floating AI Builder Button */}
-        <div className="fixed bottom-6 right-6 z-[100] group">
+        <div id="floating-ai-builder" className="fixed bottom-8 right-6 z-[100] group">
           <a 
             href="https://build.webuntukusaha.com" 
             className="flex items-center gap-3 bg-accent-orange hover:bg-accent-yellow text-primary-navy px-5 py-3 rounded-full shadow-[6px_6px_0px_0px_#1C2733] border-2 border-primary-navy transition-all hover:-translate-x-1 hover:-translate-y-1 active:translate-x-0 active:translate-y-0 active:shadow-none"
