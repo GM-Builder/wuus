@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { supabase } from '@/lib/supabase';
 import { 
   ArrowRight, 
   Check, 
@@ -186,13 +187,28 @@ export default function HospitalityPage() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-    }, 800);
+    
+    // Save lead to Supabase database
+    try {
+      await supabase.from('hospitality_inquiries').insert([
+        {
+          hotel_name: formData.hotelName,
+          website_url: formData.websiteUrl,
+          contact_name: formData.contactName,
+          email: formData.email,
+          notes: formData.notes,
+          created_at: new Date().toISOString()
+        }
+      ]);
+    } catch (err) {
+      console.error("Database save error:", err);
+    }
+
+    setIsSubmitting(false);
+    setFormSubmitted(true);
   };
 
   return (
@@ -1075,10 +1091,28 @@ export default function HospitalityPage() {
                 <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-4">
                   <Check className="w-6 h-6 stroke-[3]" />
                 </div>
-                <h3 className="text-xl font-bold text-emerald-950 mb-2">Review Request Received</h3>
-                <p className="text-sm text-emerald-800 leading-relaxed max-w-md mx-auto">
-                  Thank you! Our lead designer is reviewing <strong>{formData.hotelName || "your hotel website"}</strong>. We will email your personalized 1-page review within 48 hours.
+                <h3 className="text-xl font-bold text-emerald-950 mb-2">Review Request Received!</h3>
+                <p className="text-sm text-emerald-800 leading-relaxed max-w-md mx-auto mb-6">
+                  Thank you! Our lead designer is reviewing <strong>{formData.hotelName || "your hotel website"}</strong>. We will email your personalized 1-page review to <strong>{formData.email}</strong> within 48 hours.
                 </p>
+
+                <div className="pt-4 border-t border-emerald-200/60 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a
+                    href={`https://wa.me/6281383521750?text=${encodeURIComponent(`Hi Faisal, I just requested a 1-page website review for ${formData.hotelName || "our hotel"} (${formData.websiteUrl}). My email is ${formData.email}.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors"
+                  >
+                    <span>Fast-Track on WhatsApp</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href={`mailto:faisalalfarizi@webuntukusaha.com?subject=Website%20Review%20Request%3A%20${encodeURIComponent(formData.hotelName || "Hotel")}&body=Hi%20Faisal%2C%0A%0AWe%20just%20requested%20a%201-page%20review%20for%20${encodeURIComponent(formData.hotelName)}%20(${encodeURIComponent(formData.websiteUrl)}).%0A%0AContact%3A%20${encodeURIComponent(formData.contactName)}%20(${encodeURIComponent(formData.email)})%0ANotes%3A%20${encodeURIComponent(formData.notes)}`}
+                    className="text-xs font-semibold text-emerald-800 underline hover:text-emerald-950"
+                  >
+                    Send Direct Email Copy
+                  </a>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-5">
@@ -1241,11 +1275,23 @@ export default function HospitalityPage() {
                 </li>
                 <li className="flex items-center gap-3 text-gray-500">
                   <PhoneCall size={18} className="text-accent-orange shrink-0" />
-                  <span>+62 813-8352-1750 (WhatsApp)</span>
+                  <a
+                    href="https://wa.me/6281383521750?text=Hi%20Faisal%2C%20I'm%20reaching%20out%20from%20a%20boutique%20hotel%20regarding%20a%20website%20review."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-accent-orange transition-colors font-medium"
+                  >
+                    +62 813-8352-1750 (WhatsApp Direct)
+                  </a>
                 </li>
                 <li className="flex items-center gap-3 text-gray-500">
                   <Mail size={18} className="text-accent-orange shrink-0" />
-                  <span>hello@webuntukusaha.com</span>
+                  <a
+                    href="mailto:faisalalfarizi@webuntukusaha.com?subject=Inquiry%20from%20Boutique%20Hotelier"
+                    className="hover:text-accent-orange transition-colors font-medium"
+                  >
+                    faisalalfarizi@webuntukusaha.com
+                  </a>
                 </li>
               </ul>
 
@@ -1314,15 +1360,27 @@ export default function HospitalityPage() {
                     <Check className="w-5 h-5 stroke-[3]" />
                   </div>
                   <h4 className="text-base font-bold text-emerald-950 mb-1">Request Received!</h4>
-                  <p className="text-xs text-emerald-800 leading-relaxed">
+                  <p className="text-xs text-emerald-800 leading-relaxed mb-4">
                     We will send our 1-page visual review to <strong>{formData.email}</strong> within 48 hours. No sales follow-up calls or spam guaranteed.
                   </p>
-                  <button
-                    onClick={() => setModalOpen(false)}
-                    className="mt-4 px-5 py-2 bg-primary-navy text-white text-xs font-bold rounded-lg"
-                  >
-                    Close Window
-                  </button>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3 border-t border-emerald-200/60">
+                    <a
+                      href={`https://wa.me/6281383521750?text=${encodeURIComponent(`Hi Faisal, I just requested a 1-page website review for ${formData.hotelName || "our hotel"} (${formData.websiteUrl}). My email is ${formData.email}.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-xs transition-colors"
+                    >
+                      <span>Fast-Track on WhatsApp</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                    <button
+                      onClick={() => setModalOpen(false)}
+                      className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                    >
+                      Close Window
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="space-y-4">
