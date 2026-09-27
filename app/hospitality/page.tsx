@@ -575,14 +575,44 @@ export default function HospitalityPage() {
                   Uncompressed 12MB gallery photos and slow legacy plugins take 6 to 9 seconds to render on international mobile networks. Discerning guests tap back before the room preview ever appears.
                 </p>
               </div>
-              <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 mt-4">
-                <Image
-                  src="/images/step1-storytelling.png"
-                  alt="Slow Mobile First Impression"
-                  fill
-                  sizes="350px"
-                  className="object-cover opacity-80"
-                />
+
+              {/* Bespoke Interactive English UI Simulation (Replaces Indonesian step1 graphic) */}
+              <div className="relative h-44 rounded-2xl overflow-hidden border border-red-500/20 bg-slate-950/90 p-4 mt-4 flex flex-col justify-between font-mono text-[11px] shadow-inner">
+                {/* Simulated Browser Bar */}
+                <div className="flex items-center justify-between pb-2 border-b border-white/10 text-slate-400">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                  </div>
+                  <span className="text-[10px] text-slate-400 truncate max-w-[150px]">hotel-example.com/suites</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 font-bold">8.4s LCP</span>
+                </div>
+
+                {/* Simulated Slow Loading State */}
+                <div className="space-y-2 my-auto">
+                  <div className="flex items-center justify-between text-[10px]">
+                    <span className="text-slate-300 font-semibold flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-ping" />
+                      Loading 14 uncompressed photos...
+                    </span>
+                    <span className="text-red-400 font-bold">12.8 MB</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden relative">
+                    <div className="h-full bg-gradient-to-r from-red-500 to-amber-500 rounded-full w-[35%] animate-pulse" />
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 pt-1 opacity-30">
+                    <div className="h-8 rounded bg-slate-800" />
+                    <div className="h-8 rounded bg-slate-800" />
+                    <div className="h-8 rounded bg-slate-800" />
+                  </div>
+                </div>
+
+                {/* Alert Footnote */}
+                <div className="flex items-center justify-between text-[10px] pt-2 border-t border-white/5 text-slate-400">
+                  <span className="text-red-400 font-medium">⚠ 82% Mobile Drop-off Rate</span>
+                  <span className="text-slate-400">3G/4G Roaming</span>
+                </div>
               </div>
             </div>
 
@@ -600,14 +630,44 @@ export default function HospitalityPage() {
                   Small, non-responsive calendar popups and confusing date pickers alienate smartphone users. Rather than struggling with the form, guests return to Booking.com — where you pay 15–20% commission.
                 </p>
               </div>
-              <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 mt-4">
-                <Image
-                  src="/images/step2-storytelling.png"
-                  alt="Booking Engine Confusion"
-                  fill
-                  sizes="350px"
-                  className="object-cover opacity-80"
-                />
+
+              {/* Bespoke Interactive English UI Simulation (Replaces Indonesian step2 graphic) */}
+              <div className="relative h-44 rounded-2xl overflow-hidden border border-amber-500/20 bg-slate-950/90 p-4 mt-4 flex flex-col justify-between font-sans text-[11px] shadow-inner">
+                {/* Simulated iFrame Header */}
+                <div className="flex items-center justify-between pb-2 border-b border-white/10 text-slate-400 font-mono">
+                  <span className="text-[10px] text-amber-300/80 flex items-center gap-1 truncate max-w-[180px]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                    booking-engine-v1.com/widget
+                  </span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">iFrame</span>
+                </div>
+
+                {/* Simulated Broken Widget Flow */}
+                <div className="my-auto space-y-1.5">
+                  <div className="bg-slate-900/90 rounded-lg p-2.5 border border-white/10 space-y-1.5">
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="text-slate-300">Select Stay Dates</span>
+                      <span className="text-red-400 text-[9px] font-mono">Popup blocked on iOS</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <div className="flex-1 py-1 px-2 rounded bg-slate-800/80 border border-red-500/30 text-[10px] text-slate-400 flex items-center justify-between">
+                        <span>Check-in</span>
+                        <span className="text-red-400">✕</span>
+                      </div>
+                      <div className="flex-1 py-1 px-2 rounded bg-slate-800/80 border border-slate-700 text-[10px] text-slate-400">
+                        <span>2 Guests</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Revenue Leak Warning */}
+                <div className="flex items-center justify-between text-[10px] pt-1.5 border-t border-white/5 text-slate-400">
+                  <span className="text-amber-300 font-medium">Guest returns to OTA</span>
+                  <span className="font-bold text-red-400 bg-red-500/20 px-2 py-0.5 rounded text-[9px] font-mono">
+                    -18% Commission
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -625,14 +685,26 @@ export default function HospitalityPage() {
                   A bespoke, fast-loading digital home that greets guests warmly, lays out room options with transparent amenities, and invites direct questions via WhatsApp, clean forms, or your existing engine.
                 </p>
               </div>
-              <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 mt-4">
+
+              {/* Bespoke Tailored Asset with Live Metrics Badge */}
+              <div className="relative h-44 rounded-2xl overflow-hidden border border-emerald-500/30 group mt-4">
                 <Image
                   src="/images/hospitality/savoria-wine-estate.jpg"
                   alt="The Calm Direct Web Experience"
                   fill
                   sizes="350px"
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[10px] text-white">
+                  <span className="flex items-center gap-1.5 font-bold text-emerald-400 bg-slate-950/85 px-2.5 py-1 rounded-full border border-emerald-500/30 backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Sub-800ms · Direct Host Inquiries
+                  </span>
+                  <span className="font-mono text-emerald-300 font-bold bg-slate-950/85 px-2 py-1 rounded-full border border-emerald-500/30">
+                    0% OTA Fee
+                  </span>
+                </div>
               </div>
             </div>
 
