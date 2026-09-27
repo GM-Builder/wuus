@@ -5,6 +5,17 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-09-27
+
+### Fixed
+- **Hospitality Storytelling UI Localization (`/hospitality`)**:
+  - Eliminated legacy Indonesian image assets (`step1-storytelling.png` and `step2-storytelling.png` containing *"Momen Kritis Pertama"* and *"Kabur ke Kompetitor"*).
+  - Implemented bespoke, interactive English UI simulations:
+    - **Step 01 (The Heavy Loading Wall)**: Browser performance simulation with 8.4s LCP indicator, 12.8MB uncompressed image payload alert, pulsing progress bar, and 82% mobile drop-off metric.
+    - **Step 02 (The Clunky Booking Widget)**: Mobile iframe popup error simulation showing broken datepicker on iOS, lost direct booking alert, and -18% OTA commission leak.
+    - **Step 03 (The Calm Direct Alternative)**: Live visual showcase with sub-800ms paint badge and 0% OTA fee guarantee.
+  - Bumped version to `0.2.2`.
+
 ## [0.2.1] - 2026-09-27
 
 ### Changed
