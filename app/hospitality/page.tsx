@@ -1,29 +1,153 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { 
   ArrowRight, 
   Check, 
-  Smartphone, 
   Globe, 
-  BedDouble, 
-  Clock, 
-  MessageSquare, 
-  ChevronDown, 
   Sparkles, 
-  FileText, 
   ShieldCheck,
-  CalendarCheck,
-  Compass,
+  Clock,
+  Send,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  PhoneCall,
+  Mail,
   Zap,
-  Send
+  MousePointerClick,
+  AlertCircle,
+  Eye,
+  CheckCircle2,
+  Menu,
+  X
 } from 'lucide-react';
 
+// Portfolio / Mockup Projects for Hospitality
+const hospitalityProjects = [
+  {
+    id: 1,
+    title: "Savoria Residence & Terroir",
+    category: "Boutique Wine Estate & Stays",
+    location: "Lake Ohrid / Adriatic Coast",
+    img: "/Savoria-mockup.png",
+    accent: "#D97706",
+    tag: "Terroir & Heritage",
+    description: "Designed for a historic lakeside wine estate. Emphasizes curated wine tastings, private suites, and seamless direct inquiries."
+  },
+  {
+    id: 2,
+    title: "The Heritage Manor",
+    category: "Restored Ottoman & Austro-Hungarian Villa",
+    location: "Mostar / Old Town",
+    img: "/trust-mockup.png",
+    accent: "#1C2733",
+    tag: "Architectural Preservation",
+    description: "Translating authentic courtyard architecture, handcrafted antique furniture, and centuries of host heritage into a serene digital presence."
+  },
+  {
+    id: 3,
+    title: "Artisan Coastal Retreat",
+    category: "Curated Boutique Stays",
+    location: "Ionian Riviera / Tirana",
+    img: "/kain-nusantara-mockup.png",
+    accent: "#B45309",
+    tag: "Atmospheric Visuals",
+    description: "Full-bleed imagery of sunset terraces, local culinary experiences, and private guest suites engineered for instantaneous mobile loading."
+  },
+  {
+    id: 4,
+    title: "The Metropolitan Loft Suites",
+    category: "Design Urban Boutique",
+    location: "Sarajevo / Central Quarter",
+    img: "/urbanThreads-mockup.png",
+    accent: "#2563EB",
+    tag: "Bespoke Urban Stays",
+    description: "Minimalist urban lodging interface that allows busy international travelers to inspect room types and reserve directly in under 45 seconds."
+  },
+  {
+    id: 5,
+    title: "Palazzo Concierge & Suites",
+    category: "Historic Boutique Palace",
+    location: "Dubrovnik / Kotor Bay",
+    img: "/dressy-rent-mockup.png",
+    accent: "#DC2626",
+    tag: "Guest Concierge Experience",
+    description: "A tailored digital experience showcasing yacht charters, private terrace breakfasts, and bespoke concierge arrangements."
+  }
+];
+
+// ADRA Framework Pillars
+const adraPillars = [
+  {
+    letter: "A",
+    title: "Atmosphere First",
+    subtitle: "Showcase Character, Not Generic Templates",
+    desc: "Discerning guests book boutique hotels for their soul — the limestone walls, the morning light in the courtyard, the host's private wine cellar. We showcase this atmosphere with optimized full-screen visuals and zero lag.",
+    highlight: "Sub-second image rendering",
+    icon: Sparkles
+  },
+  {
+    letter: "D",
+    title: "Direct Inquiry Clarity",
+    subtitle: "Frictionless Paths for High-Intent Guests",
+    desc: "When travelers want to book directly, confusing third-party booking widgets or hidden rates send them straight back to OTAs. We build clear room comparison cards and instant WhatsApp/Email inquiry channels.",
+    highlight: "Zero clunky third-party frames",
+    icon: Send
+  },
+  {
+    letter: "R",
+    title: "Respectful Performance",
+    subtitle: "Ultra-Lightweight on Mobile Networks",
+    desc: "International travelers research hotels while on 4G trains, regional ferries, or roaming mobile connections. Our Next.js architecture loads in under 800ms without bloated scripts or battery-draining trackers.",
+    highlight: "Lighthouse Score 95+",
+    icon: Zap
+  },
+  {
+    letter: "A",
+    title: "Architectural Storytelling",
+    subtitle: "Heritage & Host Narrative",
+    desc: "Your hotel is not a commodity room number. We craft subtle narrative sections that celebrate your family heritage, local culinary pairings, and neighborhood insider guides that guests cannot find on Booking.com.",
+    highlight: "Uniquely memorable identity",
+    icon: ShieldCheck
+  }
+];
+
+// Honest Comparison Points
+const comparisonPoints = [
+  {
+    feature: "First Impression & Speed",
+    generic: "Clunky 5–8s loading with heavy WordPress plugins",
+    wuus: "Sub-1s instant paint powered by Next.js & Turbopack"
+  },
+  {
+    feature: "Direct Reservation Journey",
+    generic: "Impersonal third-party iframe with small, unreadable text on mobile",
+    wuus: "Bespoke, human-touch inquiry flow (WhatsApp, Email, or Direct PMS)"
+  },
+  {
+    feature: "Mobile Guest Experience",
+    generic: "Broken photo grids, crowded tables, slow touch gestures",
+    wuus: "Fluid, app-like native feel designed thumb-first for smartphones"
+  },
+  {
+    feature: "Maintenance & Independence",
+    generic: "Constant security plugin updates and vendor lock-in",
+    wuus: "Zero maintenance overhead, 100% client code ownership & static hosting"
+  }
+];
+
 export default function HospitalityPage() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     hotelName: '',
     websiteUrl: '',
@@ -32,711 +156,1177 @@ export default function HospitalityPage() {
     notes: '',
   });
 
-  const toggleFaq = (index: number) => {
-    setActiveFaq(activeFaq === index ? null : index);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  // Parallax transform for hero floating cards
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -90]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollPortfolio = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const offset = clientWidth * 0.75;
+      scrollRef.current.scrollTo({
+        left: direction === 'left' ? scrollLeft - offset : scrollLeft + offset,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate async submission
     setTimeout(() => {
       setIsSubmitting(false);
       setFormSubmitted(true);
-    }, 900);
+    }, 800);
   };
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen bg-light-grey text-primary-navy font-sans antialiased selection:bg-accent-orange selection:text-primary-navy">
+      {/* Suppress root layout floating Indonesian builder button on international hospitality page */}
       <style jsx global>{`
         #floating-ai-builder {
           display: none !important;
         }
       `}</style>
 
-      {/* Global Studio Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-[#0F172A]/85 border-b border-slate-800/80 transition-all">
-        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      {/* ─────────────────────────────────────────────────────────────
+          1. HEADER / NAVBAR (Exact same design language as Indonesian site)
+      ────────────────────────────────────────────────────────────── */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu ${
+          isScrolled 
+            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3" 
+            : "bg-transparent py-5"
+        }`}
+      >
+        <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)] flex items-center justify-between">
+          {/* Logo with Brand Asset */}
           <div className="flex items-center gap-3">
-            <Link href="/hospitality" className="flex items-center gap-2 group">
-              <span className="font-extrabold text-xl tracking-tight text-white group-hover:text-amber-400 transition-colors">
-                WUUS
-              </span>
-              <span className="text-[11px] uppercase tracking-widest text-slate-400 px-2 py-0.5 rounded border border-slate-800 bg-slate-900/60 font-medium">
-                Hospitality
-              </span>
+            <Link href="/" className="flex items-center gap-2 group">
+              <Image
+                src="/logo.png"
+                alt="WUUS Logo"
+                width={142}
+                height={40}
+                priority
+                className="h-9 w-auto object-contain"
+              />
             </Link>
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-gray-200 bg-white/80 text-[10px] font-bold tracking-widest uppercase text-primary-navy shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Hospitality
+            </div>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm text-slate-300">
-            <a href="#guest-journey" className="hover:text-white transition-colors">Guest Journey</a>
-            <a href="#what-we-improve" className="hover:text-white transition-colors">What We Improve</a>
-            <a href="#adra-concept" className="hover:text-white transition-colors">ADRA Concept</a>
-            <a href="#async-process" className="hover:text-white transition-colors">How We Work</a>
-            <a href="#pricing" className="hover:text-white transition-colors">Scope & Rates</a>
-            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            <a href="#philosophy" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
+              The Problem
+            </a>
+            <a href="#portfolio" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
+              Selected Works
+            </a>
+            <a href="#framework" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
+              ADRA Framework
+            </a>
+            <a href="#workflow" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
+              How We Work
+            </a>
+            <a href="#faq" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
+              FAQ
+            </a>
           </nav>
 
-          <div className="flex items-center gap-4">
-            <a 
-              href="#review-request" 
-              className="text-xs font-semibold px-4 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all shadow-sm hover:shadow-amber-500/20"
+          {/* Action CTAs */}
+          <div className="hidden lg:flex items-center gap-4">
+            <Link 
+              href="/" 
+              className="text-xs font-semibold text-gray-500 hover:text-primary-navy transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded border border-gray-200 hover:border-gray-300"
+              title="Kembali ke halaman utama bahasa Indonesia"
             >
-              Get Free Review
-            </a>
+              <span>🇮🇩</span>
+              <span>Versi ID</span>
+            </Link>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="bg-accent-orange hover:bg-accent-yellow text-primary-navy px-5 py-2.5 rounded text-xs md:text-sm font-bold transition-all shadow-sm border border-primary-navy/20 cursor-pointer"
+            >
+              Get Free 1-Page Review
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden flex items-center gap-3">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="bg-accent-orange text-primary-navy px-3.5 py-1.5 rounded text-xs font-bold"
+            >
+              Review
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="text-primary-navy p-2 bg-white rounded-md border border-gray-200 shadow-xs"
+              aria-label="Open Navigation Menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </header>
 
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden border-b border-slate-800/60">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(245,158,11,0.12),transparent_70%)] pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-medium tracking-wide mb-8">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>Digital Experiences for Independent Hospitality</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.12] mb-6">
-            Modern websites for <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-amber-300">
-              independent boutique hotels.
-            </span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed mb-10">
-            We design and engineer calm, high-performance websites that help boutique stays showcase their character, respect guest attention, and clarify the path to direct enquiries.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-            <a
-              href="#review-request"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-all shadow-lg shadow-amber-500/10"
-            >
-              <span>Request a Free Website Review</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#adra-concept"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-slate-700 bg-slate-800/50 hover:bg-slate-800 text-slate-200 font-medium text-sm transition-colors"
-            >
-              <span>View ADRA Concept</span>
-            </a>
-          </div>
-
-          <div className="mt-12 flex items-center justify-center gap-8 text-xs text-slate-400 border-t border-slate-800/80 pt-6">
-            <span className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-emerald-400" /> Fixed scope & turnaround
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-emerald-400" /> 100% Async-first workflow
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-emerald-400" /> No generic templates
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. THE REALITY: Why hotel websites need more than a pretty homepage */}
-      <section className="py-20 md:py-28 border-b border-slate-800/60 bg-[#0B1120]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-3 block">
-              The Reality
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
-              A hotel website needs more than a pretty homepage.
-            </h2>
-            <p className="text-slate-300 text-base leading-relaxed">
-              Most independent hotels already have authentic hospitality and picturesque properties. But online, potential guests often experience friction that pulls them away from direct contact.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-7 rounded-xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 text-amber-400 font-mono text-sm font-bold">
-                  01
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2.5">Mobile Navigation Friction</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  Over 70% of boutique hotel research begins on smartphones. When room galleries take seconds to load or inquiry forms are unoptimized for touch, guests retreat to third-party apps.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-7 rounded-xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 text-amber-400 font-mono text-sm font-bold">
-                  02
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2.5">Unclear Room Differentiation</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  Travelers want to quickly distinguish between suite tiers, views, and specific amenities without wading through cluttered PDFs or buried tables.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-7 rounded-xl border border-slate-800 bg-slate-900/60 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 text-amber-400 font-mono text-sm font-bold">
-                  03
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2.5">Fragmented Communication</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  Whether guests prefer an integrated booking engine, a direct WhatsApp message, or an email reservation inquiry, the communication channels should be unified and effortless.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. THE GUEST JOURNEY */}
-      <section id="guest-journey" className="py-20 md:py-28 border-b border-slate-800/60">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-3 block">
-              Intuitive Flow
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
-              Built around the natural guest journey.
-            </h2>
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              We structure digital touchpoints to mirror how modern guests actually discover, compare, and reserve their stays.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-4">
-            <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 relative">
-              <span className="text-xs font-mono text-amber-400/80 mb-2 block font-semibold">Step 01</span>
-              <h3 className="text-base font-semibold text-white mb-2 flex items-center gap-2">
-                <Compass className="w-4 h-4 text-amber-400" />
-                Atmosphere & Story
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Fast-loading high-resolution visuals that immediately convey your property's ambiance and unique setting.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 relative">
-              <span className="text-xs font-mono text-amber-400/80 mb-2 block font-semibold">Step 02</span>
-              <h3 className="text-base font-semibold text-white mb-2 flex items-center gap-2">
-                <BedDouble className="w-4 h-4 text-amber-400" />
-                Room Discovery
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Clear distinction between room types, view highlights, bed configurations, and inclusive perks.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 relative">
-              <span className="text-xs font-mono text-amber-400/80 mb-2 block font-semibold">Step 03</span>
-              <h3 className="text-base font-semibold text-white mb-2 flex items-center gap-2">
-                <CalendarCheck className="w-4 h-4 text-amber-400" />
-                Direct Inquiry
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Seamless integration with your existing PMS/engine or an elegant direct reservation form with instant WhatsApp link.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 relative">
-              <span className="text-xs font-mono text-amber-400/80 mb-2 block font-semibold">Step 04</span>
-              <h3 className="text-base font-semibold text-white mb-2 flex items-center gap-2">
-                <Globe className="w-4 h-4 text-amber-400" />
-                Local Context
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Essential neighborhood dining, airport transfer notes, and curated local guides that build guest confidence.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. WHAT WUUS IMPROVES */}
-      <section id="what-we-improve" className="py-20 md:py-28 border-b border-slate-800/60 bg-[#0B1120]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl mb-16">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-3 block">
-              Core Capabilities
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
-              What we refine for independent properties.
-            </h2>
-            <p className="text-slate-300 text-base leading-relaxed">
-              We do not sell generic web templates or bloated enterprise software. We engineer the exact pillars that matter for small-to-midsize hotels.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                <Smartphone className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-1.5">Mobile-First Performance</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  Sub-second page transitions and ultra-responsive layout engineered with Next.js. Fast loading ensures international guests don't bounce on cellular connections.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                <BedDouble className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-1.5">Curated Room & Suite Showcase</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  Clean galleries with high-resolution imagery, verified amenities, capacity icons, and transparent pricing structure that make choosing effortless.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                <MessageSquare className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-1.5">Direct Communication Channels</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  Direct WhatsApp click-to-chat with pre-filled room dates, structured inquiry forms, and compatibility with your existing booking widget (Cloudbeds, Sirvoy, etc.).
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                <Globe className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-1.5">Multilingual Ready Structure</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  Clean architecture for displaying English alongside your regional language (Albanian, Bosnian, Macedonian, German, Italian) without clumsy layout breaks.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. ADRA CONCEPT SPOTLIGHT */}
-      <section id="adra-concept" className="py-20 md:py-28 border-b border-slate-800/60">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="p-8 md:p-12 rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/90 to-slate-950 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-2xl mb-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 text-amber-400 text-xs font-mono font-medium mb-3">
-                <span>Featured Concept Study</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">
-                ADRA — Boutique Hotel & Suites
-              </h2>
-              <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-                A fictional 18-room heritage property in the Western Balkans created by WUUS to demonstrate how modern typography, fluid room discovery, and clear direct contact work together.
-              </p>
-            </div>
-
-            {/* Mockup Card */}
-            <div className="border border-slate-800 rounded-xl bg-slate-950 overflow-hidden shadow-2xl mb-8">
-              <div className="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block" />
-                  <span className="ml-2 text-slate-300">adra-suites.wuus.dev</span>
-                </div>
-                <span className="text-[11px] text-emerald-400">● Live Prototype</span>
-              </div>
-              
-              <div className="p-6 md:p-10 bg-gradient-to-b from-[#111827] to-[#0B0F19]">
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-800/80 pb-6 mb-6">
-                  <div>
-                    <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold block mb-1">Concept Architecture</span>
-                    <h3 className="text-xl font-bold text-white">Adria Old Town Heritage Experience</h3>
-                    <p className="text-xs text-slate-300 mt-1">Lightweight Next.js frontend • Direct reservation modal • Multi-currency display</p>
-                  </div>
-                  <div className="text-right flex-shrink-0">
-                    <span className="text-xs text-slate-400 block">Typical Lighthouse Score</span>
-                    <span className="text-2xl font-bold text-emerald-400 font-mono">98 / 100</span>
-                  </div>
-                </div>
-
-                <div className="grid sm:grid-cols-3 gap-4 text-xs text-slate-300">
-                  <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800/60">
-                    <span className="font-semibold text-white block mb-1">01. Room Hierarchy</span>
-                    Tailored suite comparisons with amenity badges and capacity details.
-                  </div>
-                  <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800/60">
-                    <span className="font-semibold text-white block mb-1">02. Direct WhatsApp Flow</span>
-                    Pre-fills check-in dates and room choice for direct management response.
-                  </div>
-                  <div className="p-4 rounded-lg bg-slate-900/60 border border-slate-800/60">
-                    <span className="font-semibold text-white block mb-1">03. Fast Asset Loading</span>
-                    Optimized WebP imaging and adaptive responsive breakpoints.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <a
-                href="#review-request"
-                className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors"
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "tween", duration: 0.25 }}
+            className="fixed inset-0 z-[100] bg-white w-full h-screen flex flex-col pt-6 px-6 pb-12 overflow-y-auto"
+          >
+            <div className="flex justify-between items-center mb-10">
+              <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+                <Image
+                  src="/logo.png"
+                  alt="WUUS Logo"
+                  width={142}
+                  height={40}
+                  className="h-9 w-auto object-contain"
+                />
+              </Link>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 bg-gray-100 rounded-full text-primary-navy border border-gray-200"
+                aria-label="Close Navigation Menu"
               >
-                <span>Request a review for your hotel</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <nav className="flex flex-col gap-5 mb-10">
+              <a
+                href="#philosophy"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
+              >
+                The Friction in Booking
               </a>
+              <a
+                href="#portfolio"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
+              >
+                Selected Boutique Works
+              </a>
+              <a
+                href="#framework"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
+              >
+                The ADRA Framework
+              </a>
+              <a
+                href="#workflow"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
+              >
+                How We Work Asynchronously
+              </a>
+              <a
+                href="#faq"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
+              >
+                Frequently Asked Questions
+              </a>
+              <Link
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base font-semibold text-gray-500 pt-2 flex items-center gap-2"
+              >
+                <span>🇮🇩</span> Buka Halaman Utama (Indonesia)
+              </Link>
+            </nav>
+
+            <div className="mt-auto">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setModalOpen(true);
+                }}
+                className="w-full text-center bg-accent-orange hover:bg-accent-yellow text-primary-navy px-6 py-4 rounded-lg font-bold text-base shadow-sm"
+              >
+                Request Free 1-Page Website Review
+              </button>
             </div>
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* 6. ASYNC-FIRST PROCESS */}
-      <section id="async-process" className="py-20 md:py-28 border-b border-slate-800/60 bg-[#0B1120]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="max-w-2xl mb-16">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-3 block">
-              Working Principles
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
-              Async-first. Respecting your operating hours.
-            </h2>
-            <p className="text-slate-300 text-base leading-relaxed">
-              Managing a hotel is a full-time operational commitment. We do not demand hours of recurring Zoom calls. We operate with structured, transparent written updates from scope to deployment.
-            </p>
-          </div>
+      {/* ─────────────────────────────────────────────────────────────
+          2. HERO SECTION (Identical visual structure to Indonesian Hero)
+      ────────────────────────────────────────────────────────────── */}
+      <section ref={heroRef} className="relative bg-off-white pt-36 pb-28 lg:pt-48 lg:pb-44 overflow-hidden z-10">
+        {/* Ambient background glows */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-secondary-blue/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent-orange/10 rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/50">
-              <Clock className="w-6 h-6 text-amber-400 mb-4" />
-              <h3 className="text-base font-semibold text-white mb-2">Clear Scope in Writing</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Before writing any code, we document every page, asset, and feature in an accessible project brief. You know exactly what is included.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/50">
-              <FileText className="w-6 h-6 text-amber-400 mb-4" />
-              <h3 className="text-base font-semibold text-white mb-2">Structured Weekly Demos</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Instead of scheduling meetings across timezones, we send concise Loom video walkthroughs and staging links for you to review whenever convenient.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/50">
-              <ShieldCheck className="w-6 h-6 text-amber-400 mb-4" />
-              <h3 className="text-base font-semibold text-white mb-2">Guaranteed Delivery Window</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Most hotel projects are completed within 1 to 3 weeks depending on property size and content readiness. No open-ended hourly billing.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. TRANSPARENT SCOPE & PRICING */}
-      <section id="pricing" className="py-20 md:py-28 border-b border-slate-800/60">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-3 block">
-              Transparent Framework
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
-              Fixed-scope investment.
-            </h2>
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              Straightforward pricing tailored for independent hotels, boutique villas, and regional guesthouses.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Tier 1: Hotel Digital Refresh */}
-            <div className="p-8 rounded-2xl border border-slate-800 bg-slate-900/70 flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">Tier 01</span>
-                <h3 className="text-2xl font-bold text-white mt-1 mb-2">Boutique Refresh</h3>
-                <p className="text-xs text-slate-300 mb-6">
-                  Ideal for small properties (under 15 rooms) looking to modernize their mobile presentation and direct inquiry channels.
-                </p>
-                <div className="mb-6">
-                  <span className="text-3xl font-extrabold text-white">from €750</span>
-                  <span className="text-xs text-slate-400 block mt-1">One-time fixed scope • 1–2 weeks turnaround</span>
-                </div>
-
-                <ul className="space-y-3 text-xs text-slate-300 border-t border-slate-800 pt-6">
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Up to 5 key pages (Home, Rooms, Story, Contact, Dining)
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Mobile-first UI & speed optimization
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Direct WhatsApp & inquiry email flow
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Compatibility with your current booking link
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Bilingual content structure
-                  </li>
-                </ul>
+        <div className="container mx-auto px-4 max-w-7xl relative z-20 flex flex-col items-center">
+          
+          {/* Main Headline & Context */}
+          <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="flex flex-col items-center w-full"
+            >
+              {/* Studio Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gray-200 bg-white text-gray-700 text-xs font-semibold tracking-wide mb-6 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-accent-orange" />
+                <span>Bespoke Digital Studio for Independent Stays & Boutique Hotels</span>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-800">
-                <a
-                  href="#review-request"
-                  className="block text-center text-xs font-semibold py-3 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-white transition-colors"
+              {/* Main Headline */}
+              <h1 className="text-[2.25rem] min-[375px]:text-4xl md:text-6xl lg:text-7xl font-black text-primary-navy tracking-tight leading-[1.08] mb-6">
+                Quiet Luxury Web Design for <br className="hidden md:block" />
+                <span className="font-serif italic font-light text-accent-orange">Independent Boutique Hotels.</span>
+              </h1>
+
+              {/* Subhead */}
+              <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mb-10 font-normal leading-relaxed">
+                We engineer calm, high-performance websites that highlight your property&apos;s true character, eliminate booking engine friction, and turn curious travelers into direct guests.
+              </p>
+
+              {/* Neo-brutalist Action Buttons matching the Indonesian version */}
+              <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-xl mx-auto relative z-30">
+                <button
+                  onClick={() => setModalOpen(true)}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-xs cursor-pointer text-center flex items-center justify-center gap-2 group"
                 >
-                  Request a Free Review First
+                  <span>Request Free 1-Page Review</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <a
+                  href="#portfolio"
+                  className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-xs cursor-pointer text-center"
+                >
+                  Explore Selected Stays
                 </a>
               </div>
-            </div>
 
-            {/* Tier 2: Comprehensive Experience */}
-            <div className="p-8 rounded-2xl border border-amber-500/40 bg-slate-900/90 flex flex-col justify-between relative shadow-xl shadow-amber-500/5">
-              <div className="absolute -top-3 right-6 bg-amber-500 text-slate-950 font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-full">
-                Most Popular
+              {/* Trust Signal */}
+              <div className="mt-8 flex items-center gap-6 text-xs text-gray-500 font-medium">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" /> No sales pitch or cold calls
+                </span>
+                <span className="hidden sm:flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Delivered within 48 hours
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Handcrafted by humans
+                </span>
               </div>
+            </motion.div>
+          </div>
 
-              <div>
-                <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">Tier 02</span>
-                <h3 className="text-2xl font-bold text-white mt-1 mb-2">Hospitality Complete</h3>
-                <p className="text-xs text-slate-300 mb-6">
-                  For boutique hotels and villas seeking advanced room filtering, direct calendar engine integration, and local area guides.
-                </p>
-                <div className="mb-6">
-                  <span className="text-3xl font-extrabold text-white">from €1,450</span>
-                  <span className="text-xs text-slate-400 block mt-1">One-time fixed scope • 2–3 weeks turnaround</span>
+          {/* Left Floating Photo Frame (Using Project Asset Hero1.png) */}
+          <motion.div
+            style={{ y: y1 }}
+            className="absolute lg:left-2 2xl:-left-8 top-44 z-10 lg:scale-[0.7] xl:scale-[0.85] 2xl:scale-100 origin-left hidden lg:block"
+          >
+            <div className="relative">
+              {/* Background accent */}
+              <div className="absolute -left-6 -top-6 w-[120px] fill-accent-orange/20 z-0">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M40.5 12C45.2 3.5 54.8 3.5 59.5 12L88.7 64C93.4 72.5 88.6 83 79.2 83H20.8C11.4 83 6.6 72.5 11.3 64L40.5 12Z" />
+                </svg>
+              </div>
+              <div className="w-[270px] h-[320px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col rotate-[-2deg]">
+                <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
+                  <Image
+                    src="/Hero1.png"
+                    alt="Independent Hotelier & Hospitality Host"
+                    fill
+                    priority
+                    sizes="300px"
+                    className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                  />
                 </div>
-
-                <ul className="space-y-3 text-xs text-slate-300 border-t border-slate-800 pt-6">
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Everything in Boutique Refresh
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Individual room showcase subpages
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Direct booking engine / PMS widget integration
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Local guide / curated experience directory
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" /> Basic SEO setup & Google Business profile alignment
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-slate-800">
-                <a
-                  href="#review-request"
-                  className="block text-center text-xs font-semibold py-3 px-4 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors"
-                >
-                  Request a Free Review First
-                </a>
+                <div className="absolute -bottom-5 -right-5 bg-primary-navy text-white px-3.5 py-2 rounded-xl shadow-lg border-2 border-white text-[11px] font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                  Independent Host
+                </div>
               </div>
             </div>
+          </motion.div>
+
+          {/* Right Floating Photo Frame (Using Project Asset Hero2.png / Mockup) */}
+          <motion.div
+            style={{ y: y2 }}
+            className="absolute lg:right-2 2xl:-right-8 top-56 z-10 lg:scale-[0.7] xl:scale-[0.85] 2xl:scale-100 origin-right hidden lg:block"
+          >
+            <div className="relative">
+              <div className="absolute -inset-8 bg-[url('/patterns/cubes.png')] opacity-10 z-0" />
+              <div className="w-[280px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 rotate-[3deg]">
+                <div className="h-[210px] rounded-2xl bg-gray-100 overflow-hidden relative">
+                  <Image
+                    src="/Hero2.png"
+                    alt="Studio Craftsmanship in Digital Hospitality"
+                    fill
+                    priority
+                    sizes="300px"
+                    className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+                <div className="pt-3 px-1 pb-1">
+                  <p className="text-[11px] font-bold text-primary-navy uppercase tracking-wider">Sub-1s Mobile Experience</p>
+                  <p className="text-[10px] text-gray-500 mt-0.5">Designed thumb-first for direct guest inquiries</p>
+                </div>
+                <div className="absolute -top-6 -right-6 w-14 h-14 bg-accent-orange rounded-2xl flex items-center justify-center shadow-lg rotate-12 border-3 border-white">
+                  <Globe className="text-primary-navy w-7 h-7" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* Brush Edge Bottom Transition (Exact same visual element as Indonesian Hero) */}
+        <div className="absolute bottom-0 left-0 w-full h-[60px] md:h-[100px] bg-secondary-blue brush-edge-bottom z-10 translate-y-[2px]" />
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          3. MARQUEE / STUDIO PRINCIPLES STRIP
+      ────────────────────────────────────────────────────────────── */}
+      <section className="bg-secondary-blue text-white py-6 overflow-hidden relative z-20">
+        <div className="w-full flex items-center justify-around gap-8 text-xs font-semibold uppercase tracking-widest text-slate-300 px-6 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-orange" />
+            <span>Adriatic & Balkan Boutique Stays</span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-orange" />
+            <span>Zero Third-Party iFrame Lag</span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-orange" />
+            <span>Direct WhatsApp & Email Inquiries</span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-orange" />
+            <span>Sub-800ms Mobile Performance</span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-orange" />
+            <span>100% Async Collaboration (No Zoom Fatigue)</span>
           </div>
         </div>
       </section>
 
-      {/* 8. FAQ */}
-      <section id="faq" className="py-20 md:py-28 border-b border-slate-800/60 bg-[#0B1120]">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-3 block">
-              Common Inquiries
-            </span>
-            <h2 className="text-3xl font-bold tracking-tight text-white mb-3">
-              Frequently asked questions.
+      {/* ─────────────────────────────────────────────────────────────
+          4. THE PROBLEM / STORYTELLING SECTION (Dark #020617 Theme)
+          Matches `components/storytelling.tsx` from Indonesian site
+      ────────────────────────────────────────────────────────────── */}
+      <section id="philosophy" className="relative py-28 lg:py-36 bg-[#020617] text-white overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
+          
+          <div className="max-w-3xl mx-auto text-center mb-20">
+            <span className="text-accent-orange text-xs font-bold tracking-widest uppercase">The Guest Journey Reality</span>
+            <h2 className="text-3xl md:text-5xl font-black mt-3 mb-6 leading-tight tracking-tight">
+              Why do high-intent travelers admire your hotel, <br />
+              <span className="font-serif italic font-light text-accent-orange lowercase">yet book somewhere else?</span>
             </h2>
-            <p className="text-slate-300 text-sm">
-              Clear answers regarding integrations, language, and ongoing care.
+            <div className="h-1 w-16 bg-accent-orange mx-auto mb-6" />
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              Independent hoteliers spend years curating authentic decor, locally sourced breakfasts, and warm host hospitality. But on their website, guests often encounter three invisible friction points.
             </p>
+          </div>
+
+          {/* 3 Human Friction Points */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            
+            {/* Step 1 */}
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 flex flex-col justify-between hover:border-accent-orange/40 transition-all duration-300">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-serif italic text-accent-orange text-3xl">01</span>
+                  <div className="p-2.5 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20">
+                    <AlertCircle className="w-5 h-5" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">The Heavy Loading Wall</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  Uncompressed 12MB gallery photos and slow legacy plugins take 6 to 9 seconds to render on international mobile networks. Discerning guests tap back before the room preview ever appears.
+                </p>
+              </div>
+              <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 mt-4">
+                <Image
+                  src="/images/step1-storytelling.png"
+                  alt="Slow Mobile First Impression"
+                  fill
+                  sizes="350px"
+                  className="object-cover opacity-80"
+                />
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 flex flex-col justify-between hover:border-accent-orange/40 transition-all duration-300">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-serif italic text-accent-orange text-3xl">02</span>
+                  <div className="p-2.5 rounded-xl bg-amber-500/10 text-accent-orange border border-amber-500/20">
+                    <MousePointerClick className="w-5 h-5" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">The Clunky Booking Widget</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  Small, non-responsive calendar popups and confusing date pickers alienate smartphone users. Rather than struggling with the form, guests return to Booking.com — where you pay 15–20% commission.
+                </p>
+              </div>
+              <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 mt-4">
+                <Image
+                  src="/images/step2-storytelling.png"
+                  alt="Booking Engine Confusion"
+                  fill
+                  sizes="350px"
+                  className="object-cover opacity-80"
+                />
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="rounded-3xl border border-accent-orange/30 bg-accent-orange/5 p-8 flex flex-col justify-between hover:border-accent-orange transition-all duration-300">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-serif italic text-accent-orange text-3xl">03</span>
+                  <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <Zap className="w-5 h-5" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">The Calm Direct Alternative</h3>
+                <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                  A bespoke, fast-loading digital home that greets guests warmly, lays out room options with transparent amenities, and invites direct questions via WhatsApp, clean forms, or your existing engine.
+                </p>
+              </div>
+              <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 mt-4">
+                <Image
+                  src="/wuus-bg-navy.jpg"
+                  alt="The Calm Direct Web Experience"
+                  fill
+                  sizes="350px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          5. SELECTED WORKS / PORTFOLIO (Matches Indonesian Portfolio)
+      ────────────────────────────────────────────────────────────── */}
+      <section id="portfolio" className="relative py-28 lg:py-36 bg-white overflow-hidden border-b border-gray-100">
+        <div className="container mx-auto px-6 mb-16 relative z-10">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">Selected Hospitality Concepts</span>
+              <h2 className="text-4xl lg:text-5xl font-black text-primary-navy tracking-tight mt-2">
+                Crafted for Character, <br />
+                <span className="font-serif italic font-light text-accent-orange text-4xl lg:text-5xl">Engineered for Stays.</span>
+              </h2>
+            </div>
+
+            {/* Carousel Navigation Arrows */}
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => scrollPortfolio('left')}
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-primary-navy hover:bg-primary-navy hover:text-white transition-all active:scale-95 shadow-xs"
+                aria-label="Previous Project"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button 
+                onClick={() => scrollPortfolio('right')}
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-primary-navy hover:bg-primary-navy hover:text-white transition-all active:scale-95 shadow-xs"
+                aria-label="Next Project"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* Horizontal Scroll Showcase (Project Mockups) */}
+          <div 
+            ref={scrollRef}
+            className="flex gap-8 overflow-x-auto pb-8 pt-2 no-scrollbar snap-x snap-mandatory"
+          >
+            {hospitalityProjects.map((project) => (
+              <div 
+                key={project.id}
+                className="min-w-[320px] sm:min-w-[420px] lg:min-w-[500px] shrink-0 snap-start bg-light-grey rounded-3xl border border-gray-200 p-6 flex flex-col justify-between group hover:shadow-xl transition-all duration-500"
+              >
+                <div>
+                  <div className="relative h-64 sm:h-72 w-full rounded-2xl overflow-hidden bg-white mb-6 border border-gray-100">
+                    <Image
+                      src={project.img}
+                      alt={project.title}
+                      fill
+                      sizes="500px"
+                      className="object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase text-primary-navy border border-gray-100 shadow-xs">
+                      {project.tag}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                    <span className="font-semibold">{project.category}</span>
+                    <span>{project.location}</span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-primary-navy mb-2 group-hover:text-accent-orange transition-colors">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-gray-200/60 flex items-center justify-between">
+                  <span className="text-xs font-bold text-primary-navy">Bespoke Design & Next.js Architecture</span>
+                  <button
+                    onClick={() => setModalOpen(true)}
+                    className="text-xs font-bold text-accent-orange hover:text-amber-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform"
+                  >
+                    Request Similar Concept <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          6. THE ADRA ARCHITECTURE FRAMEWORK (Why WUUS Style)
+          Matches the luxury sticky-card styling in `components/why-wuus.tsx`
+      ────────────────────────────────────────────────────────────── */}
+      <section id="framework" className="py-28 lg:py-36 bg-light-grey relative overflow-hidden">
+        <div className="container mx-auto px-6 max-w-6xl">
+          
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">The Engineering Method</span>
+            <h2 className="text-3xl md:text-5xl font-black text-primary-navy mt-2 mb-6 tracking-tight">
+              The ADRA Hospitality Framework
+            </h2>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              We don&apos;t install generic multi-purpose templates. Every boutique stay website is designed around four non-negotiable principles.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {adraPillars.map((pillar) => {
+              const IconComponent = pillar.icon;
+              return (
+                <div
+                  key={pillar.letter}
+                  className="bg-white rounded-3xl p-8 md:p-10 border border-gray-100 shadow-[0_15px_40px_-15px_rgba(28,39,51,0.08)] flex flex-col justify-between hover:shadow-[0_25px_60px_-15px_rgba(28,39,51,0.15)] transition-all duration-300 relative group"
+                >
+                  {/* Subtle top reflection line */}
+                  <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+
+                  <div>
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-primary-navy font-black text-2xl group-hover:bg-accent-orange group-hover:text-primary-navy transition-colors">
+                        {pillar.letter}
+                      </div>
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-accent-orange bg-amber-50/80 px-3 py-1 rounded-full border border-amber-100">
+                        {pillar.highlight}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-primary-navy mb-2">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                      {pillar.subtitle}
+                    </p>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {pillar.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-8 mt-6 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-primary-navy">
+                    <IconComponent className="w-4 h-4 text-accent-orange" />
+                    <span>Included in every hospitality build</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Honest Comparison Table */}
+          <div className="mt-20 bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm">
+            <div className="p-6 md:p-8 bg-primary-navy text-white">
+              <h3 className="text-xl md:text-2xl font-bold">Standard Agency Template vs. WUUS Studio Build</h3>
+              <p className="text-xs text-slate-300 mt-1">Why boutique hotel owners choose our focused approach over bloated software</p>
+            </div>
+            <div className="divide-y divide-gray-100">
+              {comparisonPoints.map((pt, idx) => (
+                <div key={idx} className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                  <div className="font-bold text-sm text-primary-navy">{pt.feature}</div>
+                  <div className="text-xs text-gray-500 md:pr-4 flex items-start gap-2">
+                    <span className="text-red-500 font-bold shrink-0">✕</span>
+                    <span>{pt.generic}</span>
+                  </div>
+                  <div className="text-xs font-semibold text-emerald-800 bg-emerald-50/60 p-3 rounded-xl border border-emerald-100 flex items-start gap-2">
+                    <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                    <span>{pt.wuus}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          7. HOW WE WORK (Async-First Human Studio Process)
+      ────────────────────────────────────────────────────────────── */}
+      <section id="workflow" className="py-28 lg:py-36 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-6 max-w-6xl">
+          
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">Calm Collaboration</span>
+            <h2 className="text-3xl md:text-5xl font-black text-primary-navy mt-2 mb-6 tracking-tight">
+              Async-First. Zero Timezone Friction.
+            </h2>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              We collaborate with boutique hotels across Albania, Bosnia, North Macedonia, and the wider Adriatic. We respect your busy hotel operations: no recurring 90-minute meetings, no endless email threads.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+            
+            {/* Step 1 */}
+            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 01</span>
+                <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Observation & Audit</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  We walk through your existing website as an international guest on mobile. We prepare a short 1-page visual report highlighting 3 high-impact friction points.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-200 text-[11px] font-bold text-gray-500">
+                Cost: Free & No Pitch
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 02</span>
+                <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Fixed-Scope Proposal</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  If the audit resonates, we provide a transparent 1-page proposal outlining the exact scope, deliverable mockups, timeline, and flat-rate fee. No hidden extras.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-200 text-[11px] font-bold text-gray-500">
+                Timeline: 24 Hours
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 03</span>
+                <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Rapid Crafting</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  We build your bespoke Next.js site in 7 to 14 days. You receive interactive staging links and brief Loom video walkthroughs to review at your convenience.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-200 text-[11px] font-bold text-gray-500">
+                Duration: 7–14 Days
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 04</span>
+                <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Turnkey Launch</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  We connect your custom domain, set up analytics, verify mobile loading, and deliver full code ownership to your team. Zero vendor lock-in.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-200 text-[11px] font-bold text-gray-500">
+                Result: 100% Code Ownership
+              </div>
+            </div>
+
+          </div>
+
+          {/* Pricing & Scope Box */}
+          <div className="mt-16 bg-off-white rounded-3xl p-8 md:p-12 border-2 border-primary-navy shadow-[6px_6px_0px_0px_#1C2733] max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="max-w-xl">
+              <span className="text-xs font-bold uppercase tracking-wider text-accent-orange">Transparent Studio Pricing</span>
+              <h3 className="text-2xl font-black text-primary-navy mt-1 mb-3">
+                Flat-Rate Engagements for Independent Stays
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Hospitality websites start from a flat <strong>€1,450</strong> (inclusive of custom Next.js engineering, mobile UX, performance optimization, and bilingual support). We never bill hourly or add surprise charges.
+              </p>
+            </div>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="px-8 py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-sm uppercase tracking-wide rounded border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] shrink-0 cursor-pointer"
+            >
+              Start With Free Review
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          8. FAQ SECTION (Matches Indonesian FAQ design)
+      ────────────────────────────────────────────────────────────── */}
+      <section id="faq" className="py-24 lg:py-32 bg-light-grey">
+        <div className="container mx-auto px-6 max-w-4xl">
+          
+          <div className="text-center mb-16">
+            <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">Answers for Hoteliers</span>
+            <h2 className="text-3xl md:text-4xl font-black text-primary-navy mt-2 tracking-tight">
+              Frequently Asked Questions
+            </h2>
           </div>
 
           <div className="space-y-4">
             {[
               {
-                q: "Can we keep our existing PMS or booking software?",
-                a: "Yes. If your property uses Cloudbeds, Sirvoy, Beds24, Guesty, or any standard booking engine, we seamlessly embed and style your existing booking widget so guests experience zero disruption."
+                q: "What exactly is in the free 1-page website review?",
+                a: "Our lead designer manually inspects your property's website on modern smartphones. We highlight 3 specific friction points in your guest journey (e.g. mobile photo sizing, rate visibility, inquiry flow) and mock up a suggested visual improvement. It is 100% human-crafted with no automated bot scoring and no sales follow-up pressure."
               },
               {
-                q: "What if we don't have an online booking system yet?",
-                a: "We can set up a direct reservation inquiry system with room selection, date requests, and direct WhatsApp / email notifications that your front desk can easily manage without expensive monthly software licenses."
+                q: "Do we have to abandon our existing booking engine (e.g. Cloudbeds, Phobs, Sirvoy)?",
+                a: "No. You keep your existing channel manager or booking engine. We simply build a calm, high-performance exterior and direct inquiry bridge so guests can comfortably explore your rooms and choose whether to book directly or seamlessly enter your engine."
               },
               {
-                q: "How does the Async-First working process work in practice?",
-                a: "We agree on the project brief in writing, receive your photos and details via a shared folder, and share video walkthroughs (Loom) of the staging site as we build. You provide feedback whenever convenient. If an urgent question arises, a focused 15-minute alignment call is always available."
+                q: "How can we collaborate smoothly between the Balkans and Indonesia?",
+                a: "Our studio operates async-first. We use structured Figma preview boards, short Loom video walk-throughs, and prompt WhatsApp/Email communication. Our time zone overlap allows us to work during your evening and deliver fresh updates by your morning. We do not require long meetings."
               },
               {
-                q: "Can the website support multiple languages?",
-                a: "Yes. We frequently structure sites for English alongside local languages (e.g., Albanian, Bosnian, Macedonian, Italian, or German) with clean language switchers."
+                q: "Can our staff update seasonal rates and photos without coding?",
+                a: "Yes. We integrate lightweight, intuitive content management (or structured markdown configs) so your front desk or manager can update photos, announcements, and seasonal packages in under 2 minutes."
               },
               {
-                q: "Do you offer ongoing hosting and maintenance after launch?",
-                a: "Yes. We offer an optional Website Care retainer (typically €75–€120/month) covering high-speed cloud hosting, daily backups, uptime monitoring, and small monthly content/rate adjustments."
+                q: "Who owns the website and code after launch?",
+                a: "You do. 100%. We provide complete access to the GitHub repository, hosting accounts, and digital assets. There is zero proprietary agency lock-in."
               }
-            ].map((faq, i) => (
-              <div 
-                key={i} 
-                className="border border-slate-800 rounded-xl bg-slate-900/60 overflow-hidden transition-colors"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleFaq(i)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 text-sm font-semibold text-white hover:text-amber-300 transition-colors"
+            ].map((faq, index) => {
+              const isOpen = activeFaq === index;
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all shadow-xs"
                 >
-                  <span>{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${activeFaq === i ? 'rotate-180 text-amber-400' : ''}`} />
-                </button>
-                {activeFaq === i && (
-                  <div className="px-5 pb-5 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 pt-4">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            ))}
+                  <button
+                    onClick={() => setActiveFaq(isOpen ? null : index)}
+                    className="w-full p-6 text-left font-bold text-base md:text-lg text-primary-navy flex items-center justify-between gap-4 cursor-pointer"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-accent-orange" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="px-6 pb-6 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-4"
+                      >
+                        {faq.a}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
+
         </div>
       </section>
 
-      {/* 9. REVIEW REQUEST FORM (PRIMARY CTA) */}
-      <section id="review-request" className="py-20 md:py-28 relative">
-        <div className="max-w-2xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-10">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-3 block">
-              Zero Pressure
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">
-              Request a free 1-page website review.
-            </h2>
-            <p className="text-slate-300 text-sm leading-relaxed max-w-lg mx-auto">
-              Share your current property website. We will manually inspect your mobile navigation, room presentation, and inquiry journey, and send a concise 1-page PDF teardown. No automated spam, no sales call required.
-            </p>
-          </div>
+      {/* ─────────────────────────────────────────────────────────────
+          9. FREE 1-PAGE REVIEW REQUEST SECTION (Form with Human Guarantee)
+      ────────────────────────────────────────────────────────────── */}
+      <section id="review-request" className="py-24 lg:py-32 bg-white border-t border-gray-200">
+        <div className="container mx-auto px-6 max-w-3xl">
+          
+          <div className="bg-light-grey rounded-3xl p-8 md:p-12 border-2 border-primary-navy shadow-[8px_8px_0px_0px_#1C2733]">
+            <div className="text-center mb-10">
+              <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">Free Honest Assessment</span>
+              <h2 className="text-3xl font-black text-primary-navy mt-1 mb-3">
+                Request a Free 1-Page Website Review
+              </h2>
+              <p className="text-sm text-gray-600 max-w-lg mx-auto leading-relaxed">
+                Send us your hotel link. Within 48 hours, a senior designer will manually inspect your mobile flow and return 3 actionable observations.
+              </p>
+            </div>
 
-          <div className="p-8 rounded-2xl border border-slate-800 bg-slate-900/80 shadow-2xl">
             {formSubmitted ? (
-              <div className="text-center py-8">
-                <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
-                  <Check className="w-6 h-6" />
+              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-8 text-center">
+                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-4">
+                  <Check className="w-6 h-6 stroke-[3]" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Review Request Received</h3>
-                <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-                  Thank you. We will manually inspect <strong>{formData.hotelName || 'your property'}</strong> and send your tailored 1-page teardown PDF to <strong>{formData.email}</strong> within 24–48 hours.
+                <h3 className="text-xl font-bold text-emerald-950 mb-2">Review Request Received</h3>
+                <p className="text-sm text-emerald-800 leading-relaxed max-w-md mx-auto">
+                  Thank you! Our lead designer is reviewing <strong>{formData.hotelName || "your hotel website"}</strong>. We will email your personalized 1-page review within 48 hours.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
+              <form onSubmit={handleFormSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5">Hotel / Property Name *</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-primary-navy mb-2">
+                      Hotel or Villa Name *
+                    </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Hotel Riva Boutique"
+                      placeholder="e.g. Muslibegovic House"
                       value={formData.hotelName}
                       onChange={(e) => setFormData({ ...formData, hotelName: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-400 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5">Website URL *</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-primary-navy mb-2">
+                      Current Website URL *
+                    </label>
                     <input
-                      type="url"
+                      type="text"
                       required
-                      placeholder="https://yourhotel.com"
+                      placeholder="e.g. hotel-example.com"
                       value={formData.websiteUrl}
                       onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-400 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
                     />
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5">Your Name</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-primary-navy mb-2">
+                      Your Name / Role *
+                    </label>
                     <input
                       type="text"
-                      placeholder="e.g. Elena Marković"
+                      required
+                      placeholder="e.g. Elena (Owner / General Manager)"
                       value={formData.contactName}
                       onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-400 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5">Work Email *</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-primary-navy mb-2">
+                      Email for Review Delivery *
+                    </label>
                     <input
                       type="email"
                       required
-                      placeholder="reservations@yourhotel.com"
+                      placeholder="info@hotel-example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-400 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1.5">Any specific concern? (Optional)</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-primary-navy mb-2">
+                    Any specific friction or questions? (Optional)
+                  </label>
                   <textarea
                     rows={3}
-                    placeholder="e.g. Mobile speed is slow, or we are preparing for the upcoming season..."
+                    placeholder="e.g. We get many international visitors but most book through Booking.com instead of our direct site."
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-400 transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-4 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-50"
+                  className="w-full py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-sm uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[4px_4px_0px_0px_#1C2733] transition-all cursor-pointer flex items-center justify-center gap-2 mt-4"
                 >
                   {isSubmitting ? (
-                    <span>Analyzing Request...</span>
+                    <span>Preparing Review Request...</span>
                   ) : (
                     <>
-                      <span>Send Me the 1-Page Website Review</span>
-                      <Send className="w-3.5 h-3.5" />
+                      <span>Send Website for Free Review</span>
+                      <Send className="w-4 h-4" />
                     </>
                   )}
                 </button>
 
-                <p className="text-[11px] text-slate-400 text-center mt-3">
-                  We respect your privacy. No automated phone calls or spam newsletters.
+                <p className="text-center text-[11px] text-gray-500 mt-3">
+                  100% human evaluation. No bots, no spam, no sales calls. Your information is kept strictly confidential.
                 </p>
               </form>
             )}
           </div>
+
         </div>
       </section>
 
-      {/* STUDIO FOOTER */}
-      <footer className="border-t border-slate-800/80 bg-slate-950 py-12 text-xs text-slate-400">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <span className="font-bold text-white tracking-wider">WUUS</span>
-            <p className="text-slate-400 text-[11px] mt-1">
-              An independent async-first digital studio based in Indonesia, partnering with boutique businesses internationally.
-            </p>
+      {/* ─────────────────────────────────────────────────────────────
+          10. FOOTER (Exact structure & assets as Indonesian Footer)
+      ────────────────────────────────────────────────────────────── */}
+      <footer className="bg-light-grey border-t border-gray-200 pt-20 pb-12">
+        <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+            {/* Brand & Studio Location */}
+            <div className="lg:col-span-2">
+              <Link href="/" className="flex items-center mb-6">
+                <Image
+                  src="/logo.png"
+                  alt="WUUS Logo"
+                  width={142}
+                  height={40}
+                  className="h-10 w-auto object-contain"
+                />
+              </Link>
+              <p className="text-gray-500 mb-8 max-w-md leading-relaxed text-sm">
+                WUUS is an independent digital design studio partnering with forward-thinking boutique stays and ambitious businesses worldwide. We craft digital spaces with measurable technical and aesthetic standards.
+              </p>
+
+              {/* Office Google Maps Embed (Matches Indonesian site) */}
+              <div className="rounded-[2rem] overflow-hidden shadow-xl border-4 border-white h-48 max-w-md group transition-all duration-500">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.533838466155!2d106.7541558118344!3d-6.193067260650871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f710ddd28e99%3A0x4fda30c569b2e71d!2sApartmen%20Puri%20Parkview!5e0!3m2!1sid!2sid!4v1775916857687!5m2!1sid!2sid"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-[1.02]"
+                  title="WUUS Digital Studio Office Location"
+                />
+              </div>
+            </div>
+
+            {/* Navigation Links */}
+            <div>
+              <h3 className="font-bold text-primary-navy text-base mb-6 uppercase tracking-wider text-xs">
+                Hospitality Practice
+              </h3>
+              <ul className="space-y-3 text-sm">
+                <li><a href="#philosophy" className="text-gray-500 hover:text-accent-orange transition-colors">The Guest Journey</a></li>
+                <li><a href="#portfolio" className="text-gray-500 hover:text-accent-orange transition-colors">Selected Concepts</a></li>
+                <li><a href="#framework" className="text-gray-500 hover:text-accent-orange transition-colors">ADRA Framework</a></li>
+                <li><a href="#workflow" className="text-gray-500 hover:text-accent-orange transition-colors">Async Process</a></li>
+                <li><a href="#faq" className="text-gray-500 hover:text-accent-orange transition-colors">Hotelier FAQ</a></li>
+              </ul>
+            </div>
+
+            {/* Direct Studio Contact */}
+            <div>
+              <h3 className="font-bold text-primary-navy text-base mb-6 uppercase tracking-wider text-xs">
+                Studio Direct
+              </h3>
+              <ul className="space-y-4 text-sm">
+                <li className="flex items-start gap-3 text-gray-500">
+                  <MapPin size={18} className="text-accent-orange mt-0.5 shrink-0" />
+                  <span><strong>WUUS Digital Studio</strong> <br /> Jakarta Barat, DKI Jakarta <br /> 11620, Indonesia</span>
+                </li>
+                <li className="flex items-center gap-3 text-gray-500">
+                  <PhoneCall size={18} className="text-accent-orange shrink-0" />
+                  <span>+62 813-8352-1750 (WhatsApp)</span>
+                </li>
+                <li className="flex items-center gap-3 text-gray-500">
+                  <Mail size={18} className="text-accent-orange shrink-0" />
+                  <span>hello@webuntukusaha.com</span>
+                </li>
+              </ul>
+
+              <div className="mt-8 pt-4 border-t border-gray-200">
+                <Link 
+                  href="/" 
+                  className="text-xs font-semibold text-primary-navy hover:text-accent-orange flex items-center gap-2"
+                >
+                  <span>🇮🇩</span> Menuju Halaman Utama Indonesia →
+                </Link>
+              </div>
+            </div>
+
           </div>
 
-          <div className="flex items-center gap-6 text-[11px] text-slate-300">
-            <Link href="/hospitality" className="hover:text-white transition-colors">Hospitality Edition</Link>
-            <Link href="/" className="hover:text-white transition-colors">Indonesian Studio (ID)</Link>
-            <a href="mailto:hello@webuntukusaha.com" className="hover:text-white transition-colors">hello@webuntukusaha.com</a>
+          {/* Copyright & Sub-footer */}
+          <div className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+            <p>© {new Date().getFullYear()} WUUS Digital Studio. All rights reserved.</p>
+            <div className="flex items-center gap-6">
+              <Link href="/kebijakan-privasi" className="hover:text-primary-navy transition-colors">Privacy Policy</Link>
+              <Link href="/syarat-ketentuan" className="hover:text-primary-navy transition-colors">Terms of Service</Link>
+            </div>
           </div>
         </div>
       </footer>
+
+      {/* ─────────────────────────────────────────────────────────────
+          11. REVIEW MODAL POPUP (Triggered by CTAs across the page)
+      ────────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {modalOpen && (
+          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setModalOpen(false)}
+              className="absolute inset-0 bg-primary-navy/80 backdrop-blur-sm"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="relative w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-primary-navy z-10 overflow-hidden"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent-orange">Human Audit</span>
+                  <h3 className="text-xl font-bold text-primary-navy">Free 1-Page Website Review</h3>
+                </div>
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 transition-colors"
+                  aria-label="Close Modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {formSubmitted ? (
+                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center">
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-3">
+                    <Check className="w-5 h-5 stroke-[3]" />
+                  </div>
+                  <h4 className="text-base font-bold text-emerald-950 mb-1">Request Received!</h4>
+                  <p className="text-xs text-emerald-800 leading-relaxed">
+                    We will send our 1-page visual review to <strong>{formData.email}</strong> within 48 hours. No sales follow-up calls or spam guaranteed.
+                  </p>
+                  <button
+                    onClick={() => setModalOpen(false)}
+                    className="mt-4 px-5 py-2 bg-primary-navy text-white text-xs font-bold rounded-lg"
+                  >
+                    Close Window
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-primary-navy mb-1.5">
+                      Hotel / Villa Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. City Boutique Hotel"
+                      value={formData.hotelName}
+                      onChange={(e) => setFormData({ ...formData, hotelName: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-primary-navy mb-1.5">
+                      Website URL *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. cityboutiquehotel.ba"
+                      value={formData.websiteUrl}
+                      onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-primary-navy mb-1.5">
+                        Your Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Faruk / Host"
+                        value={formData.contactName}
+                        onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-primary-navy mb-1.5">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="info@hotel.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs uppercase tracking-wide rounded-lg border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] transition-all cursor-pointer mt-3"
+                  >
+                    {isSubmitting ? "Submitting..." : "Send for Free Review (Delivered in 48h)"}
+                  </button>
+                  <p className="text-center text-[10px] text-gray-500">
+                    Handcrafted evaluation by a human designer. Zero spam.
+                  </p>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
