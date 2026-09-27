@@ -34,20 +34,20 @@ const hospitalityProjects = [
     title: "Savoria Residence & Terroir",
     category: "Boutique Wine Estate & Stays",
     location: "Lake Ohrid / Adriatic Coast",
-    img: "/Savoria-mockup.png",
+    img: "/images/hospitality/savoria-wine-estate.jpg",
     accent: "#D97706",
     tag: "Terroir & Heritage",
-    description: "Designed for a historic lakeside wine estate. Emphasizes curated wine tastings, private suites, and seamless direct inquiries."
+    description: "Custom digital home designed for a historic lakeside wine estate. Emphasizes curated wine tastings, private suites, and seamless direct inquiries."
   },
   {
     id: 2,
-    title: "The Heritage Manor",
-    category: "Restored Ottoman & Austro-Hungarian Villa",
-    location: "Mostar / Old Town",
-    img: "/trust-mockup.png",
+    title: "Vila Kliment Heritage & Suites",
+    category: "Lakeview Boutique Residence",
+    location: "Ohrid / North Macedonia",
+    img: "/images/hospitality/mobile-stay-ui.jpg",
     accent: "#1C2733",
-    tag: "Architectural Preservation",
-    description: "Translating authentic courtyard architecture, handcrafted antique furniture, and centuries of host heritage into a serene digital presence."
+    tag: "Mobile-First Direct Flow",
+    description: "Designed thumb-first for discerning travelers. Instant visual room discovery, transparent direct rates, and effortless WhatsApp/Email inquiries with the host."
   },
   {
     id: 3,
@@ -460,8 +460,8 @@ export default function HospitalityPage() {
               <div className="w-[270px] h-[320px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col rotate-[-2deg]">
                 <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
                   <Image
-                    src="/Hero1.png"
-                    alt="Independent Hotelier & Hospitality Host"
+                    src="/images/hospitality/host-portrait.jpg"
+                    alt="Independent Boutique Hotel Host"
                     fill
                     priority
                     sizes="300px"
@@ -470,13 +470,13 @@ export default function HospitalityPage() {
                 </div>
                 <div className="absolute -bottom-5 -right-5 bg-primary-navy text-white px-3.5 py-2 rounded-xl shadow-lg border-2 border-white text-[11px] font-bold flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  Independent Host
+                  Independent Host · Adriatic Stays
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Floating Photo Frame (Using Project Asset Hero2.png / Mockup) */}
+          {/* Right Floating Photo Frame (Using Custom Hospitality Mobile Mockup) */}
           <motion.div
             style={{ y: y2 }}
             className="absolute lg:right-2 2xl:-right-8 top-56 z-10 lg:scale-[0.7] xl:scale-[0.85] 2xl:scale-100 origin-right hidden lg:block"
@@ -486,8 +486,8 @@ export default function HospitalityPage() {
               <div className="w-[280px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 rotate-[3deg]">
                 <div className="h-[210px] rounded-2xl bg-gray-100 overflow-hidden relative">
                   <Image
-                    src="/Hero2.png"
-                    alt="Studio Craftsmanship in Digital Hospitality"
+                    src="/images/hospitality/mobile-stay-ui.jpg"
+                    alt="Boutique Hotel Mobile Guest Experience"
                     fill
                     priority
                     sizes="300px"
@@ -496,7 +496,7 @@ export default function HospitalityPage() {
                 </div>
                 <div className="pt-3 px-1 pb-1">
                   <p className="text-[11px] font-bold text-primary-navy uppercase tracking-wider">Sub-1s Mobile Experience</p>
-                  <p className="text-[10px] text-gray-500 mt-0.5">Designed thumb-first for direct guest inquiries</p>
+                  <p className="text-[10px] text-gray-500 mt-0.5">Vila Kliment · Direct Guest Inquiries</p>
                 </div>
                 <div className="absolute -top-6 -right-6 w-14 h-14 bg-accent-orange rounded-2xl flex items-center justify-center shadow-lg rotate-12 border-3 border-white">
                   <Globe className="text-primary-navy w-7 h-7" />
@@ -627,7 +627,7 @@ export default function HospitalityPage() {
               </div>
               <div className="relative h-44 rounded-2xl overflow-hidden border border-white/10 mt-4">
                 <Image
-                  src="/wuus-bg-navy.jpg"
+                  src="/images/hospitality/savoria-wine-estate.jpg"
                   alt="The Calm Direct Web Experience"
                   fill
                   sizes="350px"
