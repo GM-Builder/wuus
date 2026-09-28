@@ -93,7 +93,7 @@ export function Footer() {
                 </span>
               </li>
               <li>
-                <span className="text-slate-500">Mayar Instant Card Link</span>
+                <span className="text-slate-500">Instant Card & Bank Settlement</span>
               </li>
               <li>
                 <span className="text-slate-500">European SEPA Bank Wire</span>
@@ -131,7 +131,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-slate-200/90 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
           <p>
-            &copy; {new Date().getFullYear()} WUUS Studio. Built with Next.js Edge & Tailwind CSS. All rights reserved.
+            &copy; {new Date().getFullYear()} WUUS Studio. Seluruh hak cipta dilindungi. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             <Link href="/syarat-ketentuan" className="hover:text-slate-900 transition-colors">

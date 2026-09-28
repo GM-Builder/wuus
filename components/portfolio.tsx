@@ -11,7 +11,7 @@ const caseStudies = [
     id: "savoria",
     name: "Savoria Dining & Lounge",
     location: "Jakarta & Bali",
-    badge: "F&B / Restoran & Kuliner Mewah",
+    badge: "F&B / Restoran & Kuliner",
     headline: "Website Eksklusif & Sistem Reservasi Meja Otomatis",
     description: "Restoran fine dining dengan konsep kuliner premium. Dilengkapi katalog menu visual interaktif, reservasi meja langsung, dan konfirmasi WhatsApp otomatis tanpa hambatan.",
     metrics: "Akses 0.6 Detik • Reservasi Langsung • Tampilan Elegan",
@@ -44,9 +44,9 @@ const caseStudies = [
     id: "villa-stay",
     name: "Vila Kliment Boutique Stays",
     location: "Bali & Yogyakarta",
-    badge: "Hospitality & Villa Mewah",
+    badge: "Hospitality & Villa",
     headline: "Direct Booking Engine & Asisten Tamu AI 24 Jam",
-    description: "Akomodasi villa butik privat. Menerima reservasi langsung dari tamu lokal dan mancanegara tanpa potongan komisi agen 18%–25%, didukung asisten AI multibahasa.",
+    description: "Akomodasi villa butik privat. Menerima reservasi langsung dari tamu lokal dan mancanegara tanpa potongan komisi agen 18% - 25%, didukung asisten AI multibahasa.",
     metrics: "0% Komisi Calo • Asisten 24 Jam • Kalender Reservasi",
     image: "/images/hospitality/savoria-wine-estate.jpg",
     link: "/hospitality"
@@ -68,13 +68,13 @@ export function Portfolio() {
   const nextItem = caseStudies[(currentIndex + 1) % caseStudies.length];
 
   return (
-    <section id="portfolio" className="py-20 md:py-28 bg-[#F8F9FA] border-b border-slate-200/80">
+    <section id="portfolio" className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-2">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-2">
               STUDI KASUS & PORTOFOLIO
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1C2733] tracking-tight">
@@ -82,7 +82,7 @@ export function Portfolio() {
             </h2>
           </div>
 
-          <p className="text-sm text-slate-500 font-medium max-w-md">
+          <p className="text-sm text-slate-600 font-medium max-w-md">
             Pelajari bagaimana klien kami mentransformasi website mereka menjadi aset bisnis yang menghasilkan reputasi dan omset nyata.
           </p>
         </div>
@@ -91,22 +91,22 @@ export function Portfolio() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
           {/* Main Active Case Study Card */}
-          <div className="lg:col-span-8 bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
-            {/* Visual Device Frame */}
-            <div className="relative w-full h-[260px] sm:h-[340px] rounded-2xl overflow-hidden bg-slate-900 mb-6 group">
+          <div className="lg:col-span-8 bg-white rounded-xl border border-slate-200 p-6 sm:p-7 flex flex-col justify-between">
+            {/* Visual Frame */}
+            <div className="relative w-full h-[260px] sm:h-[340px] rounded-lg overflow-hidden bg-slate-900 mb-6 group">
               <Image
                 src={current.image}
                 alt={current.name}
                 fill
                 sizes="(max-width: 1024px) 100vw, 65vw"
-                className="object-contain object-center p-2 group-hover:scale-[1.02] transition-transform duration-500"
+                className="object-contain object-center p-2"
               />
               
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md rounded-full px-3 py-1 text-[11px] font-bold text-[#1C2733] shadow-xs">
+              <div className="absolute top-4 left-4 bg-white rounded-md px-3 py-1 text-[11px] font-bold text-[#1C2733]">
                 {current.badge}
               </div>
 
-              <div className="absolute bottom-4 right-4 bg-[#1C2733]/90 text-white rounded-full px-3.5 py-1.5 text-xs font-semibold flex items-center gap-1.5 backdrop-blur-sm">
+              <div className="absolute bottom-4 right-4 bg-[#1C2733] text-white rounded-md px-3 py-1.5 text-xs font-semibold">
                 <span>{current.location}</span>
               </div>
             </div>
@@ -123,10 +123,10 @@ export function Portfolio() {
                 {current.description}
               </p>
 
-              <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-between pt-4 border-t border-slate-200">
                 <Link
                   href={current.link}
-                  className="px-5 py-2.5 rounded-full border border-slate-300 hover:border-[#1C2733] text-xs font-bold text-[#1C2733] hover:bg-[#1C2733] hover:text-white transition-all flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-lg border border-slate-300 hover:border-[#1C2733] text-xs font-bold text-[#1C2733] hover:bg-[#1C2733] hover:text-white transition-colors flex items-center gap-2"
                 >
                   <span>Pelajari Studi Kasus</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -136,14 +136,14 @@ export function Portfolio() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={prevSlide}
-                    className="w-9 h-9 rounded-full border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors cursor-pointer"
+                    className="w-9 h-9 rounded-md border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors cursor-pointer"
                     aria-label="Previous"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button
                     onClick={nextSlide}
-                    className="w-9 h-9 rounded-full border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors cursor-pointer"
+                    className="w-9 h-9 rounded-md border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors cursor-pointer"
                     aria-label="Next"
                   >
                     <ChevronRight className="w-4 h-4" />
@@ -156,31 +156,31 @@ export function Portfolio() {
           {/* Right Peek Preview Card */}
           <div
             onClick={nextSlide}
-            className="hidden lg:flex lg:col-span-4 bg-white/70 backdrop-blur-sm rounded-3xl border border-slate-200/70 p-6 flex-col justify-between opacity-70 hover:opacity-100 transition-opacity cursor-pointer group"
+            className="hidden lg:flex lg:col-span-4 bg-slate-50 rounded-xl border border-slate-200 p-6 flex-col justify-between cursor-pointer group"
           >
             <div>
-              <div className="relative w-full h-[220px] rounded-2xl overflow-hidden bg-slate-100 mb-5">
+              <div className="relative w-full h-[220px] rounded-lg overflow-hidden bg-slate-200 mb-5">
                 <Image
                   src={nextItem.image}
                   alt={nextItem.name}
                   fill
                   sizes="30vw"
-                  className="object-contain p-2 filter blur-[1px] group-hover:blur-none transition-all"
+                  className="object-contain p-2"
                 />
               </div>
 
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                 BERIKUTNYA
               </span>
               <h4 className="text-lg font-bold text-[#1C2733] mt-1 mb-2">
                 {nextItem.name}
               </h4>
-              <p className="text-xs text-slate-500 line-clamp-3 font-medium leading-relaxed">
+              <p className="text-xs text-slate-600 line-clamp-3 font-medium leading-relaxed">
                 {nextItem.description}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-400 group-hover:text-[#1C2733]">
+            <div className="pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-bold text-slate-500 group-hover:text-[#1C2733]">
               <span>Lihat proyek ini</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>

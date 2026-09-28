@@ -48,77 +48,70 @@ export default function TermsAndConditions() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col w-full bg-light-grey">
+    <main className="flex min-h-screen flex-col w-full bg-white">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-primary-navy relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-secondary-blue/20 to-transparent pointer-events-none" />
-        <div className="container mx-auto px-4 max-w-4xl relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="text-accent-orange text-sm font-bold tracking-widest uppercase mb-4 block">
+      <section className="pt-28 pb-12">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <div className="rounded-xl bg-[#1C2733] text-white p-8 md:p-14 text-center">
+            <span className="text-[#F59E0B] text-xs font-bold tracking-widest uppercase mb-3 block">
               Legalitas & Transparansi
             </span>
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-6">
-              Syarat & <span className="text-accent-orange">Ketentuan</span>
+            <h1 className="text-3xl md:text-5xl font-black text-white mb-5 leading-tight">
+              Syarat & <span className="text-[#F59E0B]">Ketentuan</span>
             </h1>
-            <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-300 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
               Kesepakatan ini dibuat untuk melindungi hak dan kewajiban antara WebUntukUsaha (WUUS) dan Anda sebagai Klien demi kenyamanan bersama.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Content Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-primary-navy/5 p-8 md:p-12">
-            <div className="flex items-center gap-2 text-gray-400 text-sm font-medium mb-10 border-b border-gray-100 pb-6">
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+          <div className="bg-white rounded-xl border border-slate-200 p-7 md:p-10">
+            <div className="flex items-center gap-2 text-slate-400 text-xs sm:text-sm font-medium mb-10 border-b border-slate-100 pb-5">
               <Calendar className="w-4 h-4" />
               <span>Terakhir diperbarui: {lastUpdated}</span>
             </div>
 
-            <div className="space-y-12">
+            <div className="space-y-10">
               {sections.map((section, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="flex items-start gap-6">
-                    <div className="mt-1 w-12 h-12 shrink-0 bg-accent-orange/10 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
+                  <div className="flex items-start gap-5">
+                    <div className="mt-1 w-10 h-10 shrink-0 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center">
                       {section.icon}
                     </div>
                     <div>
-                      <h2 className="text-2xl font-black text-primary-navy mb-4 group-hover:text-accent-orange transition-colors">
+                      <h2 className="text-lg sm:text-xl font-bold text-[#1C2733] mb-2 group-hover:text-[#F59E0B] transition-colors">
                         {section.title}
                       </h2>
-                      <p className="text-gray-500 leading-relaxed text-lg">
+                      <p className="text-slate-600 leading-relaxed text-sm">
                         {section.content}
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            <div className="mt-20 p-8 bg-light-grey rounded-3xl border border-gray-100 text-center">
-              <h3 className="text-xl font-bold text-primary-navy mb-4">Punya Pertanyaan Mengenai S&K?</h3>
-              <p className="text-gray-500 mb-8">Tim kami siap membantu menjelaskan setiap poin agar Anda merasa aman dan nyaman bekerja sama dengan kami.</p>
+            <div className="mt-14 p-6 sm:p-8 bg-slate-50 rounded-xl border border-slate-200 text-center">
+              <h3 className="text-lg font-bold text-[#1C2733] mb-2">Punya Pertanyaan Mengenai S&K?</h3>
+              <p className="text-xs sm:text-sm text-slate-600 mb-6 max-w-lg mx-auto">
+                Tim kami siap membantu menjelaskan setiap poin agar Anda merasa aman dan nyaman bekerja sama dengan kami.
+              </p>
               <a 
                 href="https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20bertanya%20mengenai%20Syarat%20dan%20Ketentuan." 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-primary-navy text-white px-8 py-4 rounded-xl font-bold hover:bg-accent-orange transition-all shadow-lg hover:shadow-accent-orange/20"
+                className="inline-flex items-center gap-2 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-7 py-3 rounded-lg text-xs font-bold transition-colors cursor-pointer"
               >
-                Hubungi Bantuan Hukum
+                Hubungi Konsultasi WhatsApp
               </a>
             </div>
           </div>

@@ -94,7 +94,7 @@ const conciergeScenarios = [
   {
     id: 'de',
     lang: 'Deutsch (German)',
-    flag: '🇩🇪',
+    code: 'DE',
     guestName: 'Hans & Claudia M.',
     location: 'Munich, Germany',
     time: '23:42 · Late-Night Drive',
@@ -108,7 +108,7 @@ const conciergeScenarios = [
   {
     id: 'it',
     lang: 'Italiano (Italian)',
-    flag: '🇮🇹',
+    code: 'IT',
     guestName: 'Matteo & Sofia B.',
     location: 'Milano, Italy',
     time: '22:15 · Weekend Getaway',
@@ -122,12 +122,12 @@ const conciergeScenarios = [
   {
     id: 'en',
     lang: 'English (UK / US)',
-    flag: '🇬🇧',
+    code: 'EN',
     guestName: 'Eleanor Vance',
     location: 'London, United Kingdom',
     time: '00:18 · Planning Summer Stay',
     inquiry: 'Hi there! We are looking at a 4-night stay in July. Is it better to book directly on your site or via Booking.com? Also, can you coordinate private airport transfer from Tirana?',
-    response: 'Hello Eleanor! Booking directly with us guarantees our best flexible rate (approx. 12–15% lower than third-party platforms) plus a complimentary welcome bottle of regional vintage wine. We also coordinate private Mercedes transfer directly from Tirana Airport (fixed at €45, payable directly to the driver). Would you like me to connect you with our host on WhatsApp to secure these dates with zero deposit?',
+    response: 'Hello Eleanor! Booking directly with us guarantees our best flexible rate (approx. 12-15% lower than third-party platforms) plus a complimentary welcome bottle of regional vintage wine. We also coordinate private Mercedes transfer directly from Tirana Airport (fixed at €45, payable directly to the driver). Would you like me to connect you with our host on WhatsApp to secure these dates with zero deposit?',
     sourceCitation: 'Verified: Direct Booking Best Rate Guarantee & Concierge Transfer Protocol',
     latency: '0.9s',
     confidence: '100% Grounded',
@@ -136,7 +136,7 @@ const conciergeScenarios = [
   {
     id: 'fr',
     lang: 'Français (French)',
-    flag: '🇫🇷',
+    code: 'FR',
     guestName: 'Camille & Julien D.',
     location: 'Lyon, France',
     time: '21:05 · Wine & Gastronomy',
@@ -155,7 +155,7 @@ const adraPillars = [
     letter: "A",
     title: "Atmosphere First",
     subtitle: "Showcase Character, Not Generic Templates",
-    desc: "Discerning guests book boutique hotels for their soul — the limestone walls, the morning light in the courtyard, the host's private wine cellar. We showcase this atmosphere with optimized full-screen visuals and zero lag.",
+    desc: "Discerning guests book boutique hotels for their soul: the limestone walls, the morning light in the courtyard, the host's private wine cellar. We showcase this atmosphere with optimized full-screen visuals and zero lag.",
     highlight: "Sub-second image rendering",
     icon: Sparkles
   },
@@ -189,7 +189,7 @@ const adraPillars = [
 const comparisonPoints = [
   {
     feature: "First Impression & Speed",
-    generic: "Clunky 5–8s loading with heavy third-party plugins",
+    generic: "Clunky 5-8s loading with heavy third-party plugins",
     wuus: "Sub-1s instant paint with zero-lag edge caching"
   },
   {
@@ -292,7 +292,7 @@ export default function HospitalityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-light-grey text-primary-navy font-sans antialiased selection:bg-accent-orange selection:text-primary-navy">
+    <div className="min-h-screen bg-white text-primary-navy font-sans antialiased selection:bg-accent-orange selection:text-primary-navy">
       {/* Suppress root layout floating Indonesian builder button on international hospitality page */}
       <style jsx global>{`
         #floating-ai-builder {
@@ -306,8 +306,8 @@ export default function HospitalityPage() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu ${
           isScrolled 
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3" 
-            : "bg-transparent py-5"
+            ? "bg-white border-b border-slate-200 py-3" 
+            : "bg-white border-b border-slate-100 py-4"
         }`}
       >
         <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)] flex items-center justify-between">
@@ -323,7 +323,7 @@ export default function HospitalityPage() {
                 className="h-9 w-auto object-contain"
               />
             </Link>
-            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-gray-200 bg-white/80 text-[10px] font-bold tracking-widest uppercase text-primary-navy shadow-xs">
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-gray-200 bg-white text-[10px] font-bold tracking-widest uppercase text-primary-navy ">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Hospitality
             </div>
@@ -361,12 +361,12 @@ export default function HospitalityPage() {
               className="text-xs font-semibold text-slate-600 hover:text-[#1C2733] transition-colors flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200 hover:border-slate-300"
               title="Kembali ke halaman utama bahasa Indonesia"
             >
-              <span>🇮🇩</span>
+              <span className="font-bold text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">ID</span>
               <span>Web Utama</span>
             </Link>
             <button
               onClick={() => setModalOpen(true)}
-              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm cursor-pointer"
+              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all  cursor-pointer"
             >
               Get Free 1-Page Review
             </button>
@@ -382,7 +382,7 @@ export default function HospitalityPage() {
             </button>
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="text-primary-navy p-2 bg-white rounded-md border border-gray-200 shadow-xs"
+              className="text-primary-navy p-2 bg-white rounded-md border border-gray-200 "
               aria-label="Open Navigation Menu"
             >
               <Menu className="w-5 h-5" />
@@ -476,7 +476,7 @@ export default function HospitalityPage() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-base font-semibold text-gray-500 pt-2 flex items-center gap-2"
               >
-                <span>🇮🇩</span> Buka Halaman Utama (Indonesia)
+                <span className="font-bold text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">ID</span> Buka Halaman Utama (Indonesia)
               </Link>
             </nav>
 
@@ -486,7 +486,7 @@ export default function HospitalityPage() {
                   setMobileMenuOpen(false);
                   setModalOpen(true);
                 }}
-                className="w-full text-center bg-accent-orange hover:bg-accent-yellow text-primary-navy px-6 py-4 rounded-lg font-bold text-base shadow-sm"
+                className="w-full text-center bg-accent-orange hover:bg-accent-yellow text-primary-navy px-6 py-4 rounded-lg font-bold text-base "
               >
                 Request Free 1-Page Website Review
               </button>
@@ -498,10 +498,10 @@ export default function HospitalityPage() {
       {/* ─────────────────────────────────────────────────────────────
           2. HERO SECTION (Identical visual structure to Indonesian Hero)
       ────────────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative bg-off-white pt-36 pb-28 lg:pt-48 lg:pb-44 overflow-hidden z-10">
+      <section ref={heroRef} className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden z-10">
         {/* Ambient background glows */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-secondary-blue/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent-orange/10 rounded-full blur-[100px] pointer-events-none" />
+        
+        
 
         <div className="container mx-auto px-4 max-w-7xl relative z-20 flex flex-col items-center">
           
@@ -514,7 +514,7 @@ export default function HospitalityPage() {
               className="flex flex-col items-center w-full"
             >
               {/* Studio Pill */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-700 text-xs font-semibold tracking-wide mb-6 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-700 text-xs font-semibold tracking-wide mb-6 ">
                 <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse" />
                 <span>Direct Booking Engine + 24/7 Multilingual AI Guest Concierge</span>
               </div>
@@ -522,7 +522,7 @@ export default function HospitalityPage() {
               {/* Main Headline */}
               <h1 className="text-[2.25rem] min-[375px]:text-4xl md:text-6xl lg:text-7xl font-black text-primary-navy tracking-tight leading-[1.08] mb-6">
                 Quiet Luxury Web Design for <br className="hidden md:block" />
-                <span className="font-serif italic font-light text-accent-orange">Independent Boutique Hotels.</span>
+                <span className="text-[#F59E0B]">Independent Boutique Hotels.</span>
               </h1>
 
               {/* Subhead */}
@@ -534,14 +534,14 @@ export default function HospitalityPage() {
               <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-xl mx-auto relative z-30">
                 <button
                   onClick={() => setModalOpen(true)}
-                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs md:text-sm tracking-tight transition-all shadow-md cursor-pointer text-center flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs md:text-sm tracking-tight transition-all  cursor-pointer text-center flex items-center justify-center gap-2 group"
                 >
                   <span>Request Free 1-Page Review</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <a
                   href="#portfolio"
-                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-[#1C2733] border border-slate-300 font-bold text-xs md:text-sm tracking-tight transition-all shadow-xs cursor-pointer text-center"
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-[#1C2733] border border-slate-300 font-bold text-xs md:text-sm tracking-tight transition-all  cursor-pointer text-center"
                 >
                   Explore Selected Stays
                 </a>
@@ -574,8 +574,8 @@ export default function HospitalityPage() {
                   <path d="M40.5 12C45.2 3.5 54.8 3.5 59.5 12L88.7 64C93.4 72.5 88.6 83 79.2 83H20.8C11.4 83 6.6 72.5 11.3 64L40.5 12Z" />
                 </svg>
               </div>
-              <div className="w-[270px] h-[320px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col rotate-[-2deg]">
-                <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
+              <div className="w-[270px] h-[320px] bg-white rounded-xl p-3  relative z-10 border border-gray-100 flex flex-col rotate-[-2deg]">
+                <div className="w-full h-full rounded-xl bg-gray-100 overflow-hidden relative">
                   <Image
                     src="/images/hospitality/host-portrait.jpg"
                     alt="Independent Boutique Hotel Host"
@@ -585,7 +585,7 @@ export default function HospitalityPage() {
                     className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
-                <div className="absolute -bottom-5 -right-5 bg-primary-navy text-white px-3.5 py-2 rounded-xl shadow-lg border-2 border-white text-[11px] font-bold flex items-center gap-2">
+                <div className="absolute -bottom-5 -right-5 bg-primary-navy text-white px-3.5 py-2 rounded-xl  border border-slate-700 text-[11px] font-bold flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400" />
                   Independent Host · Adriatic Stays
                 </div>
@@ -600,8 +600,8 @@ export default function HospitalityPage() {
           >
             <div className="relative">
               <div className="absolute -inset-8 bg-[url('/patterns/cubes.png')] opacity-10 z-0" />
-              <div className="w-[280px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 rotate-[3deg]">
-                <div className="h-[210px] rounded-2xl bg-gray-100 overflow-hidden relative">
+              <div className="w-[280px] bg-white rounded-xl p-3  relative z-10 border border-gray-100 rotate-[3deg]">
+                <div className="h-[210px] rounded-xl bg-gray-100 overflow-hidden relative">
                   <Image
                     src="/images/hospitality/mobile-stay-ui.jpg"
                     alt="Boutique Hotel Mobile Guest Experience"
@@ -615,7 +615,7 @@ export default function HospitalityPage() {
                   <p className="text-[11px] font-bold text-primary-navy uppercase tracking-wider">Sub-1s Mobile Experience</p>
                   <p className="text-[10px] text-gray-500 mt-0.5">Vila Kliment · Direct Guest Inquiries</p>
                 </div>
-                <div className="absolute -top-6 -right-6 w-14 h-14 bg-accent-orange rounded-2xl flex items-center justify-center shadow-lg rotate-12 border-3 border-white">
+                <div className="absolute -top-6 -right-6 w-14 h-14 bg-accent-orange rounded-xl flex items-center justify-center  rotate-12 border border-amber-400">
                   <Globe className="text-primary-navy w-7 h-7" />
                 </div>
               </div>
@@ -631,7 +631,8 @@ export default function HospitalityPage() {
       {/* ─────────────────────────────────────────────────────────────
           3. MARQUEE / STUDIO PRINCIPLES STRIP
       ────────────────────────────────────────────────────────────── */}
-      <section className="bg-secondary-blue text-white py-6 overflow-hidden relative z-20">
+      <section className="py-2 overflow-hidden relative z-20">
+        <div className="w-full bg-[#1C2733] text-white py-4 px-6 flex items-center justify-around gap-8 text-xs font-semibold uppercase tracking-widest text-slate-300 overflow-x-auto no-scrollbar">
         <div className="w-full flex items-center justify-around gap-8 text-xs font-semibold uppercase tracking-widest text-slate-300 px-6 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-2 shrink-0">
             <span className="w-1.5 h-1.5 rounded-full bg-accent-orange" />
@@ -654,20 +655,23 @@ export default function HospitalityPage() {
             <span>100% Async Collaboration (No Zoom Fatigue)</span>
           </div>
         </div>
+        </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
           4. THE PROBLEM / STORYTELLING SECTION (Dark #020617 Theme)
           Matches `components/storytelling.tsx` from Indonesian site
       ────────────────────────────────────────────────────────────── */}
-      <section id="philosophy" className="relative py-28 lg:py-36 bg-[#020617] text-white overflow-hidden">
+      <section id="philosophy" className="py-16 md:py-24 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6">
+        <div className="rounded-xl bg-[#1C2733] text-white p-7 sm:p-10 md:p-12">
         <div className="container mx-auto px-6 relative z-10">
           
           <div className="max-w-3xl mx-auto text-center mb-20">
             <span className="text-accent-orange text-xs font-bold tracking-widest uppercase">The Guest Journey Reality</span>
             <h2 className="text-3xl md:text-5xl font-black mt-3 mb-6 leading-tight tracking-tight">
               Why do high-intent travelers admire your hotel, <br />
-              <span className="font-serif italic font-light text-accent-orange lowercase">yet book somewhere else?</span>
+              <span className="text-[#F59E0B]">yet book somewhere else?</span>
             </h2>
             <div className="h-1 w-16 bg-accent-orange mx-auto mb-6" />
             <p className="text-slate-400 text-sm md:text-base leading-relaxed">
@@ -679,11 +683,11 @@ export default function HospitalityPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             
             {/* Step 1 */}
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 flex flex-col justify-between hover:border-accent-orange/40 transition-all duration-300">
+            <div className="rounded-xl border border-slate-700 bg-[#233746] p-8 flex flex-col justify-between hover:border-accent-orange/40 transition-all duration-300">
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-serif italic text-accent-orange text-3xl">01</span>
-                  <div className="p-2.5 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20">
+                  <span className="font-extrabold text-[#F59E0B] text-2xl">1</span>
+                  <div className="p-2.5 rounded-xl bg-[#1C2733] text-red-400 border border-slate-700">
                     <AlertCircle className="w-5 h-5" />
                   </div>
                 </div>
@@ -694,16 +698,16 @@ export default function HospitalityPage() {
               </div>
 
               {/* Bespoke Interactive English UI Simulation (Replaces Indonesian step1 graphic) */}
-              <div className="relative h-44 rounded-2xl overflow-hidden border border-red-500/20 bg-slate-950/90 p-4 mt-4 flex flex-col justify-between font-mono text-[11px] shadow-inner">
+              <div className="relative h-44 rounded-xl overflow-hidden border border-slate-700 bg-[#16202B] p-4 mt-4 flex flex-col justify-between font-mono text-[11px] shadow-inner">
                 {/* Simulated Browser Bar */}
-                <div className="flex items-center justify-between pb-2 border-b border-white/10 text-slate-400">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-700 text-slate-400">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-red-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-red-500" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
                   </div>
                   <span className="text-[10px] text-slate-400 truncate max-w-[150px]">hotel-example.com/suites</span>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 font-bold">8.4s LCP</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#1C2733] text-red-400 font-bold">8.4s LCP</span>
                 </div>
 
                 {/* Simulated Slow Loading State */}
@@ -727,51 +731,51 @@ export default function HospitalityPage() {
 
                 {/* Alert Footnote */}
                 <div className="flex items-center justify-between text-[10px] pt-2 border-t border-white/5 text-slate-400">
-                  <span className="text-red-400 font-medium">⚠ 82% Mobile Drop-off Rate</span>
+                  <span className="text-red-400 font-medium">82% Mobile Drop-off Rate</span>
                   <span className="text-slate-400">3G/4G Roaming</span>
                 </div>
               </div>
             </div>
 
             {/* Step 2 */}
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 flex flex-col justify-between hover:border-accent-orange/40 transition-all duration-300">
+            <div className="rounded-xl border border-slate-700 bg-[#233746] p-8 flex flex-col justify-between hover:border-accent-orange/40 transition-all duration-300">
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-serif italic text-accent-orange text-3xl">02</span>
-                  <div className="p-2.5 rounded-xl bg-amber-500/10 text-accent-orange border border-amber-500/20">
+                  <span className="font-extrabold text-[#F59E0B] text-2xl">2</span>
+                  <div className="p-2.5 rounded-xl bg-[#1C2733] text-[#F59E0B] border border-slate-700">
                     <MousePointerClick className="w-5 h-5" />
                   </div>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">The Clunky Booking Widget</h3>
                 <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  Small, non-responsive calendar popups and confusing date pickers alienate smartphone users. Rather than struggling with the form, guests return to Booking.com — where you pay 15–20% commission.
+                  Small, non-responsive calendar popups and confusing date pickers alienate smartphone users. Rather than struggling with the form, guests return to Booking.com - where you pay 15-20% commission.
                 </p>
               </div>
 
               {/* Bespoke Interactive English UI Simulation (Replaces Indonesian step2 graphic) */}
-              <div className="relative h-44 rounded-2xl overflow-hidden border border-amber-500/20 bg-slate-950/90 p-4 mt-4 flex flex-col justify-between font-sans text-[11px] shadow-inner">
+              <div className="relative h-44 rounded-xl overflow-hidden border border-slate-700 bg-[#16202B] p-4 mt-4 flex flex-col justify-between font-sans text-[11px] shadow-inner">
                 {/* Simulated iFrame Header */}
-                <div className="flex items-center justify-between pb-2 border-b border-white/10 text-slate-400 font-mono">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-700 text-slate-400 font-mono">
                   <span className="text-[10px] text-amber-300/80 flex items-center gap-1 truncate max-w-[180px]">
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
                     booking-engine-v1.com/widget
                   </span>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">iFrame</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#1C2733] text-amber-300 font-bold">iFrame</span>
                 </div>
 
                 {/* Simulated Broken Widget Flow */}
                 <div className="my-auto space-y-1.5">
-                  <div className="bg-slate-900/90 rounded-lg p-2.5 border border-white/10 space-y-1.5">
+                  <div className="bg-[#1C2733] rounded-lg p-2.5 border border-slate-700 space-y-1.5">
                     <div className="flex items-center justify-between text-[10px]">
                       <span className="text-slate-300">Select Stay Dates</span>
                       <span className="text-red-400 text-[9px] font-mono">Popup blocked on iOS</span>
                     </div>
                     <div className="flex gap-2">
-                      <div className="flex-1 py-1 px-2 rounded bg-slate-800/80 border border-red-500/30 text-[10px] text-slate-400 flex items-center justify-between">
+                      <div className="flex-1 py-1 px-2 rounded bg-[#233746] border border-red-500 text-[10px] text-slate-400 flex items-center justify-between">
                         <span>Check-in</span>
-                        <span className="text-red-400">✕</span>
+                        <span className="text-red-400 font-bold">X</span>
                       </div>
-                      <div className="flex-1 py-1 px-2 rounded bg-slate-800/80 border border-slate-700 text-[10px] text-slate-400">
+                      <div className="flex-1 py-1 px-2 rounded bg-[#233746] border border-slate-700 text-[10px] text-slate-400">
                         <span>2 Guests</span>
                       </div>
                     </div>
@@ -781,7 +785,7 @@ export default function HospitalityPage() {
                 {/* Revenue Leak Warning */}
                 <div className="flex items-center justify-between text-[10px] pt-1.5 border-t border-white/5 text-slate-400">
                   <span className="text-amber-300 font-medium">Guest returns to OTA</span>
-                  <span className="font-bold text-red-400 bg-red-500/20 px-2 py-0.5 rounded text-[9px] font-mono">
+                  <span className="font-bold text-red-400 bg-[#1C2733] px-2 py-0.5 rounded text-[9px] font-mono">
                     -18% Commission
                   </span>
                 </div>
@@ -789,11 +793,11 @@ export default function HospitalityPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="rounded-3xl border border-accent-orange/30 bg-accent-orange/5 p-8 flex flex-col justify-between hover:border-accent-orange transition-all duration-300">
+            <div className="rounded-xl border border-slate-700 bg-[#233746] p-8 flex flex-col justify-between hover:border-accent-orange transition-all duration-300">
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-serif italic text-accent-orange text-3xl">03</span>
-                  <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="font-extrabold text-[#F59E0B] text-2xl">3</span>
+                  <div className="p-2.5 rounded-xl bg-[#1C2733] text-emerald-400 border border-slate-700">
                     <Zap className="w-5 h-5" />
                   </div>
                 </div>
@@ -804,7 +808,7 @@ export default function HospitalityPage() {
               </div>
 
               {/* Bespoke Tailored Asset with Live Metrics Badge */}
-              <div className="relative h-44 rounded-2xl overflow-hidden border border-emerald-500/30 group mt-4">
+              <div className="relative h-44 rounded-xl overflow-hidden border border-emerald-500/30 group mt-4">
                 <Image
                   src="/images/hospitality/savoria-wine-estate.jpg"
                   alt="The Calm Direct Web Experience"
@@ -814,11 +818,11 @@ export default function HospitalityPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
                 <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[10px] text-white">
-                  <span className="flex items-center gap-1.5 font-bold text-emerald-400 bg-slate-950/85 px-2.5 py-1 rounded-full border border-emerald-500/30 backdrop-blur-md">
+                  <span className="flex items-center gap-1.5 font-bold text-emerald-400 bg-[#16202B] px-2.5 py-1 rounded-full border border-emerald-600">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Sub-800ms · Direct Host Inquiries
                   </span>
-                  <span className="font-mono text-emerald-300 font-bold bg-slate-950/85 px-2 py-1 rounded-full border border-emerald-500/30">
+                  <span className="font-mono text-emerald-300 font-bold bg-[#16202B] px-2 py-1 rounded-full border border-emerald-600">
                     0% OTA Fee
                   </span>
                 </div>
@@ -828,12 +832,14 @@ export default function HospitalityPage() {
           </div>
 
         </div>
+        </div>
+        </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
           5. SELECTED WORKS / PORTFOLIO (Matches Indonesian Portfolio)
       ────────────────────────────────────────────────────────────── */}
-      <section id="portfolio" className="relative py-28 lg:py-36 bg-white overflow-hidden border-b border-gray-100">
+      <section id="portfolio" className="relative py-16 md:py-24 overflow-hidden">
         <div className="container mx-auto px-6 mb-16 relative z-10">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
@@ -841,7 +847,7 @@ export default function HospitalityPage() {
               <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">Selected Hospitality Concepts</span>
               <h2 className="text-4xl lg:text-5xl font-black text-primary-navy tracking-tight mt-2">
                 Crafted for Character, <br />
-                <span className="font-serif italic font-light text-accent-orange text-4xl lg:text-5xl">Engineered for Stays.</span>
+                <span className="text-[#F59E0B] text-4xl lg:text-5xl">Engineered for Stays.</span>
               </h2>
             </div>
 
@@ -849,14 +855,14 @@ export default function HospitalityPage() {
             <div className="flex items-center gap-4">
               <button 
                 onClick={() => scrollPortfolio('left')}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-primary-navy hover:bg-primary-navy hover:text-white transition-all active:scale-95 shadow-xs"
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-primary-navy hover:bg-primary-navy hover:text-white transition-all active:scale-95 "
                 aria-label="Previous Project"
               >
                 <ChevronLeft size={20} />
               </button>
               <button 
                 onClick={() => scrollPortfolio('right')}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-primary-navy hover:bg-primary-navy hover:text-white transition-all active:scale-95 shadow-xs"
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-primary-navy hover:bg-primary-navy hover:text-white transition-all active:scale-95 "
                 aria-label="Next Project"
               >
                 <ChevronRight size={20} />
@@ -872,10 +878,10 @@ export default function HospitalityPage() {
             {hospitalityProjects.map((project) => (
               <div 
                 key={project.id}
-                className="min-w-[320px] sm:min-w-[420px] lg:min-w-[500px] shrink-0 snap-start bg-light-grey rounded-3xl border border-gray-200 p-6 flex flex-col justify-between group hover:shadow-xl transition-all duration-500"
+                className="min-w-[320px] sm:min-w-[420px] lg:min-w-[500px] shrink-0 snap-start bg-white rounded-xl border border-gray-200 p-6 flex flex-col justify-between group hover: transition-all duration-500"
               >
                 <div>
-                  <div className="relative h-64 sm:h-72 w-full rounded-2xl overflow-hidden bg-white mb-6 border border-gray-100">
+                  <div className="relative h-64 sm:h-72 w-full rounded-xl overflow-hidden bg-white mb-6 border border-gray-100">
                     <Image
                       src={project.img}
                       alt={project.title}
@@ -883,7 +889,7 @@ export default function HospitalityPage() {
                       sizes="500px"
                       className="object-contain p-2 group-hover:scale-[1.03] transition-transform duration-700"
                     />
-                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase text-primary-navy border border-gray-100 shadow-xs">
+                    <div className="absolute top-4 left-4 bg-white px-3 py-1 rounded-md text-[10px] font-bold tracking-wider uppercase text-primary-navy border border-gray-200">
                       {project.tag}
                     </div>
                   </div>
@@ -922,22 +928,22 @@ export default function HospitalityPage() {
           5.5 THE 24/7 MULTILINGUAL AI GUEST CONCIERGE SHOWCASE
           The High-Leverage Unfair Advantage for Boutique Hoteliers
       ────────────────────────────────────────────────────────────── */}
-      <section id="ai-concierge" className="py-28 lg:py-36 bg-white border-t border-b border-gray-200 relative overflow-hidden">
+      <section id="ai-concierge" className="py-16 md:py-24 relative overflow-hidden">
         {/* Ambient background glows */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-navy/5 rounded-full blur-3xl pointer-events-none" />
+        
+        
 
         <div className="container mx-auto px-6 max-w-6xl relative z-10">
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-900 text-xs font-bold tracking-wider uppercase mb-4 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-900 text-xs font-bold tracking-wider uppercase mb-4 ">
               <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
               <span>The 24/7 Guest Concierge Advantage</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-primary-navy tracking-tight leading-tight">
               Capture Direct Bookings <br />
-              <span className="font-serif italic font-light text-accent-orange">While Your Front Desk Sleeps.</span>
+              <span className="text-[#F59E0B]">While Your Front Desk Sleeps.</span>
             </h2>
             <div className="h-1 w-16 bg-accent-orange mx-auto my-6" />
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
@@ -948,7 +954,7 @@ export default function HospitalityPage() {
           </div>
 
           {/* Interactive Simulation Dashboard */}
-          <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden mb-16">
+          <div className="bg-white rounded-xl border border-slate-200  overflow-hidden mb-16">
             
             {/* Top Bar / Language Selector */}
             <div className="bg-[#1C2733] text-white p-5 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800">
@@ -959,7 +965,7 @@ export default function HospitalityPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="font-bold text-sm sm:text-base">Interactive Concierge Simulation</h3>
-                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-mono flex items-center gap-1">
+                    <span className="text-[10px] bg-[#16202B] text-emerald-400 border border-emerald-600 px-2 py-0.5 rounded-full font-mono flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live Grounded Preview
                     </span>
                   </div>
@@ -968,18 +974,18 @@ export default function HospitalityPage() {
               </div>
 
               {/* Language Selector Pills */}
-              <div className="flex items-center gap-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-white/10 overflow-x-auto max-w-full">
+              <div className="flex items-center gap-1.5 bg-[#16202B] p-1.5 rounded-xl border border-slate-700 overflow-x-auto max-w-full">
                 {conciergeScenarios.map((sc, idx) => (
                   <button
                     key={sc.id}
                     onClick={() => handleScenarioChange(idx)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${
                       activeScenarioIdx === idx 
-                        ? 'bg-accent-orange text-primary-navy shadow-sm' 
-                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                        ? 'bg-accent-orange text-primary-navy ' 
+                        : 'text-slate-300 hover:text-white hover:bg-[#233746]'
                     }`}
                   >
-                    <span>{sc.flag}</span>
+                    <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-1 py-0.5 rounded">{sc.code}</span>
                     <span>{sc.lang.split(' ')[0]}</span>
                   </button>
                 ))}
@@ -987,15 +993,15 @@ export default function HospitalityPage() {
             </div>
 
             {/* Simulation Body */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-gray-200 bg-off-white">
+            <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-gray-200 bg-white">
               
               {/* Left Column: Guest Context & Grounding Metrics (5 cols) */}
               <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-accent-orange">Verified Guest Context</span>
                   <div className="mt-2 flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xl shadow-xs">
-                      {conciergeScenarios[activeScenarioIdx].flag}
+                    <div className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xl ">
+                      <span className="font-bold text-xs text-slate-700">{conciergeScenarios[activeScenarioIdx].code}</span>
                     </div>
                     <div>
                       <h4 className="font-bold text-primary-navy text-sm sm:text-base">
@@ -1009,7 +1015,7 @@ export default function HospitalityPage() {
                   </div>
 
                   {/* Grounded RAG Citation Guardrail */}
-                  <div className="mt-6 p-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 text-xs">
+                  <div className="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs">
                     <div className="flex items-center gap-2 font-bold text-amber-950 mb-1">
                       <ShieldCheck className="w-4 h-4 text-accent-orange shrink-0" />
                       <span>Zero-Hallucination Guardrail</span>
@@ -1050,7 +1056,7 @@ export default function HospitalityPage() {
                   
                   {/* Guest Message */}
                   <div className="flex items-start gap-3 justify-end">
-                    <div className="bg-primary-navy text-white rounded-2xl rounded-tr-xs p-4 max-w-md shadow-xs text-xs sm:text-sm leading-relaxed">
+                    <div className="bg-primary-navy text-white rounded-xl rounded-tr-xs p-4 max-w-md  text-xs sm:text-sm leading-relaxed">
                       <p>{conciergeScenarios[activeScenarioIdx].inquiry}</p>
                       <span className="text-[10px] text-slate-400 block text-right mt-1.5 font-mono">
                         {conciergeScenarios[activeScenarioIdx].time.split('·')[0].trim()} • Sent via Web
@@ -1063,11 +1069,11 @@ export default function HospitalityPage() {
 
                   {/* Concierge Response */}
                   <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-full bg-accent-orange text-primary-navy flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-9 h-9 rounded-full bg-accent-orange text-primary-navy flex items-center justify-center shrink-0 ">
                       <Bot className="w-5 h-5" />
                     </div>
                     
-                    <div className="bg-light-grey border border-gray-200 text-primary-navy rounded-2xl rounded-tl-xs p-4 max-w-lg shadow-xs text-xs sm:text-sm leading-relaxed">
+                    <div className="bg-white border border-gray-200 text-primary-navy rounded-xl rounded-tl-xs p-4 max-w-lg  text-xs sm:text-sm leading-relaxed">
                       <div className="flex items-center justify-between pb-2 mb-2 border-b border-gray-200/60 text-[11px] font-bold text-gray-500">
                         <span className="flex items-center gap-1.5 text-primary-navy">
                           <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
@@ -1093,7 +1099,7 @@ export default function HospitalityPage() {
                 </div>
 
                 {/* 1-Tap WhatsApp Lead Hand-off Action */}
-                <div className="bg-emerald-50 rounded-2xl border border-emerald-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="bg-emerald-50 rounded-xl border border-emerald-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
                   <div className="text-left">
                     <p className="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
                       <PhoneCall className="w-3.5 h-3.5 text-emerald-700" />
@@ -1107,7 +1113,7 @@ export default function HospitalityPage() {
                     href={`https://wa.me/6281383521750?text=${encodeURIComponent(conciergeScenarios[activeScenarioIdx].whatsappMessage)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl  transition-colors shrink-0 cursor-pointer"
                   >
                     <span>Test WhatsApp Link</span>
                     <ArrowRight className="w-3 h-3" />
@@ -1123,9 +1129,9 @@ export default function HospitalityPage() {
           {/* 4 Architectural Pillars for Hoteliers */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 ">
                   <Languages className="w-5 h-5 text-accent-orange" />
                 </div>
                 <h4 className="font-bold text-base text-primary-navy mb-2">20+ Native Languages</h4>
@@ -1138,9 +1144,9 @@ export default function HospitalityPage() {
               </div>
             </div>
 
-            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 ">
                   <ShieldCheck className="w-5 h-5 text-accent-orange" />
                 </div>
                 <h4 className="font-bold text-base text-primary-navy mb-2">Zero Hallucinations</h4>
@@ -1153,9 +1159,9 @@ export default function HospitalityPage() {
               </div>
             </div>
 
-            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 ">
                   <Sparkles className="w-5 h-5 text-accent-orange" />
                 </div>
                 <h4 className="font-bold text-base text-primary-navy mb-2">Direct Rate Defense</h4>
@@ -1164,13 +1170,13 @@ export default function HospitalityPage() {
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-gray-200 text-[11px] font-bold text-accent-orange">
-                Protects 15–20% margins
+                Protects 15-20% margins
               </div>
             </div>
 
-            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 ">
                   <Sliders className="w-5 h-5 text-accent-orange" />
                 </div>
                 <h4 className="font-bold text-base text-primary-navy mb-2">Zero Host Bottleneck</h4>
@@ -1192,7 +1198,7 @@ export default function HospitalityPage() {
           6. THE ADRA ARCHITECTURE FRAMEWORK (Why WUUS Style)
           Matches the luxury sticky-card styling in `components/why-wuus.tsx`
       ────────────────────────────────────────────────────────────── */}
-      <section id="framework" className="py-28 lg:py-36 bg-light-grey relative overflow-hidden">
+      <section id="framework" className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-6 max-w-6xl">
           
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -1211,17 +1217,17 @@ export default function HospitalityPage() {
               return (
                 <div
                   key={pillar.letter}
-                  className="bg-white rounded-3xl p-8 md:p-10 border border-gray-100 shadow-[0_15px_40px_-15px_rgba(28,39,51,0.08)] flex flex-col justify-between hover:shadow-[0_25px_60px_-15px_rgba(28,39,51,0.15)] transition-all duration-300 relative group"
+                  className="bg-white rounded-xl p-8 md:p-10 border border-gray-100  flex flex-col justify-between hover: transition-all duration-300 relative group"
                 >
                   {/* Subtle top reflection line */}
                   <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
 
                   <div>
                     <div className="flex items-center justify-between mb-8">
-                      <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-primary-navy font-black text-2xl group-hover:bg-accent-orange group-hover:text-primary-navy transition-colors">
+                      <div className="w-14 h-14 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-primary-navy font-black text-2xl group-hover:bg-accent-orange group-hover:text-primary-navy transition-colors">
                         {pillar.letter}
                       </div>
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-accent-orange bg-amber-50/80 px-3 py-1 rounded-full border border-amber-100">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-accent-orange bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
                         {pillar.highlight}
                       </span>
                     </div>
@@ -1247,7 +1253,7 @@ export default function HospitalityPage() {
           </div>
 
           {/* Honest Comparison Table */}
-          <div className="mt-20 bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm">
+          <div className="mt-20 bg-white rounded-xl border border-gray-200 overflow-hidden ">
             <div className="p-6 md:p-8 bg-primary-navy text-white">
               <h3 className="text-xl md:text-2xl font-bold">Standard Agency Template vs. WUUS Studio Build</h3>
               <p className="text-xs text-slate-300 mt-1">Why boutique hotel owners choose our focused approach over bloated software</p>
@@ -1257,11 +1263,11 @@ export default function HospitalityPage() {
                 <div key={idx} className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                   <div className="font-bold text-sm text-primary-navy">{pt.feature}</div>
                   <div className="text-xs text-gray-500 md:pr-4 flex items-start gap-2">
-                    <span className="text-red-500 font-bold shrink-0">✕</span>
+                    <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                     <span>{pt.generic}</span>
                   </div>
-                  <div className="text-xs font-semibold text-emerald-800 bg-emerald-50/60 p-3 rounded-xl border border-emerald-100 flex items-start gap-2">
-                    <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                  <div className="text-xs font-semibold text-emerald-800 bg-emerald-50 p-3 rounded-xl border border-emerald-100 flex items-start gap-2">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <span>{pt.wuus}</span>
                   </div>
                 </div>
@@ -1275,7 +1281,7 @@ export default function HospitalityPage() {
       {/* ─────────────────────────────────────────────────────────────
           7. HOW WE WORK (Async-First Human Studio Process)
       ────────────────────────────────────────────────────────────── */}
-      <section id="workflow" className="py-28 lg:py-36 bg-white border-t border-gray-100">
+      <section id="workflow" className="py-16 md:py-24">
         <div className="container mx-auto px-6 max-w-6xl">
           
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -1291,9 +1297,9 @@ export default function HospitalityPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
             
             {/* Step 1 */}
-            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 01</span>
+                <span className="font-extrabold text-[#F59E0B] text-xl">Stage 1</span>
                 <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Observation & Audit</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
                   We walk through your existing website as an international guest on mobile. We prepare a short 1-page visual report highlighting 3 high-impact friction points.
@@ -1305,9 +1311,9 @@ export default function HospitalityPage() {
             </div>
 
             {/* Step 2 */}
-            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 02</span>
+                <span className="font-extrabold text-[#F59E0B] text-xl">Stage 2</span>
                 <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Fixed-Scope Proposal</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
                   If the audit resonates, we provide a transparent 1-page proposal outlining the exact scope, deliverable mockups, timeline, and flat-rate fee. No hidden extras.
@@ -1319,23 +1325,23 @@ export default function HospitalityPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 03</span>
+                <span className="font-extrabold text-[#F59E0B] text-xl">Stage 3</span>
                 <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Rapid Crafting</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
                   We build your bespoke direct booking engine in 7 to 14 days. You receive interactive staging links and brief Loom video walkthroughs to review at your convenience.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-gray-200 text-[11px] font-bold text-gray-500">
-                Duration: 7–14 Days
+                Duration: 7-14 Days
               </div>
             </div>
 
             {/* Step 4 */}
-            <div className="bg-light-grey rounded-3xl p-6 border border-gray-200 flex flex-col justify-between">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
-                <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 04</span>
+                <span className="font-extrabold text-[#F59E0B] text-xl">Stage 4</span>
                 <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Turnkey Launch</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
                   We connect your custom domain, set up analytics, verify mobile loading, and deliver full code ownership to your team. Zero vendor lock-in.
@@ -1363,11 +1369,11 @@ export default function HospitalityPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               
               {/* Tier 1: Boutique Direct Showcase */}
-              <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div className="bg-white rounded-xl p-8 md:p-10 border border-slate-200  hover: transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                      Tier 01 · Flagship Website
+                      Tier 1 • Flagship Website
                     </span>
                   </div>
                   <h4 className="text-2xl font-black text-primary-navy mb-2">Boutique Direct Showcase</h4>
@@ -1380,7 +1386,7 @@ export default function HospitalityPage() {
                       <span className="text-4xl font-black text-primary-navy">€690</span>
                       <span className="text-xs text-gray-500 font-semibold uppercase">One-time flat fee</span>
                     </div>
-                    <p className="text-[11px] text-gray-500 mt-1">Delivery in 7–10 days • 100% code ownership</p>
+                    <p className="text-[11px] text-gray-500 mt-1">Delivery in 7-10 days • 100% code ownership</p>
                   </div>
 
                   <ul className="space-y-3.5 text-xs text-gray-700 mb-8">
@@ -1416,22 +1422,22 @@ export default function HospitalityPage() {
                     setFormData(prev => ({ ...prev, packageInterest: 'Tier 1: Boutique Direct Showcase (€690)' }));
                     setModalOpen(true);
                   }}
-                  className="w-full py-4 bg-white hover:bg-slate-50 text-[#1C2733] font-bold text-xs uppercase tracking-wide rounded-full border border-slate-300 shadow-xs transition-all cursor-pointer text-center"
+                  className="w-full py-4 bg-white hover:bg-slate-50 text-[#1C2733] font-bold text-xs uppercase tracking-wide rounded-full border border-slate-300  transition-all cursor-pointer text-center"
                 >
                   Inquire for Tier 1 (€690)
                 </button>
               </div>
 
               {/* Tier 2: The Complete AI Hospitality Engine (Featured) */}
-              <div className="bg-amber-50/70 rounded-3xl p-8 md:p-10 border border-amber-300/80 shadow-lg flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-[#F59E0B] text-[#1C2733] text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-bl-xl shadow-xs">
+              <div className="bg-amber-50 rounded-xl p-8 md:p-10 border border-amber-300  flex flex-col justify-between relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-[#F59E0B] text-[#1C2733] text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-bl-xl ">
                   Most Popular · Highest Direct ROI
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-4 mt-2">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-[#D97706] bg-amber-100/90 px-3 py-1 rounded-full border border-amber-200">
-                      Tier 02 · Full Digital Suite
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-[#D97706] bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
+                      Tier 2 • Full Digital Suite
                     </span>
                   </div>
                   <h4 className="text-2xl font-black text-primary-navy mb-2">The AI Hospitality Engine</h4>
@@ -1439,7 +1445,7 @@ export default function HospitalityPage() {
                     Everything in Tier 1 plus our 24/7 Multilingual AI Concierge to capture midnight inquiries from European guests without adding staff.
                   </p>
 
-                  <div className="mb-8 pb-6 border-b border-amber-200/80">
+                  <div className="mb-8 pb-6 border-b border-amber-200">
                     <div className="flex items-baseline gap-2">
                       <span className="text-4xl font-black text-primary-navy">€1,290</span>
                       <span className="text-xs text-gray-500 font-semibold uppercase">One-time flat fee</span>
@@ -1481,12 +1487,12 @@ export default function HospitalityPage() {
                       setFormData(prev => ({ ...prev, packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€1,290)' }));
                       setModalOpen(true);
                     }}
-                    className="w-full py-4 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-black text-xs uppercase tracking-wide rounded-full shadow-md transition-all cursor-pointer text-center"
+                    className="w-full py-4 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-black text-xs uppercase tracking-wide rounded-full  transition-all cursor-pointer text-center"
                   >
                     Select AI Hospitality Engine (€1,290)
                   </button>
                   <p className="text-[10px] text-gray-500 text-center mt-2">
-                    Equivalent to approx. 4–5 nights of direct bookings (less than 1 month of OTA commissions).
+                    Equivalent to approx. 4-5 nights of direct bookings (less than 1 month of OTA commissions).
                   </p>
                 </div>
               </div>
@@ -1494,7 +1500,7 @@ export default function HospitalityPage() {
             </div>
 
             {/* Staging-First Quality Guarantee Callout */}
-            <div className="mt-8 bg-amber-50/80 rounded-2xl p-5 border border-amber-200/80 flex items-center gap-4 text-left">
+            <div className="mt-8 bg-amber-50 rounded-xl p-5 border border-amber-200 flex items-center gap-4 text-left">
               <div className="w-10 h-10 rounded-xl bg-accent-orange text-primary-navy flex items-center justify-center font-bold shrink-0">
                 <ShieldCheck className="w-5 h-5" />
               </div>
@@ -1509,7 +1515,7 @@ export default function HospitalityPage() {
             </div>
 
             {/* Zero-Risk Evaluation Callout */}
-            <div className="mt-6 bg-white rounded-2xl p-6 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
+            <div className="mt-6 bg-white rounded-xl p-6 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left ">
               <div>
                 <p className="font-bold text-sm text-primary-navy">Prefer to see your property&apos;s mobile friction points first?</p>
                 <p className="text-xs text-gray-500 mt-0.5">We provide a free 1-page visual assessment with zero commitment or sales pressure.</p>
@@ -1532,7 +1538,7 @@ export default function HospitalityPage() {
       {/* ─────────────────────────────────────────────────────────────
           8. FAQ SECTION (Matches Indonesian FAQ design)
       ────────────────────────────────────────────────────────────── */}
-      <section id="faq" className="py-24 lg:py-32 bg-light-grey">
+      <section id="faq" className="py-16 md:py-24">
         <div className="container mx-auto px-6 max-w-4xl">
           
           <div className="text-center mb-16">
@@ -1577,7 +1583,7 @@ export default function HospitalityPage() {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all shadow-xs"
+                  className="bg-white rounded-xl border border-gray-200 overflow-hidden transition-all "
                 >
                   <button
                     onClick={() => setActiveFaq(isOpen ? null : index)}
@@ -1610,10 +1616,10 @@ export default function HospitalityPage() {
       {/* ─────────────────────────────────────────────────────────────
           9. FREE 1-PAGE REVIEW REQUEST SECTION (Form with Human Guarantee)
       ────────────────────────────────────────────────────────────── */}
-      <section id="review-request" className="py-24 lg:py-32 bg-white border-t border-gray-200">
+      <section id="review-request" className="py-16 md:py-24">
         <div className="container mx-auto px-6 max-w-3xl">
           
-          <div className="bg-[#FAFAFA] rounded-3xl p-8 md:p-12 border border-slate-200/90 shadow-xl">
+          <div className="bg-[#FAFAFA] rounded-xl p-8 md:p-12 border border-slate-200 ">
             <div className="text-center mb-10">
               <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">Free Honest Assessment</span>
               <h2 className="text-3xl font-black text-primary-navy mt-1 mb-3">
@@ -1625,7 +1631,7 @@ export default function HospitalityPage() {
             </div>
 
             {formSubmitted ? (
-              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-8 text-center">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-8 text-center">
                 <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-4">
                   <Check className="w-6 h-6 stroke-[3]" />
                 </div>
@@ -1639,7 +1645,7 @@ export default function HospitalityPage() {
                     href={`https://wa.me/6281383521750?text=${encodeURIComponent(`Hi Faisal, I just requested a 1-page website review for ${formData.hotelName || "our hotel"} (${formData.websiteUrl}). My email is ${formData.email}.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl  transition-colors"
                   >
                     <span>Fast-Track on WhatsApp</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1722,7 +1728,7 @@ export default function HospitalityPage() {
                     className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
                   >
                     <option value="Tier 2: The Complete AI Hospitality Engine (€1,290)">
-                      Tier 2: The Complete AI Hospitality Engine (€1,290) — Most Popular
+                      Tier 2: The Complete AI Hospitality Engine (€1,290) - Most Popular
                     </option>
                     <option value="Tier 1: Boutique Direct Showcase (€690)">
                       Tier 1: Boutique Direct Showcase (€690)
@@ -1749,7 +1755,7 @@ export default function HospitalityPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2 mt-4"
+                  className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm uppercase tracking-wider rounded-xl  hover: transition-all cursor-pointer flex items-center justify-center gap-2 mt-4"
                 >
                   {isSubmitting ? (
                     <span>Preparing Request...</span>
@@ -1774,7 +1780,7 @@ export default function HospitalityPage() {
       {/* ─────────────────────────────────────────────────────────────
           10. FOOTER (Exact structure & assets as Indonesian Footer)
       ────────────────────────────────────────────────────────────── */}
-      <footer className="bg-light-grey border-t border-gray-200 pt-20 pb-12">
+      <footer className="bg-white border-t border-gray-200 pt-20 pb-12">
         <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
@@ -1794,7 +1800,7 @@ export default function HospitalityPage() {
               </p>
 
               {/* Office Google Maps Embed (Matches Indonesian site) */}
-              <div className="rounded-[2rem] overflow-hidden shadow-xl border-4 border-white h-48 max-w-md group transition-all duration-500">
+              <div className="rounded-xl overflow-hidden  border border-slate-200 h-48 max-w-md group transition-all duration-500">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.533838466155!2d106.7541558118344!3d-6.193067260650871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f710ddd28e99%3A0x4fda30c569b2e71d!2sApartmen%20Puri%20Parkview!5e0!3m2!1sid!2sid!4v1775916857687!5m2!1sid!2sid"
                   width="100%"
@@ -1859,7 +1865,7 @@ export default function HospitalityPage() {
                   href="/" 
                   className="text-xs font-semibold text-primary-navy hover:text-accent-orange flex items-center gap-2"
                 >
-                  <span>🇮🇩</span> Menuju Halaman Utama Indonesia →
+                  <span className="font-bold text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">ID</span> Menuju Halaman Utama Indonesia →
                 </Link>
               </div>
             </div>
@@ -1889,7 +1895,7 @@ export default function HospitalityPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setModalOpen(false)}
-              className="absolute inset-0 bg-primary-navy/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-[#1C2733]"
             />
 
             {/* Modal Body */}
@@ -1897,7 +1903,7 @@ export default function HospitalityPage() {
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/90 z-10 overflow-hidden"
+              className="relative w-full max-w-xl bg-white rounded-xl p-6 sm:p-8  border border-slate-200 z-10 overflow-hidden"
             >
               <div className="flex items-center justify-between mb-6">
                 <div>
@@ -1918,7 +1924,7 @@ export default function HospitalityPage() {
               </div>
 
               {formSubmitted ? (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center">
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 text-center">
                   <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-3">
                     <Check className="w-5 h-5 stroke-[3]" />
                   </div>
@@ -1932,7 +1938,7 @@ export default function HospitalityPage() {
                       href={`https://wa.me/6281383521750?text=${encodeURIComponent(`Hi Faisal, I just submitted an inquiry for ${formData.packageInterest} for ${formData.hotelName || "our hotel"} (${formData.websiteUrl}). My email is ${formData.email}.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-xs transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg  transition-colors"
                     >
                       <span>Fast-Track on WhatsApp</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -2028,7 +2034,7 @@ export default function HospitalityPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer mt-3"
+                    className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs uppercase tracking-wider rounded-xl  hover: transition-all cursor-pointer mt-3"
                   >
                     {isSubmitting ? "Submitting..." : `Submit Request (${formData.packageInterest.split('(')[0].trim()})`}
                   </button>
