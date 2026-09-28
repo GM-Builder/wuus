@@ -5,6 +5,23 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.4] - 2026-09-28
+
+### Added
+- **24/7 Multilingual AI Guest Concierge Showcase (`/hospitality#ai-concierge`)**:
+  - Implemented interactive live simulation on the international hospitality page allowing hoteliers to test real European guest inquiries (German, Italian, English, French).
+  - Grounded RAG architecture with strict citation guardrails (zero hallucinations, never invents unauthorized rates or policies).
+  - Instant response simulation (<2s latency) and 1-tap automated WhatsApp booking lead hand-off with pre-filled guest details.
+  - 4 core architectural pillars: 20+ Native European Languages, Zero Hallucinations, Direct Rate Defense against OTAs, and Zero Host Bottleneck (100% turnkey managed by WUUS).
+- **Two-Tier Investment Architecture (`/hospitality#pricing`)**:
+  - **Tier 1: Boutique Direct Showcase (€1,450)**: Bespoke Next.js digital flagship, sub-800ms performance, 0% OTA commission engine, full code ownership.
+  - **Tier 2: The Complete AI Hospitality Engine (€2,450)**: Everything in Tier 1 + 24/7 Multilingual AI Concierge, verified property handbook setup, and 6 months concierge hosting & fine-tuning included.
+  - Added package interest selector to the inquiry form & review modal with dynamic contextual actions and automatic Supabase lead recording.
+- **Client Acquisition & Outreach Engine Updates**:
+  - Added Option B (AI Concierge & Direct Inquiry Hook) to Wave 1 cold email sequences in `docs/outreach/campaigns/batch-01-top-5-emails.md`.
+  - Added AI Concierge objection handling and RAG grounding scripts to `docs/outreach/reply-library.md`.
+  - Bumped version to `0.2.4`.
+
 ## [0.2.3] - 2026-09-28
 
 ### Added

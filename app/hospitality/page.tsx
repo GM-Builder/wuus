@@ -25,7 +25,14 @@ import {
   Eye,
   CheckCircle2,
   Menu,
-  X
+  X,
+  Bot,
+  MessageSquare,
+  Languages,
+  MessageCircle,
+  Star,
+  Users,
+  Sliders
 } from 'lucide-react';
 
 // Portfolio / Mockup Projects for Hospitality
@@ -79,6 +86,66 @@ const hospitalityProjects = [
     accent: "#DC2626",
     tag: "Guest Concierge Experience",
     description: "A tailored digital experience showcasing yacht charters, private terrace breakfasts, and bespoke concierge arrangements."
+  }
+];
+
+// 24/7 Multilingual AI Concierge Scenarios
+const conciergeScenarios = [
+  {
+    id: 'de',
+    lang: 'Deutsch (German)',
+    flag: '🇩🇪',
+    guestName: 'Hans & Claudia M.',
+    location: 'Munich, Germany',
+    time: '23:42 · Late-Night Drive',
+    inquiry: 'Guten Abend! Wir reisen mit einem Kombi an. Haben Sie sichere Parkplätze im Innenhof, und können wir nach 22:30 Uhr kontaktlos einchecken?',
+    response: 'Guten Abend Herr Müller! Ja, wir verfügen über private, videoüberwachte Parkplätze direkt im geschützten Innenhof (für Hotelgäste kostenfrei, auch für große Kombis & SUVs geeignet). Ein kontaktloser Late Check-in nach 22:30 Uhr ist über unsere Schlüsselbox am Haupteingang jederzeit problemlos möglich. Sollen wir Ihnen die Heritage Balcony Suite mit Innenhofblick unverbindlich vormerken?',
+    sourceCitation: 'Verified: Host Property Handbook §2.1 (Courtyard Parking) & §1.4 (Keybox Access)',
+    latency: '1.2s',
+    confidence: '99.8% Grounded',
+    whatsappMessage: 'Hi! I saw the answers regarding parking and late check-in on your website. We would like to inquire about reserving the Heritage Balcony Suite for 3 nights.'
+  },
+  {
+    id: 'it',
+    lang: 'Italiano (Italian)',
+    flag: '🇮🇹',
+    guestName: 'Matteo & Sofia B.',
+    location: 'Milano, Italy',
+    time: '22:15 · Weekend Getaway',
+    inquiry: 'Buonasera! Viaggiamo con un cagnolino di 5 kg. È ammesso nelle camere con balcone? E la colazione artigianale è inclusa nelle prenotazioni dirette?',
+    response: 'Buonasera! I cani di piccola taglia (fino a 10 kg) sono i benvenuti nelle nostre Balcony Suites con un piccolo supplemento pulizia di 15€ per soggiorno. Inoltre, prenotando direttamente con noi, la ricca colazione artigianale sulla terrazza panoramica è sempre inclusa gratuitamente (risparmiando circa il 15% rispetto alle tariffe terze). Desidera ricevere disponibilità diretta per il vostro weekend?',
+    sourceCitation: 'Verified: Host Property Handbook §3.8 (Pet Policy) & §5.2 (Direct Rate Perks)',
+    latency: '1.4s',
+    confidence: '99.9% Grounded',
+    whatsappMessage: 'Buonasera! Vorrei informazioni sulla disponibilità della Balcony Suite per noi e il nostro cagnolino con la colazione inclusa.'
+  },
+  {
+    id: 'en',
+    lang: 'English (UK / US)',
+    flag: '🇬🇧',
+    guestName: 'Eleanor Vance',
+    location: 'London, United Kingdom',
+    time: '00:18 · Planning Summer Stay',
+    inquiry: 'Hi there! We are looking at a 4-night stay in July. Is it better to book directly on your site or via Booking.com? Also, can you coordinate private airport transfer from Tirana?',
+    response: 'Hello Eleanor! Booking directly with us guarantees our best flexible rate (approx. 12–15% lower than third-party platforms) plus a complimentary welcome bottle of regional vintage wine. We also coordinate private Mercedes transfer directly from Tirana Airport (fixed at €45, payable directly to the driver). Would you like me to connect you with our host on WhatsApp to secure these dates with zero deposit?',
+    sourceCitation: 'Verified: Direct Booking Best Rate Guarantee & Concierge Transfer Protocol',
+    latency: '0.9s',
+    confidence: '100% Grounded',
+    whatsappMessage: 'Hi! I inquired through your website concierge regarding the 4-night stay in July and airport transfer. Would love to confirm availability directly.'
+  },
+  {
+    id: 'fr',
+    lang: 'Français (French)',
+    flag: '🇫🇷',
+    guestName: 'Camille & Julien D.',
+    location: 'Lyon, France',
+    time: '21:05 · Wine & Gastronomy',
+    inquiry: 'Bonjour, proposez-vous des dégustations de vins du domaine pour les non-résidents le vendredi soir ? Et quelles sont les options végétariennes au dîner ?',
+    response: 'Bonjour Camille ! Absolument. Nos dégustations commentées avec accords mets & vins ont lieu chaque vendredi à 18h30 dans le cellier historique (35€ par personne). Notre chef propose également un menu dégustation végétarien 4 plats mettant à l\'honneur les produits biologiques du potager. Les places étant limitées à 12 convives, souhaitez-vous que nous vous réservions une table pour ce vendredi ?',
+    sourceCitation: 'Verified: Terroir Tasting Schedule & Cellar Dietary Specs',
+    latency: '1.3s',
+    confidence: '99.7% Grounded',
+    whatsappMessage: 'Bonjour ! Nous souhaiterions réserver la dégustation de vins du vendredi soir et le dîner dégustation végétarien.'
   }
 ];
 
@@ -149,11 +216,14 @@ export default function HospitalityPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeScenarioIdx, setActiveScenarioIdx] = useState(0);
+  const [isTypingSim, setIsTypingSim] = useState(false);
   const [formData, setFormData] = useState({
     hotelName: '',
     websiteUrl: '',
     contactName: '',
     email: '',
+    packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€2,450)',
     notes: '',
   });
 
@@ -176,6 +246,15 @@ export default function HospitalityPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleScenarioChange = (idx: number) => {
+    if (idx === activeScenarioIdx) return;
+    setIsTypingSim(true);
+    setActiveScenarioIdx(idx);
+    setTimeout(() => {
+      setIsTypingSim(false);
+    }, 350);
+  };
+
   const scrollPortfolio = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
@@ -193,13 +272,14 @@ export default function HospitalityPage() {
     
     // Save lead to Supabase database
     try {
+      const formattedNotes = `[Interest: ${formData.packageInterest}] ${formData.notes ? '• ' + formData.notes : ''}`.trim();
       await supabase.from('hospitality_inquiries').insert([
         {
           hotel_name: formData.hotelName,
           website_url: formData.websiteUrl,
           contact_name: formData.contactName,
           email: formData.email,
-          notes: formData.notes,
+          notes: formattedNotes,
           created_at: new Date().toISOString()
         }
       ]);
@@ -250,18 +330,24 @@ export default function HospitalityPage() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
             <a href="#philosophy" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
               The Problem
             </a>
             <a href="#portfolio" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
               Selected Works
             </a>
+            <a href="#ai-concierge" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors flex items-center gap-1.5 group">
+              <span>AI Concierge</span>
+              <span className="text-[10px] bg-amber-100 text-amber-900 border border-amber-200 px-1.5 py-0.2 rounded font-bold uppercase group-hover:bg-accent-orange group-hover:text-primary-navy transition-colors">
+                24/7
+              </span>
+            </a>
             <a href="#framework" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
               ADRA Framework
             </a>
-            <a href="#workflow" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
-              How We Work
+            <a href="#pricing" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
+              Pricing & Scope
             </a>
             <a href="#faq" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
               FAQ
@@ -350,6 +436,14 @@ export default function HospitalityPage() {
                 Selected Boutique Works
               </a>
               <a
+                href="#ai-concierge"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3 flex items-center justify-between"
+              >
+                <span>24/7 AI Guest Concierge</span>
+                <span className="text-xs font-bold uppercase bg-accent-orange text-primary-navy px-2 py-0.5 rounded">Live Demo</span>
+              </a>
+              <a
                 href="#framework"
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
@@ -362,6 +456,13 @@ export default function HospitalityPage() {
                 className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
               >
                 How We Work Asynchronously
+              </a>
+              <a
+                href="#pricing"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
+              >
+                Studio Pricing & Scope
               </a>
               <a
                 href="#faq"
@@ -414,8 +515,8 @@ export default function HospitalityPage() {
             >
               {/* Studio Pill */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gray-200 bg-white text-gray-700 text-xs font-semibold tracking-wide mb-6 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-accent-orange" />
-                <span>Bespoke Digital Studio for Independent Stays & Boutique Hotels</span>
+                <span className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
+                <span>Next.js Architecture + 24/7 Multilingual AI Guest Concierge</span>
               </div>
 
               {/* Main Headline */}
@@ -426,7 +527,7 @@ export default function HospitalityPage() {
 
               {/* Subhead */}
               <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mb-10 font-normal leading-relaxed">
-                We engineer calm, high-performance websites that highlight your property&apos;s true character, eliminate booking engine friction, and turn curious travelers into direct guests.
+                We engineer calm, high-performance websites and 24/7 multilingual AI concierges that highlight your property&apos;s character, answer late-night international inquiries in 2 seconds, and capture direct bookings on WhatsApp.
               </p>
 
               {/* Neo-brutalist Action Buttons matching the Indonesian version */}
@@ -818,6 +919,276 @@ export default function HospitalityPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
+          5.5 THE 24/7 MULTILINGUAL AI GUEST CONCIERGE SHOWCASE
+          The High-Leverage Unfair Advantage for Boutique Hoteliers
+      ────────────────────────────────────────────────────────────── */}
+      <section id="ai-concierge" className="py-28 lg:py-36 bg-white border-t border-b border-gray-200 relative overflow-hidden">
+        {/* Ambient background glows */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-navy/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="container mx-auto px-6 max-w-6xl relative z-10">
+          
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-900 text-xs font-bold tracking-wider uppercase mb-4 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
+              <span>The 24/7 Guest Concierge Advantage</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-primary-navy tracking-tight leading-tight">
+              Capture Direct Bookings <br />
+              <span className="font-serif italic font-light text-accent-orange">While Your Front Desk Sleeps.</span>
+            </h2>
+            <div className="h-1 w-16 bg-accent-orange mx-auto my-6" />
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              European travelers from Germany, Italy, France, and the UK research trips late in the evening. When they ask about courtyard parking, pet policies, or airport transfers at 11:30 PM, waiting 10 hours for an email reply loses the reservation to Booking.com. 
+              <br className="hidden md:block" />
+              Our grounded AI Concierge answers in 2 seconds in their mother tongue, and hands them off directly to your WhatsApp.
+            </p>
+          </div>
+
+          {/* Interactive Simulation Dashboard */}
+          <div className="bg-light-grey rounded-3xl border-2 border-primary-navy shadow-[8px_8px_0px_0px_#1C2733] overflow-hidden mb-16">
+            
+            {/* Top Bar / Language Selector */}
+            <div className="bg-primary-navy text-white p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-b-2 border-primary-navy">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-accent-orange text-primary-navy flex items-center justify-center font-bold">
+                  <Bot className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-sm sm:text-base">Interactive Concierge Simulation</h3>
+                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-mono flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live Grounded Preview
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300">Test how the concierge answers real European guest inquiries</p>
+                </div>
+              </div>
+
+              {/* Language Selector Pills */}
+              <div className="flex items-center gap-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-white/10 overflow-x-auto max-w-full">
+                {conciergeScenarios.map((sc, idx) => (
+                  <button
+                    key={sc.id}
+                    onClick={() => handleScenarioChange(idx)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${
+                      activeScenarioIdx === idx 
+                        ? 'bg-accent-orange text-primary-navy shadow-sm' 
+                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span>{sc.flag}</span>
+                    <span>{sc.lang.split(' ')[0]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Simulation Body */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-gray-200 bg-off-white">
+              
+              {/* Left Column: Guest Context & Grounding Metrics (5 cols) */}
+              <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent-orange">Verified Guest Context</span>
+                  <div className="mt-2 flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xl shadow-xs">
+                      {conciergeScenarios[activeScenarioIdx].flag}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-primary-navy text-sm sm:text-base">
+                        {conciergeScenarios[activeScenarioIdx].guestName}
+                      </h4>
+                      <p className="text-xs text-gray-500 flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-accent-orange" />
+                        {conciergeScenarios[activeScenarioIdx].location} • {conciergeScenarios[activeScenarioIdx].time}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Grounded RAG Citation Guardrail */}
+                  <div className="mt-6 p-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 text-xs">
+                    <div className="flex items-center gap-2 font-bold text-amber-950 mb-1">
+                      <ShieldCheck className="w-4 h-4 text-accent-orange shrink-0" />
+                      <span>Zero-Hallucination Guardrail</span>
+                    </div>
+                    <p className="text-amber-900/90 leading-relaxed font-mono text-[11px]">
+                      {conciergeScenarios[activeScenarioIdx].sourceCitation}
+                    </p>
+                    <p className="text-[10px] text-amber-800/80 mt-2 italic">
+                      *Trained exclusively on your hotel&apos;s verified handbook. Never invents policies or unauthorized discounts.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Metrics Grid */}
+                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-200">
+                  <div className="bg-white p-3 rounded-xl border border-gray-200">
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Response Speed</p>
+                    <p className="text-lg font-black text-primary-navy mt-0.5 flex items-center gap-1">
+                      <Zap className="w-4 h-4 text-accent-orange" />
+                      {conciergeScenarios[activeScenarioIdx].latency}
+                    </p>
+                  </div>
+                  <div className="bg-white p-3 rounded-xl border border-gray-200">
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Grounding Score</p>
+                    <p className="text-lg font-black text-emerald-700 mt-0.5 flex items-center gap-1">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      {conciergeScenarios[activeScenarioIdx].confidence}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Live Chat Visual Window (7 cols) */}
+              <div className="lg:col-span-7 p-6 sm:p-8 bg-white flex flex-col justify-between">
+                
+                {/* Simulated Chat Messages */}
+                <div className="space-y-4 mb-6">
+                  
+                  {/* Guest Message */}
+                  <div className="flex items-start gap-3 justify-end">
+                    <div className="bg-primary-navy text-white rounded-2xl rounded-tr-xs p-4 max-w-md shadow-xs text-xs sm:text-sm leading-relaxed">
+                      <p>{conciergeScenarios[activeScenarioIdx].inquiry}</p>
+                      <span className="text-[10px] text-slate-400 block text-right mt-1.5 font-mono">
+                        {conciergeScenarios[activeScenarioIdx].time.split('·')[0].trim()} • Sent via Web
+                      </span>
+                    </div>
+                    <div className="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-sm font-bold text-slate-700 shrink-0">
+                      {conciergeScenarios[activeScenarioIdx].guestName.charAt(0)}
+                    </div>
+                  </div>
+
+                  {/* Concierge Response */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-full bg-accent-orange text-primary-navy flex items-center justify-center shrink-0 shadow-xs">
+                      <Bot className="w-5 h-5" />
+                    </div>
+                    
+                    <div className="bg-light-grey border border-gray-200 text-primary-navy rounded-2xl rounded-tl-xs p-4 max-w-lg shadow-xs text-xs sm:text-sm leading-relaxed">
+                      <div className="flex items-center justify-between pb-2 mb-2 border-b border-gray-200/60 text-[11px] font-bold text-gray-500">
+                        <span className="flex items-center gap-1.5 text-primary-navy">
+                          <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
+                          Hotel AI Concierge
+                        </span>
+                        <span className="text-emerald-700 font-mono text-[10px]">Instant · Grounded</span>
+                      </div>
+
+                      {isTypingSim ? (
+                        <div className="flex items-center gap-1.5 py-3 px-2">
+                          <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" />
+                          <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce [animation-delay:0.2s]" />
+                          <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce [animation-delay:0.4s]" />
+                        </div>
+                      ) : (
+                        <p className="text-gray-800 leading-relaxed">
+                          {conciergeScenarios[activeScenarioIdx].response}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* 1-Tap WhatsApp Lead Hand-off Action */}
+                <div className="bg-emerald-50 rounded-2xl border border-emerald-200 p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="text-left">
+                    <p className="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
+                      <PhoneCall className="w-3.5 h-3.5 text-emerald-700" />
+                      Automatic WhatsApp Lead Pass-off
+                    </p>
+                    <p className="text-[11px] text-emerald-800 mt-0.5">
+                      Guests can tap once to pass this entire conversation into the host&apos;s WhatsApp with zero retyping.
+                    </p>
+                  </div>
+                  <a
+                    href={`https://wa.me/6281383521750?text=${encodeURIComponent(conciergeScenarios[activeScenarioIdx].whatsappMessage)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer"
+                  >
+                    <span>Test WhatsApp Link</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* 4 Architectural Pillars for Hoteliers */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                  <Languages className="w-5 h-5 text-accent-orange" />
+                </div>
+                <h4 className="font-bold text-base text-primary-navy mb-2">20+ Native Languages</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  German, Italian, French, Polish, Dutch, and English. Answers in the exact polite, welcoming tone of a high-end European host without hiring night receptionists.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-gray-200 text-[11px] font-bold text-accent-orange">
+                Zero translation delay
+              </div>
+            </div>
+
+            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                  <ShieldCheck className="w-5 h-5 text-accent-orange" />
+                </div>
+                <h4 className="font-bold text-base text-primary-navy mb-2">Zero Hallucinations</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Constrained exclusively to your verified property handbook, room specs, and house rules. If an answer isn&apos;t approved, it offers to connect the host on WhatsApp.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-gray-200 text-[11px] font-bold text-accent-orange">
+                Strict RAG guardrails
+              </div>
+            </div>
+
+            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                  <Sparkles className="w-5 h-5 text-accent-orange" />
+                </div>
+                <h4 className="font-bold text-base text-primary-navy mb-2">Direct Rate Defense</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  When guests ask about Booking.com rates, the AI politely highlights your direct booking perks (complimentary wine, breakfast on the terrace, or free cancellation).
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-gray-200 text-[11px] font-bold text-accent-orange">
+                Protects 15–20% margins
+              </div>
+            </div>
+
+            <div className="bg-light-grey rounded-2xl p-6 border border-gray-200 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 shadow-xs">
+                  <Sliders className="w-5 h-5 text-accent-orange" />
+                </div>
+                <h4 className="font-bold text-base text-primary-navy mb-2">Zero Host Bottleneck</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  No complex software to learn. We train, deploy, and maintain the concierge for you. If you change a house rule or price, simply message us or update a shared sheet.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-gray-200 text-[11px] font-bold text-accent-orange">
+                100% turnkey managed
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
           6. THE ADRA ARCHITECTURE FRAMEWORK (Why WUUS Style)
           Matches the luxury sticky-card styling in `components/why-wuus.tsx`
       ────────────────────────────────────────────────────────────── */}
@@ -977,23 +1348,167 @@ export default function HospitalityPage() {
 
           </div>
 
-          {/* Pricing & Scope Box */}
-          <div className="mt-16 bg-off-white rounded-3xl p-8 md:p-12 border-2 border-primary-navy shadow-[6px_6px_0px_0px_#1C2733] max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="max-w-xl">
-              <span className="text-xs font-bold uppercase tracking-wider text-accent-orange">Transparent Studio Pricing</span>
-              <h3 className="text-2xl font-black text-primary-navy mt-1 mb-3">
-                Flat-Rate Engagements for Independent Stays
+          {/* Transparent Investment Tiers */}
+          <div id="pricing" className="mt-20 max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-xs font-bold uppercase tracking-wider text-accent-orange">Transparent Studio Investment</span>
+              <h3 className="text-2xl md:text-4xl font-black text-primary-navy mt-1 mb-3">
+                Two Clear Ways to Partner With WUUS
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Hospitality websites start from a flat <strong>€1,450</strong> (inclusive of custom Next.js engineering, mobile UX, performance optimization, and bilingual support). We never bill hourly or add surprise charges.
+              <p className="text-sm text-gray-600 max-w-xl mx-auto leading-relaxed">
+                Flat-rate, turnkey engagements for independent boutique hotels. No hourly billing, no surprise extra fees, and full source code ownership.
               </p>
             </div>
-            <button
-              onClick={() => setModalOpen(true)}
-              className="px-8 py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-sm uppercase tracking-wide rounded border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] shrink-0 cursor-pointer"
-            >
-              Start With Free Review
-            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+              
+              {/* Tier 1: Boutique Direct Showcase */}
+              <div className="bg-white rounded-3xl p-8 md:p-10 border-2 border-primary-navy shadow-[6px_6px_0px_0px_#1C2733] flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                      Tier 01 · Flagship Website
+                    </span>
+                  </div>
+                  <h4 className="text-2xl font-black text-primary-navy mb-2">Boutique Direct Showcase</h4>
+                  <p className="text-xs text-gray-600 leading-relaxed mb-6">
+                    A custom, sub-second digital flagship designed to celebrate your property&apos;s architectural soul and eliminate booking engine lag.
+                  </p>
+
+                  <div className="mb-8 pb-6 border-b border-gray-100">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-black text-primary-navy">€1,450</span>
+                      <span className="text-xs text-gray-500 font-semibold uppercase">One-time flat fee</span>
+                    </div>
+                    <p className="text-[11px] text-gray-500 mt-1">Delivery in 7–14 days • 100% code ownership</p>
+                  </div>
+
+                  <ul className="space-y-3.5 text-xs text-gray-700 mb-8">
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Bespoke Next.js Architecture</strong> (No generic WordPress templates)</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Sub-800ms Mobile Performance</strong> (95+ Google Lighthouse)</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Visual Room Discovery</strong> with transparent direct inquiry cards</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Frictionless WhatsApp & Email Booking Flow</strong> (0% commissions)</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Zero Vendor Lock-in</strong>: Full GitHub repository & domain delivery</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Free High-Speed Global Hosting</strong> setup on Vercel / Cloudflare</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => {
+                    setFormData(prev => ({ ...prev, packageInterest: 'Tier 1: Boutique Direct Showcase (€1,450)' }));
+                    setModalOpen(true);
+                  }}
+                  className="w-full py-3.5 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] transition-all cursor-pointer text-center"
+                >
+                  Inquire for Tier 1 (€1,450)
+                </button>
+              </div>
+
+              {/* Tier 2: The Complete AI Hospitality Engine (Featured) */}
+              <div className="bg-amber-50/60 rounded-3xl p-8 md:p-10 border-2 border-primary-navy shadow-[8px_8px_0px_0px_#1C2733] flex flex-col justify-between relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-accent-orange text-primary-navy text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-bl-xl border-l-2 border-b-2 border-primary-navy">
+                  Most Popular · Highest Direct ROI
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-4 mt-2">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-accent-orange bg-amber-100/80 px-3 py-1 rounded-full border border-amber-200">
+                      Tier 02 · Full Digital Suite
+                    </span>
+                  </div>
+                  <h4 className="text-2xl font-black text-primary-navy mb-2">The AI Hospitality Engine</h4>
+                  <p className="text-xs text-gray-600 leading-relaxed mb-6">
+                    Everything in Tier 1 plus our 24/7 Multilingual AI Concierge to capture midnight inquiries from European guests without adding staff.
+                  </p>
+
+                  <div className="mb-8 pb-6 border-b border-amber-200/80">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-black text-primary-navy">€2,450</span>
+                      <span className="text-xs text-gray-500 font-semibold uppercase">One-time flat fee</span>
+                    </div>
+                    <p className="text-[11px] text-emerald-800 font-medium mt-1">Includes 6 Months AI Concierge Hosting & Model Tuning</p>
+                  </div>
+
+                  <ul className="space-y-3.5 text-xs text-gray-800 mb-8">
+                    <li className="flex items-start gap-2.5 font-semibold text-primary-navy">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Everything included in Tier 1</strong> (Next.js flagship website)</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>24/7 Multilingual AI Guest Concierge</strong> embedded on your site</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>20+ European Languages</strong> (German, Italian, French, Polish, Dutch)</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>Grounded strictly in your Property Handbook</strong> (Zero Hallucination)</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>1-Tap Pre-filled WhatsApp Booking Lead Hand-off</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span><strong>6 Months Turnkey Concierge Cloud Hosting</strong> (Optional €49/mo thereafter)</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <button
+                    onClick={() => {
+                      setFormData(prev => ({ ...prev, packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€2,450)' }));
+                      setModalOpen(true);
+                    }}
+                    className="w-full py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-black text-xs uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[4px_4px_0px_0px_#1C2733] transition-all cursor-pointer text-center"
+                  >
+                    Select AI Hospitality Engine (€2,450)
+                  </button>
+                  <p className="text-[10px] text-gray-500 text-center mt-2">
+                    Equivalent to ~1 month salary of a single European night receptionist.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Zero-Risk Evaluation Callout */}
+            <div className="mt-12 bg-white rounded-2xl p-6 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
+              <div>
+                <p className="font-bold text-sm text-primary-navy">Prefer to see your property&apos;s mobile friction points first?</p>
+                <p className="text-xs text-gray-500 mt-0.5">We provide a free 1-page visual assessment with zero commitment or sales pressure.</p>
+              </div>
+              <button
+                onClick={() => {
+                  setFormData(prev => ({ ...prev, packageInterest: 'Free 1-Page Website Review' }));
+                  setModalOpen(true);
+                }}
+                className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-primary-navy font-bold text-xs rounded-xl border border-gray-300 transition-colors shrink-0 cursor-pointer"
+              >
+                Request Free 1-Page Review
+              </button>
+            </div>
           </div>
 
         </div>
@@ -1017,6 +1532,14 @@ export default function HospitalityPage() {
               {
                 q: "What exactly is in the free 1-page website review?",
                 a: "Our lead designer manually inspects your property's website on modern smartphones. We highlight 3 specific friction points in your guest journey (e.g. mobile photo sizing, rate visibility, inquiry flow) and mock up a suggested visual improvement. It is 100% human-crafted with no automated bot scoring and no sales follow-up pressure."
+              },
+              {
+                q: "Will the AI Concierge make mistakes, invent discounts, or promise unavailable rooms?",
+                a: "No. Unlike generic AI chatbots (such as ChatGPT), our concierge uses a strictly grounded RAG architecture constrained exclusively to your verified property handbook, approved room rates, and house rules. If a guest asks something outside your verified documentation (for example, a custom wedding discount or an unverified pet breed), it gracefully informs the guest and passes their contact details directly to your WhatsApp."
+              },
+              {
+                q: "Does our staff have to manage complicated AI software or servers?",
+                a: "Zero. We handle 100% of the technical setup, prompt engineering, and cloud hosting. If you ever update your house rules, breakfast hours, or seasonal tasting menus, simply send a quick note to our studio or edit a simple Google Sheet, and the concierge updates automatically."
               },
               {
                 q: "Do we have to abandon our existing booking engine (e.g. Cloudbeds, Phobs, Sirvoy)?",
@@ -1176,6 +1699,27 @@ export default function HospitalityPage() {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-primary-navy mb-2">
+                    Package or Request Type *
+                  </label>
+                  <select
+                    value={formData.packageInterest}
+                    onChange={(e) => setFormData({ ...formData, packageInterest: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
+                  >
+                    <option value="Tier 2: The Complete AI Hospitality Engine (€2,450)">
+                      Tier 2: The Complete AI Hospitality Engine (€2,450) — Most Popular
+                    </option>
+                    <option value="Tier 1: Boutique Direct Showcase (€1,450)">
+                      Tier 1: Boutique Direct Showcase (€1,450)
+                    </option>
+                    <option value="Free 1-Page Website Review">
+                      Free 1-Page Website Review (No Obligation)
+                    </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-primary-navy mb-2">
                     Any specific friction or questions? (Optional)
                   </label>
                   <textarea
@@ -1193,10 +1737,10 @@ export default function HospitalityPage() {
                   className="w-full py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-sm uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[4px_4px_0px_0px_#1C2733] transition-all cursor-pointer flex items-center justify-center gap-2 mt-4"
                 >
                   {isSubmitting ? (
-                    <span>Preparing Review Request...</span>
+                    <span>Preparing Request...</span>
                   ) : (
                     <>
-                      <span>Send Website for Free Review</span>
+                      <span>Submit Inquiry ({formData.packageInterest.split('(')[0].trim()})</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}
@@ -1342,8 +1886,12 @@ export default function HospitalityPage() {
             >
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent-orange">Human Audit</span>
-                  <h3 className="text-xl font-bold text-primary-navy">Free 1-Page Website Review</h3>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent-orange">
+                    {formData.packageInterest.includes('Tier') ? 'Direct Studio Inquiry' : 'Human Audit'}
+                  </span>
+                  <h3 className="text-xl font-bold text-primary-navy">
+                    {formData.packageInterest.includes('Tier') ? formData.packageInterest.split('(')[0].trim() : 'Free 1-Page Website Review'}
+                  </h3>
                 </div>
                 <button
                   onClick={() => setModalOpen(false)}
@@ -1359,14 +1907,14 @@ export default function HospitalityPage() {
                   <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-3">
                     <Check className="w-5 h-5 stroke-[3]" />
                   </div>
-                  <h4 className="text-base font-bold text-emerald-950 mb-1">Request Received!</h4>
+                  <h4 className="text-base font-bold text-emerald-950 mb-1">Inquiry Received!</h4>
                   <p className="text-xs text-emerald-800 leading-relaxed mb-4">
-                    We will send our 1-page visual review to <strong>{formData.email}</strong> within 48 hours. No sales follow-up calls or spam guaranteed.
+                    Thank you! We will review <strong>{formData.hotelName || "your hotel website"}</strong> and respond to <strong>{formData.email}</strong> within 48 hours. Zero spam or cold calling guaranteed.
                   </p>
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3 border-t border-emerald-200/60">
                     <a
-                      href={`https://wa.me/6281383521750?text=${encodeURIComponent(`Hi Faisal, I just requested a 1-page website review for ${formData.hotelName || "our hotel"} (${formData.websiteUrl}). My email is ${formData.email}.`)}`}
+                      href={`https://wa.me/6281383521750?text=${encodeURIComponent(`Hi Faisal, I just submitted an inquiry for ${formData.packageInterest} for ${formData.hotelName || "our hotel"} (${formData.websiteUrl}). My email is ${formData.email}.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-xs transition-colors"
@@ -1441,12 +1989,33 @@ export default function HospitalityPage() {
                     </div>
                   </div>
 
+                  <div>
+                    <label className="block text-xs font-bold text-primary-navy mb-1.5">
+                      Package or Request Type *
+                    </label>
+                    <select
+                      value={formData.packageInterest}
+                      onChange={(e) => setFormData({ ...formData, packageInterest: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange bg-white"
+                    >
+                      <option value="Tier 2: The Complete AI Hospitality Engine (€2,450)">
+                        Tier 2: The Complete AI Hospitality Engine (€2,450)
+                      </option>
+                      <option value="Tier 1: Boutique Direct Showcase (€1,450)">
+                        Tier 1: Boutique Direct Showcase (€1,450)
+                      </option>
+                      <option value="Free 1-Page Website Review">
+                        Free 1-Page Website Review (No Obligation)
+                      </option>
+                    </select>
+                  </div>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full py-3.5 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs uppercase tracking-wide rounded-lg border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] transition-all cursor-pointer mt-3"
                   >
-                    {isSubmitting ? "Submitting..." : "Send for Free Review (Delivered in 48h)"}
+                    {isSubmitting ? "Submitting..." : `Submit Request (${formData.packageInterest.split('(')[0].trim()})`}
                   </button>
                   <p className="text-center text-[10px] text-gray-500">
                     Handcrafted evaluation by a human designer. Zero spam.
