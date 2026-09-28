@@ -7,12 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const navLinks = [
-  { 
-    name: "Boutique Stays & Villa", 
-    href: "/hospitality", 
-    badge: "Khusus Stays",
-    isAccent: true 
-  },
+  { name: "Boutique Stays & Villa", href: "/hospitality" },
   { name: "Layanan", href: "/#services" },
   { name: "Alur Kerja", href: "/#workflow" },
   { name: "Portofolio", href: "/#portfolio" },
@@ -66,24 +61,15 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Nav (Clean, No Gimmick Badges) */}
           <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium tracking-tight transition-colors flex items-center gap-1.5 ${
-                  link.isAccent
-                    ? "text-[#F59E0B] hover:text-[#D97706] font-semibold"
-                    : "text-[#1C2733] hover:text-[#F59E0B]"
-                }`}
+                className="text-sm font-medium tracking-tight text-[#1C2733] hover:text-[#F59E0B] transition-colors"
               >
                 {link.name}
-                {link.badge && (
-                  <span className="bg-amber-50 border border-amber-200 text-[#D97706] text-[10px] px-2 py-0.5 rounded font-bold tracking-tight">
-                    {link.badge}
-                  </span>
-                )}
               </Link>
             ))}
           </nav>
@@ -146,24 +132,15 @@ export function Navbar() {
               </button>
             </div>
 
-            <nav className="flex flex-col gap-3 mb-8">
+            <nav className="flex flex-col gap-2 mb-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-lg font-semibold py-2.5 px-3 rounded-lg flex items-center justify-between transition-colors ${
-                    link.isAccent 
-                      ? "bg-amber-50 text-[#D97706]" 
-                      : "text-[#1C2733] hover:bg-slate-50"
-                  }`}
+                  className="text-lg font-semibold py-2.5 px-3 rounded-lg text-[#1C2733] hover:bg-slate-50 transition-colors"
                 >
-                  <span>{link.name}</span>
-                  {link.badge && (
-                    <span className="bg-[#F59E0B] text-[#1C2733] text-[10px] px-2 py-0.5 rounded font-bold">
-                      {link.badge}
-                    </span>
-                  )}
+                  {link.name}
                 </Link>
               ))}
             </nav>
@@ -172,7 +149,7 @@ export function Navbar() {
               <Link
                 href="/hospitality"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center bg-amber-50 border border-amber-200 text-[#D97706] px-5 py-3 rounded-lg font-bold text-sm"
+                className="w-full text-center bg-slate-100 text-[#1C2733] hover:bg-slate-200 px-5 py-3 rounded-lg font-bold text-sm transition-colors"
               >
                 Hospitality Engine Showcase
               </Link>

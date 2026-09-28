@@ -24,7 +24,6 @@ import {
   Eye, 
   EyeOff,
   Filter,
-  Sparkles,
   ArrowRight,
   ShieldCheck
 } from 'lucide-react';

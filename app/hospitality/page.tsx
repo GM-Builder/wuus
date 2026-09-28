@@ -9,7 +9,6 @@ import {
   ArrowRight, 
   Check, 
   Globe, 
-  Sparkles, 
   ShieldCheck,
   Clock,
   Send,
@@ -157,7 +156,7 @@ const adraPillars = [
     subtitle: "Showcase Character, Not Generic Templates",
     desc: "Discerning guests book boutique hotels for their soul: the limestone walls, the morning light in the courtyard, the host's private wine cellar. We showcase this atmosphere with optimized full-screen visuals and zero lag.",
     highlight: "Sub-second image rendering",
-    icon: Sparkles
+    icon: Eye
   },
   {
     letter: "D",
@@ -324,7 +323,7 @@ export default function HospitalityPage() {
               />
             </Link>
             <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-gray-200 bg-white text-[10px] font-bold tracking-widest uppercase text-primary-navy ">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               Hospitality
             </div>
           </div>
@@ -337,11 +336,8 @@ export default function HospitalityPage() {
             <a href="#portfolio" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
               Selected Works
             </a>
-            <a href="#ai-concierge" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors flex items-center gap-1.5 group">
-              <span>AI Concierge</span>
-              <span className="text-[10px] bg-amber-100 text-amber-900 border border-amber-200 px-1.5 py-0.2 rounded font-bold uppercase group-hover:bg-accent-orange group-hover:text-primary-navy transition-colors">
-                24/7
-              </span>
+            <a href="#ai-concierge" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
+              AI Concierge
             </a>
             <a href="#framework" className="font-semibold text-sm text-primary-navy hover:text-accent-orange transition-colors">
               ADRA Framework
@@ -438,10 +434,9 @@ export default function HospitalityPage() {
               <a
                 href="#ai-concierge"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3 flex items-center justify-between"
+                className="text-xl font-bold text-primary-navy border-b border-gray-100 pb-3"
               >
-                <span>24/7 AI Guest Concierge</span>
-                <span className="text-xs font-bold uppercase bg-accent-orange text-primary-navy px-2 py-0.5 rounded">Live Demo</span>
+                24/7 AI Guest Concierge
               </a>
               <a
                 href="#framework"
@@ -498,7 +493,7 @@ export default function HospitalityPage() {
       {/* ─────────────────────────────────────────────────────────────
           2. HERO SECTION (Identical visual structure to Indonesian Hero)
       ────────────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden z-10">
+      <section ref={heroRef} className="relative pt-36 pb-20 lg:pt-44 lg:pb-28 overflow-hidden z-10">
         {/* Ambient background glows */}
         
         
@@ -514,9 +509,9 @@ export default function HospitalityPage() {
               className="flex flex-col items-center w-full"
             >
               {/* Studio Pill */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-700 text-xs font-semibold tracking-wide mb-6 ">
-                <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse" />
-                <span>Direct Booking Engine + 24/7 Multilingual AI Guest Concierge</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-medium mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
+                <span>Direct Booking Engine & Multilingual AI Guest Concierge</span>
               </div>
 
               {/* Main Headline */}
@@ -614,9 +609,6 @@ export default function HospitalityPage() {
                 <div className="pt-3 px-1 pb-1">
                   <p className="text-[11px] font-bold text-primary-navy uppercase tracking-wider">Sub-1s Mobile Experience</p>
                   <p className="text-[10px] text-gray-500 mt-0.5">Vila Kliment · Direct Guest Inquiries</p>
-                </div>
-                <div className="absolute -top-6 -right-6 w-14 h-14 bg-accent-orange rounded-xl flex items-center justify-center  rotate-12 border border-amber-400">
-                  <Globe className="text-primary-navy w-7 h-7" />
                 </div>
               </div>
             </div>
@@ -720,7 +712,7 @@ export default function HospitalityPage() {
                     <span className="text-red-400 font-bold">12.8 MB</span>
                   </div>
                   <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden relative">
-                    <div className="h-full bg-gradient-to-r from-red-500 to-amber-500 rounded-full w-[35%] animate-pulse" />
+                    <div className="h-full bg-gradient-to-r from-red-500 to-amber-500 rounded-full w-[35%]" />
                   </div>
                   <div className="grid grid-cols-3 gap-2 pt-1 opacity-30">
                     <div className="h-8 rounded bg-slate-800" />
@@ -819,7 +811,7 @@ export default function HospitalityPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
                 <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[10px] text-white">
                   <span className="flex items-center gap-1.5 font-bold text-emerald-400 bg-[#16202B] px-2.5 py-1 rounded-full border border-emerald-600">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     Sub-800ms · Direct Host Inquiries
                   </span>
                   <span className="font-mono text-emerald-300 font-bold bg-[#16202B] px-2 py-1 rounded-full border border-emerald-600">
@@ -937,10 +929,9 @@ export default function HospitalityPage() {
           
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-900 text-xs font-bold tracking-wider uppercase mb-4 ">
-              <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
-              <span>The 24/7 Guest Concierge Advantage</span>
-            </div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-2">
+              THE GUEST CONCIERGE ADVANTAGE
+            </p>
             <h2 className="text-3xl md:text-5xl font-black text-primary-navy tracking-tight leading-tight">
               Capture Direct Bookings <br />
               <span className="text-[#F59E0B]">While Your Front Desk Sleeps.</span>
@@ -966,7 +957,7 @@ export default function HospitalityPage() {
                   <div className="flex items-center gap-2">
                     <h3 className="font-bold text-sm sm:text-base">Interactive Concierge Simulation</h3>
                     <span className="text-[10px] bg-[#16202B] text-emerald-400 border border-emerald-600 px-2 py-0.5 rounded-full font-mono flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live Grounded Preview
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Live Grounded Preview
                     </span>
                   </div>
                   <p className="text-xs text-slate-300">Test how the concierge answers real European guest inquiries</p>
@@ -1076,7 +1067,7 @@ export default function HospitalityPage() {
                     <div className="bg-white border border-gray-200 text-primary-navy rounded-xl rounded-tl-xs p-4 max-w-lg  text-xs sm:text-sm leading-relaxed">
                       <div className="flex items-center justify-between pb-2 mb-2 border-b border-gray-200/60 text-[11px] font-bold text-gray-500">
                         <span className="flex items-center gap-1.5 text-primary-navy">
-                          <Sparkles className="w-3.5 h-3.5 text-accent-orange" />
+                          <Bot className="w-3.5 h-3.5 text-accent-orange" />
                           Hotel AI Concierge
                         </span>
                         <span className="text-emerald-700 font-mono text-[10px]">Instant · Grounded</span>
@@ -1162,7 +1153,7 @@ export default function HospitalityPage() {
             <div className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-navy mb-4 ">
-                  <Sparkles className="w-5 h-5 text-accent-orange" />
+                  <CheckCircle2 className="w-5 h-5 text-accent-orange" />
                 </div>
                 <h4 className="font-bold text-base text-primary-navy mb-2">Direct Rate Defense</h4>
                 <p className="text-xs text-gray-600 leading-relaxed">

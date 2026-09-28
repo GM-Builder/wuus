@@ -94,7 +94,7 @@ export function TechAuthority() {
                   <div className="text-lg font-bold text-white tracking-tight mt-1">Google Lighthouse Benchmarks</div>
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   Verified 100/100
                 </div>
               </div>

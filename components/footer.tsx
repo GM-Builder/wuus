@@ -30,7 +30,7 @@ export function Footer() {
             </p>
 
             <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200/80 w-fit">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
               <span>Available for Q2/Q3 European Boutique Deployments</span>
             </div>
           </div>
@@ -42,9 +42,8 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/hospitality" className="text-slate-600 hover:text-[#F59E0B] transition-colors flex items-center gap-1 font-medium">
-                  <span>Hospitality AI Engine</span>
-                  <span className="text-[9px] bg-amber-50 text-[#D97706] px-1.5 py-0.5 rounded font-bold">New</span>
+                <Link href="/hospitality" className="text-slate-600 hover:text-[#F59E0B] transition-colors font-medium">
+                  Hospitality AI Engine
                 </Link>
               </li>
               <li>

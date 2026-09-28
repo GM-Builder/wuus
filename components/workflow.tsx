@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, ShieldCheck, CreditCard, Sparkles, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const timelineTabs = [

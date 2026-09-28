@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Sparkles, Zap, ArrowRight } from "lucide-react";
+import { Zap, ArrowRight, Cpu } from "lucide-react";
 import Link from "next/link";
 
 export function AIBuilderSection() {
@@ -16,7 +15,7 @@ export function AIBuilderSection() {
           <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12">
             <div className="flex-1 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent-orange/20 text-accent-orange rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                <Sparkles className="w-4 h-4" />
+                <span className="w-2 h-2 rounded-full bg-accent-orange" />
                 AI Builder (Instan)
               </div>
               
@@ -48,7 +47,7 @@ export function AIBuilderSection() {
                 <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700 shadow-2xl rotate-2">
                    <div className="aspect-video bg-slate-900 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-accent-orange/10 to-transparent"></div>
-                      <Sparkles className="w-12 h-12 text-accent-orange animate-pulse" />
+                      <Cpu className="w-12 h-12 text-accent-orange" />
                    </div>
                    <div className="space-y-3">
                       <div className="h-4 w-3/4 bg-slate-700 rounded-full"></div>

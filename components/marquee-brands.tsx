@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Server, Database, Globe, Shield, Cpu, CreditCard, Sparkles, Zap } from "lucide-react";
+import { Server, Database, Globe, Shield, Cpu, CreditCard, Zap } from "lucide-react";
 
 const stacks = [
   { name: "Next.js 16 Edge", category: "Core Framework", icon: Zap },
@@ -11,7 +11,7 @@ const stacks = [
   { name: "Mayar Settlement", category: "Payment Engine", icon: CreditCard },
   { name: "SEPA IBAN Network", category: "EU Banking", icon: Globe },
   { name: "Cloudflare Security", category: "DDoS & SSL", icon: Shield },
-  { name: "Boutique Hospitality", category: "Bespoke Practice", icon: Sparkles },
+  { name: "Boutique Hospitality", category: "Bespoke Practice", icon: Shield },
 ];
 
 export function MarqueeBrands() {

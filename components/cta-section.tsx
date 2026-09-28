@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, MessageSquare, CheckCircle2, Sparkles, ShieldCheck } from "lucide-react";
+import { ArrowRight, MessageSquare, CheckCircle2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 export function CtaSection() {
@@ -26,7 +26,7 @@ export function CtaSection() {
           <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
             
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/90 border border-slate-700 text-xs font-semibold text-indigo-400 mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
               <span>Ready for Measurable Direct Growth?</span>
             </div>
 

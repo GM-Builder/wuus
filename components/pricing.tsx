@@ -350,7 +350,7 @@ export function Pricing() {
 
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-2 mb-6 bg-accent-orange/10 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
+                  <div className="w-2 h-2 rounded-full bg-accent-orange" />
                   <span className="text-[10px] font-extrabold tracking-[0.2em] text-accent-orange uppercase">WUUS Transformation</span>
                 </div>
 
