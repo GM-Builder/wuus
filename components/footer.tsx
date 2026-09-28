@@ -1,95 +1,150 @@
 "use client";
 
-import { MapPin, PhoneCall, Mail, Globe } from "lucide-react";
+import { MapPin, PhoneCall, Mail, Globe, ArrowUpRight, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-light-grey border-t border-gray-200 pt-20 pb-10">
-      <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+    <footer className="bg-white border-t border-slate-200/90 pt-16 pb-12">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
 
-          {/* Brand & Map Info */}
+          {/* Studio Brand */}
           <div className="lg:col-span-2">
-            <a href="/" className="flex items-center mb-6">
+            <Link href="/" className="flex items-center gap-3 mb-5">
               <Image
                 src="/logo.png"
-                alt="WUUS Logo"
-                width={142}
-                height={40}
-                className="h-10 w-auto object-contain"
+                alt="WUUS Studio Logo"
+                width={130}
+                height={36}
+                className="h-8 w-auto object-contain"
               />
-            </a>
-            <p className="text-gray-500 mb-8 max-w-md leading-relaxed">
-              WUUS adalah mitra digital untuk bisnis yang ingin tampil lebih profesional dan dipercaya. Kami membantu membangun website dengan standar visual dan teknis yang terukur.
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 border-l border-slate-200 pl-3">
+                Studio
+              </span>
+            </Link>
+
+            <p className="text-sm text-slate-600 mb-6 max-w-sm leading-relaxed">
+              Bespoke digital architecture, direct booking engines, and 24/7 autonomous AI guest concierges engineered for independent European boutique stays and ambitious businesses.
             </p>
 
-            <div className="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white h-52 max-w-md group transition-all duration-500">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.533838466155!2d106.7541558118344!3d-6.193067260650871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f710ddd28e99%3A0x4fda30c569b2e71d!2sApartmen%20Puri%20Parkview!5e0!3m2!1sid!2sid!4v1775916857687!5m2!1sid!2sid"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-[1.02]"
-                title="Lokasi Kantor WUUS di Google Maps"
-              />
+            <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200/80 w-fit">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Available for Q2/Q3 European Boutique Deployments</span>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Solutions */}
           <div>
-            <h3 className="font-bold text-primary-navy text-lg mb-6">Navigasi</h3>
-            <ul className="space-y-4">
-              <li><Link href="/#services" className="text-gray-500 hover:text-accent-orange transition-colors">Layanan Biz</Link></li>
-              <li><Link href="/#portfolio" className="text-gray-500 hover:text-accent-orange transition-colors">Portfolio Karya</Link></li>
-              <li><Link href="/#pricing" className="text-gray-500 hover:text-accent-orange transition-colors">Harga Paket</Link></li>
-              {/* <li><Link href="/#roi" className="text-gray-500 hover:text-accent-orange transition-colors">Kalkulator Modal</Link></li> */}
-              <li><Link href="/#faq" className="text-gray-500 hover:text-accent-orange transition-colors">Pusat Bantuan</Link></li>
+            <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-4">
+              Practices & Solutions
+            </h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/hospitality" className="text-slate-600 hover:text-indigo-600 transition-colors flex items-center gap-1 font-medium">
+                  <span>Hospitality AI Engine</span>
+                  <span className="text-[9px] bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded font-bold">New</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/hospitality#ai-concierge" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                  24/7 AI Concierge Demo
+                </Link>
+              </li>
+              <li>
+                <Link href="/#services" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                  Direct Booking Architecture
+                </Link>
+              </li>
+              <li>
+                <Link href="/#tech" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                  Edge Speed Benchmarks
+                </Link>
+              </li>
+              <li>
+                <Link href="/score-test" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                  Business Speed & SEO Audit
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Contacts */}
+          {/* Process & Trust */}
           <div>
-            <h3 className="font-bold text-primary-navy text-lg mb-6">Hubungi Kami</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-500">
-                <MapPin size={18} className="text-accent-orange mt-1 shrink-0" />
-                <span><strong>WUUS - Digital Studio</strong> <br /> Jakarta Barat, DKI Jakarta <br /> 11620, Indonesia</span>
+            <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-4">
+              Trust & Settlement
+            </h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/hospitality#pricing" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                  Two-Tier Sweet-Spot Pricing
+                </Link>
               </li>
-              <li className="flex items-center gap-3 text-gray-500">
-                <PhoneCall size={18} className="text-accent-orange shrink-0" />
-                <span>+62 813-8352-1750</span>
+              <li>
+                <Link href="/inquiries" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                  Staging-First Guarantee
+                </Link>
               </li>
-              {/* <li className="flex items-center gap-3 text-gray-500">
-                <Mail size={18} className="text-accent-orange shrink-0" />
-                <span>hello@webuntukusaha.com</span>
-              </li> */}
+              <li>
+                <span className="text-slate-500 flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>50/50 Milestone Escrow</span>
+                </span>
+              </li>
+              <li>
+                <span className="text-slate-500">Mayar Instant Card Link</span>
+              </li>
+              <li>
+                <span className="text-slate-500">European SEPA Bank Wire</span>
+              </li>
             </ul>
-
-            <div className="flex gap-4 mt-8">
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-navy hover:text-white hover:bg-accent-orange transition-colors shadow-sm" aria-label="Kunjungi Instagram WUUS">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-navy hover:text-white hover:bg-accent-orange transition-colors shadow-sm" aria-label="Kunjungi Facebook WUUS">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-              </a>
-            </div>
           </div>
 
+          {/* Contact & Studio Location */}
+          <div>
+            <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-4">
+              Direct Contact
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-2.5 text-slate-600">
+                <MapPin size={16} className="text-slate-400 mt-0.5 shrink-0" />
+                <span>Jakarta Barat, Indonesia <br /><span className="text-xs text-slate-400">Serving Europe & Worldwide</span></span>
+              </li>
+              <li className="flex items-center gap-2.5 text-slate-600">
+                <Mail size={16} className="text-slate-400 shrink-0" />
+                <a href="mailto:faisalalfarizi@webuntukusaha.com" className="hover:text-indigo-600 transition-colors">
+                  faisalalfarizi@webuntukusaha.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5 text-slate-600">
+                <PhoneCall size={16} className="text-slate-400 shrink-0" />
+                <a href="https://wa.me/6281383521750" className="hover:text-indigo-600 transition-colors font-medium">
+                  +62 813-8352-1750
+                </a>
+              </li>
+            </ul>
+          </div>
 
         </div>
 
-        <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm font-medium">
-            &copy; {new Date().getFullYear()} WebUntukUsaha.com. All rights reserved.
+        {/* Bottom Bar */}
+        <div className="border-t border-slate-200/90 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <p>
+            &copy; {new Date().getFullYear()} WUUS Studio. Built with Next.js Edge & Tailwind CSS. All rights reserved.
           </p>
-          <div className="flex gap-4 text-sm text-gray-400 font-medium">
-            <Link href="/syarat-ketentuan" className="hover:text-primary-navy">Syarat & Ketentuan</Link>
-            <span>|</span>
-            <Link href="/kebijakan-privasi" className="hover:text-primary-navy">Kebijakan Privasi</Link>
+          <div className="flex items-center gap-5">
+            <Link href="/syarat-ketentuan" className="hover:text-slate-900 transition-colors">
+              Terms & Conditions
+            </Link>
+            <span>•</span>
+            <Link href="/kebijakan-privasi" className="hover:text-slate-900 transition-colors">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/admin/inquiries" className="hover:text-slate-900 transition-colors text-slate-400">
+              Admin Portal
+            </Link>
           </div>
         </div>
       </div>

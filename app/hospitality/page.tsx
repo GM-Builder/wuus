@@ -1749,7 +1749,7 @@ export default function HospitalityPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-sm uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[4px_4px_0px_0px_#1C2733] transition-all cursor-pointer flex items-center justify-center gap-2 mt-4"
+                  className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2 mt-4"
                 >
                   {isSubmitting ? (
                     <span>Preparing Request...</span>
@@ -2028,7 +2028,7 @@ export default function HospitalityPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs uppercase tracking-wide rounded-lg border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] transition-all cursor-pointer mt-3"
+                    className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer mt-3"
                   >
                     {isSubmitting ? "Submitting..." : `Submit Request (${formData.packageInterest.split('(')[0].trim()})`}
                   </button>

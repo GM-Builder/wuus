@@ -1,46 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Coffee, WashingMachine, Wrench, Stethoscope, Shirt, Camera, Home, GraduationCap, ShoppingBag } from "lucide-react";
+import { Server, Database, Globe, Shield, Cpu, CreditCard, Sparkles, Zap } from "lucide-react";
 
-const brands = [
-  { name: "Restoran & Cafe", icon: Coffee },
-  { name: "Jasa Laundry & Cleaning", icon: WashingMachine },
-  { name: "Bengkel & Otomotif", icon: Wrench },
-  { name: "Klinik & Kesehatan", icon: Stethoscope },
-  { name: "Fashion & Boutique", icon: Shirt },
-  { name: "Studio Kreatif", icon: Camera },
-  { name: "Property & Agent", icon: Home },
-  { name: "Lembaga Kursus", icon: GraduationCap },
-  { name: "Toko Online & UMKM", icon: ShoppingBag }
+const stacks = [
+  { name: "Next.js 16 Edge", category: "Core Framework", icon: Zap },
+  { name: "Vercel Global CDN", category: "Global Edge", icon: Server },
+  { name: "Supabase Postgres", category: "Database & Auth", icon: Database },
+  { name: "24/7 RAG AI Engine", category: "AI Concierge", icon: Cpu },
+  { name: "Mayar Settlement", category: "Payment Engine", icon: CreditCard },
+  { name: "SEPA IBAN Network", category: "EU Banking", icon: Globe },
+  { name: "Cloudflare Security", category: "DDoS & SSL", icon: Shield },
+  { name: "Boutique Hospitality", category: "Bespoke Practice", icon: Sparkles },
 ];
 
 export function MarqueeBrands() {
   return (
-    <section className="bg-secondary-blue text-white pt-8 pb-12 relative z-20 border-b-8 border-accent-orange -mt-8 md:-mt-20">
-      <div className="text-center mb-8">
-        <p className="text-sm font-semibold text-gray-400 uppercase tracking-[0.2em]">
-          Dirancang untuk Berbagai Jenis Bisnis
+    <section className="bg-white py-10 border-b border-slate-200/80 overflow-hidden">
+      <div className="container mx-auto px-6 mb-6 text-center">
+        <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">
+          Powered By Enterprise-Grade Architecture & Global Settlement Infrastructure
         </p>
       </div>
-      
+
       {/* Marquee Animation */}
       <div className="w-full flex overflow-hidden">
-        <motion.div 
+        <motion.div
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
-          className="flex whitespace-nowrap items-center gap-16 px-8 transform-gpu will-change-transform"
+          transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+          className="flex whitespace-nowrap items-center gap-10 px-6 transform-gpu will-change-transform"
           style={{ transform: "translateZ(0)" }}
         >
-          {/* Double array for seamless looping */}
-          {[...brands, ...brands].map((brand, i) => {
-            const Icon = brand.icon;
+          {[...stacks, ...stacks].map((item, i) => {
+            const Icon = item.icon;
             return (
-              <div key={i} className="flex-shrink-0 opacity-50 hover:opacity-100 transition-all duration-300 flex items-center gap-3 group grayscale hover:grayscale-0">
-                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-accent-orange/30">
-                  <Icon size={20} className="text-gray-400 group-hover:text-accent-orange" strokeWidth={1.5} />
+              <div
+                key={i}
+                className="flex-shrink-0 flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200/70 hover:border-indigo-300 transition-colors group cursor-default"
+              >
+                <div className="w-8 h-8 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-slate-600 group-hover:text-indigo-600 transition-colors shadow-xs">
+                  <Icon size={16} />
                 </div>
-                <span className="text-xl font-bold text-gray-300 tracking-wide group-hover:text-white">{brand.name}</span>
+                <div>
+                  <div className="text-xs font-bold text-slate-800 tracking-tight">{item.name}</div>
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">{item.category}</div>
+                </div>
               </div>
             );
           })}

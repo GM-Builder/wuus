@@ -2,15 +2,20 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X, Globe, Search } from "lucide-react";
+import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 const navLinks = [
-  { name: "AI Builder", href: "https://build.webuntukusaha.com", isNew: true },
-  { name: "Layanan Kami", href: "/#services" },
-  { name: "Portfolio", href: "/#portfolio" },
-  // { name: "Kalkulator ROI", href: "/#roi" },
+  { 
+    name: "Hospitality AI Engine", 
+    href: "/hospitality", 
+    badge: "EU Stays",
+    isAccent: true 
+  },
+  { name: "Solutions", href: "/#services" },
+  { name: "Architecture & Speed", href: "/#tech" },
+  { name: "Workflow", href: "/#workflow" },
   { name: "FAQ", href: "/#faq" },
 ];
 
@@ -21,11 +26,10 @@ export function Navbar() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 20 && !isScrolled) setIsScrolled(true);
-    else if (latest <= 20 && isScrolled) setIsScrolled(false);
+    if (latest > 15 && !isScrolled) setIsScrolled(true);
+    else if (latest <= 15 && isScrolled) setIsScrolled(false);
   });
 
-  // Handle resize to close mobile menu on desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -39,50 +43,64 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu will-change-transform ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3" : "bg-transparent py-5"
-          }`}
-        style={{ transform: "translateZ(0)" }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] py-3.5"
+            : "bg-transparent py-5"
+        }`}
       >
-        <div className="w-full mx-auto px-6 md:px-[max(60px,5vw)] flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
 
           {/* Logo Area */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center gap-3 group">
             <Image
               src="/logo.png"
               alt="WUUS Logo"
-              width={142}
-              height={40}
+              width={130}
+              height={36}
               priority
-              className="h-10 w-auto object-contain"
+              className="h-8 w-auto object-contain transition-transform group-hover:scale-105"
             />
+            <span className="hidden sm:inline-block text-[11px] font-bold uppercase tracking-wider text-slate-400 border-l border-slate-200 pl-3">
+              Studio
+            </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`font-semibold text-sm transition-colors flex items-center gap-1 ${
-                  link.isNew 
-                    ? "text-accent-orange hover:text-accent-yellow" 
-                    : "text-primary-navy hover:text-accent-orange"
+                className={`text-sm font-medium tracking-tight transition-colors flex items-center gap-1.5 ${
+                  link.isAccent
+                    ? "text-indigo-600 hover:text-indigo-700 font-semibold"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 {link.name}
-                {link.isNew && (
-                  <span className="bg-accent-orange text-primary-navy text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter shadow-sm">New</span>
+                {link.badge && (
+                  <span className="bg-indigo-50 border border-indigo-200 text-indigo-600 text-[10px] px-2 py-0.5 rounded-full font-bold tracking-tight">
+                    {link.badge}
+                  </span>
                 )}
               </Link>
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-6">
-            <Link href="/score-test" className="bg-primary-navy hover:bg-secondary-blue text-white px-6 py-2.5 rounded text-sm font-bold transition-all shadow-sm">
-              Cek Score Bisnis
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              href="/hospitality"
+              className="text-xs font-semibold px-4 py-2.5 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100/80 transition-all flex items-center gap-1"
+            >
+              <span>Explore Hospitality</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
             </Link>
-            <Link href="/inquiries" className="bg-accent-orange hover:bg-accent-yellow text-primary-navy px-6 py-2.5 rounded text-sm font-bold transition-all shadow-sm">
-              Estimasi Proyek Gratis
+            <Link
+              href="/inquiries"
+              className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-lg text-xs font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5"
+            >
+              <span>Project Inquiries</span>
             </Link>
           </div>
 
@@ -90,10 +108,10 @@ export function Navbar() {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="text-primary-navy p-2 bg-gray-100 rounded-md"
-              aria-label="Buka Menu"
+              className="text-slate-800 p-2 bg-slate-100/80 hover:bg-slate-200/80 rounded-lg transition-colors"
+              aria-label="Open Menu"
             >
-              <Menu className="w-6 h-6" aria-hidden="true" />
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -103,55 +121,67 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-[100] !bg-white w-full h-screen flex flex-col pt-6 px-6 pb-12 overflow-y-auto"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] bg-white w-full h-screen flex flex-col pt-6 px-6 pb-10 overflow-y-auto"
           >
-            <div className="flex justify-between items-center mb-12">
+            <div className="flex justify-between items-center mb-8 border-b border-slate-100 pb-5">
               <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
                 <Image
                   src="/logo.png"
                   alt="WUUS Logo"
-                  width={142}
-                  height={40}
-                  className="h-10 w-auto object-contain"
+                  width={130}
+                  height={36}
+                  className="h-8 w-auto object-contain"
                 />
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 bg-gray-100 rounded-full text-primary-navy border border-gray-200"
-                aria-label="Tutup Menu"
+                className="p-2 bg-slate-100 rounded-lg text-slate-700 hover:bg-slate-200"
+                aria-label="Close Menu"
               >
-                <X className="w-6 h-6" aria-hidden="true" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <nav className="flex flex-col gap-6 mb-12">
+            <nav className="flex flex-col gap-3 mb-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold border-b border-gray-100 pb-4 flex items-center justify-between ${
-                    link.isNew ? "text-accent-orange" : "text-primary-navy"
+                  className={`text-lg font-semibold py-2.5 px-3 rounded-lg flex items-center justify-between transition-colors ${
+                    link.isAccent 
+                      ? "bg-indigo-50/70 text-indigo-700" 
+                      : "text-slate-800 hover:bg-slate-50"
                   }`}
                 >
-                  {link.name}
-                  {link.isNew && (
-                    <span className="bg-accent-orange text-primary-navy text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-tighter">New</span>
+                  <span>{link.name}</span>
+                  {link.badge && (
+                    <span className="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                      {link.badge}
+                    </span>
                   )}
                 </Link>
               ))}
             </nav>
 
-            <div className="mt-auto flex flex-col gap-4">
-              <Link href="/score-test" onClick={() => setMobileMenuOpen(false)} className="w-full text-center bg-primary-navy text-white px-6 py-4 rounded-lg font-bold text-lg">
-                Cek Score Bisnis
+            <div className="mt-auto flex flex-col gap-3 pt-6 border-t border-slate-100">
+              <Link
+                href="/hospitality"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center bg-indigo-50 border border-indigo-200 text-indigo-700 px-6 py-3.5 rounded-xl font-semibold text-sm"
+              >
+                Hospitality Engine Showcase
               </Link>
-              <Link href="/inquiries" onClick={() => setMobileMenuOpen(false)} className="w-full text-center bg-accent-orange text-primary-navy px-6 py-4 rounded-lg font-bold text-lg">
-                Estimasi Proyek Gratis
+              <Link
+                href="/inquiries"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center bg-slate-900 text-white px-6 py-3.5 rounded-xl font-semibold text-sm shadow-sm"
+              >
+                Start Project Inquiry
               </Link>
             </div>
           </motion.div>

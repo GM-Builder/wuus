@@ -1,220 +1,155 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import { Building2, ShoppingCart, LayoutTemplate, Bot, Workflow, FileCode2, Blocks, Wrench, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Zap, Bot, ShieldCheck, CreditCard, Sparkles, Layers, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
-const services = [
+const bentoItems = [
   {
-    id: "01",
-    category: "Web Development",
-    title: "Custom Corporate Website",
-    shortDesc: "Desain eksklusif & performa Next.js.",
-    icon: Building2,
-    image: "/images/services/service-1.png",
+    id: "direct-booking",
+    colSpan: "lg:col-span-8",
+    badge: "Hospitality Practice",
+    title: "Direct Booking Engine & OTA Commission Defense",
+    description: "Break your reliance on Booking.com & Airbnb. We engineer lightning-fast direct reservation flows that keep 100% of room revenue in your bank account.",
+    highlights: ["Sub-800ms Edge load time", "Zero OTA commission leakage", "Instant mobile confirmation"],
+    metric: "18% – 25%",
+    metricLabel: "Average commission saved per reservation",
+    linkText: "Explore Hospitality Practice",
+    linkHref: "/hospitality"
   },
   {
-    id: "02",
-    category: "Web Development",
-    title: "High-Performance E-Commerce",
-    shortDesc: "Sistem belanja otomatis & terintegrasi.",
-    icon: ShoppingCart,
-    image: "/images/services/service-2.png",
+    id: "ai-concierge",
+    colSpan: "lg:col-span-4",
+    badge: "24/7 AI System",
+    title: "Grounded AI Guest Concierge",
+    description: "An autonomous digital host answering guest inquiries in 20+ languages in 1.2 seconds, strictly grounded in your hotel handbook with zero hallucinations.",
+    highlights: ["24+ European languages", "Instant WhatsApp escalation", "Zero operational bottleneck"],
+    metric: "24/7",
+    metricLabel: "Autonomous guest coverage without host fatigue",
+    linkText: "Test Live AI Demo",
+    linkHref: "/hospitality#ai-concierge"
   },
   {
-    id: "03",
-    category: "Web Development",
-    title: "Landing Page Optimization",
-    shortDesc: "Optimasi konversi untuk iklan Anda.",
-    icon: LayoutTemplate,
-    image: "/images/services/service-3.png",
+    id: "performance-architecture",
+    colSpan: "lg:col-span-4",
+    badge: "Core Engineering",
+    title: "Next.js Edge Performance Architecture",
+    description: "Engineered on modern React Server Components and global edge CDN caches. No bloated WordPress plugins, no database lag, no security vulnerabilities.",
+    highlights: ["Lighthouse 98+ score", "Global edge caching", "Enterprise SSL & DDoS defense"],
+    metric: "< 800ms",
+    metricLabel: "Time to interactive worldwide",
+    linkText: "Review Architecture",
+    linkHref: "/inquiries"
   },
   {
-    id: "04",
-    category: "AI & Automation",
-    title: "Autonomous AI Agents",
-    shortDesc: "Asisten otonom untuk tugas operasional.",
-    icon: Bot,
-    image: "/images/services/service-4.png",
+    id: "cross-border-settlement",
+    colSpan: "lg:col-span-4",
+    badge: "Fintech Settlement",
+    title: "Frictionless Mayar & SEPA Settlement",
+    description: "Built-in cross-border B2B payment rails. Accept instant credit card payments via Mayar or direct European SEPA bank transfers compliant with EU tax accounting.",
+    highlights: ["Instant Visa/Mastercard links", "0% VAT cross-border invoicing", "Direct IDR bank settlement"],
+    metric: "50 / 50",
+    metricLabel: "Milestone-protected payment structure",
+    linkText: "Payment Details",
+    linkHref: "/inquiries"
   },
   {
-    id: "05",
-    category: "AI & Automation",
-    title: "Workflow Automation",
-    shortDesc: "Integrasi alur kerja tanpa manual.",
-    icon: Workflow,
-    image: "/images/services/service-5.png",
+    id: "staging-guarantee",
+    colSpan: "lg:col-span-4",
+    badge: "Risk Reversal",
+    title: "Staging-First Quality Guarantee",
+    description: "You review and test your complete digital engine on a private staging link on your own phone before paying the final 50% balance. Complete transparency.",
+    highlights: ["Private mobile testing link", "Unlimited pre-launch revisions", "Zero risk for client"],
+    metric: "100%",
+    metricLabel: "Client verification before final release",
+    linkText: "Start an Inquiry",
+    linkHref: "/inquiries"
   },
-  {
-    id: "06",
-    category: "Web3 & Future Tech",
-    title: "Smart Contract Development",
-    shortDesc: "Keamanan transaksi berbasis Blockchain.",
-    icon: FileCode2,
-    image: "/images/services/service-6.png",
-  },
-  {
-    id: "07",
-    category: "Web3 & Future Tech",
-    title: "dApps & Web3 Integration",
-    shortDesc: "Integrasi dompet digital & dApps.",
-    icon: Blocks,
-    image: "/images/services/service-7.png",
-  },
-  {
-    id: "08",
-    category: "Growth & Technical",
-    title: "Technical Audit & Migration",
-    shortDesc: "Modernisasi sistem & perbaikan error.",
-    icon: Wrench,
-    image: "/images/services/service-8.png",
-  }
 ];
 
 export function Services() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile(); // Check on mount
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  // Calculate translation based on scroll progress
-  // At p=0, x = 0. At p=1, x = -100% of the container width + 100vw to ensure the last item is visible.
-  const x = useTransform(scrollYProgress, (p) => `calc(${p * -100}% + ${p * 100}vw)`);
-
   return (
-    <section ref={targetRef} className={`relative bg-[#F8F7F4] text-primary-navy ${isMobile ? 'h-auto py-20' : 'h-[300vh]'}`}>
-      <div className={isMobile ? 'flex flex-col' : 'sticky top-0 h-screen flex flex-col justify-center overflow-hidden'}>
+    <section id="services" className="py-24 md:py-32 bg-[#FAFAFA] border-b border-slate-200/80 relative">
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         
-        <div className="container mx-auto px-6 md:px-12 xl:px-24 mb-10 md:mb-14 relative z-20 mt-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl"
-          >
-            <h2 className="text-sm md:text-base font-bold text-accent-orange uppercase tracking-widest mb-4">
-              Layanan & Solusi
-            </h2>
-            <h3 className="text-4xl md:text-6xl font-black leading-tight tracking-tight">
-              Lebih dari sekadar website<br/> 
-            </h3>
-
-            {/* Mobile Swipe Indicator */}
-            {isMobile && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-6 flex items-center gap-2 text-gray-500 text-sm font-medium"
-              >
-                <motion.div
-                  animate={{ x: [0, 8, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                >
-                  <ArrowRight size={18} className="text-accent-orange" />
-                </motion.div>
-                <span>Geser untuk melihat semua layanan</span>
-              </motion.div>
-            )}
-          </motion.div>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-xs font-semibold text-indigo-700 mb-4">
+            <Layers className="w-3.5 h-3.5" />
+            <span>Studio Capabilities & Architecture</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-5">
+            Engineered for Revenue, Speed, and Total Operational Autonomy.
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+            We don’t build generic template websites. We architect high-performance digital infrastructure that eliminates middleman fees, engages international guests 24/7, and builds undeniable corporate trust.
+          </p>
         </div>
 
-        <div className={isMobile ? 'px-4 pb-20' : ''}>
-          <motion.div 
-            style={isMobile ? {} : { x }} 
-            className={isMobile 
-              ? "grid grid-cols-2 gap-3" 
-              : "flex gap-6 md:gap-8 px-6 md:px-12 xl:px-24 w-max pb-12 pt-10"
-            }
-          >
-            {services.map((service) => (
-            <div 
-              key={service.id}
-              className={`relative group cursor-pointer drop-shadow-[0_15px_30px_rgba(28,39,51,0.08)] ${
-                isMobile ? "w-full aspect-[4/5]" : "w-[280px] md:w-[340px] aspect-[4/5] shrink-0"
-              }`}
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {bentoItems.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className={`${item.colSpan} card-enterprise p-7 md:p-9 flex flex-col justify-between group`}
             >
-              {/* SVG Mask Definition */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                <defs>
-                  <mask id={`notch-mask-${service.id}`}>
-                    <rect width="100%" height="100%" fill="white" rx={isMobile ? 12 : 16} />
-                    {isMobile ? (
-                      /* Mobile Notch: 60px total, 12px radii */
-                      <path d="M0 0 H60 Q48 0 48 12 V36 Q48 48 36 48 H12 Q0 48 0 60 Z" fill="black" />
-                    ) : (
-                      /* Desktop Notch: 108px total, 24px radii */
-                      <path d="M0 0 H108 Q84 0 84 24 V60 Q84 84 60 84 H24 Q0 84 0 108 Z" fill="black" />
-                    )}
-                  </mask>
-                </defs>
-              </svg>
-
-              {/* Masked Card Container */}
-              <div 
-                className="relative w-full h-full bg-gray-200"
-                style={{ 
-                  mask: `url(#notch-mask-${service.id})`, 
-                  WebkitMask: `url(#notch-mask-${service.id})` 
-                }}
-              >
-                {/* Full Cover Image */}
-                <div className="absolute inset-0 bg-gray-300">
-                  <Image 
-                    src={service.image} 
-                    alt={service.title} 
-                    fill 
-                    priority
-                    sizes={isMobile ? "50vw" : "(max-width: 768px) 280px, 340px"}
-                    className="object-cover" 
-                  />
-                </div>
-
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/95 via-primary-navy/40 to-transparent opacity-80" />
-
-                {/* Content over Image */}
-                <div className={`absolute bottom-0 left-0 w-full flex flex-col z-10 ${isMobile ? 'p-3' : 'p-6'}`}>
-                  <span className={`${isMobile ? 'text-[10px]' : 'text-xs'} font-bold text-accent-orange uppercase tracking-widest mb-1`}>
-                    {service.category}
+              <div>
+                {/* Card Header */}
+                <div className="flex items-center justify-between gap-4 mb-5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-100">
+                    {item.badge}
                   </span>
-                  <h4 className={`${isMobile ? 'text-sm' : 'text-xl'} font-black text-white mb-1 leading-tight`}>
-                    {service.title}
-                  </h4>
-                  <p className={`text-gray-300 ${isMobile ? 'text-[10px]' : 'text-sm'} font-medium leading-relaxed line-clamp-2`}>
-                    {service.shortDesc}
-                  </p>
+                  <div className="w-8 h-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-indigo-600 group-hover:bg-indigo-50 transition-colors">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </div>
+
+                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight mb-3">
+                  {item.title}
+                </h3>
+
+                <p className="text-sm text-slate-600 leading-relaxed mb-6">
+                  {item.description}
+                </p>
+
+                {/* Highlights List */}
+                <ul className="space-y-2 mb-8">
+                  {item.highlights.map((h, i) => (
+                    <li key={i} className="flex items-center gap-2 text-xs font-medium text-slate-700">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Icon box */}
-              <div className={`absolute bg-white rounded-xl shadow-sm flex items-center justify-center z-30 border border-gray-100 ${
-                isMobile 
-                  ? "top-2 left-2 w-9 h-9" 
-                  : "top-4 left-4 w-14 h-14"
-              }`}>
-                <service.icon 
-                  className="text-accent-orange" 
-                  size={isMobile ? 18 : 24} 
-                  strokeWidth={2} 
-                />
-              </div>
+              {/* Card Footer Metric & Link */}
+              <div className="pt-6 border-t border-slate-100 flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <div className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                    {item.metric}
+                  </div>
+                  <div className="text-xs text-slate-500 font-medium">
+                    {item.metricLabel}
+                  </div>
+                </div>
 
-            </div>
+                <Link
+                  href={item.linkHref}
+                  className="text-xs font-semibold text-indigo-600 group-hover:text-indigo-700 inline-flex items-center gap-1 transition-colors"
+                >
+                  <span>{item.linkText}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </motion.div>
           ))}
-          {!isMobile && <div className="w-[10vw] flex-shrink-0" />}
-        </motion.div>
         </div>
+
       </div>
     </section>
   );

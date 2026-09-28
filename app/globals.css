@@ -1,29 +1,83 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-navy: #1C2733;
-  --color-secondary-blue: #233746;
-  --color-accent-orange: #F59E0B;
-  --color-accent-yellow: #FBBF24;
-  --color-light-grey: #F9FAFB;
-  --color-off-white: #FCFDFD;
-  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --color-obsidian: #090D16;
+  --color-slate-950: #0B0F19;
+  --color-slate-900: #0F172A;
+  --color-slate-800: #1E293B;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748B;
+  --color-slate-200: #E2E8F0;
+  --color-slate-100: #F1F5F9;
+  --color-canvas: #FAFAFA;
+  --color-surface: #FFFFFF;
+  
+  --color-brand-indigo: #4F46E5;
+  --color-brand-violet: #6366F1;
+  --color-brand-emerald: #10B981;
+  
+  /* Legacy compatibility */
+  --color-primary-navy: #0F172A;
+  --color-secondary-blue: #1E293B;
+  --color-accent-orange: #4F46E5;
+  --color-accent-yellow: #6366F1;
+  --color-light-grey: #FAFAFA;
+  --color-off-white: #FFFFFF;
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-  background-color: var(--color-light-grey);
-  color: var(--color-primary-navy);
+  background-color: #FAFAFA;
+  color: #0F172A;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom utility for the jagged brush edge used in the reference */
-.brush-edge-bottom {
-  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 100' fill='none' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0 100V40C150 40 200 10 350 25C480 38 520 15 650 30C780 43 850 15 1000 35V100H0Z' fill='black'/%3E%3C/svg%3E");
-  mask-size: 100% 100%;
+/* Subtle fintech grid pattern utility */
+.bg-grid-fintech {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
 }
 
-/* Exclusive Tag Style Build */
-.tag-exclusive {
-  @apply px-4 py-1.5 rounded-full border border-blue-100 bg-blue-50/30 text-blue-600 text-[10px] uppercase tracking-widest font-bold whitespace-nowrap inline-flex items-center;
+.bg-grid-dark {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* Subtle glow badge */
+.badge-fintech {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  color: #334155;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Premium Card hover */
+.card-enterprise {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
+}
+
+.card-enterprise:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+  transform: translateY(-2px);
 }

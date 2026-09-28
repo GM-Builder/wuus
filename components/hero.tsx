@@ -1,131 +1,271 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { CheckCircle2, Globe } from "lucide-react";
-import Image from "next/image";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ShieldCheck, Zap, Bot, CreditCard, Sparkles, CheckCircle2, Globe2 } from "lucide-react";
 import Link from "next/link";
-import { useRef } from "react";
+
+const tabs = [
+  {
+    id: "booking",
+    title: "Direct Booking Engine",
+    badge: "0% OTA Fee",
+    icon: Zap,
+    headline: "Stop leaking 18%–25% to Booking.com & Airbnb.",
+    description: "Built on Next.js Edge infrastructure with sub-800ms load times, instant calendar sync, and zero middleman commissions.",
+    metrics: [
+      { label: "Commission Saved", value: "100%", sub: "Kept by host" },
+      { label: "Page Load Speed", value: "720ms", sub: "Global Edge CDN" },
+      { label: "Mobile Conversion", value: "+34%", sub: "Frictionless checkout" },
+    ],
+    snippet: "Guest clicks 'Book Direct' → Confirmation received in 4 seconds."
+  },
+  {
+    id: "ai-concierge",
+    title: "24/7 AI Concierge",
+    badge: "Strictly Grounded",
+    icon: Bot,
+    headline: "Answers in 20+ languages while you sleep.",
+    description: "Strict RAG architecture grounded strictly on your hotel handbook. Zero hallucinations, zero tech overhead, automatic WhatsApp escalation.",
+    metrics: [
+      { label: "Response Latency", value: "1.2s", sub: "Near instant" },
+      { label: "Guest Languages", value: "24+", sub: "Auto-detected" },
+      { label: "Host Interruption", value: "-85%", sub: "Automated FAQ" },
+    ],
+    snippet: "🇩🇪 'Ist spätes Einchecken möglich?' → 'Ja, mit Schlüsselcode #4092.'"
+  },
+  {
+    id: "settlement",
+    title: "Frictionless Settlement",
+    badge: "Mayar & SEPA",
+    icon: CreditCard,
+    headline: "Cross-border B2B payments without bureaucratic friction.",
+    description: "Receive instant corporate card deposits via Mayar link or direct SEPA IBAN transfers for European hotel accounting.",
+    metrics: [
+      { label: "Deposit Milestone", value: "50 / 50", sub: "Staging-first" },
+      { label: "Card Processing", value: "Instant", sub: "Visa / Mastercard" },
+      { label: "Invoice Compliance", value: "0% VAT", sub: "Export of services" },
+    ],
+    snippet: "Client verifies live staging on their phone before final balance."
+  },
+];
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const [activeTab, setActiveTab] = useState("booking");
+  const currentTab = tabs.find((t) => t.id === activeTab) || tabs[0];
 
   return (
-    <section ref={containerRef} className="relative bg-off-white pt-36 pb-32 lg:pt-48 lg:pb-48 overflow-hidden z-10" style={{ position: "relative" }}>
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-secondary-blue/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent-orange/10 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative pt-32 pb-24 md:pt-44 md:pb-32 bg-[#FAFAFA] overflow-hidden border-b border-slate-200/80">
+      {/* Background Fintech Grid */}
+      <div className="absolute inset-0 bg-grid-fintech opacity-60 pointer-events-none" />
 
-      <div className="container mx-auto px-4 max-w-7xl relative z-20 flex flex-col items-center">
+      {/* Subtle radial ambient lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-indigo-500/10 via-slate-200/20 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-        {/* Main Content constraints */}
-        <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center px-6">
-
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
+        
+        {/* Header Text Section */}
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center mb-16 md:mb-20">
+          
+          {/* Authority Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-center w-full"
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-slate-200/90 shadow-sm text-xs font-semibold text-slate-700 mb-8"
           >
-
-
-            <h1 className="text-[2.5rem] min-[375px]:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-primary-navy tracking-tight leading-[1.05] mb-8">
-              Jangan Biarkan <br className="hidden md:block" />
-              Bisnis Anda <br className="hidden md:block" />
-              Terlihat <span className="bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent italic">Amatir.</span>
-            </h1>
-
-            <p className="text-base md:text-lg lg:text-xl text-gray-500 max-w-2xl mb-12 font-medium leading-relaxed">
-              Kami merancang website yang cepat, elegan, dan dirancang untuk membangun kepercayaan sejak interaksi pertama.
-            </p>
-
-            {/* Action Buttons (DDI Style: Solid Orange & White w/ Outline) */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-2xl mx-auto relative z-30">
-              <Link href="https://build.webuntukusaha.com" className="w-full sm:w-auto px-8 py-3 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto text-center flex items-center justify-center gap-2 group">
-                🚀 Bikin Web 1x Klik
-              </Link>
-              <Link href="/inquiries" className="w-full sm:w-auto px-8 py-3 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-sm cursor-pointer pointer-events-auto text-center">
-                Estimasi Proyek Gratis
-              </Link>
-            </div>
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="tracking-tight">WUUS Studio</span>
+            <span className="text-slate-300">•</span>
+            <span className="text-indigo-600 font-bold">Boutique Hospitality & Modern Web Engineering</span>
           </motion.div>
 
+          {/* Master Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.08] mb-6"
+          >
+            Engineering Digital Platforms That Turn Strangers Into <span className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-slate-900 bg-clip-text text-transparent">Direct Bookings.</span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl font-normal leading-relaxed mb-10"
+          >
+            Bespoke Next.js direct-booking engines, sub-800ms speed architecture, and 24/7 multilingual AI concierges. Engineered for independent European stays and businesses that refuse to look amateur.
+          </motion.p>
+
+          {/* Dual Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto"
+          >
+            <Link
+              href="/hospitality"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-200"
+            >
+              <span>Explore Hospitality Engine</span>
+              <ArrowRight className="w-4 h-4 text-slate-300" />
+            </Link>
+
+            <Link
+              href="/inquiries"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-200/90 font-semibold text-sm shadow-sm transition-all duration-200"
+            >
+              <span>Request Project Inquiry</span>
+            </Link>
+          </motion.div>
+
+          {/* Trust Guarantees Row */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-10 text-xs font-medium text-slate-500"
+          >
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+              <span>Staging-First Guarantee</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+              <span>50/50 Milestone Protection</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+              <span>Instant Mayar Card Checkout</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+              <span>Strict RAG Zero-Hallucination AI</span>
+            </span>
+          </motion.div>
         </div>
 
-        {/* Floating Mockup Elements alongside text as requested */}
-        {/* Left Floating Image Box */}
+        {/* Live Interactive Engine Preview (Deel / Mayar Aesthetic) */}
         <motion.div
-          style={{ y: y1 }}
-          className="absolute lg:left-0 2xl:-left-12 top-48 z-10 lg:scale-[0.6] xl:scale-[0.8] 2xl:scale-100 origin-left hidden lg:block"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="w-full max-w-5xl mx-auto rounded-2xl bg-white border border-slate-200/90 shadow-[0_20px_50px_-10px_rgba(15,23,42,0.08)] overflow-hidden"
         >
-          <div className="relative">
-            <div className="absolute -left-6 -top-6 w-[120px] fill-accent-orange/20 z-0">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M40.5 12C45.2 3.5 54.8 3.5 59.5 12L88.7 64C93.4 72.5 88.6 83 79.2 83H20.8C11.4 83 6.6 72.5 11.3 64L40.5 12Z" />
-              </svg>
+          {/* Top Control Bar */}
+          <div className="bg-slate-900 text-white px-5 py-3.5 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+              </div>
+              <span className="text-xs font-mono text-slate-400 border-l border-slate-700 pl-3">
+                wuus-engine // live-production v0.2.5
+              </span>
             </div>
-            <div className="w-[260px] h-[300px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 flex flex-col">
-              <div className="w-full h-full rounded-2xl bg-gray-100 overflow-hidden relative">
-                <Image
-                  src="/Hero1.png"
-                  alt="Business Owner"
-                  fill
-                  priority
-                  loading="eager"
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
 
-              <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-accent-orange rounded-2xl flex items-center justify-center shadow-lg transform rotate-6 border-4 border-white">
-                <Globe className="text-white w-8 h-8" />
-              </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                Edge Global CDN: 720ms
+              </span>
             </div>
           </div>
-        </motion.div>
 
-        {/* Right Floating Stat Box */}
-        <motion.div
-          style={{ y: y2 }}
-          className="absolute lg:right-0 2xl:-right-12 top-64 z-10 lg:scale-[0.6] xl:scale-[0.8] 2xl:scale-100 origin-right hidden lg:block"
-        >
-          <div className="relative">
-            {/* DDI style brush accent under right photo */}
-            <div className="absolute -inset-8 bg-[url('/patterns/cubes.png')] opacity-10 z-0" />
+          {/* Interactive Navigation Tabs */}
+          <div className="grid grid-cols-1 md:grid-cols-3 border-b border-slate-200/90 bg-slate-50/70">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = tab.id === activeTab;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`text-left p-5 transition-all relative flex flex-col gap-1 ${
+                    isActive
+                      ? "bg-white text-slate-900 border-b-2 border-indigo-600 shadow-sm"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/60"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                      <Icon className={`w-3.5 h-3.5 ${isActive ? "text-indigo-600" : "text-slate-400"}`} />
+                      {tab.title}
+                    </span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      isActive ? "bg-indigo-50 text-indigo-700 border border-indigo-200" : "bg-slate-200/70 text-slate-600"
+                    }`}>
+                      {tab.badge}
+                    </span>
+                  </div>
+                  <p className="text-sm font-semibold tracking-tight text-slate-900 line-clamp-1">
+                    {tab.headline}
+                  </p>
+                </button>
+              );
+            })}
+          </div>
 
-            <div className="w-[280px] sm:w-[320px] bg-white rounded-3xl p-3 shadow-2xl relative z-10 border border-gray-100 rotate-8">
-              <div className="h-[200px] sm:h-[220px] rounded-2xl bg-gray-100 overflow-hidden relative">
-                <Image
-                  src="/Hero2.png"
-                  alt="Team Working"
-                  fill
-                  priority
-                  loading="eager"
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
+          {/* Tab Body */}
+          <div className="p-6 md:p-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTab.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                {/* Left explanation */}
+                <div className="lg:col-span-7 space-y-4">
+                  <div className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-100">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Engine Capability</span>
+                  </div>
 
-              <div className="absolute -top-8 -right-8 w-20 h-20">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full rotate-12">
-                  <circle cx="50" cy="50" r="40" fill="#FF9900" fillOpacity="0.2" />
-                  <circle cx="50" cy="50" r="25" fill="#FF9900" />
-                  <path d="M40 50L46.5 56.5L60 43" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                    {currentTab.headline}
+                  </h3>
+
+                  <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                    {currentTab.description}
+                  </p>
+
+                  <div className="p-3.5 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs flex items-center gap-2 border border-slate-800">
+                    <span className="text-emerald-400">✓</span>
+                    <span>{currentTab.snippet}</span>
+                  </div>
+                </div>
+
+                {/* Right Metrics Grid */}
+                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3.5">
+                  {currentTab.metrics.map((m, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between"
+                    >
+                      <div>
+                        <div className="text-xs font-medium text-slate-500">{m.label}</div>
+                        <div className="text-[11px] text-slate-400">{m.sub}</div>
+                      </div>
+                      <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                        {m.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </motion.div>
 
       </div>
-
-      <div className="absolute bottom-0 left-0 w-full h-[100px] md:h-[150px] bg-secondary-blue brush-edge-bottom z-10 translate-y-[2px]"></div>
     </section>
   );
 }

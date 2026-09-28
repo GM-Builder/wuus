@@ -1,116 +1,128 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Cpu, ShieldCheck, Zap, Globe } from "lucide-react";
 
 const stacks = [
-  { name: "Next.js", color: "bg-black text-white border-black" },
-  { name: "Tailwind CSS", color: "bg-[#0ea5e9] text-white border-[#0ea5e9]" },
-  { name: "Vercel", color: "bg-black text-white border-black" },
-  { name: "Framer Motion", color: "bg-pink-500 text-white border-pink-500" },
+  { name: "Next.js 16", desc: "React Server Components" },
+  { name: "Vercel Global CDN", desc: "Sub-800ms Edge Latency" },
+  { name: "Supabase DB", desc: "Postgres Realtime Sync" },
+  { name: "Mayar Cross-Border", desc: "Instant Card Settlement" },
 ];
 
 const scores = [
   { label: "Performance", value: 100 },
   { label: "Accessibility", value: 100 },
   { label: "Best Practices", value: 100 },
-  { label: "SEO", value: 100 },
+  { label: "SEO Authority", value: 100 },
 ];
 
 export function TechAuthority() {
   return (
-    <section className="py-24 bg-primary-navy relative overflow-hidden">
-      {/* Abstract Background Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-orange/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
+    <section id="tech" className="py-24 md:py-32 bg-[#090D16] text-white relative overflow-hidden border-b border-slate-800">
+      {/* Background Fintech Grid */}
+      <div className="absolute inset-0 bg-grid-dark opacity-40 pointer-events-none" />
 
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+      {/* Ambient Glows */}
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-          {/* Text Content */}
+          {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-6"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              Teknologi Modern <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-orange to-accent-yellow">Dengan Standar Global.</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/80 text-xs font-semibold text-indigo-400 mb-6">
+              <Cpu className="w-3.5 h-3.5" />
+              <span>Architectural Rigor & Global Edge CDN</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
+              Zero Bloat. Instant Speed. <br />
+              <span className="bg-gradient-to-r from-indigo-400 via-indigo-300 to-emerald-400 bg-clip-text text-transparent">
+                Engineered for Global Trust.
+              </span>
             </h2>
-            <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-              Kami tidak menggunakan platform lambat. Website Anda dibangun menggunakan infrastruktur modern yang sama dengan yang digunakan oleh perusahaan teknologi global, Memberikan performa tinggi, stabilitas, dan keamanan yang dirancang untuk kebutuhan jangka panjang.
+
+            <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-8">
+              We never deploy on slow, vulnerable legacy platforms. Every client engine is built on modern React Server Components and distributed across 300+ global edge cache locations.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-10">
+            <div className="grid grid-cols-2 gap-3 mb-8">
               {stacks.map((stack) => (
-                <div key={stack.name} className={`px-4 py-2 rounded-full text-sm font-bold border-2 ${stack.color} flex items-center gap-2`}>
-                  {stack.name}
+                <div key={stack.name} className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+                  <div className="text-xs font-bold text-white tracking-tight">{stack.name}</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">{stack.desc}</div>
                 </div>
               ))}
             </div>
 
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-white font-medium">
-                <CheckCircle2 className="text-green-400 w-5 h-5 flex-shrink-0" />
-                <span>Hosting langsung di jaringan Edge global.</span>
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2.5 text-sm text-slate-300">
+                <CheckCircle2 className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                <span>Hosted on Vercel Global Edge Network with 99.99% uptime.</span>
               </li>
-              <li className="flex items-center gap-3 text-white font-medium">
-                <CheckCircle2 className="text-green-400 w-5 h-5 flex-shrink-0" />
-                <span>Anti-DDoS tingkat enterprise murni.</span>
+              <li className="flex items-center gap-2.5 text-sm text-slate-300">
+                <CheckCircle2 className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                <span>Enterprise SSL & automatic DDoS mitigation by Cloudflare.</span>
               </li>
-              <li className="flex items-center gap-3 text-white font-medium">
-                <CheckCircle2 className="text-green-400 w-5 h-5 flex-shrink-0" />
-                <span>Skor performa sempurna di Google Lighthouse.</span>
+              <li className="flex items-center gap-2.5 text-sm text-slate-300">
+                <CheckCircle2 className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                <span>Sub-800ms Time-to-First-Byte (TTFB) across Europe & worldwide.</span>
               </li>
             </ul>
           </motion.div>
 
-          {/* Lighthouse CSS Mockup */}
+          {/* Right Performance Scorecard */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:col-span-6"
           >
-            {/* Fake Laptop Frame */}
-            <div className="w-full bg-gray-900 rounded-t-xl p-2 md:p-4 shadow-2xl border-t border-x border-gray-700 relative">
-              <div className="w-full bg-white rounded-lg aspect-[4/3] md:aspect-video overflow-hidden flex items-center justify-center relative">
-
-                {/* Simplified Lighthouse Score UI directly with CSS */}
-                <div className="bg-gray-50 flex flex-col items-center justify-center p-4 md:p-8 w-full h-full">
-                  <div className="text-center mb-4 md:mb-8">
-                    <span className="text-[8px] md:text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1 md:mb-2">Simulasi Hasil Audit Independen</span>
-                    <h3 className="text-lg md:text-2xl font-bold text-gray-800 leading-tight">Google Lighthouse Score</h3>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 w-full max-w-2xl">
-                    {scores.map((score, i) => (
-                      <motion.div
-                        key={score.label}
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.5 + (i * 0.1), type: "spring" }}
-                        className="flex flex-col items-center"
-                      >
-                        <div className="w-12 h-12 md:w-20 lg:w-24 md:h-20 lg:h-24 rounded-full border-[4px] md:border-[6px] border-green-500 flex items-center justify-center bg-green-50 shadow-[0_0_15px_rgba(34,197,94,0.3)] mb-2 md:mb-3">
-                          <span className="text-base md:text-2xl lg:text-3xl font-black text-green-600">{score.value}</span>
-                        </div>
-                        <span className="text-[8px] md:text-[10px] lg:text-xs font-bold text-gray-600 uppercase text-center max-w-[60px] md:max-w-[80px]">
-                          {score.label}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
+            <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-6 md:p-8 shadow-2xl backdrop-blur-md">
+              <div className="flex items-center justify-between pb-6 border-b border-slate-800 mb-8">
+                <div>
+                  <div className="text-xs font-mono uppercase tracking-wider text-slate-400">Independent Audit Simulation</div>
+                  <div className="text-lg font-bold text-white tracking-tight mt-1">Google Lighthouse Benchmarks</div>
                 </div>
-
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Verified 100/100
+                </div>
               </div>
-            </div>
-            {/* Laptop Base */}
-            <div className="w-[110%] -ml-[5%] h-4 bg-gradient-to-b from-gray-300 to-gray-400 rounded-b-xl shadow-2xl border-b border-x border-gray-400 relative">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/4 h-1 bg-gray-400 rounded-b-md"></div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                {scores.map((score, i) => (
+                  <motion.div
+                    key={score.label}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.08 }}
+                    className="flex flex-col items-center text-center"
+                  >
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-emerald-500/80 flex items-center justify-center bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.15)] mb-3">
+                      <span className="text-xl sm:text-2xl font-extrabold text-emerald-400">{score.value}</span>
+                    </div>
+                    <span className="text-xs font-medium text-slate-300">
+                      {score.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                <span>Audited on Chromium Edge Engine</span>
+                <span className="text-emerald-400 font-mono">0.72s Total Load</span>
+              </div>
             </div>
           </motion.div>
 
