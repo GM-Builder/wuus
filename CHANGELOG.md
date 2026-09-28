@@ -5,6 +5,18 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.5] - 2026-09-28
+
+### Changed
+- **Sweet-Spot Pricing Calibration & Staging-First Quality Guarantee (`/hospitality#pricing`)**:
+  - Calibrated investment pricing to eliminate upfront friction for independent Western Balkan boutique stays:
+    - **Tier 1: Boutique Direct Showcase**: Pressed to **€690 flat** (from €1,450), delivering bespoke Next.js architecture, sub-800ms speed, and 0% OTA commission direct flow.
+    - **Tier 2: The Complete AI Hospitality Engine**: Pressed to **€1,290 flat** (from €2,450), delivering full digital flagship + 24/7 Multilingual AI Concierge in 20+ languages + WhatsApp lead hand-off + 6 months hosting included.
+  - Added **Staging-First Quality Guarantee**: WUUS builds the interactive site and tests the live AI Concierge on a private staging link first, allowing hoteliers to verify mobile speed and quality before final payment.
+  - Updated value comparison: entire investment breaks even in less than 2 weeks of direct bookings (approx. 4–5 room nights).
+  - Synchronized package dropdowns in main form & modal, and updated `docs/outreach/reply-library.md`.
+  - Bumped version to `0.2.5`.
+
 ## [0.2.4] - 2026-09-28
 
 ### Added

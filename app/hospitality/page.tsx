@@ -223,7 +223,7 @@ export default function HospitalityPage() {
     websiteUrl: '',
     contactName: '',
     email: '',
-    packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€2,450)',
+    packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€1,290)',
     notes: '',
   });
 
@@ -1377,10 +1377,10 @@ export default function HospitalityPage() {
 
                   <div className="mb-8 pb-6 border-b border-gray-100">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-black text-primary-navy">€1,450</span>
+                      <span className="text-4xl font-black text-primary-navy">€690</span>
                       <span className="text-xs text-gray-500 font-semibold uppercase">One-time flat fee</span>
                     </div>
-                    <p className="text-[11px] text-gray-500 mt-1">Delivery in 7–14 days • 100% code ownership</p>
+                    <p className="text-[11px] text-gray-500 mt-1">Delivery in 7–10 days • 100% code ownership</p>
                   </div>
 
                   <ul className="space-y-3.5 text-xs text-gray-700 mb-8">
@@ -1413,12 +1413,12 @@ export default function HospitalityPage() {
 
                 <button
                   onClick={() => {
-                    setFormData(prev => ({ ...prev, packageInterest: 'Tier 1: Boutique Direct Showcase (€1,450)' }));
+                    setFormData(prev => ({ ...prev, packageInterest: 'Tier 1: Boutique Direct Showcase (€690)' }));
                     setModalOpen(true);
                   }}
                   className="w-full py-3.5 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] transition-all cursor-pointer text-center"
                 >
-                  Inquire for Tier 1 (€1,450)
+                  Inquire for Tier 1 (€690)
                 </button>
               </div>
 
@@ -1441,7 +1441,7 @@ export default function HospitalityPage() {
 
                   <div className="mb-8 pb-6 border-b border-amber-200/80">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-black text-primary-navy">€2,450</span>
+                      <span className="text-4xl font-black text-primary-navy">€1,290</span>
                       <span className="text-xs text-gray-500 font-semibold uppercase">One-time flat fee</span>
                     </div>
                     <p className="text-[11px] text-emerald-800 font-medium mt-1">Includes 6 Months AI Concierge Hosting & Model Tuning</p>
@@ -1470,7 +1470,7 @@ export default function HospitalityPage() {
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong>6 Months Turnkey Concierge Cloud Hosting</strong> (Optional €49/mo thereafter)</span>
+                      <span><strong>6 Months Turnkey Concierge Cloud Hosting</strong> (Optional €29/mo thereafter)</span>
                     </li>
                   </ul>
                 </div>
@@ -1478,23 +1478,38 @@ export default function HospitalityPage() {
                 <div>
                   <button
                     onClick={() => {
-                      setFormData(prev => ({ ...prev, packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€2,450)' }));
+                      setFormData(prev => ({ ...prev, packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€1,290)' }));
                       setModalOpen(true);
                     }}
                     className="w-full py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-black text-xs uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[4px_4px_0px_0px_#1C2733] transition-all cursor-pointer text-center"
                   >
-                    Select AI Hospitality Engine (€2,450)
+                    Select AI Hospitality Engine (€1,290)
                   </button>
                   <p className="text-[10px] text-gray-500 text-center mt-2">
-                    Equivalent to ~1 month salary of a single European night receptionist.
+                    Equivalent to approx. 4–5 nights of direct bookings (less than 1 month of OTA commissions).
                   </p>
                 </div>
               </div>
 
             </div>
 
+            {/* Staging-First Quality Guarantee Callout */}
+            <div className="mt-8 bg-amber-50/80 rounded-2xl p-5 border border-amber-200/80 flex items-center gap-4 text-left">
+              <div className="w-10 h-10 rounded-xl bg-accent-orange text-primary-navy flex items-center justify-center font-bold shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="font-bold text-xs text-primary-navy uppercase tracking-wider">
+                  Staging-First Quality Guarantee · Zero Financial Risk
+                </p>
+                <p className="text-xs text-gray-600 mt-0.5 leading-relaxed">
+                  We build your interactive Next.js site and test the live AI Concierge on a private staging link first. You review and verify the real mobile experience on your own phone before making the final balance payment.
+                </p>
+              </div>
+            </div>
+
             {/* Zero-Risk Evaluation Callout */}
-            <div className="mt-12 bg-white rounded-2xl p-6 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
+            <div className="mt-6 bg-white rounded-2xl p-6 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-xs">
               <div>
                 <p className="font-bold text-sm text-primary-navy">Prefer to see your property&apos;s mobile friction points first?</p>
                 <p className="text-xs text-gray-500 mt-0.5">We provide a free 1-page visual assessment with zero commitment or sales pressure.</p>
@@ -1706,11 +1721,11 @@ export default function HospitalityPage() {
                     onChange={(e) => setFormData({ ...formData, packageInterest: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange"
                   >
-                    <option value="Tier 2: The Complete AI Hospitality Engine (€2,450)">
-                      Tier 2: The Complete AI Hospitality Engine (€2,450) — Most Popular
+                    <option value="Tier 2: The Complete AI Hospitality Engine (€1,290)">
+                      Tier 2: The Complete AI Hospitality Engine (€1,290) — Most Popular
                     </option>
-                    <option value="Tier 1: Boutique Direct Showcase (€1,450)">
-                      Tier 1: Boutique Direct Showcase (€1,450)
+                    <option value="Tier 1: Boutique Direct Showcase (€690)">
+                      Tier 1: Boutique Direct Showcase (€690)
                     </option>
                     <option value="Free 1-Page Website Review">
                       Free 1-Page Website Review (No Obligation)
@@ -1998,11 +2013,11 @@ export default function HospitalityPage() {
                       onChange={(e) => setFormData({ ...formData, packageInterest: e.target.value })}
                       className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-primary-navy focus:outline-hidden focus:border-accent-orange bg-white"
                     >
-                      <option value="Tier 2: The Complete AI Hospitality Engine (€2,450)">
-                        Tier 2: The Complete AI Hospitality Engine (€2,450)
+                      <option value="Tier 2: The Complete AI Hospitality Engine (€1,290)">
+                        Tier 2: The Complete AI Hospitality Engine (€1,290)
                       </option>
-                      <option value="Tier 1: Boutique Direct Showcase (€1,450)">
-                        Tier 1: Boutique Direct Showcase (€1,450)
+                      <option value="Tier 1: Boutique Direct Showcase (€690)">
+                        Tier 1: Boutique Direct Showcase (€690)
                       </option>
                       <option value="Free 1-Page Website Review">
                         Free 1-Page Website Review (No Obligation)
