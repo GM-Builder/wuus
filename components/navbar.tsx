@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -13,9 +13,9 @@ const navLinks = [
     badge: "EU Stays",
     isAccent: true 
   },
-  { name: "Solutions", href: "/#services" },
-  { name: "Architecture & Speed", href: "/#tech" },
-  { name: "Workflow", href: "/#workflow" },
+  { name: "Layanan", href: "/#services" },
+  { name: "Alur Kerja", href: "/#workflow" },
+  { name: "Studi Kasus", href: "/#portfolio" },
   { name: "FAQ", href: "/#faq" },
 ];
 
@@ -45,8 +45,8 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] py-3.5"
-            : "bg-transparent py-5"
+            ? "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_12px_-2px_rgba(28,39,51,0.06)] py-3"
+            : "bg-white/80 backdrop-blur-sm py-4"
         }`}
       >
         <div className="w-full max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
@@ -74,13 +74,13 @@ export function Navbar() {
                 href={link.href}
                 className={`text-sm font-medium tracking-tight transition-colors flex items-center gap-1.5 ${
                   link.isAccent
-                    ? "text-indigo-600 hover:text-indigo-700 font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "text-[#F59E0B] hover:text-[#D97706] font-semibold"
+                    : "text-[#1C2733] hover:text-[#F59E0B]"
                 }`}
               >
                 {link.name}
                 {link.badge && (
-                  <span className="bg-indigo-50 border border-indigo-200 text-indigo-600 text-[10px] px-2 py-0.5 rounded-full font-bold tracking-tight">
+                  <span className="bg-amber-50 border border-amber-200 text-[#D97706] text-[10px] px-2 py-0.5 rounded-full font-bold tracking-tight">
                     {link.badge}
                   </span>
                 )}
@@ -91,16 +91,16 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/hospitality"
-              className="text-xs font-semibold px-4 py-2.5 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100/80 transition-all flex items-center gap-1"
+              className="text-xs font-semibold px-4 py-2 rounded-full text-slate-700 hover:text-[#1C2733] hover:bg-slate-100 transition-all flex items-center gap-1"
             >
-              <span>Explore Hospitality</span>
+              <span>Showcase Hospitality</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
             </Link>
             <Link
               href="/inquiries"
-              className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-lg text-xs font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5"
+              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm flex items-center gap-1.5"
             >
-              <span>Project Inquiries</span>
+              <span>Konsultasi Proyek</span>
             </Link>
           </div>
 
@@ -108,7 +108,7 @@ export function Navbar() {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="text-slate-800 p-2 bg-slate-100/80 hover:bg-slate-200/80 rounded-lg transition-colors"
+              className="text-[#1C2733] p-2 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
               aria-label="Open Menu"
             >
               <Menu className="w-5 h-5" />
@@ -154,13 +154,13 @@ export function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-lg font-semibold py-2.5 px-3 rounded-lg flex items-center justify-between transition-colors ${
                     link.isAccent 
-                      ? "bg-indigo-50/70 text-indigo-700" 
-                      : "text-slate-800 hover:bg-slate-50"
+                      ? "bg-amber-50 text-[#D97706]" 
+                      : "text-[#1C2733] hover:bg-slate-50"
                   }`}
                 >
                   <span>{link.name}</span>
                   {link.badge && (
-                    <span className="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                    <span className="bg-[#F59E0B] text-[#1C2733] text-[10px] px-2 py-0.5 rounded-full font-bold">
                       {link.badge}
                     </span>
                   )}
@@ -172,16 +172,16 @@ export function Navbar() {
               <Link
                 href="/hospitality"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center bg-indigo-50 border border-indigo-200 text-indigo-700 px-6 py-3.5 rounded-xl font-semibold text-sm"
+                className="w-full text-center bg-amber-50 border border-amber-200 text-[#D97706] px-6 py-3.5 rounded-full font-bold text-sm"
               >
                 Hospitality Engine Showcase
               </Link>
               <Link
                 href="/inquiries"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center bg-slate-900 text-white px-6 py-3.5 rounded-xl font-semibold text-sm shadow-sm"
+                className="w-full text-center bg-[#1C2733] text-white px-6 py-3.5 rounded-full font-bold text-sm shadow-sm"
               >
-                Start Project Inquiry
+                Mulai Konsultasi Proyek
               </Link>
             </div>
           </motion.div>

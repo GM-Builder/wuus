@@ -42,28 +42,28 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/hospitality" className="text-slate-600 hover:text-indigo-600 transition-colors flex items-center gap-1 font-medium">
+                <Link href="/hospitality" className="text-slate-600 hover:text-[#F59E0B] transition-colors flex items-center gap-1 font-medium">
                   <span>Hospitality AI Engine</span>
-                  <span className="text-[9px] bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded font-bold">New</span>
+                  <span className="text-[9px] bg-amber-50 text-[#D97706] px-1.5 py-0.5 rounded font-bold">New</span>
                 </Link>
               </li>
               <li>
-                <Link href="/hospitality#ai-concierge" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                <Link href="/hospitality#ai-concierge" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
                   24/7 AI Concierge Demo
                 </Link>
               </li>
               <li>
-                <Link href="/#services" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                <Link href="/#services" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
                   Direct Booking Architecture
                 </Link>
               </li>
               <li>
-                <Link href="/#tech" className="text-slate-600 hover:text-indigo-600 transition-colors">
-                  Edge Speed Benchmarks
+                <Link href="/#workflow" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
+                  Alur Kerja & Kecepatan
                 </Link>
               </li>
               <li>
-                <Link href="/score-test" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                <Link href="/score-test" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
                   Business Speed & SEO Audit
                 </Link>
               </li>
@@ -77,12 +77,12 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/hospitality#pricing" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                <Link href="/hospitality#pricing" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
                   Two-Tier Sweet-Spot Pricing
                 </Link>
               </li>
               <li>
-                <Link href="/inquiries" className="text-slate-600 hover:text-indigo-600 transition-colors">
+                <Link href="/inquiries" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
                   Staging-First Guarantee
                 </Link>
               </li>
@@ -113,13 +113,13 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2.5 text-slate-600">
                 <Mail size={16} className="text-slate-400 shrink-0" />
-                <a href="mailto:faisalalfarizi@webuntukusaha.com" className="hover:text-indigo-600 transition-colors">
+                <a href="mailto:faisalalfarizi@webuntukusaha.com" className="hover:text-[#F59E0B] transition-colors">
                   faisalalfarizi@webuntukusaha.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-slate-600">
                 <PhoneCall size={16} className="text-slate-400 shrink-0" />
-                <a href="https://wa.me/6281383521750" className="hover:text-indigo-600 transition-colors font-medium">
+                <a href="https://wa.me/6281383521750" className="hover:text-[#F59E0B] transition-colors font-medium">
                   +62 813-8352-1750
                 </a>
               </li>

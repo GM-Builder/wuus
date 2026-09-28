@@ -1,83 +1,59 @@
 @import "tailwindcss";
 
 @theme {
-  --color-obsidian: #090D16;
-  --color-slate-950: #0B0F19;
-  --color-slate-900: #0F172A;
-  --color-slate-800: #1E293B;
+  --color-primary-navy: #1C2733;
+  --color-secondary-blue: #233746;
+  --color-slate-navy: #16202B;
+  --color-accent-orange: #F59E0B;
+  --color-accent-orange-hover: #D97706;
+  --color-accent-orange-deep: #EA580C;
+  --color-accent-yellow: #FBBF24;
+  
+  --color-slate-900: #1C2733;
+  --color-slate-800: #233746;
   --color-slate-700: #334155;
   --color-slate-600: #475569;
   --color-slate-500: #64748B;
+  --color-slate-300: #CBD5E1;
   --color-slate-200: #E2E8F0;
   --color-slate-100: #F1F5F9;
-  --color-canvas: #FAFAFA;
+  --color-slate-50: #F8FAFC;
+  
+  --color-canvas: #F8F9FA;
   --color-surface: #FFFFFF;
-  
-  --color-brand-indigo: #4F46E5;
-  --color-brand-violet: #6366F1;
-  --color-brand-emerald: #10B981;
-  
-  /* Legacy compatibility */
-  --color-primary-navy: #0F172A;
-  --color-secondary-blue: #1E293B;
-  --color-accent-orange: #4F46E5;
-  --color-accent-yellow: #6366F1;
-  --color-light-grey: #FAFAFA;
-  --color-off-white: #FFFFFF;
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-  background-color: #FAFAFA;
-  color: #0F172A;
+  background-color: #FFFFFF;
+  color: #1C2733;
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle fintech grid pattern utility */
-.bg-grid-fintech {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+/* Deel-Style Clean Card */
+.deel-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 1.5rem;
+  transition: all 0.25s ease-in-out;
 }
 
-.bg-grid-dark {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+.deel-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 12px 24px -8px rgba(28, 39, 51, 0.08);
 }
 
-/* Subtle glow badge */
-.badge-fintech {
+/* Subtle clean badge */
+.badge-clean {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
   border-radius: 9999px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  color: #334155;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-}
-
-/* Premium Card hover */
-.card-enterprise {
-  background: #FFFFFF;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 1.25rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
-}
-
-.card-enterprise:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
-  transform: translateY(-2px);
 }

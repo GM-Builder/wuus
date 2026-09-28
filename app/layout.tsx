@@ -62,13 +62,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} antialiased scroll-smooth selection:bg-indigo-500/20 selection:text-indigo-900`}
+      className={`${plusJakarta.variable} antialiased scroll-smooth selection:bg-amber-500/20 selection:text-[#1C2733]`}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-[#FAFAFA] text-slate-900 antialiased">
+      <body className="min-h-full flex flex-col font-sans bg-white text-[#1C2733] antialiased">
         {children}
         <Analytics />
         <SpeedInsights />
