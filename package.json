@@ -1,6 +1,6 @@
 {
   "name": "webuntukusaha",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--max-old-space-size=2048' next dev",

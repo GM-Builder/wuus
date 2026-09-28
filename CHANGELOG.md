@@ -5,6 +5,19 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2026-09-28
+
+### Added
+- **Studio Admin & Client Maintenance CRM (`/admin/inquiries`)**:
+  - Implemented PIN-protected client relationship management dashboard (`/admin/inquiries`).
+  - Added live synchronization with Supabase table `hospitality_inquiries`.
+  - Added pipeline metrics (Total Inquiries, New Leads, Reviews Sent, Client Won).
+  - Added real-time status management (`new`, `audit_prepared`, `review_sent`, `won`, `archived`).
+  - Added 1-click action buttons: Direct Website Inspector, Open in Zoho Mail, Send WhatsApp Message, and Copy Pre-filled 1-Page Review Delivery Script.
+  - Added detailed Client Dossier modal view for inspecting hotelier notes and contact info.
+  - Added automatic fallback with copyable SQL table schema setup if Supabase table is not yet created.
+  - Bumped version to `0.2.3`.
+
 ## [0.2.2] - 2026-09-27
 
 ### Fixed
