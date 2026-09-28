@@ -1,13 +1,29 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+const satoshi = localFont({
+  src: [
+    {
+      path: "../public/fonts/Satoshi-Variable.woff2",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Satoshi-VariableItalic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+});
+
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["700", "800", "900"],
 });
 
 export const viewport: Viewport = {
@@ -62,11 +78,12 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${outfit.variable} font-sans antialiased scroll-smooth selection:bg-amber-500/20 selection:text-[#1C2733]`}
+      className={`${satoshi.variable} ${outfit.variable} font-sans antialiased scroll-smooth selection:bg-amber-500/20 selection:text-[#1C2733]`}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800,900&display=swap" />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-white text-[#1C2733] antialiased">
         {children}

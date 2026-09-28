@@ -16,7 +16,7 @@ export function Logo({ className = "", iconSize = 32, textSize = "text-2xl" }: L
         size={iconSize}
         strokeWidth={2.5} 
       />
-      <span className={`text-primary-navy font-extrabold ${textSize} tracking-tight`}>
+      <span className={`text-primary-navy font-extrabold ${textSize} tracking-tight font-logo`}>
         WUUS<span className="text-secondary-blue">.</span>
       </span>
     </div>
