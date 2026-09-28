@@ -56,7 +56,7 @@ export function Workflow() {
                 1
               </div>
               <h4 className="text-base font-extrabold text-[#1C2733] mb-2">Hari 1</h4>
-              <div className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-xs font-medium text-slate-600 leading-relaxed min-h-[88px] flex items-center justify-center">
+              <div className="w-full bg-[#F8F9FA] rounded-xl p-5 text-xs font-medium text-slate-600 leading-relaxed min-h-[96px] flex items-center justify-center">
                 Konsultasi, audit kebutuhan, penentuan target pasar, dan rancangan konsep website Anda.
               </div>
             </div>
@@ -67,7 +67,7 @@ export function Workflow() {
                 2
               </div>
               <h4 className="text-base font-extrabold text-[#1C2733] mb-2">Hari 3-5</h4>
-              <div className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-xs font-medium text-slate-600 leading-relaxed min-h-[88px] flex items-center justify-center">
+              <div className="w-full bg-[#F8F9FA] rounded-xl p-5 text-xs font-medium text-slate-600 leading-relaxed min-h-[96px] flex items-center justify-center">
                 Live staging link aktif. Anda uji coba langsung di handphone sebelum pelunasan final.
               </div>
             </div>
@@ -78,7 +78,7 @@ export function Workflow() {
                 3
               </div>
               <h4 className="text-base font-extrabold text-[#1C2733] mb-2">Hari 7</h4>
-              <div className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-xs font-medium text-slate-600 leading-relaxed min-h-[88px] flex items-center justify-center">
+              <div className="w-full bg-[#F8F9FA] rounded-xl p-5 text-xs font-medium text-slate-600 leading-relaxed min-h-[96px] flex items-center justify-center">
                 Go-Live! Domain terhubung, sistem pembayaran aktif, langsung siap mendatangkan omset.
               </div>
             </div>

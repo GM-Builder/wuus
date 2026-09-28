@@ -29,8 +29,8 @@ export function Footer() {
               Bespoke digital architecture, direct booking engines, and 24/7 autonomous AI guest concierges engineered for independent European boutique stays and ambitious businesses.
             </p>
 
-            <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200/80 w-fit">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-500 w-fit">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               <span>Available for Q2/Q3 European Boutique Deployments</span>
             </div>
           </div>

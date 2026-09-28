@@ -179,7 +179,7 @@ export function Hero() {
             {industries.map((ind) => (
               <span
                 key={ind.name}
-                className="text-xs sm:text-sm font-semibold text-slate-700 tracking-tight px-3 py-1.5 rounded-md bg-slate-50 border border-slate-200"
+                className="text-xs sm:text-sm font-semibold text-slate-700 tracking-tight px-3.5 py-1.5 rounded-md bg-slate-100"
               >
                 {ind.name}
               </span>
