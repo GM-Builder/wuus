@@ -171,7 +171,7 @@ const adraPillars = [
     letter: "R",
     title: "Respectful Performance",
     subtitle: "Ultra-Lightweight on Mobile Networks",
-    desc: "International travelers research hotels while on 4G trains, regional ferries, or roaming mobile connections. Our Next.js architecture loads in under 800ms without bloated scripts or battery-draining trackers.",
+    desc: "International travelers research hotels while on 4G trains, regional ferries, or roaming mobile connections. Our high-performance architecture loads in under 800ms without bloated scripts or battery-draining trackers.",
     highlight: "Lighthouse Score 95+",
     icon: Zap
   },
@@ -189,8 +189,8 @@ const adraPillars = [
 const comparisonPoints = [
   {
     feature: "First Impression & Speed",
-    generic: "Clunky 5–8s loading with heavy WordPress plugins",
-    wuus: "Sub-1s instant paint powered by Next.js & Turbopack"
+    generic: "Clunky 5–8s loading with heavy third-party plugins",
+    wuus: "Sub-1s instant paint with zero-lag edge caching"
   },
   {
     feature: "Direct Reservation Journey",
@@ -358,15 +358,15 @@ export default function HospitalityPage() {
           <div className="hidden lg:flex items-center gap-4">
             <Link 
               href="/" 
-              className="text-xs font-semibold text-gray-500 hover:text-primary-navy transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded border border-gray-200 hover:border-gray-300"
+              className="text-xs font-semibold text-slate-600 hover:text-[#1C2733] transition-colors flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200 hover:border-slate-300"
               title="Kembali ke halaman utama bahasa Indonesia"
             >
               <span>🇮🇩</span>
-              <span>Versi ID</span>
+              <span>Web Utama</span>
             </Link>
             <button
               onClick={() => setModalOpen(true)}
-              className="bg-accent-orange hover:bg-accent-yellow text-primary-navy px-5 py-2.5 rounded text-xs md:text-sm font-bold transition-all shadow-sm border border-primary-navy/20 cursor-pointer"
+              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm cursor-pointer"
             >
               Get Free 1-Page Review
             </button>
@@ -376,7 +376,7 @@ export default function HospitalityPage() {
           <div className="lg:hidden flex items-center gap-3">
             <button
               onClick={() => setModalOpen(true)}
-              className="bg-accent-orange text-primary-navy px-3.5 py-1.5 rounded text-xs font-bold"
+              className="bg-[#F59E0B] text-[#1C2733] px-3.5 py-1.5 rounded-full text-xs font-bold"
             >
               Review
             </button>
@@ -514,9 +514,9 @@ export default function HospitalityPage() {
               className="flex flex-col items-center w-full"
             >
               {/* Studio Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gray-200 bg-white text-gray-700 text-xs font-semibold tracking-wide mb-6 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-accent-orange animate-pulse" />
-                <span>Next.js Architecture + 24/7 Multilingual AI Guest Concierge</span>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-700 text-xs font-semibold tracking-wide mb-6 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse" />
+                <span>Direct Booking Engine + 24/7 Multilingual AI Guest Concierge</span>
               </div>
 
               {/* Main Headline */}
@@ -530,18 +530,18 @@ export default function HospitalityPage() {
                 We engineer calm, high-performance websites and 24/7 multilingual AI concierges that highlight your property&apos;s character, answer late-night international inquiries in 2 seconds, and capture direct bookings on WhatsApp.
               </p>
 
-              {/* Neo-brutalist Action Buttons matching the Indonesian version */}
+              {/* Quiet Luxury Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-xl mx-auto relative z-30">
                 <button
                   onClick={() => setModalOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3.5 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-xs cursor-pointer text-center flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs md:text-sm tracking-tight transition-all shadow-md cursor-pointer text-center flex items-center justify-center gap-2 group"
                 >
                   <span>Request Free 1-Page Review</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
                 <a
                   href="#portfolio"
-                  className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs md:text-sm tracking-wide transition-all shadow-[4px_4px_0px_0px_#1C2733] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_#1C2733] border-2 border-primary-navy uppercase rounded-xs cursor-pointer text-center"
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-[#1C2733] border border-slate-300 font-bold text-xs md:text-sm tracking-tight transition-all shadow-xs cursor-pointer text-center"
                 >
                   Explore Selected Stays
                 </a>
@@ -624,8 +624,8 @@ export default function HospitalityPage() {
 
         </div>
 
-        {/* Brush Edge Bottom Transition (Exact same visual element as Indonesian Hero) */}
-        <div className="absolute bottom-0 left-0 w-full h-[60px] md:h-[100px] bg-secondary-blue brush-edge-bottom z-10 translate-y-[2px]" />
+        {/* Elegant Bottom Transition */}
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-slate-200 z-10" />
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
@@ -903,7 +903,7 @@ export default function HospitalityPage() {
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-gray-200/60 flex items-center justify-between">
-                  <span className="text-xs font-bold text-primary-navy">Bespoke Design & Next.js Architecture</span>
+                  <span className="text-xs font-bold text-primary-navy">Bespoke Design & Instant Mobile Flow</span>
                   <button
                     onClick={() => setModalOpen(true)}
                     className="text-xs font-bold text-accent-orange hover:text-amber-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform"
@@ -948,10 +948,10 @@ export default function HospitalityPage() {
           </div>
 
           {/* Interactive Simulation Dashboard */}
-          <div className="bg-light-grey rounded-3xl border-2 border-primary-navy shadow-[8px_8px_0px_0px_#1C2733] overflow-hidden mb-16">
+          <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl overflow-hidden mb-16">
             
             {/* Top Bar / Language Selector */}
-            <div className="bg-primary-navy text-white p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 border-b-2 border-primary-navy">
+            <div className="bg-[#1C2733] text-white p-5 sm:p-7 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-accent-orange text-primary-navy flex items-center justify-center font-bold">
                   <Bot className="w-5 h-5" />
@@ -1324,7 +1324,7 @@ export default function HospitalityPage() {
                 <span className="font-serif italic text-accent-orange text-3xl font-light">Stage 03</span>
                 <h3 className="text-lg font-bold text-primary-navy mt-2 mb-2">Rapid Crafting</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  We build your bespoke Next.js site in 7 to 14 days. You receive interactive staging links and brief Loom video walkthroughs to review at your convenience.
+                  We build your bespoke direct booking engine in 7 to 14 days. You receive interactive staging links and brief Loom video walkthroughs to review at your convenience.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-gray-200 text-[11px] font-bold text-gray-500">
@@ -1363,10 +1363,10 @@ export default function HospitalityPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               
               {/* Tier 1: Boutique Direct Showcase */}
-              <div className="bg-white rounded-3xl p-8 md:p-10 border-2 border-primary-navy shadow-[6px_6px_0px_0px_#1C2733] flex flex-col justify-between">
+              <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
                       Tier 01 · Flagship Website
                     </span>
                   </div>
@@ -1386,7 +1386,7 @@ export default function HospitalityPage() {
                   <ul className="space-y-3.5 text-xs text-gray-700 mb-8">
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong>Bespoke Next.js Architecture</strong> (No generic WordPress templates)</span>
+                      <span><strong>Bespoke High-Speed Architecture</strong> (No bloated templates or heavy plugins)</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
@@ -1402,11 +1402,11 @@ export default function HospitalityPage() {
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong>Zero Vendor Lock-in</strong>: Full GitHub repository & domain delivery</span>
+                      <span><strong>Zero Vendor Lock-in</strong>: Full source ownership & custom domain setup</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong>Free High-Speed Global Hosting</strong> setup on Vercel / Cloudflare</span>
+                      <span><strong>Global Edge Cloud Deployment</strong> with instant Worldwide loading</span>
                     </li>
                   </ul>
                 </div>
@@ -1416,21 +1416,21 @@ export default function HospitalityPage() {
                     setFormData(prev => ({ ...prev, packageInterest: 'Tier 1: Boutique Direct Showcase (€690)' }));
                     setModalOpen(true);
                   }}
-                  className="w-full py-3.5 bg-white hover:bg-gray-50 text-primary-navy font-bold text-xs uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[3px_3px_0px_0px_#1C2733] transition-all cursor-pointer text-center"
+                  className="w-full py-4 bg-white hover:bg-slate-50 text-[#1C2733] font-bold text-xs uppercase tracking-wide rounded-full border border-slate-300 shadow-xs transition-all cursor-pointer text-center"
                 >
                   Inquire for Tier 1 (€690)
                 </button>
               </div>
 
               {/* Tier 2: The Complete AI Hospitality Engine (Featured) */}
-              <div className="bg-amber-50/60 rounded-3xl p-8 md:p-10 border-2 border-primary-navy shadow-[8px_8px_0px_0px_#1C2733] flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-accent-orange text-primary-navy text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-bl-xl border-l-2 border-b-2 border-primary-navy">
+              <div className="bg-amber-50/70 rounded-3xl p-8 md:p-10 border border-amber-300/80 shadow-lg flex flex-col justify-between relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-[#F59E0B] text-[#1C2733] text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-bl-xl shadow-xs">
                   Most Popular · Highest Direct ROI
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-4 mt-2">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-accent-orange bg-amber-100/80 px-3 py-1 rounded-full border border-amber-200">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-[#D97706] bg-amber-100/90 px-3 py-1 rounded-full border border-amber-200">
                       Tier 02 · Full Digital Suite
                     </span>
                   </div>
@@ -1450,7 +1450,7 @@ export default function HospitalityPage() {
                   <ul className="space-y-3.5 text-xs text-gray-800 mb-8">
                     <li className="flex items-start gap-2.5 font-semibold text-primary-navy">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong>Everything included in Tier 1</strong> (Next.js flagship website)</span>
+                      <span><strong>Everything included in Tier 1</strong> (Flagship website suite)</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
@@ -1481,7 +1481,7 @@ export default function HospitalityPage() {
                       setFormData(prev => ({ ...prev, packageInterest: 'Tier 2: The Complete AI Hospitality Engine (€1,290)' }));
                       setModalOpen(true);
                     }}
-                    className="w-full py-4 bg-accent-orange hover:bg-accent-yellow text-primary-navy font-black text-xs uppercase tracking-wide rounded-xl border-2 border-primary-navy shadow-[4px_4px_0px_0px_#1C2733] transition-all cursor-pointer text-center"
+                    className="w-full py-4 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-black text-xs uppercase tracking-wide rounded-full shadow-md transition-all cursor-pointer text-center"
                   >
                     Select AI Hospitality Engine (€1,290)
                   </button>
@@ -1503,7 +1503,7 @@ export default function HospitalityPage() {
                   Staging-First Quality Guarantee · Zero Financial Risk
                 </p>
                 <p className="text-xs text-gray-600 mt-0.5 leading-relaxed">
-                  We build your interactive Next.js site and test the live AI Concierge on a private staging link first. You review and verify the real mobile experience on your own phone before making the final balance payment.
+                  We build your custom direct booking engine and test the live AI Concierge on a private staging link first. You review and verify the real mobile experience on your own phone before making the final balance payment.
                 </p>
               </div>
             </div>
@@ -1570,7 +1570,7 @@ export default function HospitalityPage() {
               },
               {
                 q: "Who owns the website and code after launch?",
-                a: "You do. 100%. We provide complete access to the GitHub repository, hosting accounts, and digital assets. There is zero proprietary agency lock-in."
+                a: "You do. 100%. We provide complete handover of your digital assets, full source code, and independent hosting accounts. There is zero proprietary agency lock-in."
               }
             ].map((faq, index) => {
               const isOpen = activeFaq === index;
@@ -1613,7 +1613,7 @@ export default function HospitalityPage() {
       <section id="review-request" className="py-24 lg:py-32 bg-white border-t border-gray-200">
         <div className="container mx-auto px-6 max-w-3xl">
           
-          <div className="bg-light-grey rounded-3xl p-8 md:p-12 border-2 border-primary-navy shadow-[8px_8px_0px_0px_#1C2733]">
+          <div className="bg-[#FAFAFA] rounded-3xl p-8 md:p-12 border border-slate-200/90 shadow-xl">
             <div className="text-center mb-10">
               <span className="text-xs font-bold uppercase tracking-widest text-accent-orange">Free Honest Assessment</span>
               <h2 className="text-3xl font-black text-primary-navy mt-1 mb-3">
@@ -1897,7 +1897,7 @@ export default function HospitalityPage() {
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-primary-navy z-10 overflow-hidden"
+              className="relative w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/90 z-10 overflow-hidden"
             >
               <div className="flex items-center justify-between mb-6">
                 <div>

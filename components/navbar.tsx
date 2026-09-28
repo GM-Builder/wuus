@@ -8,14 +8,14 @@ import Image from "next/image";
 
 const navLinks = [
   { 
-    name: "Hospitality AI Engine", 
+    name: "Boutique Stays & Villa", 
     href: "/hospitality", 
-    badge: "EU Stays",
+    badge: "Khusus Stays",
     isAccent: true 
   },
   { name: "Layanan", href: "/#services" },
   { name: "Alur Kerja", href: "/#workflow" },
-  { name: "Studi Kasus", href: "/#portfolio" },
+  { name: "Portofolio", href: "/#portfolio" },
   { name: "FAQ", href: "/#faq" },
 ];
 

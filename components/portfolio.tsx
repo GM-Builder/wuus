@@ -2,43 +2,54 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Play, ExternalLink } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const caseStudies = [
   {
-    id: "muslibegovic",
-    name: "Muslibegovic House",
-    location: "Mostar, Bosnia & Herzegovina",
-    badge: "Heritage Stay & Luxury Boutique",
-    headline: "Direct Booking Engine & Multilingual AI Concierge",
-    description: "Situs cagar budaya nasional abad ke-18 dengan 12 kamar boutique. Berhasil mengaktifkan direct booking engine 0% komisi OTA dan AI concierge 20+ bahasa dalam 7 hari kerja.",
-    metrics: "+38% Direct Booking • €0 Komisi OTA • 1.2s AI Respon",
+    id: "savoria",
+    name: "Savoria Dining & Lounge",
+    location: "Jakarta & Bali",
+    badge: "F&B / Restoran & Kuliner Mewah",
+    headline: "Website Eksklusif & Sistem Reservasi Meja Otomatis",
+    description: "Restoran fine dining dengan konsep kuliner premium. Dilengkapi katalog menu visual interaktif, reservasi meja langsung, dan konfirmasi WhatsApp otomatis tanpa hambatan.",
+    metrics: "Akses 0.6 Detik • Reservasi Langsung • Tampilan Elegan",
     image: "/Savoria-mockup.png",
-    link: "/hospitality"
+    link: "/inquiries"
   },
   {
-    id: "city-boutique",
-    name: "City Boutique Hotel",
-    location: "Sarajevo, Baščaršija",
-    badge: "Eco-Friendly 4-Star Hotel",
-    headline: "Fast Edge Architecture & WhatsApp Direct Integration",
-    description: "Hotel butik bintang empat di pusat Sarajevo. Menggantikan sistem booking pihak ketiga yang mahal dengan direct engine modern dan konfirmasi WhatsApp otomatis.",
-    metrics: "720ms Load Time • 100% Margin Terselamatkan • 4.9★ Review",
+    id: "trust",
+    name: "Trust Architect & Engineering",
+    location: "Surabaya & Jabodetabek",
+    badge: "B2B Corporate & Konsultan",
+    headline: "Profil Perusahaan Berkelas untuk Tender & Klien Korporat",
+    description: "Konsultan arsitektur dan konstruksi ternama. Membutuhkan website berkecepatan tinggi yang menampilkan portofolio proyek berskala besar untuk memenangkan tender klien.",
+    metrics: "Kredibilitas 100% • Tampilan Presisi • Bebas Loading Lemot",
     image: "/trust-mockup.png",
-    link: "/hospitality"
+    link: "/inquiries"
   },
   {
     id: "urban-threads",
-    name: "Urban Threads & Retail",
-    location: "Jakarta, Indonesia",
-    badge: "Modern Apparel & E-Commerce",
-    headline: "Instant Mayar Settlement & High-Speed Catalog",
-    description: "Brand fashion premium dengan ribuan SKU. Dilengkapi checkout kilat Mayar.id dengan settlement instan QRIS dan kartu kredit tanpa downtime.",
-    metrics: "99/100 Lighthouse • Transaksi Instan • Nol Lag Server",
+    name: "Urban Threads Apparel",
+    location: "Bandung & Jakarta",
+    badge: "E-Commerce & Retail Brand",
+    headline: "Toko Online Mandiri dengan Pembayaran Instan",
+    description: "Brand fashion modern dengan ratusan produk aktif. Menerima pembayaran QRIS, transfer bank, dan kartu kredit secara otomatis tanpa potongan komisi marketplace.",
+    metrics: "Profit 100% Milik Brand • Checkout Cepat • Terhubung WhatsApp",
     image: "/urbanThreads-mockup.png",
     link: "/inquiries"
+  },
+  {
+    id: "villa-stay",
+    name: "Vila Kliment Boutique Stays",
+    location: "Bali & Yogyakarta",
+    badge: "Hospitality & Villa Mewah",
+    headline: "Direct Booking Engine & Asisten Tamu AI 24 Jam",
+    description: "Akomodasi villa butik privat. Menerima reservasi langsung dari tamu lokal dan mancanegara tanpa potongan komisi agen 18%–25%, didukung asisten AI multibahasa.",
+    metrics: "0% Komisi Calo • Asisten 24 Jam • Kalender Reservasi",
+    image: "/images/hospitality/savoria-wine-estate.jpg",
+    link: "/hospitality"
   }
 ];
 
@@ -60,23 +71,23 @@ export function Portfolio() {
     <section id="portfolio" className="py-20 md:py-28 bg-[#F8F9FA] border-b border-slate-200/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         
-        {/* Section Header (Deel Reference Image 4 Style) */}
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-2">
-              STUDI KASUS & HASIL NYATA
+              STUDI KASUS & PORTOFOLIO
             </p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1C2733] tracking-tight">
-              Ulasan klien & dampak bisnis
+              Karya terpilih & dampak bisnis nyata
             </h2>
           </div>
 
           <p className="text-sm text-slate-500 font-medium max-w-md">
-            Pelajari bagaimana klien kami melipatgandakan direct booking dan menghemat ribuan Euro dari potongan komisi pihak ketiga.
+            Pelajari bagaimana klien kami mentransformasi website mereka menjadi aset bisnis yang menghasilkan reputasi dan omset nyata.
           </p>
         </div>
 
-        {/* Carousel Showcase (Exact Deel Image 4) */}
+        {/* Carousel Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
           {/* Main Active Case Study Card */}
@@ -125,14 +136,14 @@ export function Portfolio() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={prevSlide}
-                    className="w-9 h-9 rounded-full border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors"
+                    className="w-9 h-9 rounded-full border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors cursor-pointer"
                     aria-label="Previous"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button
                     onClick={nextSlide}
-                    className="w-9 h-9 rounded-full border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors"
+                    className="w-9 h-9 rounded-full border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-[#1C2733] transition-colors cursor-pointer"
                     aria-label="Next"
                   >
                     <ChevronRight className="w-4 h-4" />
@@ -142,7 +153,7 @@ export function Portfolio() {
             </div>
           </div>
 
-          {/* Right Peek Preview Card (Deel-Style Blurred Next Item) */}
+          {/* Right Peek Preview Card */}
           <div
             onClick={nextSlide}
             className="hidden lg:flex lg:col-span-4 bg-white/70 backdrop-blur-sm rounded-3xl border border-slate-200/70 p-6 flex-col justify-between opacity-70 hover:opacity-100 transition-opacity cursor-pointer group"

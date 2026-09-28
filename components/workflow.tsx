@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, Bot, ShieldCheck, CreditCard, Sparkles, Check, ChevronRight } from "lucide-react";
+import { ArrowRight, Bot, ShieldCheck, CreditCard, Sparkles, Check, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 const timelineTabs = [
-  { id: "web", label: "Website Peluncuran" },
-  { id: "ai", label: "AI Concierge Otonom" },
-  { id: "mayar", label: "Integrasi Pembayaran Mayar" },
-  { id: "staging", label: "Garansi Staging 50/50" },
+  { id: "web", label: "Website Bisnis" },
+  { id: "toko", label: "Toko Online" },
+  { id: "booking", label: "Sistem Booking" },
+  { id: "ai", label: "Asisten AI 24 Jam" },
 ];
 
 export function Workflow() {
@@ -20,10 +19,10 @@ export function Workflow() {
     <section id="workflow" className="py-20 md:py-28 bg-white border-b border-slate-200/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         
-        {/* Section Header (Deel Reference Image 3 Style) */}
+        {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-2">
-            KECEPATAN & EFISIENSI WUUS
+            ALUR KERJA CEPAT & TRANSPARAN
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1C2733] tracking-tight">
             Selesaikan lebih banyak dalam waktu lebih singkat
@@ -60,7 +59,7 @@ export function Workflow() {
                 <div className="w-5 h-5 rounded-full bg-slate-300 mb-3 border-2 border-white shadow-xs" />
                 <h4 className="text-base font-extrabold text-[#1C2733] mb-3">Hari 1</h4>
                 <div className="w-full bg-[#F8FAFC] border border-slate-200/90 rounded-2xl p-4 text-xs font-medium text-slate-600 leading-relaxed shadow-xs min-h-[88px] flex items-center justify-center">
-                  Konsultasi, audit kebutuhan, target audiens, dan penetapan arsitektur web Anda.
+                  Konsultasi, audit kebutuhan, penentuan target pasar, dan rancangan konsep website Anda.
                 </div>
               </div>
 
@@ -78,7 +77,7 @@ export function Workflow() {
                 <div className="w-5 h-5 rounded-full bg-slate-300 mb-3 border-2 border-white shadow-xs" />
                 <h4 className="text-base font-extrabold text-[#1C2733] mb-3">Hari 7</h4>
                 <div className="w-full bg-[#F8FAFC] border border-slate-200/90 rounded-2xl p-4 text-xs font-medium text-slate-600 leading-relaxed shadow-xs min-h-[88px] flex items-center justify-center">
-                  Go-Live! Domain terhubung, sistem pembayaran aktif, langsung siap hasilkan penjualan.
+                  Go-Live! Domain terhubung, sistem pembayaran aktif, langsung siap mendatangkan omset.
                 </div>
               </div>
 
@@ -86,7 +85,7 @@ export function Workflow() {
           </div>
         </div>
 
-        {/* Massive Dark Card: One Modern Experience (Exact Deel Image 3) */}
+        {/* Massive Dark Card: One Modern Experience */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -105,17 +104,17 @@ export function Workflow() {
             <div className="flex flex-col justify-between">
               <div>
                 <h4 className="text-base font-bold text-white mb-2">
-                  <span className="text-[#F59E0B]">150+ Mata Uang</span> & Pembayaran Instan
+                  <span className="text-[#F59E0B]">Multi-Pembayaran</span> Otomatis
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
-                  Terima QRIS, transfer bank lokal, dan kartu kredit internasional via Mayar.id tanpa hambatan birokrasi berbelit.
+                  Terima QRIS, transfer bank nasional, dan kartu kredit secara instan langsung ke kas rekening Anda tanpa ribet.
                 </p>
               </div>
               <Link
                 href="/inquiries"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-[#F59E0B] transition-colors"
               >
-                <span>Pelajari integrasi Mayar</span>
+                <span>Pelajari sistem pembayaran</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -124,17 +123,17 @@ export function Workflow() {
             <div className="flex flex-col justify-between">
               <div>
                 <h4 className="text-base font-bold text-white mb-2">
-                  <span className="text-[#F59E0B]">Actionable AI</span> Concierge 24/7
+                  <span className="text-[#F59E0B]">Asisten AI Siaga</span> 24 Jam
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
-                  Menjawab tamu dalam 20+ bahasa, menjawab pertanyaan umum hotel/toko, dan mengarahkan transaksi ke WhatsApp otomatis.
+                  Menjawab pertanyaan calon pembeli, menjelaskan produk, dan mengarahkan kontak langsung ke WhatsApp Anda.
                 </p>
               </div>
               <Link
-                href="/hospitality#ai-concierge"
+                href="/inquiries"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-[#F59E0B] transition-colors"
               >
-                <span>Uji coba demo AI</span>
+                <span>Konsultasi fitur AI</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -160,17 +159,17 @@ export function Workflow() {
 
           </div>
 
-          {/* Bottom Live Workspace Snapshot inside Dark Card */}
+          {/* Bottom Live Status Snapshot inside Dark Card */}
           <div className="rounded-2xl bg-white/5 border border-white/10 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-xs sm:text-sm font-semibold text-slate-200">
-                Infrastruktur Next.js 16 + Global Edge CDN aktif di seluruh dunia
+                Infrastruktur berstandar enterprise dengan kecepatan akses instan di seluruh Indonesia
               </span>
             </div>
 
             <div className="flex items-center gap-6 text-xs font-mono text-slate-400">
-              <span>Latency: <strong className="text-emerald-400">24ms</strong></span>
+              <span>Kecepatan: <strong className="text-emerald-400">0.6 Detik</strong></span>
               <span>Uptime: <strong className="text-emerald-400">99.99%</strong></span>
             </div>
           </div>
