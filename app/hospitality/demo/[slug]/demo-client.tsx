@@ -5,31 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowRight, 
   Check, 
   MapPin, 
   PhoneCall, 
-  Mail, 
-  Calendar, 
-  Users, 
-  Sparkles, 
   X, 
   Send,
-  Star,
   ShieldCheck,
-  Coffee,
-  Wine,
+  MessageSquare,
+  Printer,
+  Calendar,
+  Compass,
   Clock,
-  ChevronDown,
-  Building,
-  CheckCircle2,
-  Share2,
-  Heart,
-  Search,
-  Percent,
-  SlidersHorizontal,
-  Flame,
-  Printer
+  Sparkles,
+  ChevronDown
 } from 'lucide-react';
 import { PropertyData, Room, RatePlan } from './demo-data';
 
@@ -68,7 +56,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
   // Filter state for rooms
   const [roomFilter, setRoomFilter] = useState<'all' | 'breakfast' | 'view'>('all');
 
-  // Booking Checkout Flow State (Booking.com / Traveloka style)
+  // Booking Checkout Flow State
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [checkoutStep, setCheckoutStep] = useState<1 | 2 | 3>(1);
   const [selectedRoom, setSelectedRoom] = useState<Room>(property.rooms[0]);
@@ -89,12 +77,12 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
   ]);
   const [bookingRef, setBookingRef] = useState('WUUS-HM-84920');
 
-  // 24/7 AI Concierge chat state
+  // Digital Concierge chat state
   const [conciergeOpen, setConciergeOpen] = useState(false);
-  const [chatMessages, setChatMessages] = useState<Array<{ sender: 'ai' | 'user'; text: string }>>([
+  const [chatMessages, setChatMessages] = useState<Array<{ sender: 'host' | 'user'; text: string }>>([
     { 
-      sender: 'ai', 
-      text: `Hello and welcome to ${property.name}! I am the 24/7 direct digital concierge. You can ask me about free parking, breakfast, check-in, or direct perks!` 
+      sender: 'host', 
+      text: `Hello and welcome to ${property.name}. How can we assist you with parking, arrival times, breakfast, or booking direct today?` 
     }
   ]);
   const [inputQuestion, setInputQuestion] = useState('');
@@ -103,7 +91,6 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
   const handleOpenCheckout = (room: Room, plan?: RatePlan) => {
     setSelectedRoom(room);
     setSelectedRatePlan(plan || room.ratePlans?.find(p => p.recommended) || room.ratePlans[0]);
-    // Generate fresh booking ref
     const randomNum = Math.floor(10000 + Math.random() * 90000);
     const prefix = slug === 'seaside-guesthouse' ? 'VR' : slug === 'lakeside-wine-estate' ? 'SO' : 'BH';
     setBookingRef(`WUUS-${prefix}-${randomNum}`);
@@ -118,7 +105,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
 
   // WhatsApp formatted booking trigger
   const handleSendWhatsAppBooking = () => {
-    const text = `*OFFICIAL DIRECT BOOKING VOUCHER*\n*Property:* ${property.name}\n*Reference:* ${bookingRef}\n*Guest:* ${firstName} ${lastName}\n*Email:* ${email || 'guest@direct.com'}\n*Phone:* ${countryCode} ${phone || 'Not provided'}\n*Country:* ${country}\n\n*STAY DETAILS:*\n• Room: ${selectedRoom.name}\n• Rate Plan: ${selectedRatePlan.name}\n• Dates: ${checkIn} → ${checkOut} (${nights} nights)\n• Guests: ${adults} Adults${childrenCount > 0 ? `, ${childrenCount} Children` : ''} · ${roomsCount} Room\n• Est. Arrival: ${arrivalTime}\n\n*PRICE BREAKDOWN (0% OTA FEE):*\n• Rate: €${selectedRatePlan.rate}/night × ${nights} nights = €${calculateTotal(selectedRatePlan.rate)}\n• OTA Fee Saved: €${savings}\n• Total Due at Property: €${calculateTotal(selectedRatePlan.rate)}\n\n*INCLUDED DIRECT PERKS:*\n${selectedRatePlan.perks.map(p => `✓ ${p}`).join('\n')}\n\n*Special Requests:* ${specialRequests.join(', ')}\n\nCould you please confirm our reservation? Thank you!`;
+    const text = `*DIRECT RESERVATION INQUIRY*\n*Property:* ${property.name}\n*Reference:* ${bookingRef}\n*Guest:* ${firstName} ${lastName}\n*Email:* ${email || 'guest@direct.com'}\n*Phone:* ${countryCode} ${phone || 'Not provided'}\n*Country:* ${country}\n\n*STAY DETAILS:*\n• Room: ${selectedRoom.name}\n• Plan: ${selectedRatePlan.name}\n• Dates: ${checkIn} to ${checkOut} (${nights} nights)\n• Guests: ${adults} Adults${childrenCount > 0 ? `, ${childrenCount} Children` : ''}\n• Est. Arrival: ${arrivalTime}\n\n*RATE (0% OTA COMMISSION):*\n• €${selectedRatePlan.rate} × ${nights} nights = €${calculateTotal(selectedRatePlan.rate)}\n• Direct Savings: €${savings} vs OTA\n• Total to pay upon arrival: €${calculateTotal(selectedRatePlan.rate)}\n\n*INCLUDED:*\n${selectedRatePlan.perks.map(p => `- ${p}`).join('\n')}\n\n*Special Notes:* ${specialRequests.join(', ')}\n\nPlease confirm availability for these dates. Thank you!`;
     window.open(`https://wa.me/6281383521750?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -130,20 +117,20 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
     setChatMessages(prev => [...prev, { sender: 'user', text: userMsg }]);
 
     setTimeout(() => {
-      let reply = "I would be delighted to help! For specific personalized requests, our host team is also available directly on WhatsApp.";
+      let reply = "Thank you for asking. Our team is also reachable directly on WhatsApp for any custom requests.";
       const lower = userMsg.toLowerCase();
       const qa = property.conciergeQA;
 
       if (lower.includes('park') || lower.includes('car')) reply = qa['parking'] || reply;
-      else if (lower.includes('check') || lower.includes('late') || lower.includes('time')) reply = qa['checkin'] || reply;
+      else if (lower.includes('check') || lower.includes('late') || lower.includes('time') || lower.includes('arrive')) reply = qa['checkin'] || reply;
       else if (lower.includes('break') || lower.includes('food') || lower.includes('eat')) reply = qa['breakfast'] || reply;
-      else if (lower.includes('perk') || lower.includes('direct') || lower.includes('wine')) reply = qa['directPerks'] || reply;
-      else if (lower.includes('beach')) reply = qa['beach'] || qa['directPerks'] || reply;
+      else if (lower.includes('perk') || lower.includes('direct') || lower.includes('rate') || lower.includes('price')) reply = qa['directPerks'] || reply;
+      else if (lower.includes('beach') || lower.includes('sea')) reply = qa['beach'] || qa['directPerks'] || reply;
       else if (lower.includes('taste') || lower.includes('wine') || lower.includes('cellar')) reply = qa['tasting'] || qa['directPerks'] || reply;
       else if (lower.includes('wifi') || lower.includes('internet') || lower.includes('work')) reply = qa['wifi'] || reply;
 
-      setChatMessages(prev => [...prev, { sender: 'ai', text: reply }]);
-    }, 400);
+      setChatMessages(prev => [...prev, { sender: 'host', text: reply }]);
+    }, 300);
   };
 
   // Filtered rooms
@@ -154,67 +141,65 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
   });
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] text-[#1C2733] font-sans antialiased selection:bg-amber-500/20 selection:text-[#1C2733]">
+    <div className="min-h-screen bg-white text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B]/20 selection:text-[#1C2733]">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. TOP DEMO INSPECTOR BANNER (WUUS STUDIO EVALUATION)
+          1. TOP DEMO INSPECTOR BAR (WUUS STUDIO EVALUATION)
       ────────────────────────────────────────────────────────────── */}
-      <div className="bg-[#1C2733] text-white px-4 py-2 sticky top-0 z-50 border-b border-[#233746] shadow-md flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex flex-wrap items-center gap-2.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-          <span className="font-extrabold tracking-wide uppercase text-[10px] text-[#F59E0B] shrink-0">
+      <div className="bg-[#1C2733] text-white px-4 sm:px-6 py-2.5 sticky top-0 z-50 border-b border-[#233746] flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-bold tracking-wider uppercase text-[11px] text-[#F59E0B]">
             WUUS Live Demo
           </span>
-          <span className="text-slate-500 hidden md:inline">|</span>
+          <span className="text-slate-500 hidden sm:inline">|</span>
           
           {/* Concept Switcher Tabs */}
-          <div className="flex flex-wrap items-center gap-1 bg-white/10 p-0.5 rounded-lg text-[11px] font-semibold">
+          <div className="flex items-center gap-1 text-xs">
             <Link
               href="/hospitality/demo/seaside-guesthouse"
-              className={`px-2.5 py-1 rounded transition-colors ${
+              className={`px-3 py-1 rounded transition-colors ${
                 slug === 'seaside-guesthouse'
-                  ? 'bg-[#F59E0B] text-[#1C2733] font-bold shadow-xs'
+                  ? 'bg-white/20 text-white font-bold'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              🌊 Albanian Riviera
+              Albanian Riviera
             </Link>
             <Link
               href="/hospitality/demo/lakeside-wine-estate"
-              className={`px-2.5 py-1 rounded transition-colors ${
+              className={`px-3 py-1 rounded transition-colors ${
                 slug === 'lakeside-wine-estate'
-                  ? 'bg-[#F59E0B] text-[#1C2733] font-bold shadow-xs'
+                  ? 'bg-white/20 text-white font-bold'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              🍇 Lake Ohrid
+              Lake Ohrid
             </Link>
             <Link
               href="/hospitality/demo/city-apartments"
-              className={`px-2.5 py-1 rounded transition-colors ${
+              className={`px-3 py-1 rounded transition-colors ${
                 slug === 'city-apartments'
-                  ? 'bg-[#F59E0B] text-[#1C2733] font-bold shadow-xs'
+                  ? 'bg-white/20 text-white font-bold'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              🏛️ Sarajevo
+              Sarajevo
             </Link>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <Link
             href="/hospitality#review"
-            className="bg-[#F59E0B] hover:bg-amber-400 text-[#1C2733] font-bold px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center gap-1 shadow-xs"
+            className="text-slate-200 hover:text-white font-medium transition-colors"
           >
-            <span>Ask Faisal for a Bespoke Build</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            Ask Faisal for a Bespoke Build →
           </Link>
           <Link
             href="/hospitality#examples"
-            className="text-slate-300 hover:text-white text-xs underline font-medium"
+            className="text-slate-400 hover:text-slate-200 transition-colors"
           >
-            Back to Overview
+            Exit demo
           </Link>
         </div>
       </div>
@@ -222,40 +207,34 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
       {/* ─────────────────────────────────────────────────────────────
           2. HOTEL NAVBAR
       ────────────────────────────────────────────────────────────── */}
-      <header className="bg-white border-b border-slate-200 sticky top-9 z-40 shadow-2xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
+      <header className="bg-white border-b border-slate-200 sticky top-10 z-40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           <Link href={`/hospitality/demo/${property.slug}`} className="flex flex-col">
-            <span className="text-xl sm:text-2xl font-black text-[#1C2733] tracking-tight">
+            <span className="text-xl sm:text-2xl font-bold text-[#1C2733] tracking-tight">
               {property.name}
             </span>
-            <span className="text-[10px] uppercase font-bold tracking-[1.5px] text-[#F59E0B]">
+            <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">
               {property.category}
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-bold text-[#1C2733]">
-            <a href="#search-engine" className="hover:text-[#F59E0B] transition-colors">Availability & Prices</a>
-            <a href="#rooms" className="hover:text-[#F59E0B] transition-colors">Rooms & Suites</a>
-            <a href="#experience" className="hover:text-[#F59E0B] transition-colors">The Experience</a>
-            <a href="#guide" className="hover:text-[#F59E0B] transition-colors">Local Guide</a>
-            <a href="#faq" className="hover:text-[#F59E0B] transition-colors">Stay FAQ</a>
+          <nav className="hidden lg:flex items-center gap-8 text-sm text-[#1C2733]">
+            <a href="#search-engine" className="hover:text-[#F59E0B] transition-colors font-medium">Availability</a>
+            <a href="#rooms" className="hover:text-[#F59E0B] transition-colors font-medium">Rooms & Rates</a>
+            <a href="#experience" className="hover:text-[#F59E0B] transition-colors font-medium">About</a>
+            <a href="#guide" className="hover:text-[#F59E0B] transition-colors font-medium">Local Guide</a>
+            <a href="#faq" className="hover:text-[#F59E0B] transition-colors font-medium">FAQ</a>
           </nav>
 
           <div className="flex items-center gap-3">
-            {/* Direct Booking Badge */}
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold rounded-lg">
-              <Percent className="w-3.5 h-3.5 text-emerald-600" />
-              <span>0% Commission Guarantee</span>
-            </div>
-
             {/* Language Selector */}
-            <div className="flex items-center bg-slate-100 rounded-lg p-1 text-[11px] font-bold text-[#1C2733]">
+            <div className="flex items-center bg-slate-100 rounded-lg p-0.5 text-xs font-semibold text-[#1C2733]">
               {(['EN', 'DE', 'IT'] as const).map(l => (
                 <button
                   key={l}
                   onClick={() => setLang(l)}
-                  className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
-                    lang === l ? 'bg-white shadow-xs font-extrabold text-[#1C2733]' : 'text-slate-500 hover:text-[#1C2733]'
+                  className={`px-2 py-1 rounded transition-colors ${
+                    lang === l ? 'bg-white text-[#1C2733] font-bold shadow-xs' : 'text-slate-500 hover:text-[#1C2733]'
                   }`}
                 >
                   {l}
@@ -268,178 +247,133 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                 const elem = document.getElementById('rooms');
                 if (elem) elem.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-4 py-2.5 rounded-xl font-bold text-xs transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
+              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-4 py-2.5 rounded-lg font-semibold text-xs transition-colors cursor-pointer"
             >
-              <span>See Rooms</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              See Rooms
             </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
         
         {/* ─────────────────────────────────────────────────────────────
-            3. AGODA / BOOKING.COM PROPERTY OVERVIEW HEADER
+            3. PROPERTY OVERVIEW & EDITORIAL PHOTO GALLERY
         ────────────────────────────────────────────────────────────── */}
-        <section className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs space-y-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <section className="space-y-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="flex text-amber-400 text-sm">
-                  {[...Array(4)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </span>
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                  {property.category}
-                </span>
-              </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-[#1C2733] tracking-tight">
+              <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase mb-1">
+                {property.category} · {property.location}
+              </p>
+              <h1 className="text-3xl sm:text-4xl font-bold text-[#1C2733] tracking-tight">
                 {property.name}
               </h1>
-              <p className="text-xs text-slate-600 flex items-center gap-1.5 mt-1 font-medium">
-                <MapPin className="w-3.5 h-3.5 text-[#F59E0B] shrink-0" />
-                <span>{property.location}</span>
-                <span className="text-slate-300">•</span>
-                <span className="text-emerald-700 font-bold">{property.locationHighlight}</span>
+              <p className="text-sm text-slate-600 mt-1 flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
+                <span>{property.locationHighlight}</span>
               </p>
             </div>
 
-            {/* Review Score Box (Booking.com style) */}
-            <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200 self-start md:self-auto">
-              <div className="text-right">
-                <strong className="block text-sm font-extrabold text-[#1C2733]">
+            {/* Score block */}
+            <div className="flex items-center gap-3 text-right shrink-0">
+              <div>
+                <strong className="block text-sm font-bold text-[#1C2733]">
                   {property.ratingLabel}
                 </strong>
-                <span className="text-[11px] text-slate-500 font-medium">
+                <span className="text-xs text-slate-500">
                   {property.reviewsCount} verified reviews
                 </span>
               </div>
-              <div className="w-12 h-12 bg-[#1C2733] text-[#F59E0B] rounded-xl flex items-center justify-center font-black text-lg shadow-xs">
+              <div className="w-12 h-12 bg-[#1C2733] text-white rounded-xl flex items-center justify-center font-bold text-lg">
                 {property.ratingScore}
               </div>
             </div>
           </div>
 
-          {/* Multi-Photo Grid (Booking.com / Agoda style) */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 h-[340px] sm:h-[420px] rounded-2xl overflow-hidden">
-            {/* Main Featured Photo (2 cols) */}
-            <div className="md:col-span-2 relative h-full group overflow-hidden">
+          {/* Clean 3-Photo Editorial Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 h-[380px] sm:h-[460px] rounded-2xl overflow-hidden">
+            {/* Main Featured Photo (7 cols) */}
+            <div className="md:col-span-7 relative h-full">
               <Image
                 src={property.heroImage}
                 alt={property.name}
                 fill
                 priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, 60vw"
+                className="object-cover"
               />
-              <div className="absolute top-3 left-3 bg-[#1C2733]/85 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-xs">
-                Featured Exterior & Grounds
-              </div>
             </div>
 
-            {/* Room 1 Photo */}
-            <div className="relative h-full hidden md:block group overflow-hidden">
-              <Image
-                src={property.rooms[0]?.image || property.heroImage}
-                alt="Room Preview"
-                fill
-                sizes="25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute top-3 left-3 bg-white/90 text-[#1C2733] text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs">
-                {property.rooms[0]?.name}
+            {/* Right 2 Stacked Photos (5 cols) */}
+            <div className="md:col-span-5 grid grid-rows-2 gap-3 h-full">
+              <div className="relative h-full">
+                <Image
+                  src={property.rooms[0]?.image || property.heroImage}
+                  alt="Room View"
+                  fill
+                  sizes="40vw"
+                  className="object-cover"
+                />
               </div>
-            </div>
-
-            {/* Room 2 / Lifestyle Photo with View All */}
-            <div className="relative h-full hidden md:block group overflow-hidden">
-              <Image
-                src={property.rooms[1]?.image || property.rooms[0]?.gallery[1] || property.heroImage}
-                alt="Room View Preview"
-                fill
-                sizes="25vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-              <button 
-                onClick={() => {
-                  const elem = document.getElementById('rooms');
-                  if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="absolute bottom-4 right-4 bg-white/95 hover:bg-white text-[#1C2733] font-bold text-xs px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-1.5 transition-all cursor-pointer"
-              >
-                <span>View All Rooms</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#F59E0B]" />
-              </button>
+              <div className="relative h-full">
+                <Image
+                  src={property.rooms[1]?.image || property.atmosphereImage}
+                  alt="Terrace or Garden"
+                  fill
+                  sizes="40vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            4. ADVANCED BOOKING ENGINE SEARCH BAR (BOOKING.COM / AGODA STYLE)
+            4. CLEAN SEARCH & DATES BAR
         ────────────────────────────────────────────────────────────── */}
         <section 
           id="search-engine" 
-          className="bg-white rounded-2xl p-4 sm:p-5 border-2 border-[#F59E0B] shadow-md sticky top-28 z-30 space-y-3"
+          className="bg-white rounded-xl p-4 sm:p-5 border border-slate-200 shadow-xs sticky top-24 z-30"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-[#1C2733] flex items-center gap-1.5">
-              <Search className="w-3.5 h-3.5 text-[#F59E0B]" />
-              <span>Direct Stay Search & Live Availability</span>
-            </span>
-            <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-              ✓ Guaranteed 0% OTA Markup Rate
-            </span>
-          </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
             
-            {/* Check-in Date (3 cols) */}
-            <div className="lg:col-span-3 bg-slate-50 border border-slate-200 rounded-xl p-2.5 focus-within:border-[#F59E0B] focus-within:bg-white transition-all">
-              <label className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 block mb-0.5 flex items-center gap-1">
-                <Calendar className="w-3 h-3 text-[#F59E0B]" />
-                <span>Check-in Date</span>
+            {/* Check-in Date */}
+            <div className="lg:col-span-3 bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+              <label className="text-[11px] font-semibold text-slate-500 block mb-0.5">
+                Check-in Date
               </label>
               <input
                 type="date"
                 value={checkIn}
                 onChange={e => setCheckIn(e.target.value)}
-                className="w-full text-xs font-bold text-[#1C2733] bg-transparent outline-hidden cursor-pointer"
+                className="w-full text-sm font-semibold text-[#1C2733] bg-transparent outline-hidden cursor-pointer"
               />
             </div>
 
-            {/* Check-out Date (3 cols) */}
-            <div className="lg:col-span-3 bg-slate-50 border border-slate-200 rounded-xl p-2.5 focus-within:border-[#F59E0B] focus-within:bg-white transition-all">
-              <label className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 block mb-0.5 flex items-center justify-between">
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3 text-[#F59E0B]" />
-                  <span>Check-out Date</span>
-                </span>
-                <span className="text-[10px] font-bold text-amber-700 bg-amber-100/80 px-1.5 py-0.2 rounded">
-                  {nights} {nights === 1 ? 'Night' : 'Nights'}
-                </span>
+            {/* Check-out Date */}
+            <div className="lg:col-span-3 bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+              <label className="text-[11px] font-semibold text-slate-500 block mb-0.5">
+                Check-out ({nights} nights)
               </label>
               <input
                 type="date"
                 value={checkOut}
                 onChange={e => setCheckOut(e.target.value)}
-                className="w-full text-xs font-bold text-[#1C2733] bg-transparent outline-hidden cursor-pointer"
+                className="w-full text-sm font-semibold text-[#1C2733] bg-transparent outline-hidden cursor-pointer"
               />
             </div>
 
-            {/* Guests & Room Popover (4 cols) */}
+            {/* Guests & Room */}
             <div className="lg:col-span-4 relative">
               <div
                 onClick={() => setGuestPickerOpen(!guestPickerOpen)}
-                className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 cursor-pointer hover:border-[#F59E0B] transition-colors"
+                className="bg-slate-50 border border-slate-200 rounded-lg p-2.5 cursor-pointer hover:border-slate-300 transition-colors"
               >
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 block mb-0.5 flex items-center gap-1">
-                  <Users className="w-3 h-3 text-[#F59E0B]" />
-                  <span>Guests & Rooms</span>
+                <span className="text-[11px] font-semibold text-slate-500 block mb-0.5">
+                  Guests & Rooms
                 </span>
-                <span className="text-xs font-bold text-[#1C2733] block truncate">
+                <span className="text-sm font-semibold text-[#1C2733] block truncate">
                   {adults} Adults · {childrenCount} Children · {roomsCount} Room
                 </span>
               </div>
@@ -451,68 +385,46 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 5 }}
-                    className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl p-4 border border-slate-200 shadow-xl z-50 space-y-3"
+                    className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl p-4 border border-slate-200 shadow-lg z-50 space-y-3"
                   >
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-sm">
                       <div>
                         <strong className="block text-[#1C2733]">Adults</strong>
-                        <span className="text-[10px] text-slate-500">Ages 13 and above</span>
+                        <span className="text-xs text-slate-500">Ages 13+</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setAdults(Math.max(1, adults - 1))}
-                          className="w-7 h-7 rounded-lg border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-100"
+                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
                         >
                           -
                         </button>
-                        <span className="w-5 text-center font-bold">{adults}</span>
+                        <span className="w-5 text-center font-semibold">{adults}</span>
                         <button
                           onClick={() => setAdults(Math.min(4, adults + 1))}
-                          className="w-7 h-7 rounded-lg border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-100"
+                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
                         >
                           +
                         </button>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
+                    <div className="flex items-center justify-between text-sm pt-2 border-t border-slate-100">
                       <div>
                         <strong className="block text-[#1C2733]">Children</strong>
-                        <span className="text-[10px] text-slate-500">Ages 0 to 12</span>
+                        <span className="text-xs text-slate-500">Ages 0 to 12</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setChildrenCount(Math.max(0, childrenCount - 1))}
-                          className="w-7 h-7 rounded-lg border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-100"
+                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
                         >
                           -
                         </button>
-                        <span className="w-5 text-center font-bold">{childrenCount}</span>
+                        <span className="w-5 text-center font-semibold">{childrenCount}</span>
                         <button
                           onClick={() => setChildrenCount(Math.min(3, childrenCount + 1))}
-                          className="w-7 h-7 rounded-lg border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-100"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
-                      <div>
-                        <strong className="block text-[#1C2733]">Rooms</strong>
-                        <span className="text-[10px] text-slate-500">Number of rooms</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setRoomsCount(Math.max(1, roomsCount - 1))}
-                          className="w-7 h-7 rounded-lg border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-100"
-                        >
-                          -
-                        </button>
-                        <span className="w-5 text-center font-bold">{roomsCount}</span>
-                        <button
-                          onClick={() => setRoomsCount(Math.min(2, roomsCount + 1))}
-                          className="w-7 h-7 rounded-lg border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-100"
+                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
                         >
                           +
                         </button>
@@ -521,7 +433,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
 
                     <button
                       onClick={() => setGuestPickerOpen(false)}
-                      className="w-full py-2 bg-[#1C2733] text-white text-xs font-bold rounded-lg hover:bg-[#F59E0B] hover:text-[#1C2733] transition-colors"
+                      className="w-full py-2 bg-[#1C2733] text-white text-xs font-semibold rounded hover:bg-[#233746] transition-colors"
                     >
                       Done
                     </button>
@@ -530,7 +442,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               </AnimatePresence>
             </div>
 
-            {/* Check Rates Button (2 cols) */}
+            {/* Check Rates Button */}
             <div className="lg:col-span-2">
               <button
                 onClick={() => {
@@ -538,10 +450,9 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                   const elem = document.getElementById('rooms');
                   if (elem) elem.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full py-3.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
               >
-                <span>Check Rates</span>
-                <ArrowRight className="w-4 h-4 text-[#F59E0B]" />
+                Check Rates
               </button>
             </div>
 
@@ -549,82 +460,65 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            5. ROOMS & RATE PLANS SELECTION MATRIX (BOOKING.COM STYLE)
+            5. ROOMS & RATE PLANS
         ────────────────────────────────────────────────────────────── */}
-        <section id="rooms" className="space-y-6 pt-4">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 pb-2 border-b border-slate-200">
+        <section id="rooms" className="space-y-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 border-b border-slate-200 pb-4">
             <div>
-              <p className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase">
-                AVAILABLE ACCOMMODATION
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#1C2733] tracking-tight">
-                Select Your Room & Direct Rate Plan
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1C2733] tracking-tight">
+                Rooms & Direct Rates
               </h2>
+              <p className="text-sm text-slate-500 mt-1">
+                Direct reservations include guaranteed lowest rate, artisan breakfast options, and flexible arrival.
+              </p>
             </div>
 
             {/* Filter pills */}
-            <div className="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-slate-200 text-xs font-bold">
+            <div className="flex items-center gap-2 text-xs">
               <button
                 onClick={() => setRoomFilter('all')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  roomFilter === 'all' ? 'bg-[#1C2733] text-white' : 'text-slate-600 hover:text-[#1C2733]'
+                className={`px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${
+                  roomFilter === 'all' ? 'bg-[#1C2733] border-[#1C2733] text-white font-semibold' : 'border-slate-200 text-slate-600 hover:border-slate-300'
                 }`}
               >
                 All Rooms ({property.rooms.length})
               </button>
               <button
                 onClick={() => setRoomFilter('breakfast')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  roomFilter === 'breakfast' ? 'bg-[#1C2733] text-white' : 'text-slate-600 hover:text-[#1C2733]'
+                className={`px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${
+                  roomFilter === 'breakfast' ? 'bg-[#1C2733] border-[#1C2733] text-white font-semibold' : 'border-slate-200 text-slate-600 hover:border-slate-300'
                 }`}
               >
                 Breakfast Included
-              </button>
-              <button
-                onClick={() => setRoomFilter('view')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  roomFilter === 'view' ? 'bg-[#1C2733] text-white' : 'text-slate-600 hover:text-[#1C2733]'
-                }`}
-              >
-                Best View
               </button>
             </div>
           </div>
 
           {/* Rooms List */}
-          <div className="space-y-8">
+          <div className="space-y-10">
             {filteredRooms.map((room) => {
               const currentImg = activePhoto[room.id] || room.image;
               return (
                 <div
                   key={room.id}
-                  className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xs hover:border-slate-300 transition-all"
+                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                     
-                    {/* Room Info & Photo Gallery (5 cols) */}
-                    <div className="lg:col-span-5 p-5 sm:p-6 bg-slate-50/70 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between">
-                      <div className="space-y-3.5">
-                        {/* Title & Badge */}
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <h3 className="text-xl sm:text-2xl font-black text-[#1C2733]">
-                              {room.name}
-                            </h3>
-                            <span className="text-xs font-semibold text-[#F59E0B]">
-                              {room.view}
-                            </span>
-                          </div>
-                          {room.urgencyText && (
-                            <span className="bg-red-50 border border-red-200 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 shrink-0">
-                              <Flame className="w-3 h-3 text-red-500 fill-current" />
-                              <span>{room.urgencyText.split(':')[0]}</span>
-                            </span>
-                          )}
+                    {/* Left: Photos & Specs (5 cols) */}
+                    <div className="lg:col-span-5 p-6 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between space-y-4">
+                      <div className="space-y-3">
+                        <div>
+                          <h3 className="text-xl font-bold text-[#1C2733]">
+                            {room.name}
+                          </h3>
+                          <p className="text-xs text-slate-500 mt-0.5">
+                            {room.view} · Max {room.maxGuests} Guests
+                          </p>
                         </div>
 
-                        {/* Interactive Main Photo */}
-                        <div className="relative h-60 w-full rounded-2xl overflow-hidden shadow-2xs">
+                        {/* Main Room Photo */}
+                        <div className="relative h-64 w-full rounded-xl overflow-hidden">
                           <Image
                             src={currentImg}
                             alt={room.name}
@@ -632,19 +526,16 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                             sizes="(max-width: 1024px) 100vw, 400px"
                             className="object-cover"
                           />
-                          <div className="absolute bottom-2.5 left-2.5 bg-black/70 backdrop-blur-xs text-white text-[10px] font-semibold px-2 py-0.5 rounded">
-                            {room.size} · Max {room.maxGuests} Guests
-                          </div>
                         </div>
 
-                        {/* Thumbnail switcher bar */}
+                        {/* Thumbnail switcher */}
                         <div className="flex items-center gap-2">
                           {room.gallery.map((gImg, idx) => (
                             <button
                               key={idx}
                               onClick={() => setActivePhoto(prev => ({ ...prev, [room.id]: gImg }))}
-                              className={`relative w-16 h-11 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${
-                                currentImg === gImg ? 'border-[#F59E0B] scale-105 shadow-xs' : 'border-transparent opacity-65 hover:opacity-100'
+                              className={`relative w-16 h-12 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${
+                                currentImg === gImg ? 'border-[#1C2733]' : 'border-transparent opacity-70 hover:opacity-100'
                               }`}
                             >
                               <Image src={gImg} alt="Thumb" fill sizes="64px" className="object-cover" />
@@ -652,51 +543,31 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                           ))}
                         </div>
 
-                        {/* Room Specifications Pills */}
-                        <div className="grid grid-cols-2 gap-2 text-xs pt-1">
-                          <div className="bg-white p-2 rounded-xl border border-slate-200 text-slate-700 font-medium">
-                            <span className="block text-[10px] text-slate-400 font-bold uppercase">Bed Type</span>
-                            {room.bed}
-                          </div>
-                          <div className="bg-white p-2 rounded-xl border border-slate-200 text-slate-700 font-medium">
-                            <span className="block text-[10px] text-slate-400 font-bold uppercase">Room Size</span>
-                            {room.size}
-                          </div>
+                        {/* Specs */}
+                        <div className="text-xs text-slate-600 space-y-1 pt-1">
+                          <p className="m-0"><strong>Bed:</strong> {room.bed}</p>
+                          <p className="m-0"><strong>Size:</strong> {room.size}</p>
                         </div>
 
-                        {/* Description */}
-                        <p className="text-xs text-slate-600 leading-relaxed">
+                        <p className="text-sm text-slate-600 leading-relaxed pt-1">
                           {room.description}
                         </p>
-
-                        {/* Amenities Tags */}
-                        <div className="flex flex-wrap gap-1 pt-1">
-                          {room.amenities.slice(0, 5).map((am, idx) => (
-                            <span key={idx} className="bg-white border border-slate-200 text-slate-700 text-[10px] font-semibold px-2 py-0.5 rounded-md">
-                              ✓ {am}
-                            </span>
-                          ))}
-                        </div>
                       </div>
 
-                      <div className="pt-3 border-t border-slate-200 text-[11px] text-slate-500 font-medium">
-                        Direct Booking Perk: <strong className="text-emerald-800">{room.perk}</strong>
+                      <div className="pt-3 border-t border-slate-100 text-xs text-slate-500">
+                        Direct stay perk: <strong className="text-slate-800">{room.perk}</strong>
                       </div>
                     </div>
 
-                    {/* Rate Plans Table (Booking.com style) (7 cols) */}
-                    <div className="lg:col-span-7 p-5 sm:p-6 flex flex-col justify-between space-y-4">
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-extrabold uppercase tracking-wider text-slate-700">
-                            Available Direct Rate Plans ({nights} nights)
-                          </span>
-                          <span className="text-[11px] text-slate-500">
-                            Taxes & Service Included
-                          </span>
+                    {/* Right: Rate Plans Table (7 cols) */}
+                    <div className="lg:col-span-7 p-6 flex flex-col justify-between space-y-4">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between text-xs text-slate-500">
+                          <span className="font-semibold text-slate-700">Available Rate Plans</span>
+                          <span>{nights} nights total</span>
                         </div>
 
-                        {/* Rate Plans Cards */}
+                        {/* Rate Plans List */}
                         <div className="space-y-3">
                           {room.ratePlans.map((plan) => {
                             const isRecommended = plan.recommended;
@@ -707,21 +578,21 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                             return (
                               <div
                                 key={plan.id}
-                                className={`p-4 rounded-2xl border transition-all ${
+                                className={`p-5 rounded-xl border transition-colors ${
                                   isRecommended
-                                    ? 'bg-amber-50/40 border-amber-300 ring-1 ring-amber-300 shadow-2xs'
-                                    : 'bg-white border-slate-200 hover:border-slate-300'
+                                    ? 'border-[#1C2733] bg-white shadow-xs'
+                                    : 'border-slate-200 bg-white'
                                 }`}
                               >
-                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                                   <div className="space-y-1.5 max-w-sm">
                                     <div className="flex items-center gap-2">
-                                      <h4 className="text-sm font-extrabold text-[#1C2733]">
+                                      <h4 className="text-base font-bold text-[#1C2733]">
                                         {plan.name}
                                       </h4>
                                       {isRecommended && (
-                                        <span className="bg-[#F59E0B] text-[#1C2733] text-[10px] font-black uppercase px-2 py-0.5 rounded-full shadow-2xs">
-                                          Best Value
+                                        <span className="bg-[#1C2733] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                                          Recommended
                                         </span>
                                       )}
                                     </div>
@@ -729,46 +600,41 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                                       {plan.description}
                                     </p>
 
-                                    {/* Perks Checkmarks */}
-                                    <ul className="space-y-1 text-xs text-slate-700 font-medium pt-1">
+                                    {/* Perks List */}
+                                    <ul className="space-y-1 text-xs text-slate-700 pt-1">
                                       {plan.perks.map((pk, idx) => (
-                                        <li key={idx} className="flex items-center gap-1.5 text-[11px]">
-                                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                        <li key={idx} className="flex items-start gap-1.5">
+                                          <Check className="w-3.5 h-3.5 text-slate-700 mt-0.5 shrink-0" />
                                           <span>{pk}</span>
                                         </li>
                                       ))}
                                     </ul>
                                   </div>
 
-                                  {/* Price & Action Column */}
-                                  <div className="text-right sm:self-center shrink-0 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200">
+                                  {/* Price & Action */}
+                                  <div className="text-right sm:self-center shrink-0 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
                                     <div className="space-y-0.5">
-                                      <span className="text-[10px] text-slate-400 line-through block">
-                                        OTA Rate: €{totalOtaPrice}
+                                      <span className="text-xs text-slate-400 line-through block">
+                                        OTA rate: €{totalOtaPrice}
                                       </span>
                                       <div className="flex items-baseline justify-end gap-1">
-                                        <span className="text-2xl font-black text-[#1C2733]">
+                                        <span className="text-2xl font-bold text-[#1C2733]">
                                           €{totalPrice}
                                         </span>
-                                        <span className="text-[10px] text-slate-500 font-semibold">
+                                        <span className="text-xs text-slate-500">
                                           / {nights} nights
                                         </span>
                                       </div>
-                                      <span className="inline-block text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded">
-                                        Save €{planSavings} direct
+                                      <span className="text-xs font-semibold text-emerald-800 block">
+                                        Save €{planSavings} direct (0% OTA Fee)
                                       </span>
                                     </div>
 
                                     <button
                                       onClick={() => handleOpenCheckout(room, plan)}
-                                      className={`mt-2.5 w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center justify-center gap-1.5 ${
-                                        isRecommended
-                                          ? 'bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white'
-                                          : 'bg-slate-100 hover:bg-[#1C2733] hover:text-white text-[#1C2733]'
-                                      }`}
+                                      className="mt-3 w-full sm:w-auto px-5 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
                                     >
-                                      <span>Reserve</span>
-                                      <ArrowRight className="w-3.5 h-3.5" />
+                                      Select & Reserve
                                     </button>
                                   </div>
                                 </div>
@@ -778,12 +644,12 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                         </div>
                       </div>
 
-                      <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs text-emerald-900 font-medium flex items-center justify-between">
+                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                         <span className="flex items-center gap-1.5">
-                          <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                          <span>Book with confidence · No prepayment required · Instant confirmation</span>
+                          <ShieldCheck className="w-4 h-4 text-slate-400 shrink-0" />
+                          <span>No prepayment needed · Pay at check-in · Free cancellation</span>
                         </span>
-                        <strong className="text-emerald-800 text-[11px]">0% Fee</strong>
+                        <span className="font-semibold text-slate-700">0% OTA fee</span>
                       </div>
                     </div>
 
@@ -795,35 +661,35 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            6. EXPERIENCE & HOST STORY
+            6. EXPERIENCE & HOST STORY (NON-REPEATING PHOTOGRAPHY)
         ────────────────────────────────────────────────────────────── */}
-        <section id="experience" className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-2xs">
+        <section id="experience" className="border-t border-slate-200 pt-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="space-y-4">
-              <p className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase">
+              <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
                 THE STORY & CARETAKERS
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black text-[#1C2733] leading-tight">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1C2733] tracking-tight">
                 Personal hospitality,<br />
                 not a nameless hotel chain.
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              <p className="text-sm text-slate-600 leading-relaxed font-normal">
                 {property.host.note}
               </p>
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+              <div className="p-4 bg-slate-50 rounded-xl space-y-1">
                 <strong className="block text-sm font-bold text-[#1C2733]">
                   {property.host.names}
                 </strong>
-                <span className="text-xs text-slate-500 font-medium">
-                  {property.host.role} · Direct Host Communication via WhatsApp
+                <span className="text-xs text-slate-500">
+                  {property.host.role} · Direct contact via WhatsApp
                 </span>
               </div>
             </div>
 
-            <div className="relative h-72 sm:h-96 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+            <div className="relative h-72 sm:h-80 rounded-xl overflow-hidden shadow-xs">
               <Image
-                src={property.heroImage}
-                alt="Host atmosphere"
+                src={property.atmosphereImage}
+                alt="Property atmosphere"
                 fill
                 sizes="500px"
                 className="object-cover"
@@ -833,26 +699,31 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            7. CURATED LOCAL GUIDE (INSIDER TIPS)
+            7. CURATED LOCAL GUIDE (CLEAN CATEGORIZED TILES)
         ────────────────────────────────────────────────────────────── */}
-        <section id="guide" className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-2xs space-y-6">
+        <section id="guide" className="border-t border-slate-200 pt-12 space-y-6">
           <div>
-            <p className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase">
-              LOCAL INSIDER RECOMMENDATIONS
+            <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+              LOCAL INSIDER TIPS
             </p>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#1C2733] tracking-tight">
+            <h2 className="text-2xl font-bold text-[#1C2733] tracking-tight">
               Secret Spots & Dining Nearby
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {property.localGuide.map((item, idx) => (
-              <div key={idx} className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2.5">
-                <span className="text-[10px] font-extrabold text-[#F59E0B] bg-amber-100/70 px-2 py-0.5 rounded">
-                  {item.dist}
-                </span>
-                <h4 className="text-base font-bold text-[#1C2733]">{item.title}</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+              <div key={idx} className="p-5 bg-white border border-slate-200 rounded-xl space-y-2.5 hover:border-slate-300 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold tracking-wider text-slate-500 uppercase bg-slate-100 px-2 py-0.5 rounded">
+                    {item.category}
+                  </span>
+                  <span className="text-xs font-semibold text-slate-500">
+                    {item.dist}
+                  </span>
+                </div>
+                <h4 className="text-base font-bold text-[#1C2733] m-0">{item.title}</h4>
+                <p className="text-xs text-slate-600 leading-relaxed m-0">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -861,22 +732,22 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
         {/* ─────────────────────────────────────────────────────────────
             8. STAY FAQ
         ────────────────────────────────────────────────────────────── */}
-        <section id="faq" className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-2xs space-y-6">
-          <div className="text-center max-w-xl mx-auto">
-            <p className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase">
-              ESSENTIAL INFORMATION
+        <section id="faq" className="border-t border-slate-200 pt-12 space-y-6">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+              FREQUENTLY ASKED QUESTIONS
             </p>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#1C2733] tracking-tight">
-              Frequently Asked Questions
+            <h2 className="text-2xl font-bold text-[#1C2733] tracking-tight">
+              Essential Stay Details
             </h2>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-3">
+          <div className="max-w-3xl space-y-3">
             {property.faq.map((item, idx) => (
-              <details key={idx} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 group" open={idx === 0}>
+              <details key={idx} className="p-4 bg-slate-50 rounded-xl group border border-slate-200/80" open={idx === 0}>
                 <summary className="font-bold text-sm text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
                   <span>{item.q}</span>
-                  <span className="text-[#F59E0B] font-bold text-base group-open:rotate-180 transition-transform">↓</span>
+                  <span className="text-slate-400 font-bold text-base group-open:rotate-180 transition-transform">↓</span>
                 </summary>
                 <p className="text-xs text-slate-600 mt-2.5 leading-relaxed">
                   {item.a}
@@ -889,7 +760,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
       </main>
 
       {/* ─────────────────────────────────────────────────────────────
-          9. SOPHISTICATED MULTI-STEP BOOKING DRAWER (TRAVELOKA / BOOKING.COM)
+          9. CLEAN MULTI-STEP RESERVATION DRAWER
       ────────────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {checkoutOpen && (
@@ -899,22 +770,22 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setCheckoutOpen(false)}
-              className="absolute inset-0 bg-[#1C2733]/80 backdrop-blur-xs"
+              className="absolute inset-0 bg-[#1C2733]/70 backdrop-blur-xs"
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              initial={{ opacity: 0, scale: 0.96, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="relative w-full max-w-2xl bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 z-10 max-h-[92vh] overflow-y-auto shadow-2xl space-y-5"
+              exit={{ opacity: 0, scale: 0.96, y: 10 }}
+              className="relative w-full max-w-xl bg-white rounded-2xl p-6 sm:p-8 z-10 max-h-[92vh] overflow-y-auto shadow-2xl space-y-5"
             >
               {/* Header with Steps */}
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#F59E0B]">
-                    Direct Booking Engine · 0% OTA Commission
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                    Direct Booking Confirmation
                   </span>
-                  <h3 className="text-xl font-black text-[#1C2733]">
+                  <h3 className="text-xl font-bold text-[#1C2733]">
                     {property.name}
                   </h3>
                 </div>
@@ -926,21 +797,18 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                 </button>
               </div>
 
-              {/* Progress Steps Indicator */}
-              <div className="flex items-center justify-between text-xs font-bold px-2 py-1.5 bg-slate-100 rounded-xl">
-                <span className={`flex items-center gap-1.5 ${checkoutStep === 1 ? 'text-[#1C2733] font-black' : 'text-slate-400'}`}>
-                  <span className="w-5 h-5 rounded-full bg-white flex items-center justify-center shadow-2xs">1</span>
-                  <span>Stay Review</span>
+              {/* Step Tracker */}
+              <div className="flex items-center justify-between text-xs font-semibold px-3 py-2 bg-slate-50 rounded-lg">
+                <span className={checkoutStep === 1 ? 'text-[#1C2733] font-bold' : 'text-slate-400'}>
+                  1. Room & Rate
                 </span>
-                <span className="text-slate-300">➔</span>
-                <span className={`flex items-center gap-1.5 ${checkoutStep === 2 ? 'text-[#1C2733] font-black' : 'text-slate-400'}`}>
-                  <span className="w-5 h-5 rounded-full bg-white flex items-center justify-center shadow-2xs">2</span>
-                  <span>Guest Details</span>
+                <span className="text-slate-300">/</span>
+                <span className={checkoutStep === 2 ? 'text-[#1C2733] font-bold' : 'text-slate-400'}>
+                  2. Guest Details
                 </span>
-                <span className="text-slate-300">➔</span>
-                <span className={`flex items-center gap-1.5 ${checkoutStep === 3 ? 'text-emerald-700 font-black' : 'text-slate-400'}`}>
-                  <span className="w-5 h-5 rounded-full bg-white flex items-center justify-center shadow-2xs">3</span>
-                  <span>Confirmation Voucher</span>
+                <span className="text-slate-300">/</span>
+                <span className={checkoutStep === 3 ? 'text-emerald-700 font-bold' : 'text-slate-400'}>
+                  3. Confirmation
                 </span>
               </div>
 
@@ -948,135 +816,126 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               {checkoutStep === 1 && (
                 <div className="space-y-4">
                   {/* Room Card Preview */}
-                  <div className="flex gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200">
-                    <div className="relative w-24 h-20 rounded-xl overflow-hidden shrink-0">
-                      <Image src={selectedRoom.image} alt={selectedRoom.name} fill sizes="96px" className="object-cover" />
+                  <div className="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                    <div className="relative w-20 h-16 rounded-lg overflow-hidden shrink-0">
+                      <Image src={selectedRoom.image} alt={selectedRoom.name} fill sizes="80px" className="object-cover" />
                     </div>
-                    <div className="text-xs space-y-1">
-                      <span className="text-[10px] font-bold text-[#F59E0B] uppercase">Selected Room</span>
+                    <div className="text-xs space-y-0.5">
                       <strong className="block text-sm text-[#1C2733]">{selectedRoom.name}</strong>
                       <span className="text-slate-500">{selectedRoom.size} · {selectedRoom.bed}</span>
-                      <div className="text-emerald-700 font-bold text-[11px] pt-0.5">
-                        Plan: {selectedRatePlan.name}
-                      </div>
+                      <p className="text-slate-700 font-medium pt-0.5 m-0">Plan: {selectedRatePlan.name}</p>
                     </div>
                   </div>
 
-                  {/* Dates & Occupancy Details */}
+                  {/* Dates */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                      <span className="text-[10px] text-slate-400 font-bold block uppercase">Check-in</span>
+                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Check-in</span>
                       <strong className="text-[#1C2733]">{checkIn}</strong>
                     </div>
-                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                      <span className="text-[10px] text-slate-400 font-bold block uppercase">Check-out</span>
+                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Check-out</span>
                       <strong className="text-[#1C2733]">{checkOut}</strong>
                     </div>
-                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                      <span className="text-[10px] text-slate-400 font-bold block uppercase">Duration</span>
+                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Duration</span>
                       <strong className="text-[#1C2733]">{nights} Nights</strong>
                     </div>
-                    <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
-                      <span className="text-[10px] text-slate-400 font-bold block uppercase">Guests</span>
+                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Guests</span>
                       <strong className="text-[#1C2733]">{adults} Adults</strong>
                     </div>
                   </div>
 
-                  {/* Transparent Price Breakdown */}
-                  <div className="p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-2 text-xs">
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-600">Room Rate ({nights} nights × €{selectedRatePlan.rate}):</span>
-                      <span className="font-bold text-[#1C2733]">€{calculateTotal(selectedRatePlan.rate)}</span>
+                  {/* Price Breakdown */}
+                  <div className="p-4 bg-slate-50 rounded-xl space-y-2 text-xs">
+                    <div className="flex justify-between items-center text-slate-600">
+                      <span>Room Rate ({nights} nights × €{selectedRatePlan.rate}):</span>
+                      <span className="font-semibold text-[#1C2733]">€{calculateTotal(selectedRatePlan.rate)}</span>
                     </div>
                     <div className="flex justify-between items-center text-slate-600">
-                      <span>Artisan Breakfast:</span>
-                      <span className="text-emerald-700 font-bold">INCLUDED (FREE)</span>
+                      <span>Breakfast & Direct Perks:</span>
+                      <span className="font-semibold text-slate-700">{selectedRatePlan.breakfastIncluded ? 'Included' : 'Room Only'}</span>
                     </div>
                     <div className="flex justify-between items-center text-slate-600">
-                      <span>Local Taxes & VAT:</span>
-                      <span className="font-semibold text-slate-700">INCLUDED (€0)</span>
+                      <span>Taxes & Service:</span>
+                      <span className="font-semibold text-slate-700">Included (€0)</span>
                     </div>
-                    <div className="flex justify-between items-center text-slate-400 text-[11px]">
-                      <span>Estimated OTA Agency Price:</span>
-                      <span className="line-through">€{calculateOtaTotal(selectedRatePlan.otaRate)}</span>
-                    </div>
-                    <div className="pt-2 border-t border-emerald-200 flex justify-between items-center">
-                      <strong className="text-sm text-emerald-950 font-black">Total Due at Property:</strong>
-                      <strong className="text-xl text-emerald-900 font-black">
+                    <div className="pt-2 border-t border-slate-200 flex justify-between items-baseline">
+                      <strong className="text-sm text-[#1C2733]">Total Due at Property:</strong>
+                      <strong className="text-xl text-[#1C2733]">
                         €{calculateTotal(selectedRatePlan.rate)}
                       </strong>
                     </div>
-                    <p className="text-[11px] text-emerald-800 font-bold pt-1 m-0">
-                      ✓ Direct Booking Savings: You save €{savings} + receive free breakfast and welcome perks.
+                    <p className="text-xs text-emerald-800 font-semibold m-0">
+                      ✓ Direct Rate Guarantee: You save €{savings} vs. OTA bookings.
                     </p>
                   </div>
 
                   <button
                     onClick={() => setCheckoutStep(2)}
-                    className="w-full py-4 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
                   >
-                    <span>Proceed to Guest Details</span>
-                    <ArrowRight className="w-4 h-4" />
+                    Continue to Guest Details →
                   </button>
                 </div>
               )}
 
-              {/* ── STEP 2: GUEST DETAILS FORM (TRAVELOKA / BOOKING.COM STYLE) ── */}
+              {/* ── STEP 2: GUEST DETAILS ── */}
               {checkoutStep === 2 && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div>
-                      <label className="font-bold text-[#1C2733] block mb-1">First Name *</label>
+                      <label className="font-semibold text-[#1C2733] block mb-1">First Name *</label>
                       <input
                         type="text"
                         required
                         placeholder="e.g. Thomas"
                         value={firstName}
                         onChange={e => setFirstName(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-[#1C2733]"
+                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
                       />
                     </div>
                     <div>
-                      <label className="font-bold text-[#1C2733] block mb-1">Last Name *</label>
+                      <label className="font-semibold text-[#1C2733] block mb-1">Last Name *</label>
                       <input
                         type="text"
                         required
                         placeholder="e.g. Schmidt"
                         value={lastName}
                         onChange={e => setLastName(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-[#1C2733]"
+                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div>
-                      <label className="font-bold text-[#1C2733] block mb-1">Email Address *</label>
+                      <label className="font-semibold text-[#1C2733] block mb-1">Email Address *</label>
                       <input
                         type="email"
                         required
                         placeholder="thomas@example.com"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-[#1C2733]"
+                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
                       />
                     </div>
                     <div>
-                      <label className="font-bold text-[#1C2733] block mb-1">WhatsApp / Phone *</label>
+                      <label className="font-semibold text-[#1C2733] block mb-1">WhatsApp / Phone *</label>
                       <div className="flex gap-1.5">
                         <select
                           value={countryCode}
                           onChange={e => setCountryCode(e.target.value)}
-                          className="p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-[#1C2733]"
+                          className="p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-[#1C2733]"
                         >
-                          <option value="+49">🇩🇪 +49</option>
-                          <option value="+39">🇮🇹 +39</option>
-                          <option value="+44">🇬🇧 +44</option>
-                          <option value="+43">🇦🇹 +43</option>
-                          <option value="+41">🇨🇭 +41</option>
-                          <option value="+33">🇫🇷 +33</option>
-                          <option value="+1">🇺🇸 +1</option>
-                          <option value="+62">🇮🇩 +62</option>
+                          <option value="+49">+49 (DE)</option>
+                          <option value="+39">+39 (IT)</option>
+                          <option value="+44">+44 (UK)</option>
+                          <option value="+43">+43 (AT)</option>
+                          <option value="+41">+41 (CH)</option>
+                          <option value="+33">+33 (FR)</option>
+                          <option value="+62">+62 (ID)</option>
                         </select>
                         <input
                           type="tel"
@@ -1084,7 +943,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                           placeholder="170 1234567"
                           value={phone}
                           onChange={e => setPhone(e.target.value)}
-                          className="flex-1 p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-[#1C2733]"
+                          className="flex-1 p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
                         />
                       </div>
                     </div>
@@ -1092,11 +951,11 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div>
-                      <label className="font-bold text-[#1C2733] block mb-1">Country of Residence</label>
+                      <label className="font-semibold text-[#1C2733] block mb-1">Country of Residence</label>
                       <select
                         value={country}
                         onChange={e => setCountry(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-[#1C2733]"
+                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
                       >
                         <option value="Germany">Germany</option>
                         <option value="Italy">Italy</option>
@@ -1104,28 +963,26 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                         <option value="Austria">Austria</option>
                         <option value="Switzerland">Switzerland</option>
                         <option value="France">France</option>
-                        <option value="Netherlands">Netherlands</option>
                         <option value="United States">United States</option>
                       </select>
                     </div>
                     <div>
-                      <label className="font-bold text-[#1C2733] block mb-1">Estimated Arrival Time</label>
+                      <label className="font-semibold text-[#1C2733] block mb-1">Estimated Arrival</label>
                       <select
                         value={arrivalTime}
                         onChange={e => setArrivalTime(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium text-[#1C2733]"
+                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
                       >
-                        <option value="14:00 - 16:00">14:00 – 16:00 (Standard)</option>
+                        <option value="14:00 - 16:00">14:00 – 16:00</option>
                         <option value="16:00 - 18:00">16:00 – 18:00</option>
-                        <option value="18:00 - 20:00">18:00 – 20:00</option>
                         <option value="Late Check-in (after 20:00)">Late Check-in (after 20:00)</option>
                       </select>
                     </div>
                   </div>
 
-                  {/* Special Requests Checkboxes */}
-                  <div className="space-y-1.5 pt-2 border-t border-slate-100 text-xs">
-                    <span className="font-bold text-[#1C2733] block">Special Requests</span>
+                  {/* Special Requests */}
+                  <div className="space-y-1.5 pt-2 text-xs">
+                    <span className="font-semibold text-[#1C2733] block">Special Requests</span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700">
                       {[
                         'Quiet room away from reception',
@@ -1143,7 +1000,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                             }}
                             className="rounded text-[#1C2733]"
                           />
-                          <span className="text-[11px] font-medium">{req}</span>
+                          <span className="text-xs">{req}</span>
                         </label>
                       ))}
                     </div>
@@ -1152,91 +1009,87 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                   <div className="flex gap-3 pt-2">
                     <button
                       onClick={() => setCheckoutStep(1)}
-                      className="px-4 py-3 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl hover:bg-slate-200"
+                      className="px-4 py-2.5 bg-slate-100 text-slate-700 font-semibold text-xs rounded-lg hover:bg-slate-200 cursor-pointer"
                     >
                       Back
                     </button>
                     <button
                       onClick={() => setCheckoutStep(3)}
-                      className="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                      className="flex-1 py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
                     >
-                      <span>Complete & Generate Voucher</span>
-                      <ArrowRight className="w-4 h-4" />
+                      Complete & View Voucher →
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* ── STEP 3: INSTANT CONFIRMATION & WHATSAPP VOUCHER ── */}
+              {/* ── STEP 3: VOUCHER & CONFIRMATION ── */}
               {checkoutStep === 3 && (
                 <div className="space-y-4">
-                  {/* Voucher Card */}
-                  <div className="p-5 bg-gradient-to-br from-emerald-500/10 via-slate-50 to-amber-500/10 rounded-2xl border-2 border-emerald-500 space-y-4 shadow-md">
-                    <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
+                  {/* Clean Voucher Receipt Card */}
+                  <div className="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-4">
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                       <div>
-                        <span className="text-[10px] font-extrabold text-emerald-800 uppercase tracking-widest block">
-                          Official Direct Reservation
+                        <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+                          Direct Booking Voucher
                         </span>
-                        <strong className="text-base text-[#1C2733] font-black">
+                        <strong className="text-base text-[#1C2733] font-mono">
                           {bookingRef}
                         </strong>
                       </div>
-                      <span className="bg-emerald-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full shadow-2xs">
-                        Guaranteed · Pay on Arrival
+                      <span className="text-xs font-semibold text-emerald-800 bg-white px-2.5 py-1 rounded border border-slate-200">
+                        Pay on Arrival
                       </span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 text-xs">
                       <div>
-                        <span className="text-slate-400 block text-[10px] uppercase font-bold">Guest</span>
+                        <span className="text-slate-400 block font-medium">Guest</span>
                         <strong className="text-[#1C2733]">{firstName || 'Guest'} {lastName || ''}</strong>
                       </div>
                       <div>
-                        <span className="text-slate-400 block text-[10px] uppercase font-bold">Room & Plan</span>
+                        <span className="text-slate-400 block font-medium">Room</span>
                         <strong className="text-[#1C2733]">{selectedRoom.name}</strong>
                       </div>
                       <div>
-                        <span className="text-slate-400 block text-[10px] uppercase font-bold">Dates</span>
+                        <span className="text-slate-400 block font-medium">Dates</span>
                         <strong className="text-[#1C2733]">{checkIn} → {checkOut} ({nights}N)</strong>
                       </div>
                       <div>
-                        <span className="text-slate-400 block text-[10px] uppercase font-bold">Total Due</span>
-                        <strong className="text-emerald-700 text-base font-black">€{calculateTotal(selectedRatePlan.rate)}</strong>
+                        <span className="text-slate-400 block font-medium">Total Due</span>
+                        <strong className="text-base font-bold text-[#1C2733]">€{calculateTotal(selectedRatePlan.rate)}</strong>
                       </div>
                     </div>
 
-                    <div className="p-3 bg-white rounded-xl border border-slate-200 text-[11px] text-slate-600 space-y-1">
-                      <strong className="block text-[#1C2733]">Direct Booking Confirmation Guarantee:</strong>
-                      <p className="m-0">
-                        No credit card charged online. Free cancellation up to 48 hours before arrival. Your reservation details will be sent directly to the host on WhatsApp.
-                      </p>
+                    <div className="pt-2 border-t border-slate-200 text-xs text-slate-500">
+                      Payment is made directly at the guesthouse upon check-in. Free cancellation up to 48 hours prior to arrival.
                     </div>
                   </div>
 
-                  {/* Actions: Send WhatsApp & Download */}
+                  {/* WhatsApp Action */}
                   <div className="space-y-2">
                     <button
                       onClick={handleSendWhatsAppBooking}
-                      className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                      className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                     >
                       <PhoneCall className="w-4 h-4" />
-                      <span>Send Real Booking Voucher via WhatsApp</span>
+                      <span>Send Reservation to Host via WhatsApp</span>
                     </button>
-                    <p className="text-[10px] text-center text-slate-400">
-                      Instantly opens WhatsApp on your phone/desktop with complete booking details pre-filled.
+                    <p className="text-[11px] text-center text-slate-400">
+                      Opens WhatsApp with your booking details formatted for the host.
                     </p>
                   </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 pt-1">
                     <button
                       onClick={() => setCheckoutStep(2)}
-                      className="px-4 py-2.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-200"
+                      className="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-semibold rounded-lg hover:bg-slate-200 cursor-pointer"
                     >
                       Edit Info
                     </button>
                     <button
                       onClick={() => window.print()}
-                      className="flex-1 py-2.5 bg-white border border-slate-200 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-50 flex items-center justify-center gap-1.5"
+                      className="flex-1 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:bg-slate-50 flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <Printer className="w-3.5 h-3.5" />
                       <span>Print Summary</span>
@@ -1251,36 +1104,28 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
       </AnimatePresence>
 
       {/* ─────────────────────────────────────────────────────────────
-          10. 24/7 AI GUEST CONCIERGE INTERACTIVE CHAT WIDGET
+          10. GUEST INQUIRIES CONCIERGE CHAT
       ────────────────────────────────────────────────────────────── */}
       <div className="fixed bottom-6 right-6 z-50">
         {!conciergeOpen ? (
           <button
             onClick={() => setConciergeOpen(true)}
-            className="px-4 py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-full shadow-2xl flex items-center gap-2 font-bold text-xs transition-all cursor-pointer border border-[#233746]"
+            className="px-4 py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-full shadow-lg flex items-center gap-2 font-semibold text-xs transition-colors cursor-pointer"
           >
-            <Sparkles className="w-4 h-4 text-[#F59E0B]" />
-            <span>24/7 AI Concierge</span>
+            <MessageSquare className="w-4 h-4" />
+            <span>Host Concierge</span>
           </button>
         ) : (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="w-[340px] sm:w-[380px] bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col h-[480px]"
+            className="w-[340px] sm:w-[360px] bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[460px]"
           >
             {/* Chat header */}
             <div className="bg-[#1C2733] text-white p-4 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-[#F59E0B] text-[#1C2733] flex items-center justify-center font-bold text-xs">
-                  AI
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white leading-tight">24/7 Concierge</h4>
-                  <span className="text-[10px] text-emerald-400 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    Online · {property.name}
-                  </span>
-                </div>
+              <div>
+                <h4 className="text-xs font-bold text-white">Direct Host Concierge</h4>
+                <p className="text-[11px] text-slate-300 m-0">{property.name}</p>
               </div>
               <button
                 onClick={() => setConciergeOpen(false)}
@@ -1298,10 +1143,10 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] p-3 rounded-2xl leading-relaxed ${
+                    className={`max-w-[85%] p-3 rounded-xl leading-relaxed ${
                       msg.sender === 'user'
-                        ? 'bg-[#1C2733] text-white rounded-br-xs'
-                        : 'bg-white text-slate-800 border border-slate-200 shadow-2xs rounded-bl-xs'
+                        ? 'bg-[#1C2733] text-white'
+                        : 'bg-white text-slate-800 border border-slate-200'
                     }`}
                   >
                     {msg.text}
@@ -1310,25 +1155,25 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               ))}
             </div>
 
-            {/* Quick Prompt Chips */}
-            <div className="p-2.5 bg-white border-t border-slate-100 flex flex-wrap gap-1.5">
+            {/* Prompt Chips */}
+            <div className="p-2 bg-white border-t border-slate-100 flex flex-wrap gap-1.5">
               {[
                 'Free parking?',
-                'Late check-in?',
+                'Late arrival?',
                 'Breakfast hours?',
-                'Direct perks?'
+                'Direct booking perks?'
               ].map((chip, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleAskConcierge(chip)}
-                  className="text-[10px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded-md font-medium cursor-pointer transition-colors"
+                  className="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded font-medium cursor-pointer transition-colors"
                 >
                   {chip}
                 </button>
               ))}
             </div>
 
-            {/* Chat input */}
+            {/* Input */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -1338,14 +1183,14 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
             >
               <input
                 type="text"
-                placeholder="Ask about parking, check-in, breakfast..."
+                placeholder="Ask about parking, arrival, breakfast..."
                 value={inputQuestion}
                 onChange={e => setInputQuestion(e.target.value)}
-                className="flex-1 text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
+                className="flex-1 text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-[#1C2733] focus:outline-hidden focus:border-slate-400"
               />
               <button
                 type="submit"
-                className="p-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-xl transition-colors cursor-pointer"
+                className="p-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg transition-colors cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
               </button>

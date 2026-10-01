@@ -25,10 +25,10 @@ export interface Room {
   amenities: string[];
   description: string;
   ratePlans: RatePlan[];
-  urgencyText?: string;
 }
 
 export interface LocalGuideItem {
+  category: string;
   title: string;
   dist: string;
   desc: string;
@@ -52,6 +52,7 @@ export interface PropertyData {
   motto: string;
   tagline: string;
   heroImage: string;
+  atmosphereImage: string;
   startingRate: number;
   otaStartingRate: number;
   directPerk: string;
@@ -81,8 +82,9 @@ export const propertiesData: Record<string, PropertyData> = {
     motto: 'A quiet stone haven above the turquoise Ionian Sea',
     tagline: 'Handcrafted limestone architecture, morning sea breeze, and homemade courtyard artisan breakfast.',
     heroImage: '/images/hospitality/guesthouse.webp',
-    startingRate: 95,
-    otaStartingRate: 115,
+    atmosphereImage: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85',
+    startingRate: 85,
+    otaStartingRate: 105,
     directPerk: 'Complimentary chilled local reserve white wine + flexible late check-in',
     host: {
       names: 'Nikolin & Elena',
@@ -94,8 +96,8 @@ export const propertiesData: Record<string, PropertyData> = {
       {
         id: 'stone-suite',
         name: 'Stone Courtyard Suite',
-        rate: 95,
-        otaRate: 115,
+        rate: 85,
+        otaRate: 105,
         size: '34 m²',
         bed: 'King Bed (180×200cm)',
         maxGuests: 2,
@@ -106,36 +108,40 @@ export const propertiesData: Record<string, PropertyData> = {
           '/images/hospitality/stone-suite-breakfast.jpg',
           '/images/hospitality/guesthouse.webp'
         ],
-        perk: 'Free Artisan Breakfast & Welcome Chilled Wine',
-        amenities: ['High-speed Wi-Fi', 'Artisan Breakfast', 'Rain Shower', 'Espresso Bar', 'Quiet Patio', 'Eco Toiletries', 'Air Conditioning'],
+        perk: 'Artisan Breakfast & Welcome Chilled Wine',
+        amenities: ['High-speed Wi-Fi', 'Artisan Breakfast', 'Rain Shower', 'Espresso Bar', 'Private Patio', 'Eco Toiletries', 'Air Conditioning'],
         description: 'Native white limestone walls keep the room naturally cool under the Mediterranean sun. Large arched window overlooking centuries-old olive trees and azure sea.',
-        urgencyText: 'Popular: Booked 3 times this week!',
         ratePlans: [
           {
             id: 'stone-standard',
-            name: 'Standard Direct Rate',
-            description: 'Room-only flexibility with direct booking privileges.',
-            rate: 95,
-            otaRate: 115,
+            name: 'Room Only Direct',
+            description: 'Room-only flexibility with direct booking rate defense.',
+            rate: 85,
+            otaRate: 105,
             breakfastIncluded: false,
             freeCancellation: true,
-            perks: ['0% Commission Direct Rate', 'Free Cancellation up to 48h before arrival', 'Pay Upon Arrival at Property', 'High-Speed Wi-Fi']
+            perks: [
+              'Direct booking rate (0% OTA commission)',
+              'Free cancellation up to 48 hours before arrival',
+              'Payment upon arrival at property',
+              'High-speed Wi-Fi'
+            ]
           },
           {
             id: 'stone-vip',
-            name: 'Direct VIP Deal (Best Value)',
-            description: 'Complete luxury stay package with complimentary breakfast and wine.',
+            name: 'Bed & Breakfast Direct',
+            description: 'Our signature stay package with homemade courtyard artisan breakfast.',
             rate: 95,
             otaRate: 115,
             breakfastIncluded: true,
             freeCancellation: true,
             recommended: true,
             perks: [
-              'Daily Artisan Homemade Breakfast Included (€20 value FREE)',
-              'Complimentary Chilled Bottle of Local White Wine',
-              'Free Cancellation up to 48h before arrival',
-              'Priority Early Check-in from 12:00 (upon availability)',
-              'Pay Upon Arrival (No Credit Card Deposit Required)'
+              'Daily homemade artisan courtyard breakfast included',
+              'Complimentary bottle of chilled local reserve wine',
+              'Priority early check-in from 12:00 (upon availability)',
+              'Free cancellation up to 48 hours before arrival',
+              'Payment upon arrival (No deposit required)'
             ]
           }
         ]
@@ -143,48 +149,51 @@ export const propertiesData: Record<string, PropertyData> = {
       {
         id: 'sea-terrace',
         name: 'Panoramic Sea Terrace Studio',
-        rate: 135,
-        otaRate: 165,
+        rate: 120,
+        otaRate: 145,
         size: '48 m²',
         bed: 'King Bed + Daybed',
         maxGuests: 3,
         view: 'Direct Ionian Sea Sunset View',
-        image: '/images/hospitality/coastal-retreat.jpg',
+        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85',
         gallery: [
-          '/images/hospitality/coastal-retreat.jpg',
-          '/images/hospitality/stone-suite-breakfast.jpg',
-          '/images/hospitality/guesthouse.webp'
+          'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85',
+          'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85',
+          '/images/hospitality/stone-suite-breakfast.jpg'
         ],
         perk: 'Private Sunset Sunbeds, Breakfast & Late Checkout',
-        amenities: ['Private Sun Terrace', 'Outdoor Shower', 'King Bed', 'Ionian Sea View', 'High-speed Wi-Fi', 'Espresso Machine', 'Air Conditioning'],
+        amenities: ['Private Sun Terrace', 'Outdoor Teak Loungers', 'King Bed', 'Ionian Sea View', 'High-speed Wi-Fi', 'Espresso Machine', 'Air Conditioning'],
         description: 'Unobstructed horizon views over the Ionian Sea and Corfu island. Watch golden hour colors directly from your private outdoor teak loungers.',
-        urgencyText: 'Only 1 terrace suite left on your selected dates!',
         ratePlans: [
           {
             id: 'terrace-standard',
-            name: 'Standard Direct Rate',
+            name: 'Room Only Direct',
             description: 'Direct rate with flexible arrival and full terrace access.',
-            rate: 135,
-            otaRate: 165,
+            rate: 120,
+            otaRate: 145,
             breakfastIncluded: false,
             freeCancellation: true,
-            perks: ['0% Commission Direct Rate', 'Free Cancellation up to 48h before arrival', 'Private Sun Terrace Access']
+            perks: [
+              'Direct booking rate (0% OTA commission)',
+              'Free cancellation up to 48 hours before arrival',
+              'Private sun terrace access with loungers'
+            ]
           },
           {
             id: 'terrace-vip',
-            name: 'Direct VIP Package (Recommended)',
-            description: 'Includes courtyard breakfast, welcome sparkling wine, and late checkout.',
+            name: 'Signature Terrace Stay',
+            description: 'Includes courtyard breakfast, welcome reserve wine, and flexible checkout.',
             rate: 135,
             otaRate: 165,
             breakfastIncluded: true,
             freeCancellation: true,
             recommended: true,
             perks: [
-              'Daily Artisan Courtyard Breakfast Included (€20 value FREE)',
-              'Chilled Bottle of Albanian Reserve Wine on Arrival',
-              'Free Late Check-out until 13:00',
-              'Private Sunbeds with Beach Towels Provided',
-              'Pay at Property (No Prepayment Required)'
+              'Daily homemade artisan courtyard breakfast included',
+              'Chilled bottle of Albanian reserve wine on arrival',
+              'Complimentary late check-out until 13:00',
+              'Private sunbeds with fresh beach towels provided',
+              'Payment upon arrival at property'
             ]
           }
         ]
@@ -192,32 +201,35 @@ export const propertiesData: Record<string, PropertyData> = {
     ],
     localGuide: [
       {
+        category: 'COVE',
         title: 'Secret Pebble Cove',
         dist: '4 min walk',
         desc: 'Follow the stone path past the olive grove directly to a quiet crystal-clear turquoise swimming cove.'
       },
       {
+        category: 'DINING',
         title: 'Taverna Kosta',
         dist: '8 min walk',
         desc: 'Family-run tavern catching fresh sea bream and octopus daily, grilled over olive wood.'
       },
       {
+        category: 'HERITAGE',
         title: 'Old Town Castle Ruins',
         dist: '12 min drive',
         desc: 'Centuries-old stone ruins offering 360-degree panoramic views of the entire coastal mountain range.'
       }
     ],
     faq: [
-      { q: 'Is there safe parking on-site?', a: 'Yes, we have free private parking in our shaded stone courtyard for all guest vehicles.' },
-      { q: 'Can we check in after 22:30?', a: 'Yes. We offer seamless contactless check-in via our entrance keybox. The code is sent to your WhatsApp.' },
-      { q: 'What is included with direct booking?', a: 'Direct bookings include our homemade artisan breakfast daily, a welcome bottle of local wine, 0% OTA fees, and priority room allocation.' }
+      { q: 'Is there safe parking on-site?', a: 'Yes, we provide free private parking in our shaded stone courtyard for all staying guest vehicles.' },
+      { q: 'Can we check in after 22:30?', a: 'Yes. We offer seamless contactless check-in via our entrance keybox. The code is sent to your WhatsApp on arrival morning.' },
+      { q: 'What is included with direct booking?', a: 'Direct bookings include our guaranteed lowest rate, homemade artisan breakfast, welcome chilled reserve wine, and priority room allocation.' }
     ],
     conciergeQA: {
       parking: 'Yes, we provide free private parking in our private stone courtyard for all staying guests.',
-      checkin: 'Check-in is from 14:00. If you arrive late after 22:30, we arrange contactless keybox entry with instructions sent to WhatsApp.',
+      checkin: 'Check-in is from 14:00. If you arrive late after 22:30, we arrange contactless keybox entry with instructions sent to your WhatsApp.',
       breakfast: 'Artisan breakfast is freshly prepared every morning from 08:00 to 10:30 on the courtyard garden terrace.',
       beach: 'The nearest quiet pebble beach is just a 4-minute walk down our private stone footpath.',
-      directPerks: 'When booking directly with us, you get our guaranteed best rate (15-20% cheaper than OTAs), free breakfast daily, and a complimentary bottle of local wine.'
+      directPerks: 'When booking directly with us, you receive our guaranteed best rate (15-20% lower than OTAs), artisan breakfast daily, and a complimentary bottle of local wine.'
     }
   },
   'lakeside-wine-estate': {
@@ -233,8 +245,9 @@ export const propertiesData: Record<string, PropertyData> = {
     motto: 'Heritage suites overlooking ancient waters and terraced vineyards',
     tagline: '150-year-old historic winery estate, organic vineyard breakfast, and private sommelier tastings.',
     heroImage: '/images/hospitality/savoria-wine-estate.jpg',
-    startingRate: 110,
-    otaStartingRate: 135,
+    atmosphereImage: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1200&q=85',
+    startingRate: 95,
+    otaStartingRate: 120,
     directPerk: 'Complimentary cellar tour + welcome bottle of Reserve Vranec wine',
     host: {
       names: 'Stefan & Maria',
@@ -246,48 +259,51 @@ export const propertiesData: Record<string, PropertyData> = {
       {
         id: 'heritage-balcony',
         name: 'Heritage Balcony Suite',
-        rate: 110,
-        otaRate: 135,
+        rate: 95,
+        otaRate: 120,
         size: '42 m²',
         bed: 'King Bed (180×200cm)',
         maxGuests: 2,
         view: 'Lake Ohrid & Terraced Vineyards',
-        image: '/images/hospitality/savoria-wine-estate.jpg',
+        image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85',
         gallery: [
+          'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85',
           '/images/hospitality/savoria-wine-estate.jpg',
-          '/images/hospitality/palazzo-suites.jpg',
           '/images/hospitality/stone-suite-breakfast.jpg'
         ],
         perk: 'Welcome Reserve Wine, Cellar Tour & Vineyard Breakfast',
         amenities: ['Lake View Balcony', 'Stone Fireplace', 'Vineyard Breakfast', 'Wine Mini-cellar', 'Fast Wi-Fi', 'Plush Bathrobes'],
         description: 'Features exposed oak beams, private balcony overlooking the calm lake, and a crackling wood fireplace for cozy evenings.',
-        urgencyText: 'High demand: Only 2 suites left this season!',
         ratePlans: [
           {
             id: 'heritage-standard',
-            name: 'Standard Direct Rate',
-            description: 'Direct room rate with vineyard views.',
-            rate: 110,
-            otaRate: 135,
+            name: 'Room Only Direct',
+            description: 'Direct room rate with vineyard and lake views.',
+            rate: 95,
+            otaRate: 120,
             breakfastIncluded: false,
             freeCancellation: true,
-            perks: ['0% Commission Direct Rate', 'Free Cancellation up to 48h before arrival', 'Complimentary Estate Wi-Fi']
+            perks: [
+              'Direct booking rate (0% OTA commission)',
+              'Free cancellation up to 48 hours before arrival',
+              'Complimentary estate-wide Wi-Fi'
+            ]
           },
           {
             id: 'heritage-vip',
-            name: 'Vineyard VIP Package (Recommended)',
-            description: 'Includes organic farm breakfast and private cellar tour.',
+            name: 'Vineyard Bed & Breakfast',
+            description: 'Includes organic farm breakfast and private cellar tasting tour.',
             rate: 110,
             otaRate: 135,
             breakfastIncluded: true,
             freeCancellation: true,
             recommended: true,
             perks: [
-              'Daily Organic Farm Breakfast Included (€22 value FREE)',
-              'Complimentary Bottle of Estate Reserve Vranec Wine',
-              'Private Sommelier Cellar Tour at 18:30',
-              'Free Late Check-out until 13:00',
-              'Pay at Check-in (Zero upfront deposit)'
+              'Daily organic farm breakfast included',
+              'Complimentary bottle of estate Reserve Vranec wine',
+              'Private sommelier cellar tour at 18:30',
+              'Complimentary late check-out until 13:00',
+              'Payment upon arrival at estate'
             ]
           }
         ]
@@ -295,36 +311,39 @@ export const propertiesData: Record<string, PropertyData> = {
       {
         id: 'cellar-loft',
         name: 'Cellar Master Loft',
-        rate: 150,
-        otaRate: 185,
+        rate: 135,
+        otaRate: 165,
         size: '55 m²',
         bed: 'Super King Bed (200×200cm)',
         maxGuests: 3,
         view: 'Historic Winery Courtyard & Cellars',
-        image: '/images/hospitality/palazzo-suites.jpg',
+        image: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85',
         gallery: [
-          '/images/hospitality/palazzo-suites.jpg',
+          'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85',
           '/images/hospitality/savoria-wine-estate.jpg',
-          '/images/hospitality/coastal-retreat.jpg'
+          '/images/hospitality/palazzo-suites.jpg'
         ],
         perk: 'Private Barrel Room Tasting & Late Checkout',
         amenities: ['Freestanding Copper Tub', 'Private Wine Tasting', 'Lounge Seating', 'Super King Bed', 'Garden Access', 'Espresso Bar'],
-        description: 'Located in the historic east wing above the aging cellars. Handcrafted wrought-iron accents, copper soaking tub, and sommelier service.',
-        urgencyText: 'Rarely available: Book before it sells out!',
+        description: 'Located in the historic east wing above the aging cellars. Handcrafted wrought-iron accents, freestanding copper soaking tub, and sommelier service.',
         ratePlans: [
           {
             id: 'cellar-standard',
-            name: 'Standard Direct Rate',
-            description: 'Full loft suite access with direct booking discounts.',
-            rate: 150,
-            otaRate: 185,
+            name: 'Room Only Direct',
+            description: 'Full loft suite access with direct booking privilege.',
+            rate: 135,
+            otaRate: 165,
             breakfastIncluded: false,
             freeCancellation: true,
-            perks: ['0% Commission Direct Rate', 'Free Cancellation', 'Copper Soaking Tub Access']
+            perks: [
+              'Direct booking rate (0% OTA commission)',
+              'Free cancellation up to 48 hours before arrival',
+              'Copper soaking tub & garden access'
+            ]
           },
           {
             id: 'cellar-vip',
-            name: 'Cellar Master Experience (Best Value)',
+            name: 'Cellar Master Experience',
             description: 'The ultimate winery escape with private barrel tasting and vineyard breakfast.',
             rate: 150,
             otaRate: 185,
@@ -332,11 +351,11 @@ export const propertiesData: Record<string, PropertyData> = {
             freeCancellation: true,
             recommended: true,
             perks: [
-              'Daily Gourmet Vineyard Breakfast Included',
-              'Private Reserve Tasting in Ancient Barrel Vault',
-              'Complimentary Wine Library Access & Firewood',
-              'Flexible Early Arrival & Late Checkout',
-              'Pay on Arrival'
+              'Daily gourmet vineyard breakfast included',
+              'Private reserve tasting in ancient barrel vault',
+              'Complimentary wine library access & firewood',
+              'Flexible early arrival & late checkout',
+              'Payment upon arrival at estate'
             ]
           }
         ]
@@ -344,23 +363,26 @@ export const propertiesData: Record<string, PropertyData> = {
     ],
     localGuide: [
       {
+        category: 'ESTATE',
         title: 'Historic Wine Cellars',
         dist: 'On-site',
         desc: 'Explore underground stone barrel vaults dating back to 1894 with daily sommelier-guided tastings.'
       },
       {
+        category: 'HERITAGE',
         title: 'St. John at Kaneo Church',
         dist: '10 min boat ride',
         desc: 'Iconic 13th-century cliffside Byzantine church with the most famous lake vista in the Balkans.'
       },
       {
+        category: 'NATURE',
         title: 'Galicica Mountain National Park',
         dist: '15 min drive',
         desc: 'Scenic mountain trails where you can simultaneously view two major Balkan lakes.'
       }
     ],
     faq: [
-      { q: 'Are wine tastings included?', a: 'Direct booking guests receive a complimentary welcome cellar tour and a signature bottle of Reserve Vranec.' },
+      { q: 'Are wine tastings included?', a: 'Direct booking guests receive a complimentary welcome cellar tour and a signature bottle of Reserve Vranec on arrival.' },
       { q: 'Is transportation from Ohrid Airport available?', a: 'Yes, private estate driver transfer takes 18 minutes and costs €25 fixed.' },
       { q: 'What are breakfast hours?', a: 'Organic breakfast featuring farm cheeses, homemade figs, and lake trout spreads is served from 08:00 to 10:30.' }
     ],
@@ -384,9 +406,10 @@ export const propertiesData: Record<string, PropertyData> = {
     coords: '43.8594° N, 18.4318° E',
     motto: 'Historic boutique lofts in the vibrant heart of the old artisan quarter',
     tagline: 'Exposed Austrian-era brick, high-speed fiber WiFi, and seamless contactless keyless entry.',
-    heroImage: '/images/hospitality/urban-loft.jpg',
-    startingRate: 85,
-    otaStartingRate: 105,
+    heroImage: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=85',
+    atmosphereImage: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=85',
+    startingRate: 75,
+    otaStartingRate: 95,
     directPerk: '24/7 keybox arrival + welcome Bosnian coffee set & neighborhood guide',
     host: {
       names: 'Dino & Lejla',
@@ -398,48 +421,50 @@ export const propertiesData: Record<string, PropertyData> = {
       {
         id: 'historic-penthouse',
         name: 'Historic Penthouse Loft',
-        rate: 85,
-        otaRate: 105,
+        rate: 75,
+        otaRate: 95,
         size: '40 m²',
         bed: 'Queen Bed (160×200cm)',
         maxGuests: 2,
         view: 'Old Town Minarets & Hillside Rooftops',
-        image: '/images/hospitality/urban-loft.jpg',
+        image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85',
         gallery: [
-          '/images/hospitality/urban-loft.jpg',
-          '/images/hospitality/mobile-stay-ui.jpg',
-          '/images/hospitality/stone-suite-main.jpg'
+          'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85',
+          'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=85'
         ],
         perk: '24/7 Keyless Check-in, Coffee Set & Fast Fiber',
         amenities: ['300 Mbps Fiber Wi-Fi', 'Smart Keyless Lock', 'Air Conditioning', 'Ergonomic Desk', 'Rain Shower', 'Washer/Dryer'],
         description: 'Cathedral ceiling with skylights framing the historic minarets. Perfect for independent couples and digital remote workers.',
-        urgencyText: 'Top rated by remote workers: 9.9 for Wi-Fi speed!',
         ratePlans: [
           {
             id: 'penthouse-standard',
-            name: 'Standard Direct Rate',
+            name: 'Room Only Direct',
             description: 'Full loft access with 300 Mbps fiber internet.',
-            rate: 85,
-            otaRate: 105,
+            rate: 75,
+            otaRate: 95,
             breakfastIncluded: false,
             freeCancellation: true,
-            perks: ['0% Commission Direct Rate', 'Free Cancellation up to 48h before arrival', '300 Mbps Dedicated Fiber Wi-Fi']
+            perks: [
+              'Direct booking rate (0% OTA commission)',
+              'Free cancellation up to 48 hours before arrival',
+              '300 Mbps dedicated fiber Wi-Fi'
+            ]
           },
           {
             id: 'penthouse-vip',
-            name: 'Direct Urban Package (Recommended)',
-            description: 'Includes artisanal Bosnian coffee welcome set and flexible self check-in.',
+            name: 'Urban Breakfast & Coffee Stay',
+            description: 'Includes artisanal Bosnian coffee welcome set and partner bakery breakfast.',
             rate: 85,
             otaRate: 105,
             breakfastIncluded: true,
             freeCancellation: true,
             recommended: true,
             perks: [
-              'Traditional Artisan Bosnian Coffee Welcome Kit with Turkish Delight',
-              'Free Bakery Voucher at Old Town Partner Bakery Daily',
-              '24/7 Contactless Digital Smart Keycode Access',
-              'Luggage Storage Facility Access',
-              'Pay on Arrival'
+              'Traditional artisan Bosnian coffee kit with Turkish delight',
+              'Daily fresh bakery voucher at historic Old Town bakery',
+              '24/7 contactless smart digital keycode access',
+              'Luggage storage facility access',
+              'Payment upon arrival'
             ]
           }
         ]
@@ -447,47 +472,49 @@ export const propertiesData: Record<string, PropertyData> = {
       {
         id: 'atelier-studio',
         name: 'Atelier Courtyard Studio',
-        rate: 70,
-        otaRate: 88,
+        rate: 60,
+        otaRate: 75,
         size: '30 m²',
         bed: 'Double Bed (150×200cm)',
         maxGuests: 2,
         view: 'Quiet Inner Courtyard Garden',
-        image: '/images/hospitality/mobile-stay-ui.jpg',
+        image: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=85',
         gallery: [
-          '/images/hospitality/mobile-stay-ui.jpg',
-          '/images/hospitality/urban-loft.jpg',
-          '/images/hospitality/stone-suite-breakfast.jpg'
+          'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=85',
+          'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=85'
         ],
         perk: 'Peaceful Courtyard, Neighborhood Map & Espresso',
         amenities: ['Quiet Garden View', 'Walk-in Rain Shower', 'Espresso Bar', 'Fiber Wi-Fi', 'Keyless Access', 'Blackout Blinds'],
         description: 'Peaceful garden sanctuary tucked behind the main cobblestone bazaar. Minimalist Scandinavian-Balkan oak furnishings.',
-        urgencyText: 'Great value: Most affordable loft in Baščaršija!',
         ratePlans: [
           {
             id: 'atelier-standard',
-            name: 'Standard Direct Rate',
-            description: 'Quiet studio retreat in historic centre.',
-            rate: 70,
-            otaRate: 88,
+            name: 'Room Only Direct',
+            description: 'Quiet studio retreat in historic Old Town centre.',
+            rate: 60,
+            otaRate: 75,
             breakfastIncluded: false,
             freeCancellation: true,
-            perks: ['0% Commission Direct Rate', 'Free Cancellation', 'Keyless 24/7 Access']
+            perks: [
+              'Direct booking rate (0% OTA commission)',
+              'Free cancellation up to 48 hours before arrival',
+              'Keyless 24/7 digital access'
+            ]
           },
           {
             id: 'atelier-vip',
-            name: 'Direct Explorer Deal (Recommended)',
-            description: 'Complimentary artisan coffee, local guidebook, and flexible check-in.',
+            name: 'Explorer Direct Stay',
+            description: 'Complimentary artisan coffee, curated local map, and flexible check-in.',
             rate: 70,
             otaRate: 88,
             breakfastIncluded: true,
             freeCancellation: true,
             recommended: true,
             perks: [
-              'Daily Partner Bakery Breakfast Voucher Included',
-              'Curated Sarajevo Insider Map by Host Dino & Lejla',
-              'Flexible 24/7 Digital Check-in',
-              'Pay at Check-in (No deposit required)'
+              'Daily partner bakery breakfast voucher included',
+              'Curated Sarajevo insider map by hosts Dino & Lejla',
+              'Flexible 24/7 digital check-in',
+              'Payment upon arrival (No deposit required)'
             ]
           }
         ]
@@ -495,25 +522,28 @@ export const propertiesData: Record<string, PropertyData> = {
     ],
     localGuide: [
       {
+        category: 'BAZAAR',
         title: 'Sebilj Fountain & Bazaar',
         dist: '2 min walk',
         desc: 'The beating heart of Baščaršija with artisan coppersmiths and traditional pigeon square.'
       },
       {
+        category: 'CAFE',
         title: 'Café Divan (Morića Han)',
         dist: '3 min walk',
         desc: 'Historic 16th-century caravan inn courtyard serving authentic Bosnian coffee in traditional copper dzezva.'
       },
       {
+        category: 'PANORAMA',
         title: 'Trebević Cable Car',
         dist: '6 min walk',
         desc: 'Panoramic gondola gliding high above the valley for breathtaking city skyline views.'
       }
     ],
     faq: [
-      { q: 'How does check-in work?', a: 'We have 24/7 smart keycode access. Your private code is sent directly to your WhatsApp on the morning of check-in.' },
-      { q: 'Is there parking near Old Town?', a: 'Yes, we have a partner secured underground garage 150m away (€12/day).' },
-      { q: 'Is the internet reliable for video calls?', a: 'Yes! We have dedicated symmetrical 300 Mbps fiber internet in every loft.' }
+      { q: 'How does check-in work?', a: 'We use 24/7 smart keycode access. Your private code is sent directly to your WhatsApp on the morning of check-in.' },
+      { q: 'Is there parking near Old Town?', a: 'Yes, we have an agreement with a secured underground garage 150m away (€12/day).' },
+      { q: 'Is the internet reliable for video calls?', a: 'Yes, every apartment has dedicated symmetrical 300 Mbps fiber internet.' }
     ],
     conciergeQA: {
       parking: 'We have an arrangement with a secure covered parking garage 150m away (€12 per day).',

@@ -5,6 +5,18 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.8] - 2026-10-01
+
+### Polished & Refined
+- **Complete Eradication of "AI Slop" Across Live Demos (`/hospitality/demo/[slug]`)**:
+  - **Authentic Photography & Zero Device Mockups in Rooms**: Replaced technical device screenshots and phone mockups inside room galleries with authentic, high-resolution European boutique hotel photography (unobstructed panoramic sea terrace suites, exposed brick lofts, Scandinavian-Balkan courtyard studios, and historic barrel lofts).
+  - **Eliminated Image Duplication**: Integrated dedicated `atmosphereImage` photography for the host story and courtyard sections, ensuring the hero image is never reused.
+  - **Eliminated Fake Dropshipping Urgency**: Purged all cheesy e-commerce hype copy (`"Only 1 left!"`, `"Booked 3 times this week!"`, `"FREE €20 value"`, `(Best Value)`).
+  - **Realistic Hospitality Rate Architecture**: Structured genuine European boutique rate tiers: *Room Only Direct* (flexible room-only) vs *Bed & Breakfast Direct / Signature Stay* (includes daily homemade artisan breakfast, chilled reserve wine, priority arrival, and 0% OTA commission savings).
+  - **Dignified Direct Host Concierge**: Replaced gimmicky "AI Concierge" with a refined *Direct Host Concierge* widget answering authentic guest queries (free shaded courtyard parking, late keybox arrival, breakfast hours, direct wine perks).
+  - **Curated Local Guide Tiles**: Transformed flat gray cards into structured editorial insider guides categorized by `COVE`, `DINING`, `HERITAGE`, `BAZAAR`, and `CAFE` with walking distances.
+  - **Editorial Reservation Voucher**: Multi-step checkout drawer finishes with a crisp receipt-style voucher, 0% prepayment pay-on-arrival terms, booking reference, and pre-formatted 1-click WhatsApp host dispatch.
+
 ## [0.2.7] - 2026-10-01
 
 ### Fixed & Aligned
