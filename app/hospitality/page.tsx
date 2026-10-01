@@ -357,72 +357,73 @@ export default function HospitalityPage() {
         {/* ─────────────────────────────────────────────────────────────
             2. HERO SECTION
         ────────────────────────────────────────────────────────────── */}
-        <section className="max-w-[1224px] mx-auto px-6 sm:px-9 py-14 lg:py-24 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-14 items-center">
+        <section className="max-w-[1224px] mx-auto px-6 sm:px-9 pt-[76px] pb-[72px] grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-[55px] items-center">
           
           {/* Hero Copy */}
-          <div className="max-w-xl">
-            <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
-              INDEPENDENT HOTELS · DIRECT CONNECTIONS
+          <div className="hero-copy">
+            <p className="text-[12px] tracking-[2px] font-bold text-[#F59E0B] uppercase mb-[22px]">
+              INDEPENDENT HOTELS. DIRECT CONNECTIONS.
             </p>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-[74px] leading-[1.04] font-black tracking-[-2px] text-[#1C2733] mb-6">
+            <h1 className="text-[52px] sm:text-[62px] lg:text-[78px] leading-[1.03] tracking-[-3px] lg:tracking-[-4px] font-[650] text-[#1C2733] mb-[28px]">
               A better way<br />
               for guests to<br />
               <em className="not-italic text-[#F59E0B]">reach you.</em>
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-[480px] mb-8 font-normal">
-              Your hotel has a story worth discovering. Give it a website that feels like your place — and makes asking you a question effortless.
+            <p className="text-[18px] leading-[1.7] text-[#617078] max-w-[450px] font-normal mb-0">
+              Your hotel has a story worth discovering. Give it a website that feels like your place—and makes asking you a question effortless.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 mb-6">
+            <div className="flex flex-wrap items-center gap-[23px] mt-[31px]">
               <a
                 href="#review"
-                className="inline-flex items-center justify-center min-h-[50px] px-8 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg font-bold text-sm transition-all shadow-xs"
+                className="inline-flex items-center justify-center min-h-[52px] px-6 py-[13px] bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-[7px] font-semibold text-[14px] transition-all"
               >
                 Get a free 1-page review
               </a>
               <a
                 href="#process"
-                className="inline-flex items-center justify-center min-h-[50px] px-6 text-sm font-semibold text-[#1C2733] hover:text-[#F59E0B] border-b border-slate-300 hover:border-[#F59E0B] pb-0.5 transition-colors"
+                className="text-[14px] font-semibold text-[#1C2733] hover:text-[#F59E0B] border-b border-[#adb8bd] pb-[3px] transition-colors"
               >
                 See how it works
               </a>
             </div>
 
-            <p className="text-xs text-slate-500 leading-relaxed">
-              A fresh look at your hotel on a phone. Free, no obligation.
+            <p className="text-[12px] text-[#617078] leading-[1.65] mt-[19px]">
+              A fresh look at your hotel on a phone.<br />
+              Free. No obligation.
             </p>
           </div>
 
           {/* Hero Visual */}
-          <div className="relative h-[380px] sm:h-[480px] lg:h-[510px] w-full">
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-sm">
+          <div className="relative h-[420px] sm:h-[480px] lg:h-[525px] w-full lg:ml-[14px]">
+            <div className="relative w-full h-full rounded-[14px] overflow-hidden border border-slate-200 bg-slate-50 shadow-sm">
               <Image
                 src="/images/hospitality/guesthouse.webp"
-                alt="Coastal boutique guesthouse stone courtyard"
+                alt="AI-generated concept of a coastal guesthouse with a stone courtyard"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 600px"
-                className="object-cover"
+                className="object-cover rounded-[14px]"
               />
-              <div className="absolute left-6 top-6 text-white text-[10px] tracking-[2px] bg-[#1C2733]/85 backdrop-blur-xs px-3.5 py-1.5 rounded-full font-bold uppercase">
-                A SMALL HOTEL · A BIG FIRST IMPRESSION
+              <div className="absolute left-[26px] top-[25px] text-white text-[10px] tracking-[2px] bg-[#172c35]/55 backdrop-blur-xs px-[12px] py-[7px] rounded-[30px] font-bold uppercase">
+                A SMALL HOTEL. A BIG FIRST IMPRESSION.
               </div>
             </div>
 
             {/* Floating Enquiry Card */}
-            <div className="absolute -bottom-6 left-4 right-4 sm:-left-6 sm:right-8 bg-white rounded-xl p-5 border border-slate-200 shadow-xl flex items-center gap-4">
-              <div className="w-11 h-11 rounded-full bg-amber-50 text-[#F59E0B] flex items-center justify-center font-bold text-xl shrink-0 border border-amber-200/60">
-                <Mail className="w-5 h-5" />
+            <div className="absolute bottom-[36px] -left-3 sm:-left-[40px] right-3 sm:right-[30px] bg-white rounded-[10px] p-[21px_24px] border border-slate-100 shadow-[0_12px_40px_rgba(19,37,45,0.13)] flex items-center gap-[15px] z-10">
+              <div className="w-[45px] h-[45px] rounded-full bg-[#FFF0E9] text-[#F59E0B] flex items-center justify-center font-bold text-[22px] shrink-0">
+                ✉
               </div>
-              <div className="text-xs sm:text-sm">
-                <strong className="block text-[#1C2733] font-bold text-sm">One question from a guest.</strong>
-                <p className="text-xs text-slate-500 m-0">One direct conversation with you.</p>
+              <div>
+                <strong className="block text-[#1C2733] font-bold text-[15px]">One question from a guest.</strong>
+                <p className="text-[12px] text-[#617078] m-[3px_0_0]">One direct conversation with you.</p>
               </div>
             </div>
 
-            <span className="absolute -bottom-12 right-2 text-[10px] text-slate-400">
+            <span className="absolute -bottom-[27px] right-0 text-[10px] text-[#617078]">
               Concept imagery · AI generated
             </span>
           </div>
