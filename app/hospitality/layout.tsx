@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "WUUS - Modern Websites for Independent Boutique Hotels",
   description: "We engineer calm, high-performance websites and direct digital experiences for independent boutique hotels and hospitality stays. Async-first workflow, fixed scope.",
+  alternates: {
+    canonical: "https://www.webuntukusaha.com/hospitality",
+  },
   keywords: [
     "boutique hotel website design",
     "hospitality digital studio",

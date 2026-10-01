@@ -43,8 +43,8 @@ const hospitalityProjects = [
     location: "Lake Ohrid / Adriatic Coast",
     img: "/images/hospitality/savoria-wine-estate.jpg",
     accent: "#D97706",
-    tag: "Terroir & Heritage",
-    description: "Custom digital home designed for a historic lakeside wine estate. Emphasizes curated wine tastings, private suites, and seamless direct inquiries."
+    tag: "Terroir Concept",
+    description: "Custom digital concept designed for a historic lakeside wine estate. Emphasizes curated wine tastings, private suites, and seamless direct inquiries."
   },
   {
     id: 2,
@@ -53,27 +53,27 @@ const hospitalityProjects = [
     location: "Ohrid / North Macedonia",
     img: "/images/hospitality/mobile-stay-ui.jpg",
     accent: "#1C2733",
-    tag: "Mobile-First Direct Flow",
-    description: "Designed thumb-first for discerning travelers. Instant visual room discovery, transparent direct rates, and effortless WhatsApp/Email inquiries with the host."
+    tag: "Mobile-First Prototype",
+    description: "Designed thumb-first for discerning travelers. Instant visual room discovery, transparent direct rates, and effortless WhatsApp/Viber inquiries with the host."
   },
   {
     id: 3,
     title: "Artisan Coastal Retreat",
     category: "Curated Boutique Stays",
     location: "Ionian Riviera / Tirana",
-    img: "/kain-nusantara-mockup.png",
+    img: "/images/hospitality/coastal-retreat.jpg",
     accent: "#B45309",
-    tag: "Atmospheric Visuals",
-    description: "Full-bleed imagery of sunset terraces, local culinary experiences, and private guest suites engineered for instantaneous mobile loading."
+    tag: "Coastal Villa Concept",
+    description: "Full-bleed imagery of sunset terraces, local culinary experiences, and private guest suites engineered for sub-second mobile loading."
   },
   {
     id: 4,
     title: "The Metropolitan Loft Suites",
     category: "Design Urban Boutique",
     location: "Sarajevo / Central Quarter",
-    img: "/urbanThreads-mockup.png",
+    img: "/images/hospitality/urban-loft.jpg",
     accent: "#2563EB",
-    tag: "Bespoke Urban Stays",
+    tag: "Urban Heritage Prototype",
     description: "Minimalist urban lodging interface that allows busy international travelers to inspect room types and reserve directly in under 45 seconds."
   },
   {
@@ -81,9 +81,9 @@ const hospitalityProjects = [
     title: "Palazzo Concierge & Suites",
     category: "Historic Boutique Palace",
     location: "Dubrovnik / Kotor Bay",
-    img: "/dressy-rent-mockup.png",
+    img: "/images/hospitality/palazzo-suites.jpg",
     accent: "#DC2626",
-    tag: "Guest Concierge Experience",
+    tag: "Heritage Palace Concept",
     description: "A tailored digital experience showcasing yacht charters, private terrace breakfasts, and bespoke concierge arrangements."
   }
 ];
@@ -98,10 +98,10 @@ const conciergeScenarios = [
     location: 'Munich, Germany',
     time: '23:42 · Late-Night Drive',
     inquiry: 'Guten Abend! Wir reisen mit einem Kombi an. Haben Sie sichere Parkplätze im Innenhof, und können wir nach 22:30 Uhr kontaktlos einchecken?',
-    response: 'Guten Abend Herr Müller! Ja, wir verfügen über private, videoüberwachte Parkplätze direkt im geschützten Innenhof (für Hotelgäste kostenfrei, auch für große Kombis & SUVs geeignet). Ein kontaktloser Late Check-in nach 22:30 Uhr ist über unsere Schlüsselbox am Haupteingang jederzeit problemlos möglich. Sollen wir Ihnen die Heritage Balcony Suite mit Innenhofblick unverbindlich vormerken?',
+    response: 'Guten Abend Hans & Claudia! Ja, wir verfügen über private, videoüberwachte Parkplätze direkt im geschützten Innenhof (für Hotelgäste kostenfrei, auch für große Kombis & SUVs geeignet). Ein kontaktloser Late Check-in nach 22:30 Uhr ist über unsere Schlüsselbox am Haupteingang jederzeit problemlos möglich. Sollen wir Ihnen die Heritage Balcony Suite mit Innenhofblick unverbindlich vormerken?',
     sourceCitation: 'Verified: Host Property Handbook §2.1 (Courtyard Parking) & §1.4 (Keybox Access)',
     latency: '1.2s',
-    confidence: '99.8% Grounded',
+    confidence: 'Verified Handbook',
     whatsappMessage: 'Hi! I saw the answers regarding parking and late check-in on your website. We would like to inquire about reserving the Heritage Balcony Suite for 3 nights.'
   },
   {
@@ -112,10 +112,10 @@ const conciergeScenarios = [
     location: 'Milano, Italy',
     time: '22:15 · Weekend Getaway',
     inquiry: 'Buonasera! Viaggiamo con un cagnolino di 5 kg. È ammesso nelle camere con balcone? E la colazione artigianale è inclusa nelle prenotazioni dirette?',
-    response: 'Buonasera! I cani di piccola taglia (fino a 10 kg) sono i benvenuti nelle nostre Balcony Suites con un piccolo supplemento pulizia di 15€ per soggiorno. Inoltre, prenotando direttamente con noi, la ricca colazione artigianale sulla terrazza panoramica è sempre inclusa gratuitamente (risparmiando circa il 15% rispetto alle tariffe terze). Desidera ricevere disponibilità diretta per il vostro weekend?',
+    response: 'Buonasera Matteo & Sofia! I cani di piccola taglia (fino a 10 kg) sono i benvenuti nelle nostre Balcony Suites con un piccolo supplemento pulizia di 15€ per soggiorno. Inoltre, prenotando direttamente con noi, la ricca colazione artigianale sulla terrazza panoramica è sempre inclusa gratuitamente (risparmiando circa il 15% rispetto alle tariffe terze). Desidera ricevere disponibilità diretta per il vostro weekend?',
     sourceCitation: 'Verified: Host Property Handbook §3.8 (Pet Policy) & §5.2 (Direct Rate Perks)',
     latency: '1.4s',
-    confidence: '99.9% Grounded',
+    confidence: 'Verified Handbook',
     whatsappMessage: 'Buonasera! Vorrei informazioni sulla disponibilità della Balcony Suite per noi e il nostro cagnolino con la colazione inclusa.'
   },
   {
@@ -126,10 +126,10 @@ const conciergeScenarios = [
     location: 'London, United Kingdom',
     time: '00:18 · Planning Summer Stay',
     inquiry: 'Hi there! We are looking at a 4-night stay in July. Is it better to book directly on your site or via Booking.com? Also, can you coordinate private airport transfer from Tirana?',
-    response: 'Hello Eleanor! Booking directly with us guarantees our best flexible rate (approx. 12-15% lower than third-party platforms) plus a complimentary welcome bottle of regional vintage wine. We also coordinate private Mercedes transfer directly from Tirana Airport (fixed at €45, payable directly to the driver). Would you like me to connect you with our host on WhatsApp to secure these dates with zero deposit?',
+    response: 'Hello Eleanor! Booking directly with us guarantees our best flexible rate (approx. 12-15% lower than third-party platforms) plus a complimentary welcome bottle of regional vintage wine. We also coordinate private Mercedes transfer directly from Tirana Airport (fixed at €45, payable directly to the driver). Would you like me to connect you with our host on WhatsApp or Viber to secure these dates with zero deposit?',
     sourceCitation: 'Verified: Direct Booking Best Rate Guarantee & Concierge Transfer Protocol',
     latency: '0.9s',
-    confidence: '100% Grounded',
+    confidence: 'Verified Handbook',
     whatsappMessage: 'Hi! I inquired through your website concierge regarding the 4-night stay in July and airport transfer. Would love to confirm availability directly.'
   },
   {
@@ -140,7 +140,7 @@ const conciergeScenarios = [
     location: 'Lyon, France',
     time: '21:05 · Wine & Gastronomy',
     inquiry: 'Bonjour, proposez-vous des dégustations de vins du domaine pour les non-résidents le vendredi soir ? Et quelles sont les options végétariennes au dîner ?',
-    response: 'Bonjour Camille ! Absolument. Nos dégustations commentées avec accords mets & vins ont lieu chaque vendredi à 18h30 dans le cellier historique (35€ par personne). Notre chef propose également un menu dégustation végétarien 4 plats mettant à l\'honneur les produits biologiques du potager. Les places étant limitées à 12 convives, souhaitez-vous que nous vous réservions une table pour ce vendredi ?',
+    response: 'Bonjour Camille & Julien ! Absolument. Nos dégustations commentées avec accords mets & vins ont lieu chaque vendredi à 18h30 dans le cellier historique (35€ par personne). Notre chef propose également un menu dégustation végétarien 4 plats mettant à l\'honneur les produits biologiques du potager. Les places étant limitées à 12 convives, souhaitez-vous que nous vous réservions une table pour ce vendredi ?',
     sourceCitation: 'Verified: Terroir Tasting Schedule & Cellar Dietary Specs',
     latency: '1.3s',
     confidence: '99.7% Grounded',
@@ -796,7 +796,7 @@ export default function HospitalityPage() {
               {/* Bespoke Tailored Asset with Live Metrics Badge */}
               <div className="relative h-44 rounded-xl overflow-hidden group mt-4">
                 <Image
-                  src="/images/hospitality/savoria-wine-estate.jpg"
+                  src="/images/hospitality/coastal-retreat.jpg"
                   alt="The Calm Direct Web Experience"
                   fill
                   sizes="350px"
@@ -837,6 +837,9 @@ export default function HospitalityPage() {
                 Crafted for Character, <br />
                 <span className="text-[#F59E0B] text-4xl lg:text-5xl">Engineered for Stays.</span>
               </h2>
+              <p className="text-sm text-gray-600 max-w-xl mt-3 leading-relaxed">
+                Studio design prototypes and architectural case concepts. Each layout demonstrates how independent boutique properties can showcase authentic character, load in sub-seconds on roaming mobile networks, and capture direct inquiries via WhatsApp, Viber, or email.
+              </p>
             </div>
 
             {/* Carousel Navigation Arrows */}
@@ -1451,15 +1454,15 @@ export default function HospitalityPage() {
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong className="text-white">20+ European Languages</strong> (German, Italian, French, Polish, Dutch)</span>
+                      <span><strong className="text-white">Multilingual Guest Concierge</strong> (German, Italian, French, English, and regional languages)</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong className="text-white">Grounded strictly in your Property Handbook</strong> (Zero Hallucination)</span>
+                      <span><strong className="text-white">Strictly Grounded in Property Handbook</strong> (Deterministic rules & room specs, zero invented discounts)</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 stroke-[2.5]" />
-                      <span><strong className="text-white">1-Tap Pre-filled WhatsApp Booking Lead Hand-off</strong></span>
+                      <span><strong className="text-white">1-Tap Direct Inquiries via WhatsApp & Viber</strong> (Instant host hand-off)</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 stroke-[2.5]" />
@@ -1478,8 +1481,8 @@ export default function HospitalityPage() {
                   >
                     Select AI Hospitality Engine (€1,290)
                   </button>
-                  <p className="text-[10px] text-slate-400 text-center mt-2">
-                    Equivalent to approx. 4-5 nights of direct bookings (less than 1 month of OTA commissions).
+                  <p className="text-[10px] text-slate-400 text-center mt-2 leading-relaxed">
+                    Recovers its investment after ~10-15 direct bookings (saving 15-20% in OTA commissions on guests who would otherwise book via third-party platforms).
                   </p>
                 </div>
               </div>
@@ -1777,7 +1780,7 @@ export default function HospitalityPage() {
 
             {/* Brand & Studio Location */}
             <div className="lg:col-span-2">
-              <Link href="/" className="flex items-center mb-6">
+              <Link href="/hospitality" className="flex items-center mb-6">
                 <Image
                   src="/logo.png"
                   alt="WUUS Logo"
@@ -1786,22 +1789,23 @@ export default function HospitalityPage() {
                   className="h-10 w-auto object-contain"
                 />
               </Link>
-              <p className="text-gray-500 mb-8 max-w-md leading-relaxed text-sm">
-                WUUS is an independent digital design studio partnering with forward-thinking boutique stays and ambitious businesses worldwide. We craft digital spaces with measurable technical and aesthetic standards.
+              <p className="text-gray-500 mb-6 max-w-md leading-relaxed text-sm">
+                WUUS is an independent digital craft studio. We design calm, sub-second web platforms and multilingual concierge solutions for boutique hotels, heritage stays, and wine estates across the Adriatic and Western Balkans.
               </p>
 
-              {/* Office Google Maps Embed (Matches Indonesian site) */}
-              <div className="rounded-xl overflow-hidden  border border-slate-200 h-48 max-w-md group transition-all duration-500">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.533838466155!2d106.7541558118344!3d-6.193067260650871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f710ddd28e99%3A0x4fda30c569b2e71d!2sApartmen%20Puri%20Parkview!5e0!3m2!1sid!2sid!4v1775916857687!5m2!1sid!2sid"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-[1.02]"
-                  title="WUUS Digital Studio Office Location"
-                />
+              {/* International Invoicing & Staging Guarantee Card */}
+              <div className="bg-[#F8F9FA] rounded-2xl p-5 max-w-md text-xs text-slate-600 space-y-3">
+                <div className="flex items-center gap-2 font-bold text-slate-800 text-xs uppercase tracking-wider">
+                  <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
+                  <span>Staging-First Delivery & Invoicing</span>
+                </div>
+                <p className="leading-relaxed text-[11px] text-slate-500">
+                  Fixed-scope agreements invoiced in EUR via Wise Business (SEPA Transfer / International Wire / Card). 50% deposit upon private staging review approval, 50% balance upon final live launch.
+                </p>
+                <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px] font-semibold text-slate-700">
+                  <span>Zero Vendor Lock-in</span>
+                  <span>100% Source Code Ownership</span>
+                </div>
               </div>
             </div>
 
@@ -1827,7 +1831,7 @@ export default function HospitalityPage() {
               <ul className="space-y-4 text-sm">
                 <li className="flex items-start gap-3 text-gray-500">
                   <MapPin size={18} className="text-accent-orange mt-0.5 shrink-0" />
-                  <span><strong>WUUS Digital Studio</strong> <br /> Jakarta Barat, DKI Jakarta <br /> 11620, Indonesia</span>
+                  <span><strong>WUUS Digital Studio</strong> <br /> Remote-first studio with global async delivery across Europe & Southeast Asia.</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-500">
                   <PhoneCall size={18} className="text-accent-orange shrink-0" />
@@ -1835,16 +1839,16 @@ export default function HospitalityPage() {
                     href="https://wa.me/6281383521750?text=Hi%20Faisal%2C%20I'm%20reaching%20out%20from%20a%20boutique%20hotel%20regarding%20a%20website%20review."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-accent-orange transition-colors font-medium"
+                    className="hover:text-accent-orange transition-colors font-medium text-xs"
                   >
-                    +62 813-8352-1750 (WhatsApp Direct)
+                    +62 813-8352-1750 (WhatsApp & Viber)
                   </a>
                 </li>
                 <li className="flex items-center gap-3 text-gray-500">
                   <Mail size={18} className="text-accent-orange shrink-0" />
                   <a
                     href="mailto:faisalalfarizi@webuntukusaha.com?subject=Inquiry%20from%20Boutique%20Hotelier"
-                    className="hover:text-accent-orange transition-colors font-medium"
+                    className="hover:text-accent-orange transition-colors font-medium text-xs"
                   >
                     faisalalfarizi@webuntukusaha.com
                   </a>
@@ -1867,7 +1871,7 @@ export default function HospitalityPage() {
           <div className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
             <p>© {new Date().getFullYear()} WUUS Digital Studio. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <Link href="/kebijakan-privasi" className="hover:text-primary-navy transition-colors">Privacy Policy</Link>
+              <Link href="/hospitality/privacy" className="hover:text-primary-navy transition-colors">Privacy Policy & AI Disclosure</Link>
               <Link href="/syarat-ketentuan" className="hover:text-primary-navy transition-colors">Terms of Service</Link>
             </div>
           </div>
