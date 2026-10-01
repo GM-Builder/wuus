@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -20,10 +19,10 @@ const satoshi = localFont({
   display: "swap",
 });
 
-const outfit = Outfit({
+const outfit = localFont({
+  src: "../public/fonts/Outfit-Variable.woff2",
   variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["700", "800", "900"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {

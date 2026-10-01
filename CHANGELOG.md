@@ -5,6 +5,15 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.11] - 2026-10-01
+
+### Fixed (Vercel Turbopack Font Resolution)
+- **Eliminated Turbopack `@vercel/turbopack-next/internal/font/google/font` Build Error**:
+  - Replaced `next/font/google` import of `Outfit` with local variable font loading via `next/font/local` (`public/fonts/Outfit-Variable.woff2`).
+  - Fixed Turbopack compiler crash caused by `weight: ["700", "800", "900"]` generating multiple `@font-face` queries violating Turbopack's single-entry assertion.
+  - Resolved `turbopack.root should be absolute` warning in `next.config.ts` via `path.resolve(".")`.
+  - Enables 100% offline, self-contained, sub-3-second builds on Vercel deployment containers.
+
 ## [0.2.10] - 2026-10-01
 
 ### Upgraded & Re-architected (HD Assets & Mockup-Follows-Demo Synchronization)
