@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed & Aligned
 - **Authentic WUUS Brand DNA Restoration (`/hospitality`)**:
+  - **Smartphone Device Mockup**: Replaced flat photo box for Concept 01 (Albanian Riviera) with a realistic smartphone chassis mockup featuring notch, browser address bar (`riviera-stays.com`), room specifications, direct perks, and a WhatsApp action button.
+  - **Interactive Mobile Prototype & Live Demo Simulator**: Upgraded the concept dialog modal into an interactive live simulator where hoteliers can test all 3 design concepts (Albanian Riviera, Lake Ohrid, Sarajevo Old Town), switch between room types, adjust nights/guests to view real-time commission savings, and test simulated 1-tap WhatsApp lead hand-offs.
   - **Official WUUS Logo**: Restored the authentic `/logo.png` image with subtle `Hospitality` divider badge; completely eliminated the pseudo-mark `w.`.
   - **Color Palette & Design Tokens**: Replaced foreign CSS tokens with the authentic WUUS design system:
     - Primary Deep Navy: `#1C2733`
