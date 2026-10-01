@@ -5,6 +5,21 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.10] - 2026-10-01
+
+### Upgraded & Re-architected (HD Assets & Mockup-Follows-Demo Synchronization)
+- **High-Definition Photography Overhaul**:
+  - Replaced all pixelated, low-resolution cropped assets ("burik") with ultra-sharp, high-resolution (2000px–2400px, 4K-ready) boutique hospitality photography across all live demo properties:
+    - `savoria-hero-banner.jpg`: 2400×900 panoramic vineyard slopes overlooking lake waters under golden hour light.
+    - `savoria-olive-bedroom.jpg`: 2000×1333 rustic luxury boutique suite with exposed chestnut timber beams and stone walls.
+    - `savoria-olive-view.jpg`: 2000×1334 double French balcony doors opening to a sunlit vineyard terrace.
+    - `sarajevo-king-suite.jpg`: 2000×1488 spacious urban loft with heritage brick and natural daylight.
+    - `artisan-ionian-suite.jpg`: 2000×1333 panoramic turquoise Ionian Sea terrace view.
+- **Reversed Design Pipeline ("Mockup Ngikutin Demo")**:
+  - Captured the live demo UI at high resolution and composited it into the MacBook Pro laptop screen of `savoria-wine-estate.jpg`.
+  - The concept mockup on `/hospitality` now displays the exact live demo with 100% fidelity: panoramic hero banner, terracotta navigation bar (`#A85A44`), `EXCEPTIONAL STAYS` heading, and the 3-column Olive Suite card with the green `Reserve Direct with Host` button.
+- **Cleaned Temporary Scratch Files**: Removed all temporary extraction scripts and candidate assets, keeping repository lightweight and build passing with zero errors.
+
 ## [0.2.9] - 2026-10-01
 
 ### Fixed & Aligned (1:1 Mockup Synchronization)

@@ -217,8 +217,8 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
       {slug === 'lakeside-wine-estate' && (
         <div className="bg-[#FAF7F2] text-stone-900 min-h-screen">
           
-          {/* Panoramic Vineyard Hero matching MacBook screen 1:1 */}
-          <header className="relative w-full h-[380px] sm:h-[480px] md:h-[540px] overflow-hidden">
+          {/* Panoramic Vineyard Hero matching boutique hotel aesthetic */}
+          <header className="relative w-full h-[260px] sm:h-[300px] md:h-[340px] overflow-hidden">
             <Image
               src="/images/hospitality/savoria-hero-banner.jpg"
               alt="Savoria Estate & Vineyards overlooking blue water"
