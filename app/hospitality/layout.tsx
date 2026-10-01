@@ -1,30 +1,24 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "WUUS - Modern Websites for Independent Boutique Hotels",
-  description: "We engineer calm, high-performance websites and direct digital experiences for independent boutique hotels and hospitality stays. Async-first workflow, fixed scope.",
+  title: "Websites for independent hotels | WUUS",
+  description: "Fast, simple websites for independent hotels, with an optional AI assistant. Free 1-page review.",
   alternates: {
     canonical: "https://www.webuntukusaha.com/hospitality",
   },
-  keywords: [
-    "boutique hotel website design",
-    "hospitality digital studio",
-    "direct booking website",
-    "independent hotel web development",
-    "hotel mobile UX",
-    "WUUS hospitality"
-  ],
   openGraph: {
-    title: "WUUS - Modern Websites for Independent Boutique Hotels",
-    description: "Digital experiences that help boutique stays showcase character and clarify direct guest inquiries.",
-    siteName: "WUUS Digital Studio",
-    locale: "en_US",
+    title: "Websites for independent hotels | WUUS",
+    description: "Fast, simple websites for independent hotels. Free 1-page review.",
+    url: "https://www.webuntukusaha.com/hospitality",
+    siteName: "WUUS",
+    images: [{ url: "/images/hospitality/coastal-retreat.jpg", width: 1200, height: 630, alt: "Websites for independent hotels" }],
+    locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "WUUS - Modern Websites for Independent Boutique Hotels",
-    description: "Digital experiences that help boutique stays showcase character and clarify direct guest inquiries.",
+    title: "Websites for independent hotels | WUUS",
+    description: "Fast, simple websites for independent hotels. Free 1-page review.",
   }
 };
 
