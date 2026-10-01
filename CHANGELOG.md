@@ -5,6 +5,24 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.9] - 2026-10-01
+
+### Fixed & Aligned (1:1 Mockup Synchronization)
+- **Savoria Estate & Vineyards Live Demo (`/hospitality/demo/lakeside-wine-estate`)**:
+  - **Identical 1:1 Reproduction of the MacBook Screen Mockup**:
+    - **Hero Section**: Panoramic coastal vineyard hillside overlooking azure waters under golden light with centered classical serif branding `SAVORIA` and `ESTATE & VINEYARDS`.
+    - **Terracotta Navigation Bar**: Full-width `#A85A44` rust/terracotta bar featuring centered tracked uppercase serif links: `HOME`, `VINEYARDS`, `ROOMS`, `EXPERIENCES`, `CONTACT`.
+    - **Warm Travertine Canvas**: Travertine cream `#FAF7F2` body with centered tracked heading `EXCEPTIONAL STAYS`.
+    - **3-Part "The Olive Suite" Card**: Replicated the exact card layout from the laptop screen:
+      - *Left Section*: High-resolution photo of the rustic bedroom with exposed chestnut timber beams, stone walls, and terracotta floor.
+      - *Center Section*: Warm cream panel with `Luxury Suite`, `THE OLIVE SUITE`, `Rates from €110/night`, direct booking benefits, and the signature forest green `#2D5A43` button: `Reserve Direct with Host`.
+      - *Right Section*: Photo looking through open double French doors out to the sunlit terrace with small table & chairs and rolling vineyard hills.
+    - **Interactive Reservation Drawer**: Clicking `Reserve Direct with Host` launches the multi-step direct booking engine, displaying real-time date calculation, OTA savings defense, and 1-click WhatsApp dispatch to winemakers Stefan & Maria.
+- **The Metropolitan Loft Suites · Sarajevo (`/hospitality/demo/city-apartments`)**:
+  - Synchronized layout 1:1 with `urban-loft.jpg` smartphone mockup: `URBAN HERITAGE LUXURY IN SARAJEVO` banner, `Discover Our Suites` heading, and `KING SUITE` card with exposed brick photo, amenities chips (`King Bed`, `Wi-Fi`, `Espresso`, `Balcony`, `40 SQM`, `AC`), `FROM €210 / NIGHT`, `BOOK NOW`, and green `WhatsApp Inquiry` action.
+- **Artisan Coastal Retreat (`/hospitality/demo/seaside-guesthouse`)**:
+  - Synchronized layout 1:1 with `coastal-retreat.jpg` iPad mockup: `Ionian Vista Suite` with stone villa infinity pool photography, room features, thumbnail gallery, and direct availability flow.
+
 ## [0.2.8] - 2026-10-01
 
 ### Polished & Refined

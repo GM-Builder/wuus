@@ -71,8 +71,8 @@ export interface PropertyData {
 export const propertiesData: Record<string, PropertyData> = {
   'seaside-guesthouse': {
     slug: 'seaside-guesthouse',
-    name: 'Villa Mare Riviera Guesthouse',
-    category: 'Boutique Seaside Guesthouse',
+    name: 'Artisan Coastal Retreat',
+    category: 'Boutique Coastal Sanctuary',
     ratingScore: 9.8,
     reviewsCount: 142,
     ratingLabel: 'Exceptional',
@@ -81,10 +81,10 @@ export const propertiesData: Record<string, PropertyData> = {
     coords: '39.8617° N, 19.9822° E',
     motto: 'A quiet stone haven above the turquoise Ionian Sea',
     tagline: 'Handcrafted limestone architecture, morning sea breeze, and homemade courtyard artisan breakfast.',
-    heroImage: '/images/hospitality/guesthouse.webp',
-    atmosphereImage: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85',
-    startingRate: 85,
-    otaStartingRate: 105,
+    heroImage: '/images/hospitality/artisan-ionian-suite.jpg',
+    atmosphereImage: '/images/hospitality/guesthouse.webp',
+    startingRate: 120,
+    otaStartingRate: 145,
     directPerk: 'Complimentary chilled local reserve white wine + flexible late check-in',
     host: {
       names: 'Nikolin & Elena',
@@ -93,6 +93,58 @@ export const propertiesData: Record<string, PropertyData> = {
       note: 'We restored our family’s 19th-century stone estate so travelers could experience the authentic Albanian coast at their own pace—away from crowded mega-resorts.'
     },
     rooms: [
+      {
+        id: 'ionian-vista',
+        name: 'Ionian Vista Suite',
+        rate: 120,
+        otaRate: 145,
+        size: '48 m²',
+        bed: 'King Bed (180×200cm)',
+        maxGuests: 2,
+        view: 'Turquoise Ionian Sea & Private Pool Terrace',
+        image: '/images/hospitality/artisan-ionian-suite.jpg',
+        gallery: [
+          '/images/hospitality/artisan-ionian-suite.jpg',
+          '/images/hospitality/stone-suite-main.jpg',
+          '/images/hospitality/stone-suite-breakfast.jpg'
+        ],
+        perk: 'Private Terrace, Artisan Breakfast & Airport Transfers',
+        amenities: ['Private Sun Terrace', 'Infinity Pool Access', 'King Bed', 'Ionian Sea View', 'High-speed Wi-Fi', 'Espresso Machine', 'Air Conditioning'],
+        description: 'A sanctuary of sophisticated calm overlooking the turquoise Ionian. Features a private terrace, locally sourced stone, and handcrafted olive wood details.',
+        ratePlans: [
+          {
+            id: 'ionian-standard',
+            name: 'Room Only Direct',
+            description: 'Direct rate with flexible arrival and pool terrace access.',
+            rate: 120,
+            otaRate: 145,
+            breakfastIncluded: false,
+            freeCancellation: true,
+            perks: [
+              'Direct booking rate (0% OTA commission)',
+              'Free cancellation up to 48 hours before arrival',
+              'Infinity pool & private sun terrace access'
+            ]
+          },
+          {
+            id: 'ionian-vip',
+            name: 'Signature Stay & Breakfast',
+            description: 'Includes courtyard breakfast, welcome reserve wine, and flexible checkout.',
+            rate: 140,
+            otaRate: 175,
+            breakfastIncluded: true,
+            freeCancellation: true,
+            recommended: true,
+            perks: [
+              'Daily homemade artisan courtyard breakfast included',
+              'Chilled bottle of Albanian reserve wine on arrival',
+              'Complimentary late check-out until 13:00',
+              'Private sunbeds with fresh beach towels provided',
+              'Payment upon arrival at property'
+            ]
+          }
+        ]
+      },
       {
         id: 'stone-suite',
         name: 'Stone Courtyard Suite',
@@ -145,58 +197,6 @@ export const propertiesData: Record<string, PropertyData> = {
             ]
           }
         ]
-      },
-      {
-        id: 'sea-terrace',
-        name: 'Panoramic Sea Terrace Studio',
-        rate: 120,
-        otaRate: 145,
-        size: '48 m²',
-        bed: 'King Bed + Daybed',
-        maxGuests: 3,
-        view: 'Direct Ionian Sea Sunset View',
-        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85',
-        gallery: [
-          'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85',
-          'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85',
-          '/images/hospitality/stone-suite-breakfast.jpg'
-        ],
-        perk: 'Private Sunset Sunbeds, Breakfast & Late Checkout',
-        amenities: ['Private Sun Terrace', 'Outdoor Teak Loungers', 'King Bed', 'Ionian Sea View', 'High-speed Wi-Fi', 'Espresso Machine', 'Air Conditioning'],
-        description: 'Unobstructed horizon views over the Ionian Sea and Corfu island. Watch golden hour colors directly from your private outdoor teak loungers.',
-        ratePlans: [
-          {
-            id: 'terrace-standard',
-            name: 'Room Only Direct',
-            description: 'Direct rate with flexible arrival and full terrace access.',
-            rate: 120,
-            otaRate: 145,
-            breakfastIncluded: false,
-            freeCancellation: true,
-            perks: [
-              'Direct booking rate (0% OTA commission)',
-              'Free cancellation up to 48 hours before arrival',
-              'Private sun terrace access with loungers'
-            ]
-          },
-          {
-            id: 'terrace-vip',
-            name: 'Signature Terrace Stay',
-            description: 'Includes courtyard breakfast, welcome reserve wine, and flexible checkout.',
-            rate: 135,
-            otaRate: 165,
-            breakfastIncluded: true,
-            freeCancellation: true,
-            recommended: true,
-            perks: [
-              'Daily homemade artisan courtyard breakfast included',
-              'Chilled bottle of Albanian reserve wine on arrival',
-              'Complimentary late check-out until 13:00',
-              'Private sunbeds with fresh beach towels provided',
-              'Payment upon arrival at property'
-            ]
-          }
-        ]
       }
     ],
     localGuide: [
@@ -234,7 +234,7 @@ export const propertiesData: Record<string, PropertyData> = {
   },
   'lakeside-wine-estate': {
     slug: 'lakeside-wine-estate',
-    name: 'Savoria Estate & Vineyard Suites',
+    name: 'Savoria Estate & Vineyards',
     category: 'Historic Boutique Winery Estate',
     ratingScore: 9.9,
     reviewsCount: 168,
@@ -244,10 +244,10 @@ export const propertiesData: Record<string, PropertyData> = {
     coords: '41.1172° N, 20.8016° E',
     motto: 'Heritage suites overlooking ancient waters and terraced vineyards',
     tagline: '150-year-old historic winery estate, organic vineyard breakfast, and private sommelier tastings.',
-    heroImage: '/images/hospitality/savoria-wine-estate.jpg',
-    atmosphereImage: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1200&q=85',
-    startingRate: 95,
-    otaStartingRate: 120,
+    heroImage: '/images/hospitality/savoria-hero-banner.jpg',
+    atmosphereImage: '/images/hospitality/savoria-wine-estate.jpg',
+    startingRate: 110,
+    otaStartingRate: 140,
     directPerk: 'Complimentary cellar tour + welcome bottle of Reserve Vranec wine',
     host: {
       names: 'Stefan & Maria',
@@ -257,30 +257,30 @@ export const propertiesData: Record<string, PropertyData> = {
     },
     rooms: [
       {
-        id: 'heritage-balcony',
-        name: 'Heritage Balcony Suite',
-        rate: 95,
-        otaRate: 120,
+        id: 'olive-suite',
+        name: 'The Olive Suite',
+        rate: 110,
+        otaRate: 140,
         size: '42 m²',
         bed: 'King Bed (180×200cm)',
         maxGuests: 2,
         view: 'Lake Ohrid & Terraced Vineyards',
-        image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85',
+        image: '/images/hospitality/savoria-olive-bedroom.jpg',
         gallery: [
-          'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85',
-          '/images/hospitality/savoria-wine-estate.jpg',
-          '/images/hospitality/stone-suite-breakfast.jpg'
+          '/images/hospitality/savoria-olive-bedroom.jpg',
+          '/images/hospitality/savoria-olive-view.jpg',
+          '/images/hospitality/savoria-hero-banner.jpg'
         ],
-        perk: 'Welcome Reserve Wine, Cellar Tour & Vineyard Breakfast',
-        amenities: ['Lake View Balcony', 'Stone Fireplace', 'Vineyard Breakfast', 'Wine Mini-cellar', 'Fast Wi-Fi', 'Plush Bathrobes'],
-        description: 'Features exposed oak beams, private balcony overlooking the calm lake, and a crackling wood fireplace for cozy evenings.',
+        perk: 'Direct French Door Vineyard Terrace, Reserve Wine & Breakfast',
+        amenities: ['Private French Door Balcony', 'Chestnut Timber Ceilings', 'Vineyard Breakfast', 'Wine Mini-cellar', 'Fast Wi-Fi', 'Plush Bathrobes'],
+        description: 'Exposed chestnut timber beams, handcrafted stone walls, and double French doors opening directly to a sunlit terrace with panoramic vineyard hills.',
         ratePlans: [
           {
-            id: 'heritage-standard',
+            id: 'olive-standard',
             name: 'Room Only Direct',
             description: 'Direct room rate with vineyard and lake views.',
-            rate: 95,
-            otaRate: 120,
+            rate: 110,
+            otaRate: 140,
             breakfastIncluded: false,
             freeCancellation: true,
             perks: [
@@ -290,11 +290,11 @@ export const propertiesData: Record<string, PropertyData> = {
             ]
           },
           {
-            id: 'heritage-vip',
-            name: 'Vineyard Bed & Breakfast',
+            id: 'olive-vip',
+            name: 'Vineyard Bed & Breakfast Experience',
             description: 'Includes organic farm breakfast and private cellar tasting tour.',
-            rate: 110,
-            otaRate: 135,
+            rate: 125,
+            otaRate: 155,
             breakfastIncluded: true,
             freeCancellation: true,
             recommended: true,
@@ -310,18 +310,18 @@ export const propertiesData: Record<string, PropertyData> = {
       },
       {
         id: 'cellar-loft',
-        name: 'Cellar Master Loft',
+        name: 'The Cellar Master Loft',
         rate: 135,
         otaRate: 165,
         size: '55 m²',
         bed: 'Super King Bed (200×200cm)',
         maxGuests: 3,
         view: 'Historic Winery Courtyard & Cellars',
-        image: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85',
+        image: '/images/hospitality/palazzo-suites.jpg',
         gallery: [
-          'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85',
-          '/images/hospitality/savoria-wine-estate.jpg',
-          '/images/hospitality/palazzo-suites.jpg'
+          '/images/hospitality/palazzo-suites.jpg',
+          '/images/hospitality/savoria-hero-banner.jpg',
+          '/images/hospitality/savoria-wine-estate.jpg'
         ],
         perk: 'Private Barrel Room Tasting & Late Checkout',
         amenities: ['Freestanding Copper Tub', 'Private Wine Tasting', 'Lounge Seating', 'Super King Bed', 'Garden Access', 'Espresso Bar'],
@@ -396,20 +396,20 @@ export const propertiesData: Record<string, PropertyData> = {
   },
   'city-apartments': {
     slug: 'city-apartments',
-    name: 'Baščaršija Heritage Lofts',
-    category: 'Historic Boutique City Apartments',
+    name: 'The Metropolitan Loft Suites · Sarajevo',
+    category: 'Urban Heritage Luxury Suites',
     ratingScore: 9.7,
     reviewsCount: 215,
     ratingLabel: 'Superb',
     location: 'Sarajevo Old Town · Bosnia and Herzegovina',
     locationHighlight: 'Heart of Old Bazaar · Steps from artisan coppersmiths & cafés',
     coords: '43.8594° N, 18.4318° E',
-    motto: 'Historic boutique lofts in the vibrant heart of the old artisan quarter',
+    motto: 'Urban Heritage Luxury in Sarajevo',
     tagline: 'Exposed Austrian-era brick, high-speed fiber WiFi, and seamless contactless keyless entry.',
-    heroImage: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=85',
+    heroImage: '/images/hospitality/sarajevo-king-suite.jpg',
     atmosphereImage: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=85',
-    startingRate: 75,
-    otaStartingRate: 95,
+    startingRate: 210,
+    otaStartingRate: 260,
     directPerk: '24/7 keybox arrival + welcome Bosnian coffee set & neighborhood guide',
     host: {
       names: 'Dino & Lejla',
@@ -419,43 +419,43 @@ export const propertiesData: Record<string, PropertyData> = {
     },
     rooms: [
       {
-        id: 'historic-penthouse',
-        name: 'Historic Penthouse Loft',
-        rate: 75,
-        otaRate: 95,
+        id: 'king-suite',
+        name: 'King Suite',
+        rate: 210,
+        otaRate: 260,
         size: '40 m²',
-        bed: 'Queen Bed (160×200cm)',
+        bed: 'King Bed (180×200cm)',
         maxGuests: 2,
-        view: 'Old Town Minarets & Hillside Rooftops',
-        image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85',
+        view: 'Old Town Historic Quarter View',
+        image: '/images/hospitality/sarajevo-king-suite.jpg',
         gallery: [
-          'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85',
+          '/images/hospitality/sarajevo-king-suite.jpg',
           'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=85'
         ],
-        perk: '24/7 Keyless Check-in, Coffee Set & Fast Fiber',
-        amenities: ['300 Mbps Fiber Wi-Fi', 'Smart Keyless Lock', 'Air Conditioning', 'Ergonomic Desk', 'Rain Shower', 'Washer/Dryer'],
-        description: 'Cathedral ceiling with skylights framing the historic minarets. Perfect for independent couples and digital remote workers.',
+        perk: 'Transparent Direct Rate, 24/7 Keyless Check-in, Coffee Set & Fast Fiber',
+        amenities: ['King Bed', 'Wi-Fi', 'Espresso', 'Balcony', '40 SQM', 'AC'],
+        description: 'Experience spacious modern comfort with original heritage charm. 40 sqm, historic quarter view.',
         ratePlans: [
           {
-            id: 'penthouse-standard',
+            id: 'king-standard',
             name: 'Room Only Direct',
             description: 'Full loft access with 300 Mbps fiber internet.',
-            rate: 75,
-            otaRate: 95,
+            rate: 210,
+            otaRate: 260,
             breakfastIncluded: false,
             freeCancellation: true,
             perks: [
-              'Direct booking rate (0% OTA commission)',
+              'Transparent Direct Rate (0% OTA commission)',
               'Free cancellation up to 48 hours before arrival',
               '300 Mbps dedicated fiber Wi-Fi'
             ]
           },
           {
-            id: 'penthouse-vip',
+            id: 'king-vip',
             name: 'Urban Breakfast & Coffee Stay',
             description: 'Includes artisanal Bosnian coffee welcome set and partner bakery breakfast.',
-            rate: 85,
-            otaRate: 105,
+            rate: 235,
+            otaRate: 285,
             breakfastIncluded: true,
             freeCancellation: true,
             recommended: true,

@@ -41,11 +41,22 @@ export default function HospitalityPage() {
       tag: "Concept design · Albanian Riviera",
       destination: "Himara, Albanian Riviera · Albania",
       title: "A quiet place by the sea.",
-      subtitle: "Villa Mare Riviera Guesthouse",
+      subtitle: "Artisan Coastal Retreat",
       overview: "Designed for small boutique coastal properties. Room-first browsing, generous natural photography, and a calm digital welcome. High-intent guests can see terrace views, bed dimensions, and send a direct booking inquiry via WhatsApp in seconds.",
       badge: "Albanian Riviera",
-      url: "villamare-riviera.com",
+      url: "artisan-retreat.com",
       rooms: [
+        {
+          name: "Ionian Vista Suite",
+          rate: 120,
+          otaRate: 145,
+          size: "48 m²",
+          bed: "King Bed (180×200cm)",
+          view: "Turquoise Ionian Sea & Private Pool Terrace",
+          perk: "Private Terrace, Artisan Breakfast & Airport Transfers",
+          image: "/images/hospitality/artisan-ionian-suite.jpg",
+          description: "A sanctuary of sophisticated calm overlooking the turquoise Ionian. Features a private terrace, locally sourced stone, and handcrafted olive wood details."
+        },
         {
           name: "Stone Courtyard Suite",
           rate: 85,
@@ -56,17 +67,6 @@ export default function HospitalityPage() {
           perk: "Artisan Breakfast & Welcome Chilled Wine",
           image: "/images/hospitality/stone-suite-main.jpg",
           description: "Native white limestone walls, arched window overlooking centuries-old olive trees and azure sea. Naturally cool and calm."
-        },
-        {
-          name: "Panoramic Sea Terrace Studio",
-          rate: 120,
-          otaRate: 145,
-          size: "48 m²",
-          bed: "King Bed + Daybed",
-          view: "Direct Ionian Sea Sunset View",
-          perk: "Private Sunset Sunbeds, Breakfast & Late Checkout",
-          image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
-          description: "Unobstructed horizon views over the Ionian Sea and Corfu island. Watch golden hour colors from private teak loungers."
         }
       ]
     },
@@ -75,31 +75,31 @@ export default function HospitalityPage() {
       tag: "Concept design · Lake Ohrid, North Macedonia",
       destination: "Lake Ohrid · North Macedonia",
       title: "Heritage suites amongst vineyards.",
-      subtitle: "Savoria Estate & Vineyard Suites",
+      subtitle: "Savoria Estate & Vineyards",
       overview: "Designed for an independent boutique wine estate. Features full-screen photography optimized for mobile roaming networks, transparent room specs, tasting hours, and a direct inquiry button that connects high-intent travelers straight to the host.",
       badge: "Lake Ohrid, North Macedonia",
       url: "savoria-estate.com",
       rooms: [
         {
-          name: "Heritage Balcony Suite",
-          rate: 95,
-          otaRate: 120,
+          name: "The Olive Suite",
+          rate: 110,
+          otaRate: 140,
           size: "42 m²",
           bed: "King Bed (180×200cm)",
           view: "Lake Ohrid & Terraced Vineyards",
-          perk: "Welcome Reserve Wine, Cellar Tour & Vineyard Breakfast",
-          image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
-          description: "Exposed oak beams, private balcony overlooking the calm lake, and a crackling wood fireplace for cozy evenings."
+          perk: "Direct French Door Terrace, Organic Farm Breakfast & Welcome Reserve Vranec",
+          image: "/images/hospitality/savoria-olive-bedroom.jpg",
+          description: "Exposed chestnut timber beams, handcrafted limestone walls, and double French doors opening directly to the sunlit vineyard terrace."
         },
         {
-          name: "Cellar Master Loft",
+          name: "The Cellar Master Loft",
           rate: 135,
           otaRate: 165,
           size: "55 m²",
           bed: "Super King Bed (200×200cm)",
           view: "Historic Winery Courtyard & Cellars",
           perk: "Private Barrel Room Tasting & Late Checkout",
-          image: "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85",
+          image: "/images/hospitality/palazzo-suites.jpg",
           description: "Located above ancient aging cellars with freestanding copper soaking tub, lounge seating, and sommelier service."
         }
       ]
@@ -108,22 +108,22 @@ export default function HospitalityPage() {
       id: 'city-apartments' as const,
       tag: "Concept design · Sarajevo, Bosnia and Herzegovina",
       destination: "Sarajevo Old Town · Bosnia and Herzegovina",
-      title: "Old town lofts & boutique living.",
-      subtitle: "Baščaršija Heritage Lofts",
+      title: "Urban heritage luxury in Sarajevo.",
+      subtitle: "The Metropolitan Loft Suites · Sarajevo",
       overview: "Designed for city apartments and urban boutique stays. Guests can compare unit sizes on a single mobile screen, view key amenities and parking details, and receive automated check-in and keycode directions directly on their WhatsApp or Viber.",
       badge: "Sarajevo Old Town",
-      url: "sarajevo-lofts.com",
+      url: "metropolitan-lofts.com",
       rooms: [
         {
-          name: "Historic Penthouse Loft",
-          rate: 75,
-          otaRate: 95,
+          name: "King Suite",
+          rate: 210,
+          otaRate: 260,
           size: "40 m²",
-          bed: "Queen Bed (160×200cm)",
-          view: "Old Town Minarets & Hillside Rooftops",
-          perk: "24/7 Keyless Check-in, Coffee Set & Fast Fiber",
-          image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85",
-          description: "Cathedral ceiling with skylights framing the historic minarets. 300 Mbps dedicated fiber Wi-Fi and workstation."
+          bed: "King Bed (180×200cm)",
+          view: "Old Town Historic Quarter View",
+          perk: "Transparent Direct Rate, 24/7 Keyless Check-in, Coffee Set & Fast Fiber",
+          image: "/images/hospitality/sarajevo-king-suite.jpg",
+          description: "Experience spacious modern comfort with original heritage charm. 40 sqm, historic quarter view."
         },
         {
           name: "Atelier Courtyard Studio",
@@ -919,7 +919,7 @@ export default function HospitalityPage() {
                   02 · HISTORIC WINERY ESTATE
                 </p>
                 <h4 className="text-2xl font-bold text-[#1C2733] mb-3">
-                  Savoria Estate & Vineyard Suites
+                  Savoria Estate & Vineyards
                 </h4>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
                   Heritage balcony suites with lake views, organic vineyard breakfast, and welcoming reserve bottle perks for guests who book direct. Includes interactive sommelier wine tastings.
@@ -953,7 +953,7 @@ export default function HospitalityPage() {
                     setFormData(prev => ({ 
                       ...prev, 
                       request: 'A website for my hotel',
-                      message: 'Interested in a design direction like Savoria Estate & Vineyard Suites.' 
+                      message: 'Interested in a design direction like Savoria Estate & Vineyards.' 
                     }));
                     const elem = document.getElementById('review');
                     if (elem) elem.scrollIntoView({ behavior: 'smooth' });
@@ -972,7 +972,7 @@ export default function HospitalityPage() {
                 <div className="relative h-64 w-full rounded-2xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
                   <Image
                     src="/images/hospitality/urban-loft.jpg"
-                    alt="Baščaršija Heritage Lofts Sarajevo"
+                    alt="The Metropolitan Loft Suites Sarajevo"
                     fill
                     sizes="500px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -989,7 +989,7 @@ export default function HospitalityPage() {
                   03 · HISTORIC BOUTIQUE LOFTS
                 </p>
                 <h4 className="text-2xl font-bold text-[#1C2733] mb-3">
-                  Baščaršija Heritage Lofts
+                  The Metropolitan Loft Suites · Sarajevo
                 </h4>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
                   Exposed Austrian-era brick, cathedral skylights, and high-speed fiber internet. Features seamless contactless smart keybox entry and authentic Bosnian coffee welcome kit.

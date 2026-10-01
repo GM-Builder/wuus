@@ -9,15 +9,18 @@ import {
   MapPin, 
   PhoneCall, 
   X, 
-  Send,
-  ShieldCheck,
-  MessageSquare,
-  Printer,
-  Calendar,
-  Compass,
-  Clock,
-  Sparkles,
-  ChevronDown
+  Send, 
+  ShieldCheck, 
+  MessageSquare, 
+  Printer, 
+  Calendar, 
+  Sparkles, 
+  ChevronDown, 
+  ArrowUpRight,
+  Wifi,
+  Coffee,
+  Wind,
+  Maximize2
 } from 'lucide-react';
 import { PropertyData, Room, RatePlan } from './demo-data';
 
@@ -141,7 +144,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
   });
 
   return (
-    <div className="min-h-screen bg-white text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B]/20 selection:text-[#1C2733]">
+    <div className="min-h-screen text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B]/20 selection:text-[#1C2733]">
       
       {/* ─────────────────────────────────────────────────────────────
           1. TOP DEMO INSPECTOR BAR (WUUS STUDIO EVALUATION)
@@ -173,7 +176,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              Lake Ohrid
+              Lake Ohrid (Savoria)
             </Link>
             <Link
               href="/hospitality/demo/city-apartments"
@@ -205,562 +208,625 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. HOTEL NAVBAR
+          2. BESPOKE CONCEPT RENDERINGS
       ────────────────────────────────────────────────────────────── */}
-      <header className="bg-white border-b border-slate-200 sticky top-10 z-40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-          <Link href={`/hospitality/demo/${property.slug}`} className="flex flex-col">
-            <span className="text-xl sm:text-2xl font-bold text-[#1C2733] tracking-tight">
-              {property.name}
-            </span>
-            <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">
-              {property.category}
-            </span>
-          </Link>
 
-          <nav className="hidden lg:flex items-center gap-8 text-sm text-[#1C2733]">
-            <a href="#search-engine" className="hover:text-[#F59E0B] transition-colors font-medium">Availability</a>
-            <a href="#rooms" className="hover:text-[#F59E0B] transition-colors font-medium">Rooms & Rates</a>
-            <a href="#experience" className="hover:text-[#F59E0B] transition-colors font-medium">About</a>
-            <a href="#guide" className="hover:text-[#F59E0B] transition-colors font-medium">Local Guide</a>
-            <a href="#faq" className="hover:text-[#F59E0B] transition-colors font-medium">FAQ</a>
+      {/* ═════════════════════════════════════════════════════════════
+          CONCEPT 02: SAVORIA ESTATE & VINEYARDS (MATCHES MOCKUP 1:1)
+      ══════════════════════════════════════════════════════════════ */}
+      {slug === 'lakeside-wine-estate' && (
+        <div className="bg-[#FAF7F2] text-stone-900 min-h-screen">
+          
+          {/* Panoramic Vineyard Hero matching MacBook screen 1:1 */}
+          <header className="relative w-full h-[380px] sm:h-[480px] md:h-[540px] overflow-hidden">
+            <Image
+              src="/images/hospitality/savoria-hero-banner.jpg"
+              alt="Savoria Estate & Vineyards overlooking blue water"
+              fill
+              priority
+              className="object-cover object-center"
+            />
+            <h1 className="sr-only">
+              SAVORIA ESTATE & VINEYARDS
+            </h1>
+          </header>
+
+          {/* Terracotta Navigation Bar (#A85A44) matching MacBook screen */}
+          <nav className="w-full bg-[#A85A44] text-white py-3 px-4 sm:px-8 shadow-sm sticky top-10 z-40 border-b border-[#964E3A]">
+            <div className="max-w-6xl mx-auto flex items-center justify-between">
+              <div className="hidden md:flex items-center gap-10 text-[11px] sm:text-xs font-serif tracking-[0.25em] uppercase mx-auto">
+                <a href="#stays" className="text-white hover:text-white/80 transition-colors border-b border-white pb-0.5 font-semibold">HOME</a>
+                <a href="#vineyards" className="text-white/90 hover:text-white transition-colors">VINEYARDS</a>
+                <a href="#stays" className="text-white/90 hover:text-white transition-colors">ROOMS</a>
+                <a href="#experiences" className="text-white/90 hover:text-white transition-colors">EXPERIENCES</a>
+                <a href="#contact" className="text-white/90 hover:text-white transition-colors">CONTACT</a>
+              </div>
+              <div className="flex md:hidden items-center justify-center gap-5 text-[10px] tracking-[0.2em] uppercase font-serif w-full">
+                <a href="#stays" className="text-white border-b border-white pb-0.5">HOME</a>
+                <a href="#stays" className="text-white/90">ROOMS</a>
+                <a href="#experiences" className="text-white/90">EXPERIENCES</a>
+                <a href="#contact" className="text-white/90">CONTACT</a>
+              </div>
+            </div>
           </nav>
 
-          <div className="flex items-center gap-3">
-            {/* Language Selector */}
-            <div className="flex items-center bg-slate-100 rounded-lg p-0.5 text-xs font-semibold text-[#1C2733]">
-              {(['EN', 'DE', 'IT'] as const).map(l => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`px-2 py-1 rounded transition-colors ${
-                    lang === l ? 'bg-white text-[#1C2733] font-bold shadow-xs' : 'text-slate-500 hover:text-[#1C2733]'
-                  }`}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-16">
+            
+            {/* ── EXCEPTIONAL STAYS SECTION ── */}
+            <section id="stays" className="space-y-8">
+              <div className="text-center space-y-2">
+                <h2 className="text-2xl sm:text-3xl font-serif uppercase tracking-[0.25em] text-stone-900 font-normal">
+                  EXCEPTIONAL STAYS
+                </h2>
+                <p className="text-xs sm:text-sm text-stone-500 font-serif italic">
+                  Heritage suites surrounded by centuries of winemaking tradition on Lake Ohrid
+                </p>
+              </div>
 
-            <button
-              onClick={() => {
-                const elem = document.getElementById('rooms');
-                if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-4 py-2.5 rounded-lg font-semibold text-xs transition-colors cursor-pointer"
-            >
-              See Rooms
-            </button>
-          </div>
-        </div>
-      </header>
+              {/* CARD 1: THE OLIVE SUITE (Exact 3-Part Layout from Laptop Screen) */}
+              <div className="bg-white rounded-2xl border border-stone-200/90 shadow-md shadow-stone-900/5 overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                  
+                  {/* Left: Bedroom Photo with exposed wood beams & terracotta floor */}
+                  <div className="lg:col-span-4 relative min-h-[300px] sm:min-h-[360px] lg:min-h-full">
+                    <Image
+                      src="/images/hospitality/savoria-olive-bedroom.jpg"
+                      alt="The Olive Suite Rustic Luxury Bedroom"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute top-3 left-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
+                      Exposed Timber Beams
+                    </span>
+                  </div>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-12">
-        
-        {/* ─────────────────────────────────────────────────────────────
-            3. PROPERTY OVERVIEW & EDITORIAL PHOTO GALLERY
-        ────────────────────────────────────────────────────────────── */}
-        <section className="space-y-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase mb-1">
-                {property.category} · {property.location}
-              </p>
-              <h1 className="text-3xl sm:text-4xl font-bold text-[#1C2733] tracking-tight">
-                {property.name}
-              </h1>
-              <p className="text-sm text-slate-600 mt-1 flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-                <span>{property.locationHighlight}</span>
-              </p>
-            </div>
+                  {/* Center: Information, Pricing & Green Host Reservation Button */}
+                  <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-[#F8F5EE] border-y lg:border-y-0 lg:border-x border-stone-200">
+                    <div>
+                      <span className="text-xs font-serif text-stone-500 italic block mb-1">
+                        Luxury Suite
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-serif uppercase tracking-wide text-stone-900 font-normal">
+                        THE OLIVE SUITE
+                      </h3>
+                      <div className="flex items-baseline gap-2 mt-2">
+                        <span className="text-base sm:text-lg font-serif font-bold text-stone-800">
+                          Rates from €110/night
+                        </span>
+                        <span className="text-[11px] text-stone-500">
+                          (Direct Host Rate · 0% OTA Fee)
+                        </span>
+                      </div>
+                      <p className="text-xs text-stone-600 leading-relaxed mt-2.5">
+                        Exposed chestnut timber beams, handcrafted limestone walls, and private double French doors opening directly to the sunlit vineyard terrace.
+                      </p>
 
-            {/* Score block */}
-            <div className="flex items-center gap-3 text-right shrink-0">
-              <div>
-                <strong className="block text-sm font-bold text-[#1C2733]">
-                  {property.ratingLabel}
-                </strong>
-                <span className="text-xs text-slate-500">
-                  {property.reviewsCount} verified reviews
+                      {/* Direct Perks */}
+                      <div className="mt-4 pt-4 border-t border-stone-200 space-y-1.5 text-xs text-stone-700">
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <span>Daily organic vineyard breakfast included</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <span>Welcome bottle of estate Reserve Vranec</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <span>Direct reservation with winemakers Stefan & Maria</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-6">
+                      <button
+                        onClick={() => handleOpenCheckout(property.rooms[0])}
+                        className="w-full py-3.5 px-6 bg-[#2D5A43] hover:bg-[#234E38] text-white font-medium text-xs sm:text-sm rounded-lg transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <span>Reserve Direct with Host</span>
+                        <span className="text-white/70 text-xs">→</span>
+                      </button>
+                      <p className="text-[11px] text-center text-stone-400 mt-2">
+                        Instant WhatsApp inquiry · Free cancellation up to 48h
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Right: French Balcony Doors Opening to Sunny Terraced Vineyard */}
+                  <div className="lg:col-span-3 relative min-h-[260px] sm:min-h-[320px] lg:min-h-full">
+                    <Image
+                      src="/images/hospitality/savoria-olive-view.jpg"
+                      alt="The Olive Suite French Doors to Vineyard Terrace"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 25vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute bottom-3 right-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
+                      French Balcony View
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* CARD 2: THE CELLAR MASTER LOFT */}
+              <div className="bg-white rounded-2xl border border-stone-200/90 shadow-md shadow-stone-900/5 overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                  
+                  {/* Left: Copper Tub & Loft Photo */}
+                  <div className="lg:col-span-4 relative min-h-[300px] sm:min-h-[360px] lg:min-h-full">
+                    <Image
+                      src="/images/hospitality/palazzo-suites.jpg"
+                      alt="The Cellar Master Loft Freestanding Copper Tub"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute top-3 left-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
+                      Copper Tub & Vaults
+                    </span>
+                  </div>
+
+                  {/* Center: Info & Action */}
+                  <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-[#F8F5EE] border-y lg:border-y-0 lg:border-x border-stone-200">
+                    <div>
+                      <span className="text-xs font-serif text-stone-500 italic block mb-1">
+                        Loft Suite
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-serif uppercase tracking-wide text-stone-900 font-normal">
+                        THE CELLAR MASTER LOFT
+                      </h3>
+                      <div className="flex items-baseline gap-2 mt-2">
+                        <span className="text-base sm:text-lg font-serif font-bold text-stone-800">
+                          Rates from €135/night
+                        </span>
+                        <span className="text-[11px] text-stone-500">
+                          (Direct Host Rate · 0% OTA Fee)
+                        </span>
+                      </div>
+                      <p className="text-xs text-stone-600 leading-relaxed mt-2.5">
+                        Located in the historic 1894 east wing above the aging vaults. Features a freestanding copper soaking tub, wrought-iron accents, and private sommelier wine tasting.
+                      </p>
+
+                      <div className="mt-4 pt-4 border-t border-stone-200 space-y-1.5 text-xs text-stone-700">
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <span>Private barrel tasting in ancient underground vault</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <span>Daily gourmet vineyard breakfast included</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <span>Freestanding copper tub with estate herb salts</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-6">
+                      <button
+                        onClick={() => handleOpenCheckout(property.rooms[1] || property.rooms[0])}
+                        className="w-full py-3.5 px-6 bg-[#2D5A43] hover:bg-[#234E38] text-white font-medium text-xs sm:text-sm rounded-lg transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <span>Reserve Direct with Host</span>
+                        <span className="text-white/70 text-xs">→</span>
+                      </button>
+                      <p className="text-[11px] text-center text-stone-400 mt-2">
+                        Direct reservation · No OTA middleman fees
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Right: Estate Grounds */}
+                  <div className="lg:col-span-3 relative min-h-[260px] sm:min-h-[320px] lg:min-h-full">
+                    <Image
+                      src="/images/hospitality/savoria-wine-estate.jpg"
+                      alt="Historic Winery Grounds and Terraces"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 25vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute bottom-3 right-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
+                      Historic Winery Wing
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            {/* ── SAVORIA AVAILABILITY & DATE ENGINE ── */}
+            <section className="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200/80 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-stone-100 pb-4">
+                <div>
+                  <h3 className="text-lg font-serif font-bold text-stone-900 uppercase tracking-wider">
+                    Check Direct Dates & Availability
+                  </h3>
+                  <p className="text-xs text-stone-500">
+                    Guaranteed lowest rate with direct host perks and flexible cancellation.
+                  </p>
+                </div>
+                <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                  Save ~€45 vs Booking.com
                 </span>
               </div>
-              <div className="w-12 h-12 bg-[#1C2733] text-white rounded-xl flex items-center justify-center font-bold text-lg">
-                {property.ratingScore}
-              </div>
-            </div>
-          </div>
 
-          {/* Clean 3-Photo Editorial Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 h-[380px] sm:h-[460px] rounded-2xl overflow-hidden">
-            {/* Main Featured Photo (7 cols) */}
-            <div className="md:col-span-7 relative h-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center pt-2">
+                <div className="lg:col-span-3 bg-stone-50 border border-stone-200 rounded-lg p-2.5">
+                  <label className="text-[11px] font-semibold text-stone-500 block mb-0.5">Check-in Date</label>
+                  <input
+                    type="date"
+                    value={checkIn}
+                    onChange={e => setCheckIn(e.target.value)}
+                    className="w-full text-sm font-semibold text-stone-800 bg-transparent outline-hidden cursor-pointer"
+                  />
+                </div>
+                <div className="lg:col-span-3 bg-stone-50 border border-stone-200 rounded-lg p-2.5">
+                  <label className="text-[11px] font-semibold text-stone-500 block mb-0.5">Check-out ({nights} nights)</label>
+                  <input
+                    type="date"
+                    value={checkOut}
+                    onChange={e => setCheckOut(e.target.value)}
+                    className="w-full text-sm font-semibold text-stone-800 bg-transparent outline-hidden cursor-pointer"
+                  />
+                </div>
+                <div className="lg:col-span-4 bg-stone-50 border border-stone-200 rounded-lg p-2.5">
+                  <span className="text-[11px] font-semibold text-stone-500 block mb-0.5">Guests & Rooms</span>
+                  <span className="text-sm font-semibold text-stone-800 block truncate">
+                    {adults} Adults · {roomsCount} Room · {nights} Nights
+                  </span>
+                </div>
+                <div className="lg:col-span-2">
+                  <button
+                    onClick={() => handleOpenCheckout(property.rooms[0])}
+                    className="w-full py-3 bg-[#A85A44] hover:bg-[#924733] text-white font-serif font-medium text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
+                  >
+                    Check Rates
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* ── VINEYARD EXPERIENCES ── */}
+            <section id="experiences" className="space-y-6">
+              <div className="text-center space-y-1">
+                <span className="text-xs font-serif uppercase tracking-[0.25em] text-[#A85A44] font-semibold">
+                  Estate Heritage
+                </span>
+                <h3 className="text-2xl font-serif uppercase tracking-wider text-stone-900 font-normal">
+                  Winery & Lake Experiences
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3">
+                  <span className="text-xs font-serif font-bold text-[#A85A44] uppercase tracking-wider block">01 · Tasting</span>
+                  <h4 className="text-lg font-serif font-bold text-stone-900">Underground Barrel Vaults</h4>
+                  <p className="text-xs text-stone-600 leading-relaxed">
+                    Sommelier-guided tasting of four indigenous Vranec and Stanushina vintages inside our 1894 stone cellars, accompanied by local sheep cheeses.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3">
+                  <span className="text-xs font-serif font-bold text-[#A85A44] uppercase tracking-wider block">02 · Lake Tour</span>
+                  <h4 className="text-lg font-serif font-bold text-stone-900">Private Wooden Boat to Kaneo</h4>
+                  <p className="text-xs text-stone-600 leading-relaxed">
+                    Depart directly from the estate private dock on a traditional wooden boat across ancient Lake Ohrid to cliffside Byzantine churches.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3">
+                  <span className="text-xs font-serif font-bold text-[#A85A44] uppercase tracking-wider block">03 · Cuisine</span>
+                  <h4 className="text-lg font-serif font-bold text-stone-900">Organic Vineyard Breakfast</h4>
+                  <p className="text-xs text-stone-600 leading-relaxed">
+                    Morning breakfast served under ancient fig trees featuring warm pastries, farm cheeses, wild mountain honey, and freshly pressed grape juice.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* ── HOST STORY & CONTACT ── */}
+            <section id="contact" className="bg-[#F8F5EE] rounded-2xl p-8 sm:p-10 border border-stone-200/90 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8 space-y-4">
+                <span className="text-xs font-serif uppercase tracking-[0.25em] text-[#A85A44] font-semibold">
+                  Meet Your Hosts
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-serif text-stone-900 font-normal">
+                  Stefan & Maria · Winemakers & Hosts
+                </h3>
+                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                  “Our family has cultivated indigenous Vranec and Stanushina grapes on these terraced slopes for four generations. We restored the estate so travelers could experience authentic wine country living with direct, personal care.”
+                </p>
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <button
+                    onClick={() => setConciergeOpen(true)}
+                    className="px-5 py-2.5 bg-[#2D5A43] hover:bg-[#234E38] text-white font-medium text-xs rounded-lg transition-colors cursor-pointer"
+                  >
+                    Chat with Concierge
+                  </button>
+                  <a
+                    href="https://wa.me/6281383521750?text=Hello%20Stefan%20%26%20Maria,%20I%20am%20inquiring%20about%20Savoria%20Estate%20suites"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-5 py-2.5 bg-white border border-stone-300 text-stone-700 hover:text-stone-900 text-xs font-medium rounded-lg transition-colors"
+                  >
+                    Open Host WhatsApp
+                  </a>
+                </div>
+              </div>
+              <div className="lg:col-span-4 relative h-64 rounded-xl overflow-hidden border border-stone-200">
+                <Image
+                  src="/images/hospitality/savoria-wine-estate.jpg"
+                  alt="Stefan & Maria Estate"
+                  fill
+                  sizes="400px"
+                  className="object-cover"
+                />
+              </div>
+            </section>
+
+          </main>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════
+          CONCEPT 03: THE METROPOLITAN LOFT SUITES (SARAJEVO MOCKUP)
+      ══════════════════════════════════════════════════════════════ */}
+      {slug === 'city-apartments' && (
+        <div className="bg-[#FAF9F6] text-stone-900 min-h-screen">
+          
+          {/* Header matching urban-loft.jpg */}
+          <header className="bg-white border-b border-stone-200 sticky top-10 z-40">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-xs uppercase tracking-widest font-serif font-bold text-stone-400">WUUS ·</span>
+                <div>
+                  <h1 className="text-lg sm:text-xl font-serif uppercase tracking-[0.2em] text-stone-900 font-bold m-0">
+                    THE METROPOLITAN LOFT SUITES
+                  </h1>
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-stone-500 block">SARAJEVO</span>
+                </div>
+              </div>
+              <button
+                onClick={() => handleOpenCheckout(property.rooms[0])}
+                className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white text-xs font-serif uppercase tracking-wider rounded transition-colors"
+              >
+                Book Direct
+              </button>
+            </div>
+          </header>
+
+          <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-12">
+            
+            {/* Dark Urban Heritage Hero Banner */}
+            <div className="relative h-[280px] sm:h-[340px] rounded-2xl overflow-hidden shadow-sm">
               <Image
-                src={property.heroImage}
-                alt={property.name}
+                src="/images/hospitality/sarajevo-king-suite.jpg"
+                alt="Sarajevo Urban Heritage Loft"
                 fill
                 priority
-                sizes="(max-width: 768px) 100vw, 60vw"
                 className="object-cover"
               />
-            </div>
-
-            {/* Right 2 Stacked Photos (5 cols) */}
-            <div className="md:col-span-5 grid grid-rows-2 gap-3 h-full">
-              <div className="relative h-full">
-                <Image
-                  src={property.rooms[0]?.image || property.heroImage}
-                  alt="Room View"
-                  fill
-                  sizes="40vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative h-full">
-                <Image
-                  src={property.rooms[1]?.image || property.atmosphereImage}
-                  alt="Terrace or Garden"
-                  fill
-                  sizes="40vw"
-                  className="object-cover"
-                />
+              <div className="absolute inset-0 bg-black/45 flex items-center justify-center p-6 text-center">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif text-white tracking-[0.15em] uppercase font-normal max-w-lg leading-tight">
+                  URBAN HERITAGE LUXURY IN SARAJEVO
+                </h2>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* ─────────────────────────────────────────────────────────────
-            4. CLEAN SEARCH & DATES BAR
-        ────────────────────────────────────────────────────────────── */}
-        <section 
-          id="search-engine" 
-          className="bg-white rounded-xl p-4 sm:p-5 border border-slate-200 shadow-xs sticky top-24 z-30"
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
-            
-            {/* Check-in Date */}
-            <div className="lg:col-span-3 bg-slate-50 border border-slate-200 rounded-lg p-2.5">
-              <label className="text-[11px] font-semibold text-slate-500 block mb-0.5">
-                Check-in Date
-              </label>
-              <input
-                type="date"
-                value={checkIn}
-                onChange={e => setCheckIn(e.target.value)}
-                className="w-full text-sm font-semibold text-[#1C2733] bg-transparent outline-hidden cursor-pointer"
-              />
-            </div>
-
-            {/* Check-out Date */}
-            <div className="lg:col-span-3 bg-slate-50 border border-slate-200 rounded-lg p-2.5">
-              <label className="text-[11px] font-semibold text-slate-500 block mb-0.5">
-                Check-out ({nights} nights)
-              </label>
-              <input
-                type="date"
-                value={checkOut}
-                onChange={e => setCheckOut(e.target.value)}
-                className="w-full text-sm font-semibold text-[#1C2733] bg-transparent outline-hidden cursor-pointer"
-              />
-            </div>
-
-            {/* Guests & Room */}
-            <div className="lg:col-span-4 relative">
-              <div
-                onClick={() => setGuestPickerOpen(!guestPickerOpen)}
-                className="bg-slate-50 border border-slate-200 rounded-lg p-2.5 cursor-pointer hover:border-slate-300 transition-colors"
-              >
-                <span className="text-[11px] font-semibold text-slate-500 block mb-0.5">
-                  Guests & Rooms
-                </span>
-                <span className="text-sm font-semibold text-[#1C2733] block truncate">
-                  {adults} Adults · {childrenCount} Children · {roomsCount} Room
-                </span>
-              </div>
-
-              {/* Guest Picker Popover */}
-              <AnimatePresence>
-                {guestPickerOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5 }}
-                    className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl p-4 border border-slate-200 shadow-lg z-50 space-y-3"
-                  >
-                    <div className="flex items-center justify-between text-sm">
-                      <div>
-                        <strong className="block text-[#1C2733]">Adults</strong>
-                        <span className="text-xs text-slate-500">Ages 13+</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setAdults(Math.max(1, adults - 1))}
-                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
-                        >
-                          -
-                        </button>
-                        <span className="w-5 text-center font-semibold">{adults}</span>
-                        <button
-                          onClick={() => setAdults(Math.min(4, adults + 1))}
-                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between text-sm pt-2 border-t border-slate-100">
-                      <div>
-                        <strong className="block text-[#1C2733]">Children</strong>
-                        <span className="text-xs text-slate-500">Ages 0 to 12</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setChildrenCount(Math.max(0, childrenCount - 1))}
-                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
-                        >
-                          -
-                        </button>
-                        <span className="w-5 text-center font-semibold">{childrenCount}</span>
-                        <button
-                          onClick={() => setChildrenCount(Math.min(3, childrenCount + 1))}
-                          className="w-7 h-7 rounded border border-slate-300 font-bold flex items-center justify-center hover:bg-slate-50"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => setGuestPickerOpen(false)}
-                      className="w-full py-2 bg-[#1C2733] text-white text-xs font-semibold rounded hover:bg-[#233746] transition-colors"
-                    >
-                      Done
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Check Rates Button */}
-            <div className="lg:col-span-2">
-              <button
-                onClick={() => {
-                  setGuestPickerOpen(false);
-                  const elem = document.getElementById('rooms');
-                  if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
-              >
-                Check Rates
-              </button>
-            </div>
-
-          </div>
-        </section>
-
-        {/* ─────────────────────────────────────────────────────────────
-            5. ROOMS & RATE PLANS
-        ────────────────────────────────────────────────────────────── */}
-        <section id="rooms" className="space-y-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 border-b border-slate-200 pb-4">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1C2733] tracking-tight">
-                Rooms & Direct Rates
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                Direct reservations include guaranteed lowest rate, artisan breakfast options, and flexible arrival.
+            {/* Discover Our Suites Section Title */}
+            <div className="text-center space-y-1">
+              <h3 className="text-2xl font-serif text-stone-900 font-normal">
+                Discover Our Suites
+              </h3>
+              <p className="text-xs text-stone-500 font-serif italic">
+                Austrian-era brick, high ceilings, and artisan quarter views
               </p>
             </div>
 
-            {/* Filter pills */}
-            <div className="flex items-center gap-2 text-xs">
-              <button
-                onClick={() => setRoomFilter('all')}
-                className={`px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${
-                  roomFilter === 'all' ? 'bg-[#1C2733] border-[#1C2733] text-white font-semibold' : 'border-slate-200 text-slate-600 hover:border-slate-300'
-                }`}
-              >
-                All Rooms ({property.rooms.length})
-              </button>
-              <button
-                onClick={() => setRoomFilter('breakfast')}
-                className={`px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${
-                  roomFilter === 'breakfast' ? 'bg-[#1C2733] border-[#1C2733] text-white font-semibold' : 'border-slate-200 text-slate-600 hover:border-slate-300'
-                }`}
-              >
-                Breakfast Included
-              </button>
-            </div>
-          </div>
+            {/* KING SUITE CARD (Matching urban-loft.jpg 1:1) */}
+            <div className="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden p-6 sm:p-8 space-y-6">
+              <div className="relative h-[280px] sm:h-[340px] rounded-xl overflow-hidden">
+                <Image
+                  src="/images/hospitality/sarajevo-king-suite.jpg"
+                  alt="King Suite with exposed brick wall"
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
-          {/* Rooms List */}
-          <div className="space-y-10">
-            {filteredRooms.map((room) => {
-              const currentImg = activePhoto[room.id] || room.image;
-              return (
-                <div
-                  key={room.id}
-                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs"
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-                    
-                    {/* Left: Photos & Specs (5 cols) */}
-                    <div className="lg:col-span-5 p-6 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between space-y-4">
-                      <div className="space-y-3">
-                        <div>
-                          <h3 className="text-xl font-bold text-[#1C2733]">
-                            {room.name}
-                          </h3>
-                          <p className="text-xs text-slate-500 mt-0.5">
-                            {room.view} · Max {room.maxGuests} Guests
-                          </p>
-                        </div>
+              <div className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h4 className="text-2xl font-serif uppercase tracking-wider text-stone-900 font-bold m-0">
+                    KING SUITE
+                  </h4>
+                  <span className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                    TRANSPARENT DIRECT RATE
+                  </span>
+                </div>
 
-                        {/* Main Room Photo */}
-                        <div className="relative h-64 w-full rounded-xl overflow-hidden">
-                          <Image
-                            src={currentImg}
-                            alt={room.name}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 400px"
-                            className="object-cover"
-                          />
-                        </div>
+                <p className="text-sm text-stone-600 leading-relaxed m-0">
+                  Experience spacious modern comfort with original heritage charm. 40 sqm, historic quarter view.
+                </p>
 
-                        {/* Thumbnail switcher */}
-                        <div className="flex items-center gap-2">
-                          {room.gallery.map((gImg, idx) => (
-                            <button
-                              key={idx}
-                              onClick={() => setActivePhoto(prev => ({ ...prev, [room.id]: gImg }))}
-                              className={`relative w-16 h-12 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${
-                                currentImg === gImg ? 'border-[#1C2733]' : 'border-transparent opacity-70 hover:opacity-100'
-                              }`}
-                            >
-                              <Image src={gImg} alt="Thumb" fill sizes="64px" className="object-cover" />
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Specs */}
-                        <div className="text-xs text-slate-600 space-y-1 pt-1">
-                          <p className="m-0"><strong>Bed:</strong> {room.bed}</p>
-                          <p className="m-0"><strong>Size:</strong> {room.size}</p>
-                        </div>
-
-                        <p className="text-sm text-slate-600 leading-relaxed pt-1">
-                          {room.description}
-                        </p>
-                      </div>
-
-                      <div className="pt-3 border-t border-slate-100 text-xs text-slate-500">
-                        Direct stay perk: <strong className="text-slate-800">{room.perk}</strong>
-                      </div>
-                    </div>
-
-                    {/* Right: Rate Plans Table (7 cols) */}
-                    <div className="lg:col-span-7 p-6 flex flex-col justify-between space-y-4">
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between text-xs text-slate-500">
-                          <span className="font-semibold text-slate-700">Available Rate Plans</span>
-                          <span>{nights} nights total</span>
-                        </div>
-
-                        {/* Rate Plans List */}
-                        <div className="space-y-3">
-                          {room.ratePlans.map((plan) => {
-                            const isRecommended = plan.recommended;
-                            const totalPrice = calculateTotal(plan.rate);
-                            const totalOtaPrice = calculateOtaTotal(plan.otaRate);
-                            const planSavings = totalOtaPrice - totalPrice;
-
-                            return (
-                              <div
-                                key={plan.id}
-                                className={`p-5 rounded-xl border transition-colors ${
-                                  isRecommended
-                                    ? 'border-[#1C2733] bg-white shadow-xs'
-                                    : 'border-slate-200 bg-white'
-                                }`}
-                              >
-                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                                  <div className="space-y-1.5 max-w-sm">
-                                    <div className="flex items-center gap-2">
-                                      <h4 className="text-base font-bold text-[#1C2733]">
-                                        {plan.name}
-                                      </h4>
-                                      {isRecommended && (
-                                        <span className="bg-[#1C2733] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
-                                          Recommended
-                                        </span>
-                                      )}
-                                    </div>
-                                    <p className="text-xs text-slate-500">
-                                      {plan.description}
-                                    </p>
-
-                                    {/* Perks List */}
-                                    <ul className="space-y-1 text-xs text-slate-700 pt-1">
-                                      {plan.perks.map((pk, idx) => (
-                                        <li key={idx} className="flex items-start gap-1.5">
-                                          <Check className="w-3.5 h-3.5 text-slate-700 mt-0.5 shrink-0" />
-                                          <span>{pk}</span>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-
-                                  {/* Price & Action */}
-                                  <div className="text-right sm:self-center shrink-0 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
-                                    <div className="space-y-0.5">
-                                      <span className="text-xs text-slate-400 line-through block">
-                                        OTA rate: €{totalOtaPrice}
-                                      </span>
-                                      <div className="flex items-baseline justify-end gap-1">
-                                        <span className="text-2xl font-bold text-[#1C2733]">
-                                          €{totalPrice}
-                                        </span>
-                                        <span className="text-xs text-slate-500">
-                                          / {nights} nights
-                                        </span>
-                                      </div>
-                                      <span className="text-xs font-semibold text-emerald-800 block">
-                                        Save €{planSavings} direct (0% OTA Fee)
-                                      </span>
-                                    </div>
-
-                                    <button
-                                      onClick={() => handleOpenCheckout(room, plan)}
-                                      className="mt-3 w-full sm:w-auto px-5 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
-                                    >
-                                      Select & Reserve
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <span className="flex items-center gap-1.5">
-                          <ShieldCheck className="w-4 h-4 text-slate-400 shrink-0" />
-                          <span>No prepayment needed · Pay at check-in · Free cancellation</span>
-                        </span>
-                        <span className="font-semibold text-slate-700">0% OTA fee</span>
-                      </div>
-                    </div>
-
+                {/* Amenities Icons Row matching mockup */}
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 py-3 border-y border-stone-100 text-center text-xs text-stone-700">
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-semibold">🛏 King Bed</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-semibold">📶 300M Wi-Fi</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-semibold">☕ Espresso</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-semibold">🏙 Balcony</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-semibold">📐 40 SQM</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-semibold">❄ AC</span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </section>
 
-        {/* ─────────────────────────────────────────────────────────────
-            6. EXPERIENCE & HOST STORY (NON-REPEATING PHOTOGRAPHY)
-        ────────────────────────────────────────────────────────────── */}
-        <section id="experience" className="border-t border-slate-200 pt-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div className="space-y-4">
-              <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
-                THE STORY & CARETAKERS
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1C2733] tracking-tight">
-                Personal hospitality,<br />
-                not a nameless hotel chain.
-              </h2>
-              <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                {property.host.note}
-              </p>
-              <div className="p-4 bg-slate-50 rounded-xl space-y-1">
-                <strong className="block text-sm font-bold text-[#1C2733]">
-                  {property.host.names}
-                </strong>
-                <span className="text-xs text-slate-500">
-                  {property.host.role} · Direct contact via WhatsApp
+                {/* Pricing & CTA Buttons matching urban-loft.jpg */}
+                <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider text-stone-400 block font-semibold">FROM</span>
+                    <div className="flex items-baseline gap-1">
+                      <strong className="text-3xl font-serif font-bold text-stone-900">€210</strong>
+                      <span className="text-xs text-stone-500 uppercase tracking-wider">/ NIGHT</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <button
+                      onClick={() => handleOpenCheckout(property.rooms[0])}
+                      className="flex-1 sm:flex-initial px-6 py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-serif uppercase tracking-widest text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                    >
+                      BOOK NOW
+                    </button>
+                    <a
+                      href="https://wa.me/6281383521750?text=Hello,%20I%20am%20inquiring%20about%20the%20King%20Suite%20at%20The%20Metropolitan%20Loft%20Suites%20Sarajevo"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-5 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
+                    >
+                      <PhoneCall className="w-4 h-4" />
+                      <span>WhatsApp Inquiry</span>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </main>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════
+          CONCEPT 01: ARTISAN COASTAL RETREAT (COASTAL MOCKUP)
+      ══════════════════════════════════════════════════════════════ */}
+      {slug === 'seaside-guesthouse' && (
+        <div className="bg-[#FAF7F2] text-stone-900 min-h-screen">
+          
+          {/* Header matching coastal-retreat.jpg */}
+          <header className="bg-[#FAF7F2] border-b border-stone-200/80 sticky top-10 z-40">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-serif tracking-tight text-stone-900 font-normal m-0">
+                  Artisan
+                </h1>
+                <span className="text-[10px] tracking-widest uppercase text-stone-500 block">
+                  Coastal Retreat · Albanian Riviera
                 </span>
               </div>
+
+              <nav className="hidden md:flex items-center gap-8 text-xs font-serif uppercase tracking-wider text-stone-700">
+                <a href="#suite" className="hover:text-stone-900">Discover</a>
+                <a href="#suite" className="hover:text-stone-900 font-bold border-b border-stone-900 pb-0.5">Stays</a>
+                <a href="#suite" className="hover:text-stone-900">Wellness</a>
+                <a href="#suite" className="hover:text-stone-900">Gallery</a>
+                <a href="#suite" className="hover:text-stone-900">Journal</a>
+              </nav>
+
+              <button
+                onClick={() => handleOpenCheckout(property.rooms[0])}
+                className="px-4 py-2 bg-[#1C2733] hover:bg-[#2A3B4C] text-white text-xs font-serif uppercase tracking-wider rounded transition-colors"
+              >
+                Booking
+              </button>
             </div>
+          </header>
 
-            <div className="relative h-72 sm:h-80 rounded-xl overflow-hidden shadow-xs">
-              <Image
-                src={property.atmosphereImage}
-                alt="Property atmosphere"
-                fill
-                sizes="500px"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* ─────────────────────────────────────────────────────────────
-            7. CURATED LOCAL GUIDE (CLEAN CATEGORIZED TILES)
-        ────────────────────────────────────────────────────────────── */}
-        <section id="guide" className="border-t border-slate-200 pt-12 space-y-6">
-          <div>
-            <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
-              LOCAL INSIDER TIPS
-            </p>
-            <h2 className="text-2xl font-bold text-[#1C2733] tracking-tight">
-              Secret Spots & Dining Nearby
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {property.localGuide.map((item, idx) => (
-              <div key={idx} className="p-5 bg-white border border-slate-200 rounded-xl space-y-2.5 hover:border-slate-300 transition-colors">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold tracking-wider text-slate-500 uppercase bg-slate-100 px-2 py-0.5 rounded">
-                    {item.category}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-500">
-                    {item.dist}
-                  </span>
-                </div>
-                <h4 className="text-base font-bold text-[#1C2733] m-0">{item.title}</h4>
-                <p className="text-xs text-slate-600 leading-relaxed m-0">{item.desc}</p>
+          <main className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-12">
+            
+            {/* Featured Ionian Vista Suite matching iPad mockup */}
+            <div id="suite" className="bg-white rounded-3xl border border-stone-200/90 shadow-sm overflow-hidden p-6 sm:p-10 space-y-6">
+              
+              {/* Featured Villa Pool Photo */}
+              <div className="relative h-[340px] sm:h-[440px] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/hospitality/artisan-ionian-suite.jpg"
+                  alt="Ionian Vista Suite Stone Villa and Pool over Turquoise Sea"
+                  fill
+                  priority
+                  className="object-cover"
+                />
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* ─────────────────────────────────────────────────────────────
-            8. STAY FAQ
-        ────────────────────────────────────────────────────────────── */}
-        <section id="faq" className="border-t border-slate-200 pt-12 space-y-6">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
-              FREQUENTLY ASKED QUESTIONS
-            </p>
-            <h2 className="text-2xl font-bold text-[#1C2733] tracking-tight">
-              Essential Stay Details
-            </h2>
-          </div>
+              <div className="space-y-4">
+                <div>
+                  <h2 className="text-3xl font-serif text-stone-900 font-normal m-0">
+                    Ionian Vista Suite
+                  </h2>
+                  <p className="text-sm text-stone-600 leading-relaxed mt-2 max-w-2xl">
+                    A sanctuary of sophisticated calm overlooking the turquoise Ionian. Features a private terrace, locally sourced stone, and handcrafted olive wood details.
+                  </p>
+                </div>
 
-          <div className="max-w-3xl space-y-3">
-            {property.faq.map((item, idx) => (
-              <details key={idx} className="p-4 bg-slate-50 rounded-xl group border border-slate-200/80" open={idx === 0}>
-                <summary className="font-bold text-sm text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
-                  <span>{item.q}</span>
-                  <span className="text-slate-400 font-bold text-base group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <p className="text-xs text-slate-600 mt-2.5 leading-relaxed">
-                  {item.a}
-                </p>
-              </details>
-            ))}
-          </div>
-        </section>
+                <div className="pt-2">
+                  <span className="text-xs font-serif uppercase tracking-wider font-bold text-stone-900 block mb-1">
+                    Features
+                  </span>
+                  <p className="text-xs text-stone-600">
+                    2 Guests • King Bed • Private Terrace • Sea View
+                  </p>
+                </div>
 
-      </main>
+                {/* Thumbnails row */}
+                <div>
+                  <span className="text-xs font-serif uppercase tracking-wider font-bold text-stone-900 block mb-2">
+                    Details & Amenities
+                  </span>
+                  <div className="grid grid-cols-4 gap-3 max-w-md">
+                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
+                      <Image src="/images/hospitality/artisan-ionian-suite.jpg" alt="Villa Pool" fill className="object-cover" />
+                    </div>
+                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
+                      <Image src="/images/hospitality/stone-suite-main.jpg" alt="Bedroom" fill className="object-cover" />
+                    </div>
+                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
+                      <Image src="/images/hospitality/stone-suite-breakfast.jpg" alt="Breakfast" fill className="object-cover" />
+                    </div>
+                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
+                      <Image src="/images/hospitality/guesthouse.webp" alt="Courtyard" fill className="object-cover" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pricing & Check Availability Button */}
+                <div className="pt-4 border-t border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-baseline gap-1">
+                      <strong className="text-3xl font-serif font-bold text-stone-900">€120</strong>
+                      <span className="text-xs text-stone-500">/ night</span>
+                    </div>
+                    <span className="text-xs text-stone-500 block">
+                      (Including courtyard artisan breakfast & welcome chilled wine)
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => handleOpenCheckout(property.rooms[0])}
+                    className="px-8 py-3.5 bg-[#1C2733] hover:bg-[#2A3B4C] text-white font-serif uppercase tracking-widest text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                  >
+                    Check Availability
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+          </main>
+        </div>
+      )}
 
       {/* ─────────────────────────────────────────────────────────────
-          9. CLEAN MULTI-STEP RESERVATION DRAWER
+          3. CLEAN MULTI-STEP RESERVATION DRAWER (ALL CONCEPTS)
       ────────────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {checkoutOpen && (
@@ -848,28 +914,38 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                   </div>
 
                   {/* Price Breakdown */}
-                  <div className="p-4 bg-slate-50 rounded-xl space-y-2 text-xs">
-                    <div className="flex justify-between items-center text-slate-600">
-                      <span>Room Rate ({nights} nights × €{selectedRatePlan.rate}):</span>
-                      <span className="font-semibold text-[#1C2733]">€{calculateTotal(selectedRatePlan.rate)}</span>
+                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+                    <div className="flex justify-between text-slate-600">
+                      <span>Rate plan per night</span>
+                      <span>€{selectedRatePlan.rate}</span>
                     </div>
-                    <div className="flex justify-between items-center text-slate-600">
-                      <span>Breakfast & Direct Perks:</span>
-                      <span className="font-semibold text-slate-700">{selectedRatePlan.breakfastIncluded ? 'Included' : 'Room Only'}</span>
+                    <div className="flex justify-between text-slate-600">
+                      <span>Stay calculation</span>
+                      <span>€{selectedRatePlan.rate} × {nights} nights</span>
                     </div>
-                    <div className="flex justify-between items-center text-slate-600">
-                      <span>Taxes & Service:</span>
-                      <span className="font-semibold text-slate-700">Included (€0)</span>
+                    <div className="flex justify-between text-slate-400 line-through">
+                      <span>OTA comparison rate</span>
+                      <span>€{calculateOtaTotal(selectedRatePlan.otaRate)}</span>
                     </div>
-                    <div className="pt-2 border-t border-slate-200 flex justify-between items-baseline">
-                      <strong className="text-sm text-[#1C2733]">Total Due at Property:</strong>
-                      <strong className="text-xl text-[#1C2733]">
-                        €{calculateTotal(selectedRatePlan.rate)}
-                      </strong>
+                    <div className="flex justify-between text-emerald-800 font-semibold pt-1 border-t border-slate-200">
+                      <span>Direct Booking Benefit</span>
+                      <span>Save €{savings} (0% OTA Commission)</span>
                     </div>
-                    <p className="text-xs text-emerald-800 font-semibold m-0">
-                      ✓ Direct Rate Guarantee: You save €{savings} vs. OTA bookings.
-                    </p>
+                    <div className="flex justify-between text-sm font-bold text-[#1C2733] pt-1">
+                      <span>Total to Pay at Property</span>
+                      <span>€{calculateTotal(selectedRatePlan.rate)}</span>
+                    </div>
+                  </div>
+
+                  {/* Included Direct Benefits */}
+                  <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs space-y-1">
+                    <strong className="text-emerald-900 block font-semibold">Included with your direct booking:</strong>
+                    {selectedRatePlan.perks.map((p, idx) => (
+                      <div key={idx} className="flex items-center gap-1.5 text-emerald-800">
+                        <Check className="w-3.5 h-3.5 shrink-0" />
+                        <span>{p}</span>
+                      </div>
+                    ))}
                   </div>
 
                   <button
@@ -890,7 +966,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Thomas"
+                        placeholder="John"
                         value={firstName}
                         onChange={e => setFirstName(e.target.value)}
                         className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
@@ -901,7 +977,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Schmidt"
+                        placeholder="Doe"
                         value={lastName}
                         onChange={e => setLastName(e.target.value)}
                         className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
@@ -915,7 +991,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                       <input
                         type="email"
                         required
-                        placeholder="thomas@example.com"
+                        placeholder="john.doe@example.com"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
@@ -924,19 +1000,12 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                     <div>
                       <label className="font-semibold text-[#1C2733] block mb-1">WhatsApp / Phone *</label>
                       <div className="flex gap-1.5">
-                        <select
+                        <input
+                          type="text"
                           value={countryCode}
                           onChange={e => setCountryCode(e.target.value)}
-                          className="p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-[#1C2733]"
-                        >
-                          <option value="+49">+49 (DE)</option>
-                          <option value="+39">+39 (IT)</option>
-                          <option value="+44">+44 (UK)</option>
-                          <option value="+43">+43 (AT)</option>
-                          <option value="+41">+41 (CH)</option>
-                          <option value="+33">+33 (FR)</option>
-                          <option value="+62">+62 (ID)</option>
-                        </select>
+                          className="w-16 p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733] text-center"
+                        />
                         <input
                           type="tel"
                           required
@@ -980,32 +1049,6 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                     </div>
                   </div>
 
-                  {/* Special Requests */}
-                  <div className="space-y-1.5 pt-2 text-xs">
-                    <span className="font-semibold text-[#1C2733] block">Special Requests</span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700">
-                      {[
-                        'Quiet room away from reception',
-                        'High floor with best view',
-                        'Airport taxi transfer service',
-                        'Vegetarian / Vegan breakfast'
-                      ].map((req, idx) => (
-                        <label key={idx} className="flex items-center gap-2 cursor-pointer bg-slate-50 p-2 rounded-lg border border-slate-200">
-                          <input
-                            type="checkbox"
-                            checked={specialRequests.includes(req)}
-                            onChange={(e) => {
-                              if (e.target.checked) setSpecialRequests(prev => [...prev, req]);
-                              else setSpecialRequests(prev => prev.filter(r => r !== req));
-                            }}
-                            className="rounded text-[#1C2733]"
-                          />
-                          <span className="text-xs">{req}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
                   <div className="flex gap-3 pt-2">
                     <button
                       onClick={() => setCheckoutStep(1)}
@@ -1026,7 +1069,6 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               {/* ── STEP 3: VOUCHER & CONFIRMATION ── */}
               {checkoutStep === 3 && (
                 <div className="space-y-4">
-                  {/* Clean Voucher Receipt Card */}
                   <div className="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-4">
                     <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                       <div>
@@ -1062,11 +1104,10 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                     </div>
 
                     <div className="pt-2 border-t border-slate-200 text-xs text-slate-500">
-                      Payment is made directly at the guesthouse upon check-in. Free cancellation up to 48 hours prior to arrival.
+                      Payment is made directly upon check-in. Free cancellation up to 48 hours prior to arrival.
                     </div>
                   </div>
 
-                  {/* WhatsApp Action */}
                   <div className="space-y-2">
                     <button
                       onClick={handleSendWhatsAppBooking}
@@ -1104,7 +1145,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
       </AnimatePresence>
 
       {/* ─────────────────────────────────────────────────────────────
-          10. GUEST INQUIRIES CONCIERGE CHAT
+          4. GUEST INQUIRIES CONCIERGE CHAT
       ────────────────────────────────────────────────────────────── */}
       <div className="fixed bottom-6 right-6 z-50">
         {!conciergeOpen ? (
@@ -1121,7 +1162,6 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
             animate={{ opacity: 1, scale: 1, y: 0 }}
             className="w-[340px] sm:w-[360px] bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[460px]"
           >
-            {/* Chat header */}
             <div className="bg-[#1C2733] text-white p-4 flex items-center justify-between">
               <div>
                 <h4 className="text-xs font-bold text-white">Direct Host Concierge</h4>
@@ -1135,7 +1175,6 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               </button>
             </div>
 
-            {/* Chat messages */}
             <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
               {chatMessages.map((msg, idx) => (
                 <div
@@ -1155,7 +1194,6 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               ))}
             </div>
 
-            {/* Prompt Chips */}
             <div className="p-2 bg-white border-t border-slate-100 flex flex-wrap gap-1.5">
               {[
                 'Free parking?',
@@ -1173,7 +1211,6 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
               ))}
             </div>
 
-            {/* Input */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
