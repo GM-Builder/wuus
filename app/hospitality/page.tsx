@@ -19,46 +19,124 @@ import {
   ExternalLink,
   ChevronDown,
   ArrowUpRight,
-  Smartphone
+  Smartphone,
+  Calendar,
+  Users
 } from 'lucide-react';
 
 export default function HospitalityPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [conceptModalOpen, setConceptModalOpen] = useState(false);
   const [selectedConcept, setSelectedConcept] = useState<'guesthouse' | 'wine-estate' | 'city-apartments'>('guesthouse');
+  const [activeDemoRoomIndex, setActiveDemoRoomIndex] = useState<number>(0);
+  const [demoNights, setDemoNights] = useState<number>(3);
+  const [demoGuests, setDemoGuests] = useState<number>(2);
+  const [demoInquirySent, setDemoInquirySent] = useState<boolean>(false);
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
 
-  // Concept Details Dictionary
-  const conceptDetails = {
+  // Multi-concept interactive demo database
+  const conceptDatabase = {
     guesthouse: {
+      id: 'guesthouse' as const,
       tag: "Concept design · Albanian Riviera",
+      destination: "Albanian Riviera, Albania",
       title: "A quiet place by the sea.",
       subtitle: "A Seaside Guesthouse",
-      image: "/images/hospitality/guesthouse.webp",
-      alt: "Coastal boutique guesthouse stone courtyard",
-      lead: "Morning light. A courtyard breakfast. Space to slow down.",
-      description: "Designed for a small coastal property. Room-first browsing, generous natural photography, and a calm digital welcome. High-intent guests can see terrace views, bed dimensions, and send a direct booking inquiry via WhatsApp in seconds without navigating complicated OTAs.",
-      specs: "Albanian Riviera · Direct perks: Courtyard breakfast & terrace views · Inquiries: WhatsApp & Email"
+      overview: "Designed for small boutique coastal properties. Room-first browsing, generous natural photography, and a calm digital welcome. High-intent guests can see terrace views, bed dimensions, and send a direct booking inquiry via WhatsApp in seconds.",
+      badge: "Albanian Riviera",
+      url: "riviera-stays.com",
+      rooms: [
+        {
+          name: "Stone Courtyard Suite",
+          rate: 95,
+          otaRate: 115,
+          size: "34 m²",
+          bed: "King Bed",
+          view: "Garden & Patio View",
+          perk: "Breakfast & Chilled White Wine Included",
+          image: "/images/hospitality/guesthouse.webp",
+          description: "Morning light over the stone patio, local olive grove views, and artisan breakfast. Built with native limestone and cool linen."
+        },
+        {
+          name: "Panoramic Sea Terrace Studio",
+          rate: 135,
+          otaRate: 165,
+          size: "48 m²",
+          bed: "King Bed + Daybed",
+          view: "Direct Ionian Sea View",
+          perk: "Sunset Terrace, Breakfast & Late Checkout",
+          image: "/images/hospitality/coastal-retreat.jpg",
+          description: "Unobstructed sea views from your private sun terrace. Features an outdoor shower, espresso bar, and artisan Mediterranean breakfast."
+        }
+      ]
     },
     'wine-estate': {
+      id: 'wine-estate' as const,
       tag: "Concept design · Lake Ohrid, North Macedonia",
+      destination: "Lake Ohrid, North Macedonia",
       title: "Heritage suites amongst vineyards.",
       subtitle: "Lakeside Wine Estate with Rooms",
-      image: "/images/hospitality/savoria-wine-estate.jpg",
-      alt: "Lake Ohrid heritage wine estate",
-      lead: "Private vineyard terrace, stone fireplace, and organic breakfast served daily.",
-      description: "Designed for an independent boutique wine estate. Features full-screen photography optimized for mobile roaming networks, transparent room specs, tasting hours, and a direct inquiry button that connects high-intent travelers straight to the host with a welcome bottle perk.",
-      specs: "Lake Ohrid, North Macedonia · Direct perks: Breakfast & Welcome Wine · Response: Direct to host"
+      overview: "Designed for an independent boutique wine estate. Features full-screen photography optimized for mobile roaming networks, transparent room specs, tasting hours, and a direct inquiry button that connects high-intent travelers straight to the host.",
+      badge: "Lake Ohrid, North Macedonia",
+      url: "savoria-estate.com",
+      rooms: [
+        {
+          name: "Heritage Balcony Suite",
+          rate: 110,
+          otaRate: 135,
+          size: "42 m²",
+          bed: "King Bed",
+          view: "Lake Ohrid & Vineyards",
+          perk: "Welcome Bottle of Reserve Vranec + Vineyard Breakfast",
+          image: "/images/hospitality/savoria-wine-estate.jpg",
+          description: "Private vineyard terrace, stone fireplace, and organic breakfast served daily. Direct bookings receive a cellar tour and reserve tasting."
+        },
+        {
+          name: "Cellar Estate Loft",
+          rate: 150,
+          otaRate: 185,
+          size: "55 m²",
+          bed: "Super King Bed",
+          view: "Historic Winery Courtyard",
+          perk: "Private Wine Cellar Tour & Extended Breakfast",
+          image: "/images/hospitality/palazzo-suites.jpg",
+          description: "Vaulted timber ceilings, vintage copper tub, and private access to the estate library and tasting barrel room."
+        }
+      ]
     },
     'city-apartments': {
+      id: 'city-apartments' as const,
       tag: "Concept design · Sarajevo, Bosnia and Herzegovina",
+      destination: "Sarajevo Old Town, Bosnia",
       title: "Old town lofts & boutique living.",
       subtitle: "Historic City Apartments",
-      image: "/images/hospitality/urban-loft.jpg",
-      alt: "Sarajevo historic boutique apartments",
-      lead: "Rooms compared on one screen, check-in instructions in four languages.",
-      description: "Designed for city apartments and urban boutique stays. Guests can compare unit sizes on a single mobile screen, view key amenities and parking details, and receive automated check-in and keycode directions directly on their WhatsApp or Viber.",
-      specs: "Sarajevo Old Town · Direct perks: Late check-in keybox & city guide · Inquiries: WhatsApp & Viber"
+      overview: "Designed for city apartments and urban boutique stays. Guests can compare unit sizes on a single mobile screen, view key amenities and parking details, and receive automated check-in and keycode directions directly on their WhatsApp or Viber.",
+      badge: "Sarajevo Old Town",
+      url: "sarajevo-lofts.com",
+      rooms: [
+        {
+          name: "Historic Penthouse Loft",
+          rate: 85,
+          otaRate: 105,
+          size: "40 m²",
+          bed: "Queen Bed",
+          view: "Sarajevo Old Town Rooftops",
+          perk: "24/7 Keyless Check-in & Artisan Bosnian Coffee",
+          image: "/images/hospitality/urban-loft.jpg",
+          description: "Exposed brick, skylight views over old town minarets, high-speed fiber internet, and dedicated workstation."
+        },
+        {
+          name: "Atelier Studio Suite",
+          rate: 70,
+          otaRate: 88,
+          size: "30 m²",
+          bed: "Double Bed",
+          view: "Quiet Courtyard Garden",
+          perk: "Contactless Check-in & Local Neighborhood Guide",
+          image: "/images/hospitality/mobile-stay-ui.jpg",
+          description: "Minimalist Scandinavian-Balkan aesthetic, bespoke oak furniture, walk-in rain shower, and secure keybox entry."
+        }
+      ]
     }
   };
 
@@ -554,21 +632,88 @@ export default function HospitalityPage() {
             </p>
           </div>
 
-          {/* Flagship Concept 01: Seaside Guesthouse */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs mb-8">
-            <div className="relative h-[360px] sm:h-[460px] bg-slate-50">
-              <Image
-                src="/images/hospitality/guesthouse.webp"
-                alt="Coastal guesthouse design concept"
-                fill
-                sizes="(max-width: 1024px) 100vw, 750px"
-                className="object-cover"
-              />
-              <span className="absolute top-5 left-5 bg-white text-[#1C2733] font-bold text-xs px-3.5 py-1.5 rounded-full shadow-xs border border-slate-200">
-                Concept design · Albanian Riviera
-              </span>
+          {/* Flagship Concept 01: Seaside Guesthouse with Realistic Smartphone Device Mockup */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] border border-slate-200 rounded-3xl overflow-hidden bg-white shadow-xs mb-8">
+            
+            {/* Left: Smartphone Mockup Viewport */}
+            <div className="p-6 sm:p-10 bg-slate-50 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-200">
+              <div className="relative w-full max-w-[320px] sm:max-w-[340px] bg-[#141C24] rounded-[44px] p-3 shadow-2xl border-4 border-slate-700/80">
+                {/* Speaker & Dynamic Notch */}
+                <div className="w-24 h-4 bg-[#0F1720] rounded-full mx-auto mb-2.5 flex items-center justify-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
+                </div>
+                
+                {/* Smartphone Screen Content */}
+                <div className="relative h-[530px] w-full rounded-[30px] overflow-hidden bg-white text-[#1C2733] flex flex-col justify-between border border-slate-200">
+                  {/* Top Mobile Browser Bar */}
+                  <div className="bg-slate-100/90 border-b border-slate-200 px-3 py-1.5 flex items-center justify-between text-[10px] text-slate-500 font-medium">
+                    <span className="flex items-center gap-1 font-bold text-slate-700">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      riviera-stays.com
+                    </span>
+                    <span className="text-[9px] bg-white px-1.5 py-0.5 rounded text-slate-400">AA</span>
+                  </div>
+
+                  {/* Photo area */}
+                  <div className="relative h-56 w-full shrink-0">
+                    <Image
+                      src="/images/hospitality/guesthouse.webp"
+                      alt="Coastal guesthouse design concept"
+                      fill
+                      priority
+                      sizes="360px"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full text-[10px] font-extrabold text-[#1C2733] shadow-xs">
+                      Albanian Riviera
+                    </div>
+                    <div className="absolute bottom-3 left-3 right-3 text-white">
+                      <p className="text-[10px] font-bold text-[#F59E0B] uppercase tracking-wider">Independent Guesthouse</p>
+                      <h4 className="text-lg font-bold leading-tight">Stone Courtyard Suite</h4>
+                      <p className="text-[11px] text-slate-200 mt-0.5">€95 / night · Direct booking rate</p>
+                    </div>
+                  </div>
+
+                  {/* Room details & direct perks */}
+                  <div className="p-3.5 flex-1 flex flex-col justify-between text-xs space-y-2.5 bg-slate-50">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between text-slate-600 font-semibold text-[10px] border-b border-slate-200 pb-1.5">
+                        <span>34 m² · King Bed · Garden View</span>
+                        <span className="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">Breakfast Included</span>
+                      </div>
+                      <p className="text-slate-600 text-[11px] leading-relaxed line-clamp-3">
+                        Morning light over the stone patio, local olive grove views, and artisan breakfast. Direct booking perk: Complimentary bottle of chilled local white wine.
+                      </p>
+                    </div>
+
+                    {/* 1-Tap Direct Inquiry Button inside phone */}
+                    <div className="space-y-1.5 pt-1.5 border-t border-slate-200">
+                      <button 
+                        onClick={() => {
+                          setSelectedConcept('guesthouse');
+                          setActiveDemoRoomIndex(0);
+                          setDemoInquirySent(false);
+                          setConceptModalOpen(true);
+                        }}
+                        className="w-full py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                      >
+                        <PhoneCall className="w-3.5 h-3.5 text-[#F59E0B]" />
+                        <span>Book Direct via WhatsApp</span>
+                      </button>
+                      <p className="text-[9px] text-center text-slate-500 font-medium m-0">
+                        Tap to test interactive live demo
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom home bar indicator */}
+                <div className="w-28 h-1 bg-slate-600 rounded-full mx-auto mt-2.5" />
+              </div>
             </div>
 
+            {/* Right: Copy & Live Demo Trigger */}
             <div className="p-8 sm:p-12 flex flex-col justify-between">
               <div>
                 <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">
@@ -579,14 +724,14 @@ export default function HospitalityPage() {
                   do the talking.
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-5">
-                  Room-first browsing, generous photography, and a calm digital welcome. A fast-loading mobile presentation for a small coastal property.
+                  Room-first browsing, generous photography, and a calm digital welcome. Rendered in the realistic mobile frame so you can test how high-intent guests navigate and enquire directly.
                 </p>
 
                 {/* Concrete Specs */}
                 <div className="space-y-2.5 pt-1 pb-6 text-xs text-slate-700 font-medium border-y border-slate-100 mb-6">
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>Opens in under 1 second:</strong> Compressed photography eliminates drop-off on mobile roaming.</span>
+                    <span><strong>Opens in under 1 second:</strong> Compressed photography eliminates drop-off on mobile roaming networks.</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -594,7 +739,7 @@ export default function HospitalityPage() {
                   </div>
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>1-Tap direct enquiry:</strong> Opens WhatsApp or email pre-filled with the guest&apos;s chosen room.</span>
+                    <span><strong>1-Tap direct enquiry:</strong> Opens WhatsApp or email pre-filled with the guest&apos;s chosen room and dates.</span>
                   </div>
                 </div>
               </div>
@@ -604,11 +749,14 @@ export default function HospitalityPage() {
                 <button
                   onClick={() => {
                     setSelectedConcept('guesthouse');
+                    setActiveDemoRoomIndex(0);
+                    setDemoInquirySent(false);
                     setConceptModalOpen(true);
                   }}
-                  className="inline-flex items-center justify-center min-h-[46px] px-6 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs"
+                  className="inline-flex items-center justify-center min-h-[46px] px-6 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs gap-1.5"
                 >
-                  Explore this concept
+                  <span>▶ Try Live Demo Simulator</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </button>
 
                 {/* QR Code Scanner Card for Desktop */}
@@ -627,24 +775,24 @@ export default function HospitalityPage() {
                   </div>
                   <div className="text-[11px] leading-tight text-slate-500">
                     <strong className="block text-[#1C2733] font-bold">Scan to test on phone</strong>
-                    Verify real speed & UX
+                    Test live speed on your device
                   </div>
                 </div>
               </div>
 
               <p className="text-[11px] text-slate-400 mt-4 m-0">
-                Concept imagery · AI generated · No client affiliation
+                Interactive mockup & design concept · No client affiliation
               </p>
             </div>
           </div>
 
-          {/* 2 Complementary Concepts in 2-Column Grid */}
+          {/* 2 Complementary Concepts in 2-Column Grid with Demo Triggers */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* Concept 02: Lakeside Wine Estate */}
-            <article className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xs group">
+            <article className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs group">
               <div>
-                <div className="relative h-64 w-full rounded-xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
+                <div className="relative h-64 w-full rounded-2xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
                   <Image
                     src="/images/hospitality/savoria-wine-estate.jpg"
                     alt="Lake Ohrid boutique wine estate"
@@ -655,6 +803,9 @@ export default function HospitalityPage() {
                   <span className="absolute top-3 left-3 bg-[#1C2733]/90 text-white px-2.5 py-1 rounded text-xs font-bold">
                     Concept design · Lake Ohrid, North Macedonia
                   </span>
+                  <span className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-xs text-[#1C2733] font-bold text-[10px] px-2.5 py-1 rounded-full shadow-xs">
+                    Demo Simulator Ready
+                  </span>
                 </div>
 
                 <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
@@ -664,7 +815,7 @@ export default function HospitalityPage() {
                   Lakeside wine estate & rooms
                 </h4>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                  Balcony suites with lake views, organic breakfast details, and welcoming reserve bottle perks for guests who book direct. Combines property history with wine tasting reservation paths.
+                  Balcony suites with lake views, organic breakfast details, and welcoming reserve bottle perks for guests who book direct. Includes interactive wine tasting reservations.
                 </p>
               </div>
 
@@ -672,11 +823,13 @@ export default function HospitalityPage() {
                 <button
                   onClick={() => {
                     setSelectedConcept('wine-estate');
+                    setActiveDemoRoomIndex(0);
+                    setDemoInquirySent(false);
                     setConceptModalOpen(true);
                   }}
-                  className="px-4 py-2 border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors cursor-pointer"
+                  className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
                 >
-                  Explore concept
+                  <span>▶ Try Live Demo</span>
                 </button>
                 <button
                   onClick={() => {
@@ -697,9 +850,9 @@ export default function HospitalityPage() {
             </article>
 
             {/* Concept 03: Historic City Boutique Apartments */}
-            <article className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xs group">
+            <article className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs group">
               <div>
-                <div className="relative h-64 w-full rounded-xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
+                <div className="relative h-64 w-full rounded-2xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
                   <Image
                     src="/images/hospitality/urban-loft.jpg"
                     alt="Sarajevo historic boutique apartments"
@@ -709,6 +862,9 @@ export default function HospitalityPage() {
                   />
                   <span className="absolute top-3 left-3 bg-[#1C2733]/90 text-white px-2.5 py-1 rounded text-xs font-bold">
                     Concept design · Sarajevo, Bosnia
+                  </span>
+                  <span className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-xs text-[#1C2733] font-bold text-[10px] px-2.5 py-1 rounded-full shadow-xs">
+                    Demo Simulator Ready
                   </span>
                 </div>
 
@@ -727,11 +883,13 @@ export default function HospitalityPage() {
                 <button
                   onClick={() => {
                     setSelectedConcept('city-apartments');
+                    setActiveDemoRoomIndex(0);
+                    setDemoInquirySent(false);
                     setConceptModalOpen(true);
                   }}
-                  className="px-4 py-2 border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors cursor-pointer"
+                  className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
                 >
-                  Explore concept
+                  <span>▶ Try Live Demo</span>
                 </button>
                 <button
                   onClick={() => {
@@ -1410,68 +1568,293 @@ export default function HospitalityPage() {
       </footer>
 
       {/* ─────────────────────────────────────────────────────────────
-          13. INTERACTIVE CONCEPT DIALOG MODAL
+          13. INTERACTIVE LIVE CONCEPT DEMO & SIMULATOR MODAL
       ────────────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {conceptModalOpen && (
-          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-5">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setConceptModalOpen(false)}
-              className="absolute inset-0 bg-[#1C2733]/80 backdrop-blur-xs"
+              className="absolute inset-0 bg-[#1C2733]/85 backdrop-blur-xs"
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-[950px] bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 z-10 max-h-[90vh] overflow-y-auto shadow-2xl"
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="relative w-full max-w-[1020px] bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 z-10 max-h-[92vh] overflow-y-auto shadow-2xl space-y-6"
             >
-              <button
-                onClick={() => setConceptModalOpen(false)}
-                className="absolute right-4 top-4 text-2xl font-light text-[#1C2733] hover:text-[#F59E0B] p-2 cursor-pointer"
-                aria-label="Close"
-              >
-                ✕
-              </button>
+              {/* Modal Top Header */}
+              <div className="flex items-start justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>INTERACTIVE PROTOTYPE & LIVE MOBILE SIMULATOR</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-[#1C2733]">
+                    {conceptDatabase[selectedConcept].subtitle}
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {conceptDatabase[selectedConcept].destination} · Sub-800ms Edge Architecture
+                  </p>
+                </div>
+                <button
+                  onClick={() => setConceptModalOpen(false)}
+                  className="p-2 text-slate-400 hover:text-[#1C2733] hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
-                INTERACTIVE DESIGN CONCEPT · NOT A CLIENT PROJECT
-              </p>
+              {/* Concept Selector Tabs */}
+              <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-xl text-xs font-bold text-[#1C2733]">
+                <button
+                  onClick={() => {
+                    setSelectedConcept('guesthouse');
+                    setActiveDemoRoomIndex(0);
+                    setDemoInquirySent(false);
+                  }}
+                  className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                    selectedConcept === 'guesthouse'
+                      ? 'bg-[#1C2733] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#1C2733] hover:bg-white/70'
+                  }`}
+                >
+                  <span>🌊</span>
+                  <span>Albanian Riviera (Guesthouse)</span>
+                </button>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div className="relative h-64 sm:h-[390px] rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
-                  <Image
-                    src={conceptDetails[selectedConcept].image}
-                    alt={conceptDetails[selectedConcept].alt}
-                    fill
-                    sizes="500px"
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 bg-[#1C2733]/90 text-white text-[11px] font-bold px-2.5 py-1 rounded">
-                    {conceptDetails[selectedConcept].tag}
+                <button
+                  onClick={() => {
+                    setSelectedConcept('wine-estate');
+                    setActiveDemoRoomIndex(0);
+                    setDemoInquirySent(false);
+                  }}
+                  className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                    selectedConcept === 'wine-estate'
+                      ? 'bg-[#1C2733] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#1C2733] hover:bg-white/70'
+                  }`}
+                >
+                  <span>🍇</span>
+                  <span>Lake Ohrid (Wine Estate)</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setSelectedConcept('city-apartments');
+                    setActiveDemoRoomIndex(0);
+                    setDemoInquirySent(false);
+                  }}
+                  className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                    selectedConcept === 'city-apartments'
+                      ? 'bg-[#1C2733] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#1C2733] hover:bg-white/70'
+                  }`}
+                >
+                  <span>🏛️</span>
+                  <span>Sarajevo (City Lofts)</span>
+                </button>
+              </div>
+
+              {/* Interactive Prototype Simulator Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                {/* Left (7 cols): The Live Mockup Phone */}
+                <div className="lg:col-span-7 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200">
+                  <div className="flex items-center justify-between mb-3 text-xs">
+                    <span className="font-bold text-[#1C2733] flex items-center gap-1.5">
+                      <Smartphone className="w-4 h-4 text-[#F59E0B]" />
+                      <span>Live Screen Preview</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">
+                      https://{conceptDatabase[selectedConcept].url}
+                    </span>
+                  </div>
+
+                  {/* Room Switcher Sub-tabs */}
+                  <div className="flex gap-2 mb-3">
+                    {conceptDatabase[selectedConcept].rooms.map((room, idx) => (
+                      <button
+                        key={room.name}
+                        onClick={() => {
+                          setActiveDemoRoomIndex(idx);
+                          setDemoInquirySent(false);
+                        }}
+                        className={`flex-1 py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all text-center cursor-pointer border ${
+                          activeDemoRoomIndex === idx
+                            ? 'bg-white border-[#1C2733] text-[#1C2733] shadow-xs'
+                            : 'bg-slate-200/70 border-transparent text-slate-600 hover:bg-white'
+                        }`}
+                      >
+                        Room {idx + 1}: {room.name.split(' ')[0]} {room.name.split(' ')[1] || ''}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Mockup Card Screen */}
+                  <div className="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+                    {/* Room Photo */}
+                    <div className="relative h-60 w-full">
+                      <Image
+                        src={conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].image}
+                        alt={conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].name}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 500px"
+                        className="object-cover"
+                      />
+                      <div className="absolute top-3 left-3 bg-[#1C2733]/90 text-white text-[10px] font-bold px-2.5 py-1 rounded">
+                        {conceptDatabase[selectedConcept].destination}
+                      </div>
+                      <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-lg text-xs font-black text-[#1C2733] shadow-xs">
+                        Direct €{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].rate}/night
+                        <span className="text-[10px] text-slate-400 font-normal line-through ml-1.5">
+                          OTA €{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].otaRate}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Room Details & Description */}
+                    <div className="p-4 space-y-3">
+                      <div>
+                        <h4 className="text-base font-bold text-[#1C2733]">
+                          {conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].name}
+                        </h4>
+                        <div className="flex flex-wrap gap-2 text-[11px] text-slate-600 font-medium mt-1">
+                          <span className="bg-slate-100 px-2 py-0.5 rounded">{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].size}</span>
+                          <span className="bg-slate-100 px-2 py-0.5 rounded">{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].bed}</span>
+                          <span className="bg-slate-100 px-2 py-0.5 rounded">{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].view}</span>
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].description}
+                      </p>
+
+                      <div className="p-2.5 bg-amber-50/70 border border-amber-200/80 rounded-xl flex items-center gap-2 text-xs text-amber-900 font-medium">
+                        <Sparkles className="w-4 h-4 text-[#F59E0B] shrink-0" />
+                        <span><strong>Direct Booking Perk:</strong> {conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].perk}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase">
-                    {conceptDetails[selectedConcept].subtitle}
-                  </p>
-                  <h2 className="text-2xl sm:text-3xl font-black text-[#1C2733] leading-tight">
-                    {conceptDetails[selectedConcept].title}
-                  </h2>
-                  <p className="text-sm text-slate-700 font-medium leading-relaxed">
-                    {conceptDetails[selectedConcept].lead}
-                  </p>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {conceptDetails[selectedConcept].description}
-                  </p>
-                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600">
-                    {conceptDetails[selectedConcept].specs}
+                {/* Right (5 cols): Interactive Test Controls */}
+                <div className="lg:col-span-5 space-y-5">
+                  <div>
+                    <h4 className="text-base font-bold text-[#1C2733] mb-1">
+                      Test the Booking Flow
+                    </h4>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Adjust nights and guests to test how direct rates and pre-filled WhatsApp hand-offs operate.
+                    </p>
                   </div>
-                  <div className="pt-2 flex items-center gap-3">
+
+                  {/* Interactive Selector */}
+                  <div className="grid grid-cols-2 gap-3 p-3.5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <div>
+                      <label className="text-[11px] font-bold text-[#1C2733] block mb-1.5 flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-[#F59E0B]" />
+                        <span>Nights: {demoNights}</span>
+                      </label>
+                      <div className="flex gap-1">
+                        {[1, 2, 3, 5].map(n => (
+                          <button
+                            key={n}
+                            onClick={() => {
+                              setDemoNights(n);
+                              setDemoInquirySent(false);
+                            }}
+                            className={`flex-1 py-1 text-xs font-bold rounded cursor-pointer ${
+                              demoNights === n ? 'bg-[#1C2733] text-white' : 'bg-white text-slate-700 hover:bg-slate-200'
+                            }`}
+                          >
+                            {n}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-[11px] font-bold text-[#1C2733] block mb-1.5 flex items-center gap-1">
+                        <Users className="w-3.5 h-3.5 text-[#F59E0B]" />
+                        <span>Guests: {demoGuests}</span>
+                      </label>
+                      <div className="flex gap-1">
+                        {[1, 2, 3].map(g => (
+                          <button
+                            key={g}
+                            onClick={() => {
+                              setDemoGuests(g);
+                              setDemoInquirySent(false);
+                            }}
+                            className={`flex-1 py-1 text-xs font-bold rounded cursor-pointer ${
+                              demoGuests === g ? 'bg-[#1C2733] text-white' : 'bg-white text-slate-700 hover:bg-slate-200'
+                            }`}
+                          >
+                            {g}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Live Cost & Savings Readout */}
+                  <div className="p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-1.5">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-600 font-medium">Direct Booking Total:</span>
+                      <strong className="text-base text-emerald-800 font-extrabold">
+                        €{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].rate * demoNights}
+                      </strong>
+                    </div>
+                    <div className="flex justify-between items-center text-[11px] text-slate-500">
+                      <span>OTA Estimated Total (15-20% fee):</span>
+                      <span className="line-through">
+                        €{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].otaRate * demoNights}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-emerald-700 font-semibold pt-1 border-t border-emerald-200/60 m-0">
+                      ✓ Guest saves €{(conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].otaRate - conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].rate) * demoNights} while you pay €0 in OTA commissions.
+                    </p>
+                  </div>
+
+                  {/* Simulated WhatsApp Lead Bubble */}
+                  <div className="space-y-2">
+                    <span className="text-xs font-bold text-[#1C2733] flex items-center gap-1.5">
+                      <PhoneCall className="w-3.5 h-3.5 text-[#F59E0B]" />
+                      <span>Simulated WhatsApp Inquiry Message</span>
+                    </span>
+                    <div className="p-3.5 bg-[#E8F8F0] border border-emerald-200/80 rounded-2xl text-xs text-slate-800 leading-relaxed font-sans shadow-2xs">
+                      <p className="m-0">
+                        &quot;Hi! I&apos;d like to inquire about booking the <strong>{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].name}</strong> ({conceptDatabase[selectedConcept].destination}) for <strong>{demoNights} nights</strong> ({demoGuests} guests). We saw the direct booking rate on your website with <em>{conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].perk}</em>. Could you please confirm availability?&quot;
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => setDemoInquirySent(true)}
+                      className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-xs flex items-center justify-center gap-1.5"
+                    >
+                      <Check className="w-4 h-4" />
+                      <span>Test WhatsApp Lead Hand-off</span>
+                    </button>
+
+                    {demoInquirySent && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="p-3 bg-white border border-emerald-300 rounded-xl text-xs text-emerald-900 font-semibold shadow-xs"
+                      >
+                        ✓ Simulated hand-off triggered! In production, this opens the host&apos;s WhatsApp/Viber directly with this exact message pre-filled. No lost guests, no complicated forms.
+                      </motion.div>
+                    )}
+                  </div>
+
+                  {/* Modal CTA Footer */}
+                  <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
                     <a
                       href="#review"
                       onClick={() => {
@@ -1479,15 +1862,16 @@ export default function HospitalityPage() {
                         setFormData(prev => ({
                           ...prev,
                           request: 'A website for my hotel',
-                          message: `Interested in a design direction like the ${conceptDetails[selectedConcept].subtitle}.`
+                          message: `Interested in a bespoke website inspired by the ${conceptDatabase[selectedConcept].subtitle} concept.`
                         }));
                       }}
-                      className="inline-flex items-center justify-center px-6 py-3.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg font-bold text-xs transition-colors shadow-xs cursor-pointer"
+                      className="w-full py-3.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-all cursor-pointer text-center shadow-xs"
                     >
-                      Ask about a design like this
+                      I want a website like this for my property
                     </a>
                   </div>
                 </div>
+
               </div>
             </motion.div>
           </div>
