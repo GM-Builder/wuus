@@ -689,20 +689,16 @@ export default function HospitalityPage() {
 
                     {/* 1-Tap Direct Inquiry Button inside phone */}
                     <div className="space-y-1.5 pt-1.5 border-t border-slate-200">
-                      <button 
-                        onClick={() => {
-                          setSelectedConcept('guesthouse');
-                          setActiveDemoRoomIndex(0);
-                          setDemoInquirySent(false);
-                          setConceptModalOpen(true);
-                        }}
+                      <Link
+                        href="/hospitality/demo/seaside-guesthouse"
+                        target="_blank"
                         className="w-full py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
                       >
                         <PhoneCall className="w-3.5 h-3.5 text-[#F59E0B]" />
-                        <span>Book Direct via WhatsApp</span>
-                      </button>
+                        <span>Open Live Demo Page ↗</span>
+                      </Link>
                       <p className="text-[9px] text-center text-slate-500 font-medium m-0">
-                        Tap to test interactive live demo
+                        Tap to open full working live site
                       </p>
                     </div>
                   </div>
@@ -745,7 +741,16 @@ export default function HospitalityPage() {
               </div>
 
               {/* Action and QR Code Scanner */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <Link
+                  href="/hospitality/demo/seaside-guesthouse"
+                  target="_blank"
+                  className="inline-flex items-center justify-center min-h-[46px] px-6 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-all cursor-pointer shadow-xs gap-2"
+                >
+                  <span>Open Live Website Demo</span>
+                  <ArrowUpRight className="w-4 h-4 text-[#F59E0B]" />
+                </Link>
+
                 <button
                   onClick={() => {
                     setSelectedConcept('guesthouse');
@@ -753,10 +758,9 @@ export default function HospitalityPage() {
                     setDemoInquirySent(false);
                     setConceptModalOpen(true);
                   }}
-                  className="inline-flex items-center justify-center min-h-[46px] px-6 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs gap-1.5"
+                  className="inline-flex items-center justify-center min-h-[46px] px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer gap-1.5"
                 >
-                  <span>▶ Try Live Demo Simulator</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Quick Simulator</span>
                 </button>
 
                 {/* QR Code Scanner Card for Desktop */}
@@ -820,17 +824,27 @@ export default function HospitalityPage() {
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                <button
-                  onClick={() => {
-                    setSelectedConcept('wine-estate');
-                    setActiveDemoRoomIndex(0);
-                    setDemoInquirySent(false);
-                    setConceptModalOpen(true);
-                  }}
-                  className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
-                >
-                  <span>▶ Try Live Demo</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/hospitality/demo/lakeside-wine-estate"
+                    target="_blank"
+                    className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+                  >
+                    <span>Open Live Demo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#F59E0B]" />
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setSelectedConcept('wine-estate');
+                      setActiveDemoRoomIndex(0);
+                      setDemoInquirySent(false);
+                      setConceptModalOpen(true);
+                    }}
+                    className="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                  >
+                    <span>Simulator</span>
+                  </button>
+                </div>
                 <button
                   onClick={() => {
                     setFormData(prev => ({ 
@@ -880,17 +894,27 @@ export default function HospitalityPage() {
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                <button
-                  onClick={() => {
-                    setSelectedConcept('city-apartments');
-                    setActiveDemoRoomIndex(0);
-                    setDemoInquirySent(false);
-                    setConceptModalOpen(true);
-                  }}
-                  className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
-                >
-                  <span>▶ Try Live Demo</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/hospitality/demo/city-apartments"
+                    target="_blank"
+                    className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+                  >
+                    <span>Open Live Demo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#F59E0B]" />
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setSelectedConcept('city-apartments');
+                      setActiveDemoRoomIndex(0);
+                      setDemoInquirySent(false);
+                      setConceptModalOpen(true);
+                    }}
+                    className="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                  >
+                    <span>Simulator</span>
+                  </button>
+                </div>
                 <button
                   onClick={() => {
                     setFormData(prev => ({ 
@@ -1601,13 +1625,23 @@ export default function HospitalityPage() {
                     {conceptDatabase[selectedConcept].destination} · Sub-800ms Edge Architecture
                   </p>
                 </div>
-                <button
-                  onClick={() => setConceptModalOpen(false)}
-                  className="p-2 text-slate-400 hover:text-[#1C2733] hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
-                  aria-label="Close"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/hospitality/demo/${selectedConcept === 'guesthouse' ? 'seaside-guesthouse' : selectedConcept === 'wine-estate' ? 'lakeside-wine-estate' : 'city-apartments'}`}
+                    target="_blank"
+                    className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
+                  >
+                    <span>Open Full Page Live Demo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#F59E0B]" />
+                  </Link>
+                  <button
+                    onClick={() => setConceptModalOpen(false)}
+                    className="p-2 text-slate-400 hover:text-[#1C2733] hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
+                    aria-label="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
               {/* Concept Selector Tabs */}
@@ -1834,13 +1868,23 @@ export default function HospitalityPage() {
                       </p>
                     </div>
 
-                    <button
-                      onClick={() => setDemoInquirySent(true)}
-                      className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-xs flex items-center justify-center gap-1.5"
-                    >
-                      <Check className="w-4 h-4" />
-                      <span>Test WhatsApp Lead Hand-off</span>
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <a
+                        href={`https://wa.me/6281383521750?text=${encodeURIComponent(`Hi! I'd like to inquire about booking the ${conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].name} (${conceptDatabase[selectedConcept].destination}) for ${demoNights} nights (${demoGuests} guests). We saw the direct booking rate on your website with ${conceptDatabase[selectedConcept].rooms[activeDemoRoomIndex].perk}. Could you please confirm availability?`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-xs flex items-center justify-center gap-1.5 text-center"
+                      >
+                        <PhoneCall className="w-3.5 h-3.5" />
+                        <span>Send Real WhatsApp Message</span>
+                      </a>
+                      <button
+                        onClick={() => setDemoInquirySent(true)}
+                        className="py-3 px-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                      >
+                        Simulate
+                      </button>
+                    </div>
 
                     {demoInquirySent && (
                       <motion.div
@@ -1848,7 +1892,7 @@ export default function HospitalityPage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="p-3 bg-white border border-emerald-300 rounded-xl text-xs text-emerald-900 font-semibold shadow-xs"
                       >
-                        ✓ Simulated hand-off triggered! In production, this opens the host&apos;s WhatsApp/Viber directly with this exact message pre-filled. No lost guests, no complicated forms.
+                        ✓ Simulated hand-off triggered! In production, this opens the host&apos;s WhatsApp/Viber directly with this exact message pre-filled.
                       </motion.div>
                     )}
                   </div>
