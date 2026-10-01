@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Realistic Hospitality Rate Architecture**: Structured genuine European boutique rate tiers: *Room Only Direct* (flexible room-only) vs *Bed & Breakfast Direct / Signature Stay* (includes daily homemade artisan breakfast, chilled reserve wine, priority arrival, and 0% OTA commission savings).
   - **Dignified Direct Host Concierge**: Replaced gimmicky "AI Concierge" with a refined *Direct Host Concierge* widget answering authentic guest queries (free shaded courtyard parking, late keybox arrival, breakfast hours, direct wine perks).
   - **Curated Local Guide Tiles**: Transformed flat gray cards into structured editorial insider guides categorized by `COVE`, `DINING`, `HERITAGE`, `BAZAAR`, and `CAFE` with walking distances.
-  - **Editorial Reservation Voucher**: Multi-step checkout drawer finishes with a crisp receipt-style voucher, 0% prepayment pay-on-arrival terms, booking reference, and pre-formatted 1-click WhatsApp host dispatch.
+  - **1:1 Mockup to Live Demo Full Alignment**: Synchronized the smartphone device mockup on `/hospitality` to render the actual mobile layout of *Villa Mare Riviera Guesthouse* (`villamare-riviera.com`), matching hotel header, hero rating (`9.8 Exceptional`), date availability selector, exact room photography, and direct rate plans 1:1 with the live demo. Updated `conceptDatabase` and all concept cards (Savoria Estate & Baščaršija Heritage Lofts) for unified naming and pricing consistency across landing page, interactive simulator, and live demo pages.
 
 ## [0.2.7] - 2026-10-01
 

@@ -39,102 +39,102 @@ export default function HospitalityPage() {
     guesthouse: {
       id: 'guesthouse' as const,
       tag: "Concept design · Albanian Riviera",
-      destination: "Albanian Riviera, Albania",
+      destination: "Himara, Albanian Riviera · Albania",
       title: "A quiet place by the sea.",
-      subtitle: "A Seaside Guesthouse",
+      subtitle: "Villa Mare Riviera Guesthouse",
       overview: "Designed for small boutique coastal properties. Room-first browsing, generous natural photography, and a calm digital welcome. High-intent guests can see terrace views, bed dimensions, and send a direct booking inquiry via WhatsApp in seconds.",
       badge: "Albanian Riviera",
-      url: "riviera-stays.com",
+      url: "villamare-riviera.com",
       rooms: [
         {
           name: "Stone Courtyard Suite",
-          rate: 95,
-          otaRate: 115,
+          rate: 85,
+          otaRate: 105,
           size: "34 m²",
-          bed: "King Bed",
-          view: "Garden & Patio View",
-          perk: "Breakfast & Chilled White Wine Included",
-          image: "/images/hospitality/guesthouse.webp",
-          description: "Morning light over the stone patio, local olive grove views, and artisan breakfast. Built with native limestone and cool linen."
+          bed: "King Bed (180×200cm)",
+          view: "Olive Garden & Private Patio",
+          perk: "Artisan Breakfast & Welcome Chilled Wine",
+          image: "/images/hospitality/stone-suite-main.jpg",
+          description: "Native white limestone walls, arched window overlooking centuries-old olive trees and azure sea. Naturally cool and calm."
         },
         {
           name: "Panoramic Sea Terrace Studio",
-          rate: 135,
-          otaRate: 165,
+          rate: 120,
+          otaRate: 145,
           size: "48 m²",
           bed: "King Bed + Daybed",
-          view: "Direct Ionian Sea View",
-          perk: "Sunset Terrace, Breakfast & Late Checkout",
-          image: "/images/hospitality/coastal-retreat.jpg",
-          description: "Unobstructed sea views from your private sun terrace. Features an outdoor shower, espresso bar, and artisan Mediterranean breakfast."
+          view: "Direct Ionian Sea Sunset View",
+          perk: "Private Sunset Sunbeds, Breakfast & Late Checkout",
+          image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85",
+          description: "Unobstructed horizon views over the Ionian Sea and Corfu island. Watch golden hour colors from private teak loungers."
         }
       ]
     },
     'wine-estate': {
       id: 'wine-estate' as const,
       tag: "Concept design · Lake Ohrid, North Macedonia",
-      destination: "Lake Ohrid, North Macedonia",
+      destination: "Lake Ohrid · North Macedonia",
       title: "Heritage suites amongst vineyards.",
-      subtitle: "Lakeside Wine Estate with Rooms",
+      subtitle: "Savoria Estate & Vineyard Suites",
       overview: "Designed for an independent boutique wine estate. Features full-screen photography optimized for mobile roaming networks, transparent room specs, tasting hours, and a direct inquiry button that connects high-intent travelers straight to the host.",
       badge: "Lake Ohrid, North Macedonia",
       url: "savoria-estate.com",
       rooms: [
         {
           name: "Heritage Balcony Suite",
-          rate: 110,
-          otaRate: 135,
+          rate: 95,
+          otaRate: 120,
           size: "42 m²",
-          bed: "King Bed",
-          view: "Lake Ohrid & Vineyards",
-          perk: "Welcome Bottle of Reserve Vranec + Vineyard Breakfast",
-          image: "/images/hospitality/savoria-wine-estate.jpg",
-          description: "Private vineyard terrace, stone fireplace, and organic breakfast served daily. Direct bookings receive a cellar tour and reserve tasting."
+          bed: "King Bed (180×200cm)",
+          view: "Lake Ohrid & Terraced Vineyards",
+          perk: "Welcome Reserve Wine, Cellar Tour & Vineyard Breakfast",
+          image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85",
+          description: "Exposed oak beams, private balcony overlooking the calm lake, and a crackling wood fireplace for cozy evenings."
         },
         {
-          name: "Cellar Estate Loft",
-          rate: 150,
-          otaRate: 185,
+          name: "Cellar Master Loft",
+          rate: 135,
+          otaRate: 165,
           size: "55 m²",
-          bed: "Super King Bed",
-          view: "Historic Winery Courtyard",
-          perk: "Private Wine Cellar Tour & Extended Breakfast",
-          image: "/images/hospitality/palazzo-suites.jpg",
-          description: "Vaulted timber ceilings, vintage copper tub, and private access to the estate library and tasting barrel room."
+          bed: "Super King Bed (200×200cm)",
+          view: "Historic Winery Courtyard & Cellars",
+          perk: "Private Barrel Room Tasting & Late Checkout",
+          image: "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=85",
+          description: "Located above ancient aging cellars with freestanding copper soaking tub, lounge seating, and sommelier service."
         }
       ]
     },
     'city-apartments': {
       id: 'city-apartments' as const,
       tag: "Concept design · Sarajevo, Bosnia and Herzegovina",
-      destination: "Sarajevo Old Town, Bosnia",
+      destination: "Sarajevo Old Town · Bosnia and Herzegovina",
       title: "Old town lofts & boutique living.",
-      subtitle: "Historic City Apartments",
+      subtitle: "Baščaršija Heritage Lofts",
       overview: "Designed for city apartments and urban boutique stays. Guests can compare unit sizes on a single mobile screen, view key amenities and parking details, and receive automated check-in and keycode directions directly on their WhatsApp or Viber.",
       badge: "Sarajevo Old Town",
       url: "sarajevo-lofts.com",
       rooms: [
         {
           name: "Historic Penthouse Loft",
-          rate: 85,
-          otaRate: 105,
+          rate: 75,
+          otaRate: 95,
           size: "40 m²",
-          bed: "Queen Bed",
-          view: "Sarajevo Old Town Rooftops",
-          perk: "24/7 Keyless Check-in & Artisan Bosnian Coffee",
-          image: "/images/hospitality/urban-loft.jpg",
-          description: "Exposed brick, skylight views over old town minarets, high-speed fiber internet, and dedicated workstation."
+          bed: "Queen Bed (160×200cm)",
+          view: "Old Town Minarets & Hillside Rooftops",
+          perk: "24/7 Keyless Check-in, Coffee Set & Fast Fiber",
+          image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85",
+          description: "Cathedral ceiling with skylights framing the historic minarets. 300 Mbps dedicated fiber Wi-Fi and workstation."
         },
         {
-          name: "Atelier Studio Suite",
-          rate: 70,
-          otaRate: 88,
+          name: "Atelier Courtyard Studio",
+          rate: 60,
+          otaRate: 75,
           size: "30 m²",
-          bed: "Double Bed",
-          view: "Quiet Courtyard Garden",
-          perk: "Contactless Check-in & Local Neighborhood Guide",
-          image: "/images/hospitality/mobile-stay-ui.jpg",
-          description: "Minimalist Scandinavian-Balkan aesthetic, bespoke oak furniture, walk-in rain shower, and secure keybox entry."
+          bed: "Double Bed (150×200cm)",
+          view: "Quiet Inner Courtyard Garden",
+          perk: "Peaceful Courtyard, Neighborhood Map & Espresso",
+          image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=85",
+          description: "Peaceful garden sanctuary tucked behind the main cobblestone bazaar. Minimalist Scandinavian-Balkan oak furnishings."
         }
       ]
     }
@@ -640,73 +640,176 @@ export default function HospitalityPage() {
             <div className="p-6 sm:p-10 bg-slate-50 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-200">
               <div className="relative w-full max-w-[320px] sm:max-w-[340px] bg-[#141C24] rounded-[44px] p-3 shadow-2xl border-4 border-slate-700/80">
                 {/* Speaker & Dynamic Notch */}
-                <div className="w-24 h-4 bg-[#0F1720] rounded-full mx-auto mb-2.5 flex items-center justify-center">
+                <div className="w-24 h-4 bg-[#0F1720] rounded-full mx-auto mb-2 flex items-center justify-center">
                   <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800" />
                 </div>
                 
                 {/* Smartphone Screen Content */}
-                <div className="relative h-[530px] w-full rounded-[30px] overflow-hidden bg-white text-[#1C2733] flex flex-col justify-between border border-slate-200">
+                <div className="relative h-[535px] w-full rounded-[28px] overflow-hidden bg-white text-[#1C2733] flex flex-col border border-slate-200">
                   {/* Top Mobile Browser Bar */}
-                  <div className="bg-slate-100/90 border-b border-slate-200 px-3 py-1.5 flex items-center justify-between text-[10px] text-slate-500 font-medium">
+                  <div className="bg-slate-100/95 border-b border-slate-200 px-3 py-1.5 flex items-center justify-between text-[10px] text-slate-500 font-medium shrink-0">
                     <span className="flex items-center gap-1 font-bold text-slate-700">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      riviera-stays.com
+                      villamare-riviera.com
                     </span>
-                    <span className="text-[9px] bg-white px-1.5 py-0.5 rounded text-slate-400">AA</span>
+                    <span className="text-[9px] bg-white px-1.5 py-0.5 rounded text-slate-400 font-semibold border border-slate-200">SSL</span>
                   </div>
 
-                  {/* Photo area */}
-                  <div className="relative h-56 w-full shrink-0">
-                    <Image
-                      src="/images/hospitality/guesthouse.webp"
-                      alt="Coastal guesthouse design concept"
-                      fill
-                      priority
-                      sizes="360px"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
-                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full text-[10px] font-extrabold text-[#1C2733] shadow-xs">
-                      Albanian Riviera
-                    </div>
-                    <div className="absolute bottom-3 left-3 right-3 text-white">
-                      <p className="text-[10px] font-bold text-[#F59E0B] uppercase tracking-wider">Independent Guesthouse</p>
-                      <h4 className="text-lg font-bold leading-tight">Stone Courtyard Suite</h4>
-                      <p className="text-[11px] text-slate-200 mt-0.5">€95 / night · Direct booking rate</p>
-                    </div>
-                  </div>
-
-                  {/* Room details & direct perks */}
-                  <div className="p-3.5 flex-1 flex flex-col justify-between text-xs space-y-2.5 bg-slate-50">
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between text-slate-600 font-semibold text-[10px] border-b border-slate-200 pb-1.5">
-                        <span>34 m² · King Bed · Garden View</span>
-                        <span className="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">Breakfast Included</span>
+                  {/* Scrollable Mobile Page Viewport */}
+                  <div className="flex-1 overflow-y-auto overflow-x-hidden text-xs space-y-3.5 pb-3">
+                    
+                    {/* 1. Mobile Hotel Header */}
+                    <div className="bg-white px-3 py-2 border-b border-slate-100 flex items-center justify-between sticky top-0 z-20">
+                      <div className="flex flex-col">
+                        <span className="font-bold text-[#1C2733] text-[13px] leading-tight">Villa Mare</span>
+                        <span className="text-[8px] uppercase tracking-wider text-slate-400 font-semibold">Boutique Guesthouse</span>
                       </div>
-                      <p className="text-slate-600 text-[11px] leading-relaxed line-clamp-3">
-                        Morning light over the stone patio, local olive grove views, and artisan breakfast. Direct booking perk: Complimentary bottle of chilled local white wine.
-                      </p>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded font-bold text-slate-700">EN</span>
+                        <Link
+                          href="/hospitality/demo/seaside-guesthouse#rooms"
+                          target="_blank"
+                          className="bg-[#1C2733] text-white text-[9px] font-bold px-2 py-1 rounded"
+                        >
+                          Rooms
+                        </Link>
+                      </div>
                     </div>
 
-                    {/* 1-Tap Direct Inquiry Button inside phone */}
-                    <div className="space-y-1.5 pt-1.5 border-t border-slate-200">
-                      <Link
-                        href="/hospitality/demo/seaside-guesthouse"
-                        target="_blank"
-                        className="w-full py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
-                      >
-                        <PhoneCall className="w-3.5 h-3.5 text-[#F59E0B]" />
-                        <span>Open Live Demo Page ↗</span>
-                      </Link>
-                      <p className="text-[9px] text-center text-slate-500 font-medium m-0">
-                        Tap to open full working live site
-                      </p>
+                    {/* 2. Mobile Hero Overview */}
+                    <div className="px-3 space-y-2">
+                      <div>
+                        <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase block">
+                          Himara, Albanian Riviera · Albania
+                        </span>
+                        <h4 className="text-base font-bold text-[#1C2733] leading-tight">
+                          Villa Mare Riviera Guesthouse
+                        </h4>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="bg-[#1C2733] text-white text-[9px] font-black px-1.5 py-0.5 rounded">
+                            9.8
+                          </span>
+                          <span className="text-[10px] text-slate-600 font-semibold">
+                            Exceptional · 142 reviews
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Hero Image */}
+                      <div className="relative h-44 w-full rounded-xl overflow-hidden shadow-2xs">
+                        <Image
+                          src="/images/hospitality/guesthouse.webp"
+                          alt="Villa Mare Riviera Guesthouse"
+                          fill
+                          priority
+                          sizes="340px"
+                          className="object-cover"
+                        />
+                        <span className="absolute bottom-2 left-2 bg-white/95 backdrop-blur-xs text-[#1C2733] font-bold text-[9px] px-2 py-0.5 rounded-md shadow-2xs">
+                          120m from pebble beach
+                        </span>
+                      </div>
                     </div>
+
+                    {/* 3. Availability Search Bar */}
+                    <div className="px-3">
+                      <div className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 space-y-2">
+                        <div className="grid grid-cols-2 gap-2 text-[10px]">
+                          <div className="bg-white p-1.5 rounded border border-slate-200">
+                            <span className="text-slate-400 block font-medium">Dates (3 Nights)</span>
+                            <strong className="text-[#1C2733]">Oct 12 → 15</strong>
+                          </div>
+                          <div className="bg-white p-1.5 rounded border border-slate-200">
+                            <span className="text-slate-400 block font-medium">Guests</span>
+                            <strong className="text-[#1C2733]">2 Adults · 1 Room</strong>
+                          </div>
+                        </div>
+                        <Link
+                          href="/hospitality/demo/seaside-guesthouse#rooms"
+                          target="_blank"
+                          className="w-full py-1.5 bg-[#1C2733] text-white text-[10px] font-bold rounded flex items-center justify-center gap-1"
+                        >
+                          <span>Check Direct Rates</span>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* 4. Real Room Card: Stone Courtyard Suite */}
+                    <div className="px-3 space-y-2">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-1">
+                        <strong className="text-xs font-bold text-[#1C2733]">Featured Suite</strong>
+                        <span className="text-[9px] text-emerald-700 font-bold">0% OTA Commission</span>
+                      </div>
+
+                      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xs">
+                        <div className="relative h-32 w-full">
+                          <Image
+                            src="/images/hospitality/stone-suite-main.jpg"
+                            alt="Stone Courtyard Suite"
+                            fill
+                            sizes="320px"
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="p-2.5 space-y-1.5">
+                          <div>
+                            <h5 className="font-bold text-xs text-[#1C2733] m-0">Stone Courtyard Suite</h5>
+                            <span className="text-[9px] text-slate-500 font-medium">
+                              34 m² · King Bed · Olive Garden & Patio
+                            </span>
+                          </div>
+
+                          {/* Rate Box */}
+                          <div className="bg-slate-50 p-2 rounded-lg border border-slate-200/80 space-y-1">
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-[10px] text-[#1C2733]">Bed & Breakfast Direct</span>
+                              <span className="text-[8px] bg-[#1C2733] text-white font-bold px-1.5 py-0.5 rounded">
+                                Recommended
+                              </span>
+                            </div>
+                            <div className="flex items-baseline justify-between">
+                              <span className="text-slate-400 line-through text-[9px]">OTA: €115</span>
+                              <div className="flex items-baseline gap-1">
+                                <span className="font-bold text-sm text-[#1C2733]">€95</span>
+                                <span className="text-[9px] text-slate-500">/ night</span>
+                              </div>
+                            </div>
+                            <span className="text-[9px] font-semibold text-emerald-800 block">
+                              ✓ Save €60 direct (3 nights)
+                            </span>
+                            <ul className="text-[9px] text-slate-600 space-y-0.5 pt-0.5 m-0 list-none pl-0">
+                              <li>• Daily homemade artisan breakfast included</li>
+                              <li>• Chilled local reserve white wine on arrival</li>
+                              <li>• Pay on arrival (Free cancellation)</li>
+                            </ul>
+                          </div>
+
+                          <Link
+                            href="/hospitality/demo/seaside-guesthouse"
+                            target="_blank"
+                            className="w-full py-2 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold rounded-lg text-[10px] flex items-center justify-center gap-1 transition-colors"
+                          >
+                            <span>Select & Reserve Direct ↗</span>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 5. Mobile Host Story Snippet */}
+                    <div className="px-3 pb-1">
+                      <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-[10px] space-y-1">
+                        <strong className="block text-[#1C2733] font-bold">Nikolin & Elena · Caretakers</strong>
+                        <p className="text-slate-600 leading-relaxed m-0 italic">
+                          &ldquo;We restored our family’s 19th-century stone estate so travelers could experience authentic coast hospitality.&rdquo;
+                        </p>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
                 {/* Bottom home bar indicator */}
-                <div className="w-28 h-1 bg-slate-600 rounded-full mx-auto mt-2.5" />
+                <div className="w-28 h-1 bg-slate-600 rounded-full mx-auto mt-2" />
               </div>
             </div>
 
@@ -714,29 +817,28 @@ export default function HospitalityPage() {
             <div className="p-8 sm:p-12 flex flex-col justify-between">
               <div>
                 <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">
-                  01 · A SEASIDE GUESTHOUSE
+                  01 · ALBANIAN RIVIERA (FLAGSHIP DEMO)
                 </p>
                 <h3 className="text-3xl sm:text-4xl font-bold text-[#1C2733] mb-4">
-                  Let the place<br />
-                  do the talking.
+                  Villa Mare Riviera Guesthouse
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-5">
-                  Room-first browsing, generous photography, and a calm digital welcome. Rendered in the realistic mobile frame so you can test how high-intent guests navigate and enquire directly.
+                  Room-first browsing, generous photography, and a calm digital welcome. What you see inside this smartphone mockup is the exact mobile view of the live website—down to the limestone suite photography, direct rates, and 0% OTA fee calculation.
                 </p>
 
                 {/* Concrete Specs */}
                 <div className="space-y-2.5 pt-1 pb-6 text-xs text-slate-700 font-medium border-y border-slate-100 mb-6">
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>Opens in under 1 second:</strong> Compressed photography eliminates drop-off on mobile roaming networks.</span>
+                    <span><strong>100% Identical to Live Demo:</strong> Same property name, same room photos, and exact matching direct rate plans.</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>Room details on one screen:</strong> Bed dimensions, terrace views, and included perks clearly stated.</span>
+                    <span><strong>Opens in under 1 second:</strong> Edge-optimized photography eliminates drop-off on mobile roaming networks.</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>1-Tap direct enquiry:</strong> Opens WhatsApp or email pre-filled with the guest&apos;s chosen room and dates.</span>
+                    <span><strong>Direct WhatsApp voucher dispatch:</strong> Pre-fills guest room, dates, and pricing for effortless host confirmation.</span>
                   </div>
                 </div>
               </div>
@@ -786,7 +888,7 @@ export default function HospitalityPage() {
               </div>
 
               <p className="text-[11px] text-slate-400 mt-4 m-0">
-                Interactive mockup & design concept · No client affiliation
+                Interactive mockup & live demo · Concept design
               </p>
             </div>
           </div>
@@ -814,13 +916,13 @@ export default function HospitalityPage() {
                 </div>
 
                 <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
-                  02 · INDEPENDENT WINE ESTATE
+                  02 · HISTORIC WINERY ESTATE
                 </p>
                 <h4 className="text-2xl font-bold text-[#1C2733] mb-3">
-                  Lakeside wine estate & rooms
+                  Savoria Estate & Vineyard Suites
                 </h4>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                  Balcony suites with lake views, organic breakfast details, and welcoming reserve bottle perks for guests who book direct. Includes interactive wine tasting reservations.
+                  Heritage balcony suites with lake views, organic vineyard breakfast, and welcoming reserve bottle perks for guests who book direct. Includes interactive sommelier wine tastings.
                 </p>
               </div>
 
@@ -851,7 +953,7 @@ export default function HospitalityPage() {
                     setFormData(prev => ({ 
                       ...prev, 
                       request: 'A website for my hotel',
-                      message: 'Interested in a design direction like the Lakeside Wine Estate concept.' 
+                      message: 'Interested in a design direction like Savoria Estate & Vineyard Suites.' 
                     }));
                     const elem = document.getElementById('review');
                     if (elem) elem.scrollIntoView({ behavior: 'smooth' });
@@ -870,13 +972,13 @@ export default function HospitalityPage() {
                 <div className="relative h-64 w-full rounded-2xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
                   <Image
                     src="/images/hospitality/urban-loft.jpg"
-                    alt="Sarajevo historic boutique apartments"
+                    alt="Baščaršija Heritage Lofts Sarajevo"
                     fill
                     sizes="500px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <span className="absolute top-3 left-3 bg-[#1C2733]/90 text-white px-2.5 py-1 rounded text-xs font-bold">
-                    Concept design · Sarajevo, Bosnia
+                    Concept design · Sarajevo Old Town, Bosnia
                   </span>
                   <span className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-xs text-[#1C2733] font-bold text-[10px] px-2.5 py-1 rounded-full shadow-xs">
                     Demo Simulator Ready
@@ -884,13 +986,13 @@ export default function HospitalityPage() {
                 </div>
 
                 <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
-                  03 · BOUTIQUE URBAN APARTMENTS
+                  03 · HISTORIC BOUTIQUE LOFTS
                 </p>
                 <h4 className="text-2xl font-bold text-[#1C2733] mb-3">
-                  Historic city apartments & lofts
+                  Baščaršija Heritage Lofts
                 </h4>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                  Multiple room layouts compared on one screen, contactless check-in instructions in four languages, and a direct enquiry button that delivers keycodes straight to WhatsApp or Viber.
+                  Exposed Austrian-era brick, cathedral skylights, and high-speed fiber internet. Features seamless contactless smart keybox entry and authentic Bosnian coffee welcome kit.
                 </p>
               </div>
 
