@@ -5,6 +5,19 @@ All notable changes to the WUUS (Web Untuk Usaha) project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.7] - 2026-10-01
+
+### Fixed & Aligned
+- **Authentic WUUS Brand DNA Restoration (`/hospitality`)**:
+  - **Official WUUS Logo**: Restored the authentic `/logo.png` image with subtle `Hospitality` divider badge; completely eliminated the pseudo-mark `w.`.
+  - **Color Palette & Design Tokens**: Replaced foreign CSS tokens with the authentic WUUS design system:
+    - Primary Deep Navy: `#1C2733`
+    - Warm Accent Amber / Orange: `#F59E0B` (hover `#D97706`)
+    - Secondary Card / Band Slate: `#233746`
+    - Soft Canvas & Card Borders: `#F8F9FA` and `border-slate-200`
+  - **Authentic WUUS Multi-Column Footer**: Replaced the minimal single-line footer with the full, authentic 5-column studio footer including Wise SEPA settlement, European boutique deployment availability indicator, direct WhatsApp/Viber contact, and legal links.
+  - **Typography & Clean UI**: Ensured 100% Satoshi font, high contrast ratios, and clean card architecture without drop-shadow slop.
+
 ## [0.2.5] - 2026-09-28
 
 ### Changed
