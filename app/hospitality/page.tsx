@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useId } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,8 +12,13 @@ import {
   X, 
   Mail, 
   PhoneCall, 
+  MapPin,
+  ShieldCheck,
+  Globe,
   Sparkles,
-  ExternalLink
+  ExternalLink,
+  ChevronDown,
+  ArrowUpRight
 } from 'lucide-react';
 
 export default function HospitalityPage() {
@@ -72,7 +77,6 @@ export default function HospitalityPage() {
     // Prepare mailto fallback
     const body = `Hello Faisal,\n\nI'd like: ${formData.request}\nHotel: ${formData.hotel}\nHotel link: ${formData.url}\nName: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message || ''}\n\nI agree to the use of these details to reply to my request.`;
     
-    // Provide both confirmation and open email client
     setFormStatus('Thank you! Your request has been received. I will email your 1-page review within 2 working days.');
     setIsSubmitting(false);
 
@@ -103,80 +107,78 @@ export default function HospitalityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#172c35] font-sans antialiased selection:bg-[#ed693c] selection:text-white">
+    <div className="min-h-screen bg-white text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B]/20 selection:text-[#1C2733]">
       <style jsx global>{`
         #floating-ai-builder {
           display: none !important;
         }
-        :root {
-          --ink: #172c35;
-          --muted: #617078;
-          --orange: #ed693c;
-          --bg: #ffffff;
-          --light: #f3f6f6;
-          --line: #dce3e5;
-        }
       `}</style>
 
       {/* ─────────────────────────────────────────────────────────────
-          1. HEADER (DNA WUUS)
+          1. HEADER (AUTHENTIC WUUS DNA)
       ────────────────────────────────────────────────────────────── */}
-      <header className="h-[94px] max-w-[1320px] mx-auto flex items-center justify-between px-6 sm:px-12 border-b border-[#dce3e5] bg-white sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <Link href="/hospitality" className="flex items-center gap-2 group">
-            <span className="w-10 h-10 rounded-xl bg-[#ed693c] text-white flex items-center justify-center font-bold text-2xl tracking-tighter">
-              w.
-            </span>
-            <span className="font-extrabold text-2xl tracking-tight text-[#172c35]">
-              WUUS
-            </span>
-            <span className="text-[10px] tracking-[2px] font-medium border-l border-[#dce3e5] pl-3 ml-1 text-[#617078] uppercase hidden sm:inline-block">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-200 bg-white border-b border-slate-200/90 py-3.5">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
+          
+          {/* Logo Area */}
+          <Link href="/hospitality" className="flex items-center gap-3 group">
+            <Image
+              src="/logo.png"
+              alt="WUUS Logo"
+              width={130}
+              height={36}
+              priority
+              className="h-8 w-auto object-contain transition-transform group-hover:scale-105"
+            />
+            <span className="hidden sm:inline-block text-[11px] font-bold uppercase tracking-wider text-slate-400 border-l border-slate-200 pl-3">
               Hospitality
             </span>
           </Link>
-        </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-[#172c35]">
-          <a href="#process" className="hover:text-[#ed693c] transition-colors">How it works</a>
-          <a href="#examples" className="hover:text-[#ed693c] transition-colors">Examples</a>
-          <a href="#pricing" className="hover:text-[#ed693c] transition-colors">Pricing</a>
-          <a href="#faq" className="hover:text-[#ed693c] transition-colors">FAQ</a>
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[#1C2733]">
+            <a href="#process" className="hover:text-[#F59E0B] transition-colors">How it works</a>
+            <a href="#examples" className="hover:text-[#F59E0B] transition-colors">Examples</a>
+            <a href="#pricing" className="hover:text-[#F59E0B] transition-colors">Pricing</a>
+            <a href="#calculator" className="hover:text-[#F59E0B] transition-colors">Calculator</a>
+            <a href="#about" className="hover:text-[#F59E0B] transition-colors">About</a>
+            <a href="#faq" className="hover:text-[#F59E0B] transition-colors">FAQ</a>
+          </nav>
 
-        {/* Action Button */}
-        <div className="hidden lg:flex items-center gap-4">
-          <Link 
-            href="/" 
-            className="text-xs font-semibold text-[#617078] hover:text-[#172c35] transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#dce3e5]"
-            title="Halaman utama bahasa Indonesia"
-          >
-            <span className="text-[10px] font-bold bg-[#f3f6f6] px-1.5 py-0.5 rounded text-[#172c35]">ID</span>
-            <span>Web Utama</span>
-          </Link>
-          <a
-            href="#review"
-            className="inline-flex items-center justify-center min-h-[44px] px-6 bg-[#ed693c] hover:bg-[#d65226] text-white rounded-lg font-semibold text-sm transition-all"
-          >
-            Free review
-          </a>
-        </div>
+          {/* Action Area */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link 
+              href="/" 
+              className="text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:text-[#1C2733] hover:border-slate-300 transition-colors flex items-center gap-1.5"
+              title="Halaman utama bahasa Indonesia"
+            >
+              <span className="text-[10px] font-bold bg-slate-100 px-1.5 py-0.5 rounded text-[#1C2733]">ID</span>
+              <span>Web Utama</span>
+            </Link>
+            <a
+              href="#review"
+              className="bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white px-4.5 py-2 rounded-lg text-xs font-bold transition-all shadow-xs flex items-center gap-1.5"
+            >
+              <span>Free 1-Page Review</span>
+            </a>
+          </div>
 
-        {/* Mobile Menu Trigger */}
-        <div className="lg:hidden flex items-center gap-2">
-          <a
-            href="#review"
-            className="bg-[#ed693c] text-white px-3.5 py-2 rounded-lg text-xs font-bold"
-          >
-            Free review
-          </a>
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="p-2 text-[#172c35] border border-[#dce3e5] rounded-lg"
-            aria-label="Open Navigation Menu"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+          {/* Mobile Menu Trigger */}
+          <div className="lg:hidden flex items-center gap-2">
+            <a
+              href="#review"
+              className="bg-[#1C2733] hover:bg-[#F59E0B] text-white px-3.5 py-2 rounded-lg text-xs font-bold transition-colors"
+            >
+              Free review
+            </a>
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="p-2 text-[#1C2733] bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer"
+              aria-label="Open Navigation Menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -190,29 +192,37 @@ export default function HospitalityPage() {
             transition={{ type: "tween", duration: 0.2 }}
             className="fixed inset-0 z-[100] bg-white w-full h-screen flex flex-col pt-6 px-6 pb-12 overflow-y-auto"
           >
-            <div className="flex justify-between items-center mb-8">
-              <div className="flex items-center gap-2">
-                <span className="w-9 h-9 rounded-xl bg-[#ed693c] text-white flex items-center justify-center font-bold text-xl">
-                  w.
+            <div className="flex justify-between items-center mb-8 border-b border-slate-100 pb-5">
+              <Link href="/hospitality" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                <Image
+                  src="/logo.png"
+                  alt="WUUS Logo"
+                  width={130}
+                  height={36}
+                  className="h-8 w-auto object-contain"
+                />
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 border-l border-slate-200 pl-3">
+                  Hospitality
                 </span>
-                <span className="font-extrabold text-xl text-[#172c35]">WUUS</span>
-              </div>
+              </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 bg-[#f3f6f6] rounded-full text-[#172c35]"
+                className="p-2 bg-slate-100 rounded-lg text-slate-700 hover:bg-slate-200 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <nav className="flex flex-col gap-5 text-xl font-bold text-[#172c35] mb-8">
-              <a href="#process" onClick={() => setMobileMenuOpen(false)} className="border-b border-[#f3f6f6] pb-3">How it works</a>
-              <a href="#examples" onClick={() => setMobileMenuOpen(false)} className="border-b border-[#f3f6f6] pb-3">Examples</a>
-              <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="border-b border-[#f3f6f6] pb-3">Pricing</a>
-              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="border-b border-[#f3f6f6] pb-3">About Faisal</a>
-              <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="border-b border-[#f3f6f6] pb-3">FAQ</a>
-              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-[#617078] pt-2">
-                Kembali ke Web Utama (ID) →
+            <nav className="flex flex-col gap-3 text-lg font-semibold text-[#1C2733] mb-8">
+              <a href="#process" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">How it works</a>
+              <a href="#examples" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">Examples</a>
+              <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">Pricing</a>
+              <a href="#calculator" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">Calculator</a>
+              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">About Faisal</a>
+              <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">FAQ</a>
+              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-slate-500 pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
+                <span>Kembali ke Web Utama (ID)</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </nav>
 
@@ -220,7 +230,7 @@ export default function HospitalityPage() {
               <a
                 href="#review"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block w-full text-center bg-[#ed693c] text-white py-4 rounded-lg font-bold text-base"
+                className="block w-full text-center bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white py-4 rounded-xl font-bold text-base transition-colors"
               >
                 Get a free 1-page review
               </a>
@@ -229,52 +239,51 @@ export default function HospitalityPage() {
         )}
       </AnimatePresence>
 
-      <main>
+      <main className="pt-20">
         {/* ─────────────────────────────────────────────────────────────
             2. HERO SECTION
         ────────────────────────────────────────────────────────────── */}
-        <section className="max-w-[1224px] mx-auto px-6 sm:px-9 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-14 items-center">
+        <section className="max-w-[1224px] mx-auto px-6 sm:px-9 py-14 lg:py-24 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-14 items-center">
           
           {/* Hero Copy */}
           <div className="max-w-xl">
-            <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-5">
-              INDEPENDENT HOTELS. DIRECT CONNECTIONS.
+            <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
+              INDEPENDENT HOTELS · DIRECT CONNECTIONS
             </p>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-[76px] leading-[1.04] font-black tracking-[-2px] text-[#172c35] mb-6">
+            <h1 className="text-5xl sm:text-6xl lg:text-[74px] leading-[1.04] font-black tracking-[-2px] text-[#1C2733] mb-6">
               A better way<br />
               for guests to<br />
-              <em className="not-italic text-[#ed693c]">reach you.</em>
+              <em className="not-italic text-[#F59E0B]">reach you.</em>
             </h1>
 
-            <p className="text-lg sm:text-xl text-[#617078] leading-relaxed max-w-[460px] mb-8 font-normal">
+            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-[480px] mb-8 font-normal">
               Your hotel has a story worth discovering. Give it a website that feels like your place — and makes asking you a question effortless.
             </p>
 
-            <div className="flex flex-wrap items-center gap-5 mb-5">
+            <div className="flex flex-wrap items-center gap-4 mb-6">
               <a
                 href="#review"
-                className="inline-flex items-center justify-center min-h-[52px] px-8 bg-[#ed693c] hover:bg-[#d65226] text-white rounded-lg font-semibold text-sm transition-all shadow-xs"
+                className="inline-flex items-center justify-center min-h-[50px] px-8 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg font-bold text-sm transition-all shadow-xs"
               >
                 Get a free 1-page review
               </a>
               <a
                 href="#process"
-                className="text-sm font-semibold text-[#172c35] hover:text-[#ed693c] border-b border-[#adb8bd] pb-0.5 transition-colors"
+                className="inline-flex items-center justify-center min-h-[50px] px-6 text-sm font-semibold text-[#1C2733] hover:text-[#F59E0B] border-b border-slate-300 hover:border-[#F59E0B] pb-0.5 transition-colors"
               >
                 See how it works
               </a>
             </div>
 
-            <p className="text-xs text-[#617078] leading-relaxed">
-              A fresh look at your hotel on a phone.<br />
-              Free. No obligation.
+            <p className="text-xs text-slate-500 leading-relaxed">
+              A fresh look at your hotel on a phone. Free, no obligation.
             </p>
           </div>
 
           {/* Hero Visual */}
-          <div className="relative h-[420px] sm:h-[500px] lg:h-[525px] w-full">
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#dce3e5] bg-[#f3f6f6]">
+          <div className="relative h-[380px] sm:h-[480px] lg:h-[510px] w-full">
+            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-sm">
               <Image
                 src="/images/hospitality/guesthouse.webp"
                 alt="Coastal boutique guesthouse stone courtyard"
@@ -283,23 +292,23 @@ export default function HospitalityPage() {
                 sizes="(max-width: 1024px) 100vw, 600px"
                 className="object-cover"
               />
-              <div className="absolute left-6 top-6 text-white text-[10px] tracking-[2px] bg-[#172c35]/80 backdrop-blur-xs px-3.5 py-1.5 rounded-full font-semibold uppercase">
-                A SMALL HOTEL. A BIG FIRST IMPRESSION.
+              <div className="absolute left-6 top-6 text-white text-[10px] tracking-[2px] bg-[#1C2733]/85 backdrop-blur-xs px-3.5 py-1.5 rounded-full font-bold uppercase">
+                A SMALL HOTEL · A BIG FIRST IMPRESSION
               </div>
             </div>
 
             {/* Floating Enquiry Card */}
-            <div className="absolute -bottom-6 left-4 right-4 sm:-left-6 sm:right-8 bg-white rounded-xl p-5 border border-[#dce3e5] shadow-xl flex items-center gap-4">
-              <div className="w-11 h-11 rounded-full bg-[#fff0e9] text-[#ed693c] flex items-center justify-center font-bold text-xl shrink-0">
+            <div className="absolute -bottom-6 left-4 right-4 sm:-left-6 sm:right-8 bg-white rounded-xl p-5 border border-slate-200 shadow-xl flex items-center gap-4">
+              <div className="w-11 h-11 rounded-full bg-amber-50 text-[#F59E0B] flex items-center justify-center font-bold text-xl shrink-0 border border-amber-200/60">
                 <Mail className="w-5 h-5" />
               </div>
               <div className="text-xs sm:text-sm">
-                <strong className="block text-[#172c35] font-bold text-sm">One question from a guest.</strong>
-                <p className="text-xs text-[#617078] m-0">One direct conversation with you.</p>
+                <strong className="block text-[#1C2733] font-bold text-sm">One question from a guest.</strong>
+                <p className="text-xs text-slate-500 m-0">One direct conversation with you.</p>
               </div>
             </div>
 
-            <span className="absolute -bottom-12 right-2 text-[10px] text-[#617078]">
+            <span className="absolute -bottom-12 right-2 text-[10px] text-slate-400">
               Concept imagery · AI generated
             </span>
           </div>
@@ -307,11 +316,11 @@ export default function HospitalityPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            3. TRUST STRIP (DNA FAISAL)
+            3. TRUST STRIP (AUTHENTIC WUUS FOUNDER)
         ────────────────────────────────────────────────────────────── */}
-        <div className="border-y border-[#dce3e5] bg-white">
+        <div className="border-y border-slate-200 bg-white">
           <div className="max-w-[1224px] mx-auto px-6 sm:px-9 py-6 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border border-[#dce3e5]">
+            <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border border-slate-200">
               <Image
                 src="/images/hospitality/faisal-founder.jpg"
                 alt="Faisal Alfarizi"
@@ -321,14 +330,14 @@ export default function HospitalityPage() {
               />
             </div>
             <div className="text-sm">
-              <p className="text-[#617078] m-0">
-                <strong className="text-[#172c35] font-bold">Hi, I&apos;m Faisal Alfarizi.</strong> I design and build websites from Jakarta, Indonesia.<br className="hidden sm:inline" />
+              <p className="text-slate-600 m-0">
+                <strong className="text-[#1C2733] font-bold">Hi, I&apos;m Faisal Alfarizi.</strong> I design and build websites from Jakarta, Indonesia.<br className="hidden sm:inline" />
                 You talk directly to the person building your site.
               </p>
             </div>
             <a 
               href="#about" 
-              className="sm:ml-auto text-xs font-semibold text-[#172c35] hover:text-[#ed693c] border-b border-[#dce3e5] pb-0.5 shrink-0"
+              className="sm:ml-auto text-xs font-semibold text-[#1C2733] hover:text-[#F59E0B] border-b border-slate-300 pb-0.5 shrink-0 transition-colors"
             >
               Meet your designer →
             </a>
@@ -340,41 +349,41 @@ export default function HospitalityPage() {
         ────────────────────────────────────────────────────────────── */}
         <section className="max-w-[1224px] mx-auto px-6 sm:px-9 py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <div>
-            <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-4">
+            <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
               THE MISSING CONNECTION
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] leading-tight font-black tracking-tight text-[#172c35]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] leading-tight font-black tracking-tight text-[#1C2733]">
               They love your hotel.<br />
               Make the next step easy.
             </h2>
           </div>
 
           <div className="space-y-6">
-            <article className="flex gap-5 pb-6 border-b border-[#dce3e5]">
-              <span className="text-sm font-bold text-[#ed693c] pt-1">01</span>
+            <article className="flex gap-5 pb-6 border-b border-slate-200">
+              <span className="text-sm font-bold text-[#F59E0B] pt-1">01</span>
               <div>
-                <h3 className="text-lg font-bold text-[#172c35] mb-2">Let the photos load, not the guest wait.</h3>
-                <p className="text-sm text-[#617078] leading-relaxed m-0">
+                <h3 className="text-lg font-bold text-[#1C2733] mb-2">Let the photos load, not the guest wait.</h3>
+                <p className="text-sm text-slate-600 leading-relaxed m-0">
                   Optimised images help guests explore your rooms, even on a phone using roaming data.
                 </p>
               </div>
             </article>
 
-            <article className="flex gap-5 pb-6 border-b border-[#dce3e5]">
-              <span className="text-sm font-bold text-[#ed693c] pt-1">02</span>
+            <article className="flex gap-5 pb-6 border-b border-slate-200">
+              <span className="text-sm font-bold text-[#F59E0B] pt-1">02</span>
               <div>
-                <h3 className="text-lg font-bold text-[#172c35] mb-2">Make room details easy to find.</h3>
-                <p className="text-sm text-[#617078] leading-relaxed m-0">
+                <h3 className="text-lg font-bold text-[#1C2733] mb-2">Make room details easy to find.</h3>
+                <p className="text-sm text-slate-600 leading-relaxed m-0">
                   Bed types, breakfast, parking and check-in. Clear answers before a guest needs to ask.
                 </p>
               </div>
             </article>
 
             <article className="flex gap-5">
-              <span className="text-sm font-bold text-[#ed693c] pt-1">03</span>
+              <span className="text-sm font-bold text-[#F59E0B] pt-1">03</span>
               <div>
-                <h3 className="text-lg font-bold text-[#172c35] mb-2">Keep the conversation direct.</h3>
-                <p className="text-sm text-[#617078] leading-relaxed m-0">
+                <h3 className="text-lg font-bold text-[#1C2733] mb-2">Keep the conversation direct.</h3>
+                <p className="text-sm text-slate-600 leading-relaxed m-0">
                   One clear enquiry button opens WhatsApp, Viber or email, instead of another complicated form.
                 </p>
               </div>
@@ -383,22 +392,22 @@ export default function HospitalityPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            5. WHAT I BUILD (Light Card + Dark Card)
+            5. WHAT I BUILD (Light Card + Dark Navy Card)
         ────────────────────────────────────────────────────────────── */}
-        <section className="bg-[#f3f6f6] py-20 lg:py-24 border-y border-[#dce3e5]">
+        <section id="build" className="bg-[#F8F9FA] py-20 lg:py-24 border-y border-slate-200">
           <div className="max-w-[1224px] mx-auto px-6 sm:px-9">
             
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
               <div>
-                <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-3">
+                <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-3">
                   WHAT I BUILD
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#172c35]">
+                <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#1C2733]">
                   Your place, online.<br />
                   Without the complications.
                 </h2>
               </div>
-              <p className="text-sm text-[#617078] sm:text-right">
+              <p className="text-sm text-slate-600 sm:text-right">
                 A thoughtful website first.<br />
                 An assistant only if you need one.
               </p>
@@ -407,49 +416,49 @@ export default function HospitalityPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
               
               {/* Card 1: The Essential */}
-              <article className="bg-white border border-[#dce3e5] rounded-xl p-8 sm:p-10 flex flex-col justify-between">
+              <article className="bg-white border border-slate-200 rounded-2xl p-8 sm:p-10 flex flex-col justify-between shadow-xs">
                 <div>
-                  <span className="text-2xl text-[#ed693c] block mb-4">▤</span>
-                  <p className="text-[11px] font-bold tracking-[2px] text-[#ed693c] uppercase mb-3">
+                  <span className="text-2xl text-[#F59E0B] block mb-4">▤</span>
+                  <p className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-3">
                     THE ESSENTIAL
                   </p>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[#172c35] mb-4">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[#1C2733] mb-4">
                     A website that feels like your hotel.
                   </h3>
-                  <p className="text-sm text-[#617078] leading-relaxed mb-6">
+                  <p className="text-sm text-slate-600 leading-relaxed mb-6">
                     Beautiful photography, useful room details, your local story and a simple way to enquire directly.
                   </p>
-                  <ul className="space-y-3 text-sm text-[#172c35] font-medium mb-8">
+                  <ul className="space-y-3 text-sm text-[#1C2733] font-medium mb-8">
                     <li className="flex items-center gap-2.5">
-                      <span className="text-[#ed693c] font-bold">✓</span>
+                      <span className="text-[#F59E0B] font-bold">✓</span>
                       <span>Built around mobile guests</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <span className="text-[#ed693c] font-bold">✓</span>
+                      <span className="text-[#F59E0B] font-bold">✓</span>
                       <span>WhatsApp, Viber or email enquiries</span>
                     </li>
                     <li className="flex items-center gap-2.5">
-                      <span className="text-[#ed693c] font-bold">✓</span>
+                      <span className="text-[#F59E0B] font-bold">✓</span>
                       <span>You own your code and content</span>
                     </li>
                   </ul>
                 </div>
-                <div className="pt-4 border-t border-[#dce3e5] text-xs text-[#617078]">
+                <div className="pt-4 border-t border-slate-100 text-xs text-slate-500 font-medium">
                   Included in every website project
                 </div>
               </article>
 
-              {/* Card 2: Optional Add-on (Dark Card) */}
-              <article className="bg-[#172c35] text-white border border-[#172c35] rounded-xl p-8 sm:p-10 flex flex-col justify-between">
+              {/* Card 2: Optional Add-on (Dark Navy Card #1C2733) */}
+              <article id="ai-concierge" className="bg-[#1C2733] text-white border border-[#233746] rounded-2xl p-8 sm:p-10 flex flex-col justify-between shadow-xl">
                 <div>
-                  <span className="text-2xl text-[#ed693c] block mb-4">✦</span>
-                  <p className="text-[11px] font-bold tracking-[2px] text-[#ed693c] uppercase mb-3">
+                  <span className="text-2xl text-[#F59E0B] block mb-4">✦</span>
+                  <p className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-3">
                     OPTIONAL ADD-ON
                   </p>
                   <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                     A little help after hours.
                   </h3>
-                  <p className="text-sm text-[#c6d2d7] leading-relaxed mb-6">
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
                     An AI assistant for common questions, using the house information you approve.
                   </p>
 
@@ -459,8 +468,8 @@ export default function HospitalityPage() {
                       <button
                         key={l}
                         onClick={() => setActiveLang(l)}
-                        className={`px-2.5 py-1 text-xs font-bold rounded uppercase transition-colors ${
-                          activeLang === l ? 'bg-[#ed693c] text-white' : 'text-slate-300 hover:text-white'
+                        className={`px-3 py-1 text-xs font-bold rounded uppercase transition-colors ${
+                          activeLang === l ? 'bg-[#F59E0B] text-[#1C2733]' : 'text-slate-300 hover:text-white'
                         }`}
                       >
                         {l}
@@ -469,17 +478,17 @@ export default function HospitalityPage() {
                   </div>
 
                   {/* Chat demo */}
-                  <div className="bg-white/5 border border-white/15 p-4 rounded-xl space-y-3 mb-4">
-                    <p className="text-xs bg-white/10 p-3 rounded-lg text-slate-200 m-0">
+                  <div className="bg-white/5 border border-white/10 p-4 rounded-xl space-y-3 mb-4">
+                    <p className="text-xs bg-white/10 p-3 rounded-lg text-slate-200 m-0 leading-relaxed">
                       “{chatScenarios[activeLang].question}”
                     </p>
-                    <p className="text-xs bg-white text-[#172c35] p-3 rounded-lg font-medium m-0">
+                    <p className="text-xs bg-white text-[#1C2733] p-3.5 rounded-lg font-medium m-0 leading-relaxed">
                       “{chatScenarios[activeLang].answer}”
                     </p>
                   </div>
                 </div>
 
-                <p className="text-xs text-[#a8bcc5] leading-relaxed m-0">
+                <p className="text-xs text-slate-400 leading-relaxed m-0">
                   Illustrative conversation. The assistant does not confirm bookings, availability or payments.
                 </p>
               </article>
@@ -495,22 +504,22 @@ export default function HospitalityPage() {
         <section id="examples" className="max-w-[1224px] mx-auto px-6 sm:px-9 py-20 lg:py-24">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
             <div>
-              <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-3">
+              <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-3">
                 DESIGN EXPLORATION
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#172c35]">
+              <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#1C2733]">
                 Small hotel.<br />
                 Distinct character.
               </h2>
             </div>
-            <p className="text-sm text-[#617078] sm:text-right">
+            <p className="text-sm text-slate-600 sm:text-right">
               A design concept, not a client project.<br />
               Explore the direction below.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] border border-[#dce3e5] rounded-2xl overflow-hidden bg-white">
-            <div className="relative h-[340px] sm:h-[420px] bg-[#f3f6f6]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs">
+            <div className="relative h-[340px] sm:h-[420px] bg-slate-50">
               <Image
                 src="/images/hospitality/guesthouse.webp"
                 alt="Coastal guesthouse design concept"
@@ -518,33 +527,33 @@ export default function HospitalityPage() {
                 sizes="(max-width: 1024px) 100vw, 750px"
                 className="object-cover"
               />
-              <span className="absolute top-5 left-5 bg-white text-[#172c35] font-semibold text-xs px-3.5 py-1.5 rounded-full shadow-xs">
+              <span className="absolute top-5 left-5 bg-white text-[#1C2733] font-bold text-xs px-3.5 py-1.5 rounded-full shadow-xs border border-slate-200">
                 Concept design
               </span>
             </div>
 
             <div className="p-8 sm:p-12 flex flex-col justify-center">
-              <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-2">
+              <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">
                 A SEASIDE GUESTHOUSE
               </p>
-              <h3 className="text-3xl sm:text-4xl font-bold text-[#172c35] mb-4">
+              <h3 className="text-3xl sm:text-4xl font-bold text-[#1C2733] mb-4">
                 Let the place<br />
                 do the talking.
               </h3>
-              <p className="text-sm text-[#617078] leading-relaxed mb-6">
+              <p className="text-sm text-slate-600 leading-relaxed mb-6">
                 Room-first browsing, generous photography and a clear enquiry path. A calm digital welcome for a small coastal property.
               </p>
 
               <div>
                 <button
                   onClick={() => setConceptModalOpen(true)}
-                  className="inline-flex items-center justify-center min-h-[48px] px-6 border border-[#c6d0d3] hover:bg-[#e9eeee] text-[#172c35] font-semibold text-sm rounded-lg transition-colors cursor-pointer"
+                  className="inline-flex items-center justify-center min-h-[48px] px-6 border border-slate-300 hover:bg-slate-50 hover:border-slate-400 text-[#1C2733] font-bold text-sm rounded-lg transition-colors cursor-pointer"
                 >
                   Explore the concept
                 </button>
               </div>
 
-              <p className="text-xs text-[#617078] mt-6 m-0">
+              <p className="text-xs text-slate-500 mt-6 m-0">
                 Imagery is AI generated. No client affiliation.
               </p>
             </div>
@@ -554,45 +563,45 @@ export default function HospitalityPage() {
         {/* ─────────────────────────────────────────────────────────────
             7. A SIMPLE, PERSONAL PROCESS (4 Steps)
         ────────────────────────────────────────────────────────────── */}
-        <section id="process" className="bg-[#f3f6f6] py-20 lg:py-24 border-y border-[#dce3e5]">
+        <section id="process" className="bg-[#F8F9FA] py-20 lg:py-24 border-y border-slate-200">
           <div className="max-w-[1224px] mx-auto px-6 sm:px-9">
             
-            <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-3">
+            <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-3">
               A SIMPLE, PERSONAL PROCESS
             </p>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#172c35] mb-12">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#1C2733] mb-12">
               From first look to a fresh start.
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              <article className="border-t border-[#c9d4d8] pt-6">
-                <span className="text-sm font-bold text-[#ed693c] block mb-4">01</span>
-                <h3 className="text-xl font-bold text-[#172c35] mb-2">Review</h3>
-                <p className="text-sm text-[#617078] leading-relaxed m-0">
+              <article className="border-t border-slate-300 pt-6">
+                <span className="text-sm font-bold text-[#F59E0B] block mb-4">01</span>
+                <h3 className="text-xl font-bold text-[#1C2733] mb-2">Review</h3>
+                <p className="text-sm text-slate-600 leading-relaxed m-0">
                   A one-page look at how a guest experiences your hotel online.
                 </p>
               </article>
 
-              <article className="border-t border-[#c9d4d8] pt-6">
-                <span className="text-sm font-bold text-[#ed693c] block mb-4">02</span>
-                <h3 className="text-xl font-bold text-[#172c35] mb-2">Proposal</h3>
-                <p className="text-sm text-[#617078] leading-relaxed m-0">
+              <article className="border-t border-slate-300 pt-6">
+                <span className="text-sm font-bold text-[#F59E0B] block mb-4">02</span>
+                <h3 className="text-xl font-bold text-[#1C2733] mb-2">Proposal</h3>
+                <p className="text-sm text-slate-600 leading-relaxed m-0">
                   A clear scope, fixed price and timeline before you commit.
                 </p>
               </article>
 
-              <article className="border-t border-[#c9d4d8] pt-6">
-                <span className="text-sm font-bold text-[#ed693c] block mb-4">03</span>
-                <h3 className="text-xl font-bold text-[#172c35] mb-2">Build</h3>
-                <p className="text-sm text-[#617078] leading-relaxed m-0">
+              <article className="border-t border-slate-300 pt-6">
+                <span className="text-sm font-bold text-[#F59E0B] block mb-4">03</span>
+                <h3 className="text-xl font-bold text-[#1C2733] mb-2">Build</h3>
+                <p className="text-sm text-slate-600 leading-relaxed m-0">
                   A private preview you can review around your hotel&apos;s schedule.
                 </p>
               </article>
 
-              <article className="border-t border-[#c9d4d8] pt-6">
-                <span className="text-sm font-bold text-[#ed693c] block mb-4">04</span>
-                <h3 className="text-xl font-bold text-[#172c35] mb-2">Launch</h3>
-                <p className="text-sm text-[#617078] leading-relaxed m-0">
+              <article className="border-t border-slate-300 pt-6">
+                <span className="text-sm font-bold text-[#F59E0B] block mb-4">04</span>
+                <h3 className="text-xl font-bold text-[#1C2733] mb-2">Launch</h3>
+                <p className="text-sm text-slate-600 leading-relaxed m-0">
                   Your domain connected, your site checked and your code handed over.
                 </p>
               </article>
@@ -608,15 +617,15 @@ export default function HospitalityPage() {
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
             <div>
-              <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-3">
+              <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-3">
                 A CLEAR STARTING POINT
               </p>
-              <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#172c35]">
+              <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#1C2733]">
                 A right-sized website.<br />
                 A clearly scoped price.
               </h2>
             </div>
-            <p className="text-sm text-[#617078] sm:text-right">
+            <p className="text-sm text-slate-600 sm:text-right">
               Indicative ranges from the proposed packages.<br />
               Your final quote follows the free review.
             </p>
@@ -626,52 +635,52 @@ export default function HospitalityPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             
             {/* Starter */}
-            <article className="border border-[#dce3e5] rounded-xl p-8 bg-white flex flex-col">
-              <p className="text-[10px] font-bold tracking-[2px] text-[#ed693c] uppercase mb-2">STARTER</p>
-              <h3 className="text-xl font-bold text-[#172c35] mb-1">A first home online.</h3>
-              <div className="text-3xl font-extrabold text-[#172c35] tracking-tight my-4">€490–590</div>
-              <p className="text-xs text-[#617078] mb-6">For a hotel without a website.</p>
-              <ul className="space-y-2.5 text-xs text-[#172c35] mb-8 font-medium">
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> One-page website</li>
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Photo gallery & essential details</li>
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Direct contact links</li>
+            <article className="border border-slate-200 rounded-2xl p-8 bg-white flex flex-col shadow-xs">
+              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">STARTER</p>
+              <h3 className="text-xl font-bold text-[#1C2733] mb-1">A first home online.</h3>
+              <div className="text-3xl font-extrabold text-[#1C2733] tracking-tight my-4">€490–590</div>
+              <p className="text-xs text-slate-500 mb-6">For a hotel without a website.</p>
+              <ul className="space-y-2.5 text-xs text-[#1C2733] mb-8 font-medium">
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> One-page website</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Photo gallery & essential details</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Direct contact links</li>
               </ul>
-              <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] border border-[#c6d0d3] hover:bg-[#f3f6f6] text-[#172c35] font-semibold text-xs rounded-lg transition-colors text-center">
+              <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors text-center">
                 Start with a free review
               </a>
             </article>
 
             {/* Showcase (Featured) */}
-            <article className="relative border-2 border-[#ed693c] rounded-xl p-8 bg-[#fffaf7] flex flex-col shadow-xs">
-              <span className="absolute -top-3.5 left-6 bg-[#ed693c] text-white font-bold text-[10px] tracking-wider px-3.5 py-1 rounded-full uppercase">
+            <article className="relative border-2 border-[#F59E0B] rounded-2xl p-8 bg-amber-50/20 flex flex-col shadow-md">
+              <span className="absolute -top-3.5 left-6 bg-[#F59E0B] text-[#1C2733] font-extrabold text-[10px] tracking-wider px-3.5 py-1 rounded-full uppercase shadow-xs">
                 THE EVERYDAY ESSENTIAL
               </span>
-              <p className="text-[10px] font-bold tracking-[2px] text-[#ed693c] uppercase mb-2">SHOWCASE</p>
-              <h3 className="text-xl font-bold text-[#172c35] mb-1">Your whole story.</h3>
-              <div className="text-3xl font-extrabold text-[#172c35] tracking-tight my-4">€690–890</div>
-              <p className="text-xs text-[#617078] mb-6">For a hotel ready for a fuller website.</p>
-              <ul className="space-y-2.5 text-xs text-[#172c35] mb-8 font-medium">
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Room pages & your local story</li>
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Mobile enquiry paths</li>
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Domain setup and handover</li>
+              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">SHOWCASE</p>
+              <h3 className="text-xl font-bold text-[#1C2733] mb-1">Your whole story.</h3>
+              <div className="text-3xl font-extrabold text-[#1C2733] tracking-tight my-4">€690–890</div>
+              <p className="text-xs text-slate-500 mb-6">For a hotel ready for a fuller website.</p>
+              <ul className="space-y-2.5 text-xs text-[#1C2733] mb-8 font-medium">
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Room pages & your local story</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Mobile enquiry paths</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Domain setup and handover</li>
               </ul>
-              <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] bg-[#ed693c] hover:bg-[#d65226] text-white font-semibold text-xs rounded-lg transition-colors text-center">
+              <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-all text-center shadow-xs">
                 Start with a free review
               </a>
             </article>
 
             {/* Showcase + Assistant */}
-            <article className="border border-[#dce3e5] rounded-xl p-8 bg-white flex flex-col">
-              <p className="text-[10px] font-bold tracking-[2px] text-[#ed693c] uppercase mb-2">SHOWCASE + ASSISTANT</p>
-              <h3 className="text-xl font-bold text-[#172c35] mb-1">Help after hours.</h3>
-              <div className="text-3xl font-extrabold text-[#172c35] tracking-tight my-4">€1,490–1,690</div>
-              <p className="text-xs text-[#617078] mb-6">For recurring guest questions.</p>
-              <ul className="space-y-2.5 text-xs text-[#172c35] mb-8 font-medium">
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Everything in Showcase</li>
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Approved house information setup</li>
-                <li className="flex items-center gap-2"><span className="text-[#ed693c]">✓</span> Optional AI assistant</li>
+            <article className="border border-slate-200 rounded-2xl p-8 bg-white flex flex-col shadow-xs">
+              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">SHOWCASE + ASSISTANT</p>
+              <h3 className="text-xl font-bold text-[#1C2733] mb-1">Help after hours.</h3>
+              <div className="text-3xl font-extrabold text-[#1C2733] tracking-tight my-4">€1,490–1,690</div>
+              <p className="text-xs text-slate-500 mb-6">For recurring guest questions.</p>
+              <ul className="space-y-2.5 text-xs text-[#1C2733] mb-8 font-medium">
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Everything in Showcase</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Approved house information setup</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Optional AI assistant</li>
               </ul>
-              <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] border border-[#c6d0d3] hover:bg-[#f3f6f6] text-[#172c35] font-semibold text-xs rounded-lg transition-colors text-center">
+              <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors text-center">
                 Start with a free review
               </a>
             </article>
@@ -679,42 +688,42 @@ export default function HospitalityPage() {
           </div>
 
           {/* Payment Terms Strip */}
-          <div className="py-5 border-b border-[#dce3e5] flex flex-col sm:flex-row justify-between text-xs sm:text-sm text-[#172c35] gap-2">
+          <div className="py-5 border-b border-slate-200 flex flex-col sm:flex-row justify-between text-xs sm:text-sm text-[#1C2733] gap-2">
             <strong className="font-bold">Proposed payment terms</strong>
-            <span className="text-[#617078]">50% to start · 50% after staging approval · Invoiced in euros</span>
+            <span className="text-slate-600">50% to start · 50% after staging approval · Invoiced in euros (Wise SEPA)</span>
           </div>
-          <p className="text-xs text-[#617078] mt-3 mb-12">
+          <p className="text-xs text-slate-500 mt-3 mb-12">
             Pricing and payment terms are planning estimates, subject to an agreed proposal. Assistant running costs, hosting, revisions and delivery dates are confirmed in writing.
           </p>
 
           {/* Commission Calculator */}
-          <div className="bg-[#f3f6f6] p-8 sm:p-10 rounded-2xl border border-[#dce3e5] grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10">
+          <div id="calculator" className="bg-[#F8F9FA] p-8 sm:p-10 rounded-2xl border border-slate-200 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10">
             <div>
-              <p className="text-[10px] font-bold tracking-[2px] text-[#ed693c] uppercase mb-2">
+              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">
                 PUT YOUR OWN NUMBERS IN
               </p>
-              <h3 className="text-2xl font-bold text-[#172c35] mb-3">
+              <h3 className="text-2xl font-bold text-[#1C2733] mb-3">
                 What could a direct enquiry be worth?
               </h3>
-              <p className="text-xs sm:text-sm text-[#617078] leading-relaxed m-0">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed m-0">
                 This estimate is based on your assumptions. It is not a promise of increased bookings.
               </p>
             </div>
 
             <div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <label className="text-xs font-semibold text-[#172c35]">
+                <label className="text-xs font-semibold text-[#1C2733]">
                   Monthly OTA revenue (€)
                   <input
                     type="number"
                     min="0"
                     value={revenue}
                     onChange={(e) => setRevenue(Number(e.target.value) || 0)}
-                    className="w-full mt-1.5 p-2.5 bg-white border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c]"
+                    className="w-full mt-1.5 p-2.5 bg-white border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
                 </label>
 
-                <label className="text-xs font-semibold text-[#172c35]">
+                <label className="text-xs font-semibold text-[#1C2733]">
                   Commission (%)
                   <input
                     type="number"
@@ -722,11 +731,11 @@ export default function HospitalityPage() {
                     max="100"
                     value={commission}
                     onChange={(e) => setCommission(Number(e.target.value) || 0)}
-                    className="w-full mt-1.5 p-2.5 bg-white border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c]"
+                    className="w-full mt-1.5 p-2.5 bg-white border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
                 </label>
 
-                <label className="text-xs font-semibold text-[#172c35]">
+                <label className="text-xs font-semibold text-[#1C2733]">
                   Shift to direct (%)
                   <input
                     type="number"
@@ -734,27 +743,27 @@ export default function HospitalityPage() {
                     max="100"
                     value={shift}
                     onChange={(e) => setShift(Number(e.target.value) || 0)}
-                    className="w-full mt-1.5 p-2.5 bg-white border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c]"
+                    className="w-full mt-1.5 p-2.5 bg-white border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
                 </label>
               </div>
 
-              <div className="flex gap-8 py-3 border-t border-[#dce3e5] mb-2">
+              <div className="flex gap-8 py-3 border-t border-slate-200 mb-2">
                 <div>
-                  <span className="text-xs text-[#617078] block">Monthly OTA commission</span>
-                  <strong className="text-2xl font-bold text-[#172c35]">
+                  <span className="text-xs text-slate-500 block">Monthly OTA commission</span>
+                  <strong className="text-2xl font-bold text-[#1C2733]">
                     €{totalOtaCommission.toLocaleString()}
                   </strong>
                 </div>
                 <div>
-                  <span className="text-xs text-[#617078] block">Potential monthly saving</span>
-                  <strong className="text-2xl font-bold text-[#ed693c]">
+                  <span className="text-xs text-slate-500 block">Potential monthly saving</span>
+                  <strong className="text-2xl font-bold text-[#F59E0B]">
                     €{potentialMonthlySaving.toLocaleString()}
                   </strong>
                 </div>
               </div>
 
-              <p className="text-[11px] text-[#617078] m-0">
+              <p className="text-[11px] text-slate-500 m-0">
                 Revenue × commission × assumed shift. Excludes other costs. Calculated on your device.
               </p>
             </div>
@@ -765,34 +774,34 @@ export default function HospitalityPage() {
         {/* ─────────────────────────────────────────────────────────────
             9. ABOUT ME: FAISAL ALFARIZI
         ────────────────────────────────────────────────────────────── */}
-        <section id="about" className="bg-[#f3f6f6] py-20 lg:py-24 border-y border-[#dce3e5]">
+        <section id="about" className="bg-[#F8F9FA] py-20 lg:py-24 border-y border-slate-200">
           <div className="max-w-[1224px] mx-auto px-6 sm:px-9">
             
-            <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-4">
+            <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
               WHO YOU&apos;LL BE WORKING WITH
             </p>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div>
-                <h2 className="text-3xl sm:text-4xl font-black text-[#172c35] leading-tight mb-6">
+                <h2 className="text-3xl sm:text-4xl font-black text-[#1C2733] leading-tight mb-6">
                   One person.<br />
                   One conversation.<br />
-                  <em className="not-italic text-[#ed693c]">Your hotel.</em>
+                  <em className="not-italic text-[#F59E0B]">Your hotel.</em>
                 </h2>
                 
-                <div className="relative w-48 h-48 rounded-2xl overflow-hidden border border-[#dce3e5] shadow-xs">
+                <div className="relative w-52 h-52 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
                   <Image
                     src="/images/hospitality/faisal-founder.jpg"
                     alt="Faisal Alfarizi"
                     fill
-                    sizes="200px"
+                    sizes="220px"
                     className="object-cover"
                   />
                 </div>
               </div>
 
-              <div className="space-y-4 text-base text-[#617078] leading-relaxed">
-                <p className="text-lg text-[#172c35] font-semibold leading-normal">
+              <div className="space-y-4 text-base text-slate-600 leading-relaxed">
+                <p className="text-lg text-[#1C2733] font-semibold leading-normal">
                   I&apos;m Faisal Alfarizi, an independent web designer based in Jakarta, Indonesia.
                 </p>
                 <p>
@@ -804,7 +813,7 @@ export default function HospitalityPage() {
                 <div className="pt-2">
                   <a 
                     href="mailto:faisalalfarizi@webuntukusaha.com"
-                    className="text-sm font-semibold text-[#172c35] hover:text-[#ed693c] border-b border-[#adb8bd] pb-0.5"
+                    className="text-sm font-bold text-[#1C2733] hover:text-[#F59E0B] border-b border-slate-300 pb-0.5 transition-colors"
                   >
                     faisalalfarizi@webuntukusaha.com
                   </a>
@@ -820,78 +829,78 @@ export default function HospitalityPage() {
         ────────────────────────────────────────────────────────────── */}
         <section id="faq" className="max-w-[1224px] mx-auto px-6 sm:px-9 py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16">
           <div>
-            <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-4">
+            <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
               A FEW GOOD QUESTIONS
             </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#172c35] leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#1C2733] leading-tight">
               Let&apos;s make<br />
               things clear.
             </h2>
           </div>
 
-          <div className="divide-y divide-[#dce3e5]">
+          <div className="divide-y divide-slate-200">
             <details className="py-5 group" open>
-              <summary className="font-bold text-base sm:text-lg text-[#172c35] cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-base sm:text-lg text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
                 <span>Is this a booking engine?</span>
-                <span className="text-[#ed693c] font-bold text-xl group-open:hidden">+</span>
-                <span className="text-[#ed693c] font-bold text-xl hidden group-open:inline">−</span>
+                <span className="text-[#F59E0B] font-bold text-xl group-open:hidden">+</span>
+                <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
-              <p className="text-sm text-[#617078] mt-3 leading-relaxed">
-                No. The website helps guests send you enquiries directly. It does not process reservations or payments. An existing booking system can be discussed separately.
+              <p className="text-sm text-slate-600 mt-3 leading-relaxed">
+                No. The website helps guests send you enquiries directly. It does not process reservations or payments. An existing booking system can be integrated or discussed separately.
               </p>
             </details>
 
             <details className="py-5 group">
-              <summary className="font-bold text-base sm:text-lg text-[#172c35] cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-base sm:text-lg text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
                 <span>I don&apos;t have a website. Can I get a review?</span>
-                <span className="text-[#ed693c] font-bold text-xl group-open:hidden">+</span>
-                <span className="text-[#ed693c] font-bold text-xl hidden group-open:inline">−</span>
+                <span className="text-[#F59E0B] font-bold text-xl group-open:hidden">+</span>
+                <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
-              <p className="text-sm text-[#617078] mt-3 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                 Yes. Share your Booking.com, Instagram or Google Maps link instead.
               </p>
             </details>
 
             <details className="py-5 group">
-              <summary className="font-bold text-base sm:text-lg text-[#172c35] cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-base sm:text-lg text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
                 <span>Who owns the website?</span>
-                <span className="text-[#ed693c] font-bold text-xl group-open:hidden">+</span>
-                <span className="text-[#ed693c] font-bold text-xl hidden group-open:inline">−</span>
+                <span className="text-[#F59E0B] font-bold text-xl group-open:hidden">+</span>
+                <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
-              <p className="text-sm text-[#617078] mt-3 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                 You own the website code and content after the agreed handover. Hosting and optional assistant services are covered separately in your proposal.
               </p>
             </details>
 
             <details className="py-5 group">
-              <summary className="font-bold text-base sm:text-lg text-[#172c35] cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-base sm:text-lg text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
                 <span>What can the AI assistant do?</span>
-                <span className="text-[#ed693c] font-bold text-xl group-open:hidden">+</span>
-                <span className="text-[#ed693c] font-bold text-xl hidden group-open:inline">−</span>
+                <span className="text-[#F59E0B] font-bold text-xl group-open:hidden">+</span>
+                <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
-              <p className="text-sm text-[#617078] mt-3 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                 It answers common questions from information you approve. It can make mistakes and should refer uncertain questions to your team. It does not confirm availability or take bookings.
               </p>
             </details>
 
             <details className="py-5 group">
-              <summary className="font-bold text-base sm:text-lg text-[#172c35] cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-base sm:text-lg text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
                 <span>How long does a build take?</span>
-                <span className="text-[#ed693c] font-bold text-xl group-open:hidden">+</span>
-                <span className="text-[#ed693c] font-bold text-xl hidden group-open:inline">−</span>
+                <span className="text-[#F59E0B] font-bold text-xl group-open:hidden">+</span>
+                <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
-              <p className="text-sm text-[#617078] mt-3 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                 A timeline is agreed after the review and depends on scope and when your photos and text are ready (typically 7–14 days).
               </p>
             </details>
 
             <details className="py-5 group">
-              <summary className="font-bold text-base sm:text-lg text-[#172c35] cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-base sm:text-lg text-[#1C2733] cursor-pointer list-none flex justify-between items-center">
                 <span>Do I need to commit after the free review?</span>
-                <span className="text-[#ed693c] font-bold text-xl group-open:hidden">+</span>
-                <span className="text-[#ed693c] font-bold text-xl hidden group-open:inline">−</span>
+                <span className="text-[#F59E0B] font-bold text-xl group-open:hidden">+</span>
+                <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
-              <p className="text-sm text-[#617078] mt-3 leading-relaxed">
+              <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                 No. The review is a starting point. You can decide whether a website project makes sense for your hotel.
               </p>
             </details>
@@ -899,41 +908,50 @@ export default function HospitalityPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            11. REVIEW FORM SECTION (Dark Navy Band #172c35)
+            11. REVIEW FORM SECTION (AUTHENTIC WUUS DARK NAVY #1C2733)
         ────────────────────────────────────────────────────────────── */}
-        <section id="review" className="bg-[#172c35] text-white py-20 lg:py-28">
+        <section id="review" className="bg-[#1C2733] text-white py-20 lg:py-28 border-t border-[#233746]">
           <div className="max-w-[1224px] mx-auto px-6 sm:px-9 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-18 items-center">
             
             {/* Left Copy */}
             <div>
-              <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase mb-4">
+              <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
                 YOUR NEXT STEP
               </p>
               <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
                 A fresh pair of eyes.<br />
-                <em className="not-italic text-[#ed693c]">A clearer next step.</em>
+                <em className="not-italic text-[#F59E0B]">A clearer next step.</em>
               </h2>
-              <p className="text-base sm:text-lg text-[#bac9d0] leading-relaxed mb-8">
+              <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
                 Get a free 1-page review of your hotel&apos;s online presence, seen the way a guest sees it on a phone.
               </p>
 
-              <div className="space-y-4 my-8 text-sm text-[#d4dee2] font-semibold">
-                <p className="m-0">01 &nbsp; Share your hotel link</p>
-                <p className="m-0">02 &nbsp; Get practical recommendations</p>
-                <p className="m-0">03 &nbsp; Decide what feels right for you</p>
+              <div className="space-y-4 my-8 text-sm text-slate-200 font-semibold">
+                <p className="flex items-center gap-3 m-0">
+                  <span className="w-6 h-6 rounded-full bg-white/10 text-[#F59E0B] flex items-center justify-center text-xs font-bold">01</span>
+                  <span>Share your hotel link</span>
+                </p>
+                <p className="flex items-center gap-3 m-0">
+                  <span className="w-6 h-6 rounded-full bg-white/10 text-[#F59E0B] flex items-center justify-center text-xs font-bold">02</span>
+                  <span>Get practical recommendations</span>
+                </p>
+                <p className="flex items-center gap-3 m-0">
+                  <span className="w-6 h-6 rounded-full bg-white/10 text-[#F59E0B] flex items-center justify-center text-xs font-bold">03</span>
+                  <span>Decide what feels right for you</span>
+                </p>
               </div>
 
-              <p className="text-xs text-[#a9bfc8]">
+              <p className="text-xs text-slate-400">
                 No website yet? Your listing or Instagram works too.
               </p>
             </div>
 
             {/* Right White Form */}
-            <form onSubmit={handleFormSubmit} className="bg-white text-[#172c35] p-8 sm:p-10 rounded-2xl shadow-xl space-y-4">
-              <h3 className="text-2xl font-bold text-[#172c35] mb-4">Get your free review</h3>
+            <form onSubmit={handleFormSubmit} className="bg-white text-[#1C2733] p-8 sm:p-10 rounded-2xl shadow-2xl space-y-4 border border-slate-100">
+              <h3 className="text-2xl font-bold text-[#1C2733] mb-4">Get your free review</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <label className="text-xs font-semibold text-[#172c35]">
+                <label className="text-xs font-semibold text-[#1C2733]">
                   Hotel name *
                   <input
                     type="text"
@@ -941,10 +959,10 @@ export default function HospitalityPage() {
                     placeholder="Your hotel or guesthouse"
                     value={formData.hotel}
                     onChange={e => setFormData({ ...formData, hotel: e.target.value })}
-                    className="w-full mt-1.5 p-3 border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c]"
+                    className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
                 </label>
-                <label className="text-xs font-semibold text-[#172c35]">
+                <label className="text-xs font-semibold text-[#1C2733]">
                   Your name *
                   <input
                     type="text"
@@ -952,12 +970,12 @@ export default function HospitalityPage() {
                     placeholder="Your name"
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full mt-1.5 p-3 border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c]"
+                    className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
                 </label>
               </div>
 
-              <label className="text-xs font-semibold text-[#172c35] block">
+              <label className="text-xs font-semibold text-[#1C2733] block">
                 Where can I find your hotel online? *
                 <input
                   type="text"
@@ -965,11 +983,11 @@ export default function HospitalityPage() {
                   placeholder="Website, Booking.com, Instagram or Google Maps"
                   value={formData.url}
                   onChange={e => setFormData({ ...formData, url: e.target.value })}
-                  className="w-full mt-1.5 p-3 border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c]"
+                  className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                 />
               </label>
 
-              <label className="text-xs font-semibold text-[#172c35] block">
+              <label className="text-xs font-semibold text-[#1C2733] block">
                 Email *
                 <input
                   type="email"
@@ -977,16 +995,16 @@ export default function HospitalityPage() {
                   placeholder="you@yourhotel.com"
                   value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full mt-1.5 p-3 border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c]"
+                  className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                 />
               </label>
 
-              <label className="text-xs font-semibold text-[#172c35] block">
+              <label className="text-xs font-semibold text-[#1C2733] block">
                 What would you like?
                 <select
                   value={formData.request}
                   onChange={e => setFormData({ ...formData, request: e.target.value })}
-                  className="w-full mt-1.5 p-3 border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c] bg-white"
+                  className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B] bg-white"
                 >
                   <option>Free 1-page review</option>
                   <option>A website for my hotel</option>
@@ -995,31 +1013,31 @@ export default function HospitalityPage() {
                 </select>
               </label>
 
-              <label className="text-xs font-semibold text-[#172c35] block">
-                Anything you&apos;d like me to look at? <span className="font-normal text-[#617078]">(optional)</span>
+              <label className="text-xs font-semibold text-[#1C2733] block">
+                Anything you&apos;d like me to look at? <span className="font-normal text-slate-500">(optional)</span>
                 <textarea
                   rows={2}
                   placeholder="A question, a concern, an idea…"
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full mt-1.5 p-3 border border-[#cbd5da] rounded-lg text-sm text-[#172c35] focus:outline-hidden focus:border-[#ed693c] resize-none"
+                  className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B] resize-none"
                 />
               </label>
 
-              <label className="flex items-start gap-2.5 text-xs text-[#617078] pt-1 cursor-pointer">
+              <label className="flex items-start gap-2.5 text-xs text-slate-600 pt-1 cursor-pointer">
                 <input
                   type="checkbox"
                   required
                   checked={formData.consent}
                   onChange={e => setFormData({ ...formData, consent: e.target.checked })}
-                  className="mt-0.5 accent-[#ed693c] w-4 h-4 shrink-0"
+                  className="mt-0.5 accent-[#F59E0B] w-4 h-4 shrink-0"
                 />
                 <span>
                   I agree to share these details so WUUS can reply to my request.{' '}
                   <button
                     type="button"
                     onClick={() => setPrivacyModalOpen(true)}
-                    className="underline text-[#172c35] hover:text-[#ed693c] font-semibold inline"
+                    className="underline text-[#1C2733] hover:text-[#F59E0B] font-semibold inline"
                   >
                     Privacy information
                   </button>
@@ -1029,12 +1047,12 @@ export default function HospitalityPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 bg-[#ed693c] hover:bg-[#d65226] text-white font-bold text-sm rounded-lg transition-colors cursor-pointer mt-3"
+                className="w-full py-4 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-sm rounded-lg transition-all cursor-pointer shadow-md mt-3"
               >
                 {isSubmitting ? "Sending..." : "Prepare my free review request"}
               </button>
 
-              <p className="text-[11px] text-[#617078] text-center mt-2 m-0">
+              <p className="text-[11px] text-slate-500 text-center mt-2 m-0">
                 I read every request myself and reply by email. I won&apos;t call you.
               </p>
 
@@ -1050,29 +1068,150 @@ export default function HospitalityPage() {
       </main>
 
       {/* ─────────────────────────────────────────────────────────────
-          12. FOOTER
+          12. AUTHENTIC WUUS FOOTER
       ────────────────────────────────────────────────────────────── */}
-      <footer className="max-w-[1224px] mx-auto px-6 sm:px-9 py-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 border-t border-[#dce3e5] text-xs text-[#617078]">
-        <Link href="/hospitality" className="flex items-center gap-1.5 font-extrabold text-lg text-[#172c35]">
-          <span className="w-6 h-6 rounded-md bg-[#ed693c] text-white flex items-center justify-center text-sm font-bold">w.</span>
-          <span>WUUS</span>
-        </Link>
-        <p className="m-0">
-          Independent design. Direct connections.<br />
-          Jakarta, Indonesia.
-        </p>
-        <a href="mailto:faisalalfarizi@webuntukusaha.com" className="hover:text-[#ed693c]">
-          faisalalfarizi@webuntukusaha.com
-        </a>
-        <div className="sm:ml-auto flex items-center gap-4">
-          <button 
-            type="button" 
-            onClick={() => setPrivacyModalOpen(true)} 
-            className="hover:text-[#ed693c] cursor-pointer"
-          >
-            Privacy
-          </button>
-          <span>© 2026 WUUS</span>
+      <footer className="bg-white border-t border-slate-200/90 pt-16 pb-12">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+
+            {/* Studio Brand */}
+            <div className="lg:col-span-2">
+              <Link href="/hospitality" className="flex items-center gap-3 mb-5">
+                <Image
+                  src="/logo.png"
+                  alt="WUUS Studio Logo"
+                  width={130}
+                  height={36}
+                  className="h-8 w-auto object-contain"
+                />
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 border-l border-slate-200 pl-3">
+                  Hospitality
+                </span>
+              </Link>
+
+              <p className="text-sm text-slate-600 mb-6 max-w-sm leading-relaxed">
+                Bespoke digital architecture, direct booking engines, and 24/7 autonomous AI guest concierges engineered for independent European boutique stays and ambitious businesses.
+              </p>
+
+              <div className="flex items-center gap-2 text-xs font-medium text-slate-500 w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>Available for Q2/Q3 European Boutique Deployments</span>
+              </div>
+            </div>
+
+            {/* Solutions */}
+            <div>
+              <h4 className="font-bold text-[#1C2733] text-xs uppercase tracking-wider mb-4">
+                Practices & Solutions
+              </h4>
+              <ul className="space-y-2.5 text-sm">
+                <li>
+                  <a href="#build" className="text-slate-600 hover:text-[#F59E0B] transition-colors font-medium">
+                    The Essential Website
+                  </a>
+                </li>
+                <li>
+                  <a href="#ai-concierge" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
+                    Multilingual Guest Concierge
+                  </a>
+                </li>
+                <li>
+                  <a href="#examples" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
+                    Seaside Concept Showcase
+                  </a>
+                </li>
+                <li>
+                  <a href="#process" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
+                    4-Step Personal Workflow
+                  </a>
+                </li>
+                <li>
+                  <a href="#calculator" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
+                    Commission Savings Calculator
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Process & Trust */}
+            <div>
+              <h4 className="font-bold text-[#1C2733] text-xs uppercase tracking-wider mb-4">
+                Trust & Settlement
+              </h4>
+              <ul className="space-y-2.5 text-sm">
+                <li>
+                  <a href="#pricing" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
+                    Three-Tier Scoped Pricing
+                  </a>
+                </li>
+                <li>
+                  <span className="text-slate-500">Staging-First Guarantee</span>
+                </li>
+                <li>
+                  <span className="text-slate-500 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>50/50 Milestone Escrow</span>
+                  </span>
+                </li>
+                <li>
+                  <span className="text-slate-500">European SEPA Bank Wire</span>
+                </li>
+                <li>
+                  <span className="text-slate-500">You Own 100% of Code & Assets</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact & Studio Location */}
+            <div>
+              <h4 className="font-bold text-[#1C2733] text-xs uppercase tracking-wider mb-4">
+                Direct Contact
+              </h4>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2.5 text-slate-600">
+                  <MapPin size={16} className="text-slate-400 mt-0.5 shrink-0" />
+                  <span>Jakarta Barat, Indonesia <br /><span className="text-xs text-slate-400">Serving Europe & Worldwide</span></span>
+                </li>
+                <li className="flex items-center gap-2.5 text-slate-600">
+                  <Mail size={16} className="text-slate-400 shrink-0" />
+                  <a href="mailto:faisalalfarizi@webuntukusaha.com" className="hover:text-[#F59E0B] transition-colors">
+                    faisalalfarizi@webuntukusaha.com
+                  </a>
+                </li>
+                <li className="flex items-center gap-2.5 text-slate-600">
+                  <PhoneCall size={16} className="text-slate-400 shrink-0" />
+                  <a href="https://wa.me/6281383521750" className="hover:text-[#F59E0B] transition-colors font-medium">
+                    +62 813-8352-1750
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-slate-200/90 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+            <p>
+              &copy; {new Date().getFullYear()} WUUS Studio. Seluruh hak cipta dilindungi. All rights reserved.
+            </p>
+            <div className="flex items-center gap-5">
+              <Link href="/hospitality/privacy" className="hover:text-slate-900 transition-colors font-medium text-slate-600">
+                Hospitality Privacy & GDPR
+              </Link>
+              <span>•</span>
+              <Link href="/syarat-ketentuan" className="hover:text-slate-900 transition-colors">
+                Terms & Conditions
+              </Link>
+              <span>•</span>
+              <Link href="/" className="hover:text-[#F59E0B] transition-colors">
+                Main Studio (ID)
+              </Link>
+              <span>•</span>
+              <Link href="/admin/inquiries" className="hover:text-slate-900 transition-colors text-slate-400">
+                Admin
+              </Link>
+            </div>
+          </div>
         </div>
       </footer>
 
@@ -1087,29 +1226,29 @@ export default function HospitalityPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setConceptModalOpen(false)}
-              className="absolute inset-0 bg-[#10232a]/80 backdrop-blur-xs"
+              className="absolute inset-0 bg-[#1C2733]/80 backdrop-blur-xs"
             />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-[950px] bg-white rounded-2xl p-6 sm:p-10 border border-[#dce3e5] z-10 max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="relative w-full max-w-[950px] bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 z-10 max-h-[90vh] overflow-y-auto shadow-2xl"
             >
               <button
                 onClick={() => setConceptModalOpen(false)}
-                className="absolute right-4 top-4 text-2xl font-light text-[#172c35] hover:text-[#ed693c] p-2"
+                className="absolute right-4 top-4 text-2xl font-light text-[#1C2733] hover:text-[#F59E0B] p-2 cursor-pointer"
                 aria-label="Close"
               >
                 ✕
               </button>
 
-              <p className="text-[10px] font-bold tracking-[2px] text-[#ed693c] uppercase mb-4">
+              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-4">
                 INTERACTIVE DESIGN CONCEPT · NOT A CLIENT PROJECT
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div className="relative h-64 sm:h-[390px] rounded-xl overflow-hidden border border-[#dce3e5]">
+                <div className="relative h-64 sm:h-[390px] rounded-xl overflow-hidden border border-slate-200">
                   <Image
                     src="/images/hospitality/guesthouse.webp"
                     alt="AI-generated seaside guesthouse"
@@ -1120,24 +1259,24 @@ export default function HospitalityPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <p className="text-xs font-bold tracking-[2px] text-[#ed693c] uppercase">
+                  <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase">
                     THE COAST, AT YOUR PACE
                   </p>
-                  <h2 className="text-3xl sm:text-4xl font-black text-[#172c35] leading-tight">
+                  <h2 className="text-3xl sm:text-4xl font-black text-[#1C2733] leading-tight">
                     A quiet place<br />
                     by the sea.
                   </h2>
-                  <p className="text-sm text-[#617078] leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed">
                     Morning light. A courtyard breakfast. Space to slow down.
                   </p>
-                  <p className="text-xs text-[#617078] leading-relaxed">
+                  <p className="text-xs text-slate-500 leading-relaxed">
                     Illustrative accommodation copy. No real property or availability.
                   </p>
                   <div className="pt-2">
                     <a
                       href="#review"
                       onClick={() => setConceptModalOpen(false)}
-                      className="inline-flex items-center justify-center px-6 py-3.5 bg-[#ed693c] hover:bg-[#d65226] text-white rounded-lg font-semibold text-xs transition-colors"
+                      className="inline-flex items-center justify-center px-6 py-3.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg font-bold text-xs transition-colors shadow-xs"
                     >
                       Ask about a design like this
                     </a>
@@ -1160,24 +1299,24 @@ export default function HospitalityPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setPrivacyModalOpen(false)}
-              className="absolute inset-0 bg-[#10232a]/80 backdrop-blur-xs"
+              className="absolute inset-0 bg-[#1C2733]/80 backdrop-blur-xs"
             />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-[620px] bg-white rounded-2xl p-6 sm:p-10 border border-[#dce3e5] z-10 shadow-2xl space-y-4 text-xs sm:text-sm text-[#617078] leading-relaxed"
+              className="relative w-full max-w-[620px] bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 z-10 shadow-2xl space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed"
             >
               <button
                 onClick={() => setPrivacyModalOpen(false)}
-                className="absolute right-4 top-4 text-2xl font-light text-[#172c35] hover:text-[#ed693c] p-2"
+                className="absolute right-4 top-4 text-2xl font-light text-[#1C2733] hover:text-[#F59E0B] p-2 cursor-pointer"
                 aria-label="Close"
               >
                 ✕
               </button>
 
-              <h2 className="text-2xl font-bold text-[#172c35]">Privacy information</h2>
+              <h2 className="text-2xl font-bold text-[#1C2733]">Privacy information</h2>
               
               <p>
                 This form prepares your request directly for review. If you submit the form, your contact details are processed solely to evaluate your hotel&apos;s mobile experience and return your 1-page note.
@@ -1187,7 +1326,7 @@ export default function HospitalityPage() {
               </p>
               <p>
                 A complete privacy policy and data processing disclosure is available on{' '}
-                <Link href="/hospitality/privacy" className="text-[#172c35] underline font-semibold hover:text-[#ed693c]">
+                <Link href="/hospitality/privacy" className="text-[#1C2733] underline font-semibold hover:text-[#F59E0B]">
                   the Hospitality Privacy page
                 </Link>.
               </p>
@@ -1196,7 +1335,7 @@ export default function HospitalityPage() {
                 <button
                   type="button"
                   onClick={() => setPrivacyModalOpen(false)}
-                  className="px-5 py-2.5 bg-[#f3f6f6] hover:bg-[#e9eeee] text-[#172c35] font-semibold text-xs rounded-lg transition-colors"
+                  className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-[#1C2733] font-bold text-xs rounded-lg transition-colors cursor-pointer"
                 >
                   Close
                 </button>
