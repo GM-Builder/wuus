@@ -18,13 +18,49 @@ import {
   Sparkles,
   ExternalLink,
   ChevronDown,
-  ArrowUpRight
+  ArrowUpRight,
+  Smartphone
 } from 'lucide-react';
 
 export default function HospitalityPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [conceptModalOpen, setConceptModalOpen] = useState(false);
+  const [selectedConcept, setSelectedConcept] = useState<'guesthouse' | 'wine-estate' | 'city-apartments'>('guesthouse');
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
+
+  // Concept Details Dictionary
+  const conceptDetails = {
+    guesthouse: {
+      tag: "Concept design · Albanian Riviera",
+      title: "A quiet place by the sea.",
+      subtitle: "A Seaside Guesthouse",
+      image: "/images/hospitality/guesthouse.webp",
+      alt: "Coastal boutique guesthouse stone courtyard",
+      lead: "Morning light. A courtyard breakfast. Space to slow down.",
+      description: "Designed for a small coastal property. Room-first browsing, generous natural photography, and a calm digital welcome. High-intent guests can see terrace views, bed dimensions, and send a direct booking inquiry via WhatsApp in seconds without navigating complicated OTAs.",
+      specs: "Albanian Riviera · Direct perks: Courtyard breakfast & terrace views · Inquiries: WhatsApp & Email"
+    },
+    'wine-estate': {
+      tag: "Concept design · Lake Ohrid, North Macedonia",
+      title: "Heritage suites amongst vineyards.",
+      subtitle: "Lakeside Wine Estate with Rooms",
+      image: "/images/hospitality/savoria-wine-estate.jpg",
+      alt: "Lake Ohrid heritage wine estate",
+      lead: "Private vineyard terrace, stone fireplace, and organic breakfast served daily.",
+      description: "Designed for an independent boutique wine estate. Features full-screen photography optimized for mobile roaming networks, transparent room specs, tasting hours, and a direct inquiry button that connects high-intent travelers straight to the host with a welcome bottle perk.",
+      specs: "Lake Ohrid, North Macedonia · Direct perks: Breakfast & Welcome Wine · Response: Direct to host"
+    },
+    'city-apartments': {
+      tag: "Concept design · Sarajevo, Bosnia and Herzegovina",
+      title: "Old town lofts & boutique living.",
+      subtitle: "Historic City Apartments",
+      image: "/images/hospitality/urban-loft.jpg",
+      alt: "Sarajevo historic boutique apartments",
+      lead: "Rooms compared on one screen, check-in instructions in four languages.",
+      description: "Designed for city apartments and urban boutique stays. Guests can compare unit sizes on a single mobile screen, view key amenities and parking details, and receive automated check-in and keycode directions directly on their WhatsApp or Viber.",
+      specs: "Sarajevo Old Town · Direct perks: Late check-in keybox & city guide · Inquiries: WhatsApp & Viber"
+    }
+  };
 
   // Assistant interactive demo state
   const [activeLang, setActiveLang] = useState<'de' | 'it' | 'en' | 'fr'>('de');
@@ -518,8 +554,9 @@ export default function HospitalityPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs">
-            <div className="relative h-[340px] sm:h-[420px] bg-slate-50">
+          {/* Flagship Concept 01: Seaside Guesthouse */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs mb-8">
+            <div className="relative h-[360px] sm:h-[460px] bg-slate-50">
               <Image
                 src="/images/hospitality/guesthouse.webp"
                 alt="Coastal guesthouse design concept"
@@ -528,35 +565,192 @@ export default function HospitalityPage() {
                 className="object-cover"
               />
               <span className="absolute top-5 left-5 bg-white text-[#1C2733] font-bold text-xs px-3.5 py-1.5 rounded-full shadow-xs border border-slate-200">
-                Concept design
+                Concept design · Albanian Riviera
               </span>
             </div>
 
-            <div className="p-8 sm:p-12 flex flex-col justify-center">
-              <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">
-                A SEASIDE GUESTHOUSE
-              </p>
-              <h3 className="text-3xl sm:text-4xl font-bold text-[#1C2733] mb-4">
-                Let the place<br />
-                do the talking.
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                Room-first browsing, generous photography and a clear enquiry path. A calm digital welcome for a small coastal property.
-              </p>
-
+            <div className="p-8 sm:p-12 flex flex-col justify-between">
               <div>
-                <button
-                  onClick={() => setConceptModalOpen(true)}
-                  className="inline-flex items-center justify-center min-h-[48px] px-6 border border-slate-300 hover:bg-slate-50 hover:border-slate-400 text-[#1C2733] font-bold text-sm rounded-lg transition-colors cursor-pointer"
-                >
-                  Explore the concept
-                </button>
+                <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">
+                  01 · A SEASIDE GUESTHOUSE
+                </p>
+                <h3 className="text-3xl sm:text-4xl font-bold text-[#1C2733] mb-4">
+                  Let the place<br />
+                  do the talking.
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed mb-5">
+                  Room-first browsing, generous photography, and a calm digital welcome. A fast-loading mobile presentation for a small coastal property.
+                </p>
+
+                {/* Concrete Specs */}
+                <div className="space-y-2.5 pt-1 pb-6 text-xs text-slate-700 font-medium border-y border-slate-100 mb-6">
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Opens in under 1 second:</strong> Compressed photography eliminates drop-off on mobile roaming.</span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Room details on one screen:</strong> Bed dimensions, terrace views, and included perks clearly stated.</span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>1-Tap direct enquiry:</strong> Opens WhatsApp or email pre-filled with the guest&apos;s chosen room.</span>
+                  </div>
+                </div>
               </div>
 
-              <p className="text-xs text-slate-500 mt-6 m-0">
-                Imagery is AI generated. No client affiliation.
+              {/* Action and QR Code Scanner */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <button
+                  onClick={() => {
+                    setSelectedConcept('guesthouse');
+                    setConceptModalOpen(true);
+                  }}
+                  className="inline-flex items-center justify-center min-h-[46px] px-6 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs"
+                >
+                  Explore this concept
+                </button>
+
+                {/* QR Code Scanner Card for Desktop */}
+                <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 flex items-center gap-3">
+                  <div className="w-12 h-12 bg-white p-1 rounded-lg shrink-0 flex items-center justify-center border border-slate-200 shadow-2xs">
+                    <svg viewBox="0 0 29 29" className="w-full h-full text-[#1C2733] fill-current">
+                      <path d="M0,0 h7 v7 h-7 z M1,1 v5 h5 v-5 z M2,2 h3 v3 h-3 z" />
+                      <path d="M22,0 h7 v7 h-7 z M23,1 v5 h5 v-5 z M24,2 h3 v3 h-3 z" />
+                      <path d="M0,22 h7 v7 h-7 z M1,23 v5 h5 v-5 z M2,24 h3 v3 h-3 z" />
+                      <path d="M8,2 h2 v1 h-2 z M12,2 h1 v3 h-1 z M15,1 h2 v2 h-2 z M19,3 h2 v1 h-2 z" />
+                      <path d="M9,8 h2 v2 h-2 z M13,7 h3 v2 h-3 z M18,8 h2 v2 h-2 z M22,9 h4 v1 h-4 z" />
+                      <path d="M8,12 h4 v2 h-4 z M14,11 h2 v3 h-2 z M18,13 h3 v2 h-3 z M23,12 h2 v2 h-2 z" />
+                      <path d="M9,17 h2 v2 h-2 z M13,16 h3 v2 h-3 z M18,17 h2 v2 h-2 z M22,18 h4 v1 h-4 z" />
+                      <path d="M8,22 h2 v3 h-2 z M12,24 h3 v2 h-3 z M17,23 h2 v3 h-2 z M21,22 h3 v2 h-3 z" />
+                    </svg>
+                  </div>
+                  <div className="text-[11px] leading-tight text-slate-500">
+                    <strong className="block text-[#1C2733] font-bold">Scan to test on phone</strong>
+                    Verify real speed & UX
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-[11px] text-slate-400 mt-4 m-0">
+                Concept imagery · AI generated · No client affiliation
               </p>
             </div>
+          </div>
+
+          {/* 2 Complementary Concepts in 2-Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* Concept 02: Lakeside Wine Estate */}
+            <article className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xs group">
+              <div>
+                <div className="relative h-64 w-full rounded-xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
+                  <Image
+                    src="/images/hospitality/savoria-wine-estate.jpg"
+                    alt="Lake Ohrid boutique wine estate"
+                    fill
+                    sizes="500px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-3 left-3 bg-[#1C2733]/90 text-white px-2.5 py-1 rounded text-xs font-bold">
+                    Concept design · Lake Ohrid, North Macedonia
+                  </span>
+                </div>
+
+                <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
+                  02 · INDEPENDENT WINE ESTATE
+                </p>
+                <h4 className="text-2xl font-bold text-[#1C2733] mb-3">
+                  Lakeside wine estate & rooms
+                </h4>
+                <p className="text-sm text-slate-600 leading-relaxed mb-6">
+                  Balcony suites with lake views, organic breakfast details, and welcoming reserve bottle perks for guests who book direct. Combines property history with wine tasting reservation paths.
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                <button
+                  onClick={() => {
+                    setSelectedConcept('wine-estate');
+                    setConceptModalOpen(true);
+                  }}
+                  className="px-4 py-2 border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors cursor-pointer"
+                >
+                  Explore concept
+                </button>
+                <button
+                  onClick={() => {
+                    setFormData(prev => ({ 
+                      ...prev, 
+                      request: 'A website for my hotel',
+                      message: 'Interested in a design direction like the Lakeside Wine Estate concept.' 
+                    }));
+                    const elem = document.getElementById('review');
+                    if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="text-xs font-bold text-[#1C2733] hover:text-[#F59E0B] flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  <span>Ask about a site like this</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </article>
+
+            {/* Concept 03: Historic City Boutique Apartments */}
+            <article className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xs group">
+              <div>
+                <div className="relative h-64 w-full rounded-xl overflow-hidden bg-slate-50 mb-6 border border-slate-200">
+                  <Image
+                    src="/images/hospitality/urban-loft.jpg"
+                    alt="Sarajevo historic boutique apartments"
+                    fill
+                    sizes="500px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-3 left-3 bg-[#1C2733]/90 text-white px-2.5 py-1 rounded text-xs font-bold">
+                    Concept design · Sarajevo, Bosnia
+                  </span>
+                </div>
+
+                <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
+                  03 · BOUTIQUE URBAN APARTMENTS
+                </p>
+                <h4 className="text-2xl font-bold text-[#1C2733] mb-3">
+                  Historic city apartments & lofts
+                </h4>
+                <p className="text-sm text-slate-600 leading-relaxed mb-6">
+                  Multiple room layouts compared on one screen, contactless check-in instructions in four languages, and a direct enquiry button that delivers keycodes straight to WhatsApp or Viber.
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                <button
+                  onClick={() => {
+                    setSelectedConcept('city-apartments');
+                    setConceptModalOpen(true);
+                  }}
+                  className="px-4 py-2 border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors cursor-pointer"
+                >
+                  Explore concept
+                </button>
+                <button
+                  onClick={() => {
+                    setFormData(prev => ({ 
+                      ...prev, 
+                      request: 'A website for my hotel',
+                      message: 'Interested in a design direction like the Historic City Apartments concept.' 
+                    }));
+                    const elem = document.getElementById('review');
+                    if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="text-xs font-bold text-[#1C2733] hover:text-[#F59E0B] flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  <span>Ask about a site like this</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </article>
+
           </div>
         </section>
 
@@ -1248,35 +1442,47 @@ export default function HospitalityPage() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div className="relative h-64 sm:h-[390px] rounded-xl overflow-hidden border border-slate-200">
+                <div className="relative h-64 sm:h-[390px] rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
                   <Image
-                    src="/images/hospitality/guesthouse.webp"
-                    alt="AI-generated seaside guesthouse"
+                    src={conceptDetails[selectedConcept].image}
+                    alt={conceptDetails[selectedConcept].alt}
                     fill
                     sizes="500px"
                     className="object-cover"
                   />
+                  <div className="absolute top-3 left-3 bg-[#1C2733]/90 text-white text-[11px] font-bold px-2.5 py-1 rounded">
+                    {conceptDetails[selectedConcept].tag}
+                  </div>
                 </div>
 
                 <div className="space-y-4">
                   <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase">
-                    THE COAST, AT YOUR PACE
+                    {conceptDetails[selectedConcept].subtitle}
                   </p>
-                  <h2 className="text-3xl sm:text-4xl font-black text-[#1C2733] leading-tight">
-                    A quiet place<br />
-                    by the sea.
+                  <h2 className="text-2xl sm:text-3xl font-black text-[#1C2733] leading-tight">
+                    {conceptDetails[selectedConcept].title}
                   </h2>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    Morning light. A courtyard breakfast. Space to slow down.
+                  <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                    {conceptDetails[selectedConcept].lead}
                   </p>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Illustrative accommodation copy. No real property or availability.
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {conceptDetails[selectedConcept].description}
                   </p>
-                  <div className="pt-2">
+                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600">
+                    {conceptDetails[selectedConcept].specs}
+                  </div>
+                  <div className="pt-2 flex items-center gap-3">
                     <a
                       href="#review"
-                      onClick={() => setConceptModalOpen(false)}
-                      className="inline-flex items-center justify-center px-6 py-3.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg font-bold text-xs transition-colors shadow-xs"
+                      onClick={() => {
+                        setConceptModalOpen(false);
+                        setFormData(prev => ({
+                          ...prev,
+                          request: 'A website for my hotel',
+                          message: `Interested in a design direction like the ${conceptDetails[selectedConcept].subtitle}.`
+                        }));
+                      }}
+                      className="inline-flex items-center justify-center px-6 py-3.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg font-bold text-xs transition-colors shadow-xs cursor-pointer"
                     >
                       Ask about a design like this
                     </a>
