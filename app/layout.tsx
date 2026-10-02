@@ -32,16 +32,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.webuntukusaha.com'),
-  title: "WUUS Studio - High-Performance Digital Platforms & AI Automation",
-  description: "Next-generation engineering studio building bespoke direct-booking engines, high-speed corporate architectures, and 24/7 autonomous AI guest concierge systems.",
-  keywords: [
-    "WUUS Studio",
-    "Bespoke Web Development",
-    "Direct Booking Engine",
-    "Hospitality AI Concierge",
-    "Next.js High Performance Agency",
-    "Autonomous Business Automation"
-  ],
+  title: "WUUS - Web Design & Digital Solutions",
+  description: "Web development and digital design studio by Faisal Alfarizi, building fast and thoughtful websites for businesses and independent hospitality.",
   alternates: {
     canonical: "https://www.webuntukusaha.com",
   },

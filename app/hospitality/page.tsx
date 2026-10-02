@@ -686,11 +686,8 @@ export default function HospitalityPage() {
                           Villa Mare Riviera Guesthouse
                         </h4>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="bg-[#1C2733] text-white text-[9px] font-black px-1.5 py-0.5 rounded">
-                            9.8
-                          </span>
-                          <span className="text-[10px] text-slate-600 font-semibold">
-                            Exceptional · 142 reviews
+                          <span className="text-[10px] text-slate-500 font-medium">
+                            Boutique Stone Guesthouse · 4 Suites
                           </span>
                         </div>
                       </div>
@@ -795,12 +792,12 @@ export default function HospitalityPage() {
                       </div>
                     </div>
 
-                    {/* 5. Mobile Host Story Snippet */}
+                    {/* 5. Mobile Property Fact Snippet */}
                     <div className="px-3 pb-1">
                       <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-[10px] space-y-1">
-                        <strong className="block text-[#1C2733] font-bold">Nikolin & Elena · Caretakers</strong>
-                        <p className="text-slate-600 leading-relaxed m-0 italic">
-                          &ldquo;We restored our family’s 19th-century stone estate so travelers could experience authentic coast hospitality.&rdquo;
+                        <strong className="block text-[#1C2733] font-bold">Quiet stone retreat above the sea</strong>
+                        <p className="text-slate-600 leading-relaxed m-0">
+                          Restored 19th-century limestone architecture with direct courtyard breakfast and terrace views over the Ionian Sea.
                         </p>
                       </div>
                     </div>
@@ -813,7 +810,7 @@ export default function HospitalityPage() {
               </div>
             </div>
 
-            {/* Right: Copy & Live Demo Trigger */}
+            {/* Right: Copy & Demo Trigger */}
             <div className="p-8 sm:p-12 flex flex-col justify-between">
               <div>
                 <p className="text-xs font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">
@@ -823,14 +820,14 @@ export default function HospitalityPage() {
                   Villa Mare Riviera Guesthouse
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-5">
-                  Room-first browsing, generous photography, and a calm digital welcome. What you see inside this smartphone mockup is the exact mobile view of the live website—down to the limestone suite photography, direct rates, and 0% OTA fee calculation.
+                  A concept demo. It is not a real hotel and the photos are AI generated. Shows how room browsing, transparent direct rates, and a direct inquiry flow feel on a phone.
                 </p>
 
                 {/* Concrete Specs */}
                 <div className="space-y-2.5 pt-1 pb-6 text-xs text-slate-700 font-medium border-y border-slate-100 mb-6">
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>100% Identical to Live Demo:</strong> Same property name, same room photos, and exact matching direct rate plans.</span>
+                    <span><strong>Concept Demo with Direct Rates:</strong> Shows room details, direct rate calculation, and zero OTA commission logic.</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -850,7 +847,7 @@ export default function HospitalityPage() {
                   target="_blank"
                   className="inline-flex items-center justify-center min-h-[46px] px-6 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-all cursor-pointer shadow-xs gap-2"
                 >
-                  <span>Open Live Website Demo</span>
+                  <span>Open Concept Demo</span>
                   <ArrowUpRight className="w-4 h-4 text-[#F59E0B]" />
                 </Link>
 
@@ -863,7 +860,7 @@ export default function HospitalityPage() {
                   }}
                   className="inline-flex items-center justify-center min-h-[46px] px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer gap-1.5"
                 >
-                  <span>Quick Simulator</span>
+                  <span>Interactive Demo</span>
                 </button>
 
                 {/* QR Code Scanner Card for Desktop */}
@@ -882,13 +879,13 @@ export default function HospitalityPage() {
                   </div>
                   <div className="text-[11px] leading-tight text-slate-500">
                     <strong className="block text-[#1C2733] font-bold">Scan to test on phone</strong>
-                    Test live speed on your device
+                    Test speed on your device
                   </div>
                 </div>
               </div>
 
               <p className="text-[11px] text-slate-400 mt-4 m-0">
-                Interactive mockup & live demo · Concept design
+                Interactive mockup · Concept design with AI-generated imagery
               </p>
             </div>
           </div>
@@ -910,9 +907,6 @@ export default function HospitalityPage() {
                   <span className="absolute top-3 left-3 bg-[#1C2733]/90 text-white px-2.5 py-1 rounded text-xs font-bold">
                     Concept design · Lake Ohrid, North Macedonia
                   </span>
-                  <span className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-xs text-[#1C2733] font-bold text-[10px] px-2.5 py-1 rounded-full shadow-xs">
-                    Demo Simulator Ready
-                  </span>
                 </div>
 
                 <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
@@ -922,7 +916,7 @@ export default function HospitalityPage() {
                   Savoria Estate & Vineyards
                 </h4>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                  Heritage balcony suites with lake views, organic vineyard breakfast, and welcoming reserve bottle perks for guests who book direct. Includes interactive sommelier wine tastings.
+                  Concept: a lakeside estate with rooms. Shows how a story-led page and room list fit together.
                 </p>
               </div>
 
@@ -933,7 +927,7 @@ export default function HospitalityPage() {
                     target="_blank"
                     className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
                   >
-                    <span>Open Live Demo</span>
+                    <span>Open Concept Demo</span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-[#F59E0B]" />
                   </Link>
                   <button
@@ -945,7 +939,7 @@ export default function HospitalityPage() {
                     }}
                     className="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer"
                   >
-                    <span>Simulator</span>
+                    <span>Interactive Demo</span>
                   </button>
                 </div>
                 <button
@@ -980,9 +974,6 @@ export default function HospitalityPage() {
                   <span className="absolute top-3 left-3 bg-[#1C2733]/90 text-white px-2.5 py-1 rounded text-xs font-bold">
                     Concept design · Sarajevo Old Town, Bosnia
                   </span>
-                  <span className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-xs text-[#1C2733] font-bold text-[10px] px-2.5 py-1 rounded-full shadow-xs">
-                    Demo Simulator Ready
-                  </span>
                 </div>
 
                 <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
@@ -992,7 +983,7 @@ export default function HospitalityPage() {
                   The Metropolitan Loft Suites · Sarajevo
                 </h4>
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                  Exposed Austrian-era brick, cathedral skylights, and high-speed fiber internet. Features seamless contactless smart keybox entry and authentic Bosnian coffee welcome kit.
+                  Concept: a city loft guesthouse in Sarajevo. Shows how room types and a direct enquiry button work on a phone.
                 </p>
               </div>
 
@@ -1003,7 +994,7 @@ export default function HospitalityPage() {
                     target="_blank"
                     className="px-4 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
                   >
-                    <span>Open Live Demo</span>
+                    <span>Open Concept Demo</span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-[#F59E0B]" />
                   </Link>
                   <button
@@ -1015,7 +1006,7 @@ export default function HospitalityPage() {
                     }}
                     className="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer"
                   >
-                    <span>Simulator</span>
+                    <span>Interactive Demo</span>
                   </button>
                 </div>
                 <button
@@ -1036,6 +1027,77 @@ export default function HospitalityPage() {
               </div>
             </article>
 
+          </div>
+        </section>
+
+        {/* ─────────────────────────────────────────────────────────────
+            6B. FOUNDING CLIENT OFFER
+        ────────────────────────────────────────────────────────────── */}
+        <section className="bg-white py-16 lg:py-20 border-t border-slate-200">
+          <div className="max-w-[1224px] mx-auto px-6 sm:px-9">
+            <div className="bg-[#FAF7F2] border border-[#E8E1D5] rounded-3xl p-8 sm:p-12">
+              <div className="max-w-2xl mb-8">
+                <span className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase block mb-2">
+                  FOUNDING CLIENT OFFER
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-black text-[#1C2733] tracking-tight mb-4">
+                  Taking two founding clients
+                </h2>
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                  I&apos;m new to hospitality and I want my first two hotel projects to go well. In return for a reduced price, I ask for honest feedback and, if you are happy with the result, permission to show it as a case study.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-[#E8E1D5]">
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-[#1C2733]">What you get</h3>
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#F59E0B] font-bold text-sm shrink-0">✓</span>
+                      <span>The same scope as the standard package, built with my full attention</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#F59E0B] font-bold text-sm shrink-0">✓</span>
+                      <span>A private preview before you pay the final instalment</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#F59E0B] font-bold text-sm shrink-0">✓</span>
+                      <span>Your code and content, handed over in full</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-[#1C2733]">What I ask</h3>
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-slate-400 font-bold text-sm shrink-0">•</span>
+                      <span>Photos and basic house information within a week of starting</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-slate-400 font-bold text-sm shrink-0">•</span>
+                      <span>A short review call or written feedback after launch</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-slate-400 font-bold text-sm shrink-0">•</span>
+                      <span>Permission to show the finished site only if you agree in writing</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-[#E8E1D5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <p className="text-xs text-slate-600 m-0">
+                  Reduced founding rates: Starter €390 · Showcase €590 · Showcase + Assistant €1,190.
+                </p>
+                <a
+                  href="#review"
+                  className="inline-flex items-center justify-center px-5 py-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-xs"
+                >
+                  Apply as a founding client
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1115,7 +1177,10 @@ export default function HospitalityPage() {
             
             {/* Starter */}
             <article className="border border-slate-200 rounded-2xl p-8 bg-white flex flex-col shadow-xs">
-              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">STARTER</p>
+              <div className="flex justify-between items-center mb-2">
+                <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase">STARTER</p>
+                <span className="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">Founding: €390</span>
+              </div>
               <h3 className="text-xl font-bold text-[#1C2733] mb-1">A first home online.</h3>
               <div className="text-3xl font-extrabold text-[#1C2733] tracking-tight my-4">€490–590</div>
               <p className="text-xs text-slate-500 mb-6">For a hotel without a website.</p>
@@ -1134,7 +1199,10 @@ export default function HospitalityPage() {
               <span className="absolute -top-3.5 left-6 bg-[#F59E0B] text-[#1C2733] font-extrabold text-[10px] tracking-wider px-3.5 py-1 rounded-full uppercase shadow-xs">
                 THE EVERYDAY ESSENTIAL
               </span>
-              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">SHOWCASE</p>
+              <div className="flex justify-between items-center mb-2">
+                <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase">SHOWCASE</p>
+                <span className="text-[10px] font-bold bg-[#F59E0B] text-[#1C2733] px-2 py-0.5 rounded">Founding: €590</span>
+              </div>
               <h3 className="text-xl font-bold text-[#1C2733] mb-1">Your whole story.</h3>
               <div className="text-3xl font-extrabold text-[#1C2733] tracking-tight my-4">€690–890</div>
               <p className="text-xs text-slate-500 mb-6">For a hotel ready for a fuller website.</p>
@@ -1150,15 +1218,21 @@ export default function HospitalityPage() {
 
             {/* Showcase + Assistant */}
             <article className="border border-slate-200 rounded-2xl p-8 bg-white flex flex-col shadow-xs">
-              <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-2">SHOWCASE + ASSISTANT</p>
+              <div className="flex justify-between items-center mb-2">
+                <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase">SHOWCASE + ASSISTANT</p>
+                <span className="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">Founding: €1,190</span>
+              </div>
               <h3 className="text-xl font-bold text-[#1C2733] mb-1">Help after hours.</h3>
               <div className="text-3xl font-extrabold text-[#1C2733] tracking-tight my-4">€1,490–1,690</div>
               <p className="text-xs text-slate-500 mb-6">For recurring guest questions.</p>
-              <ul className="space-y-2.5 text-xs text-[#1C2733] mb-8 font-medium">
+              <ul className="space-y-2.5 text-xs text-[#1C2733] mb-4 font-medium">
                 <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Everything in Showcase</li>
-                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Approved house information setup</li>
-                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Optional AI assistant</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> House info knowledge base setup</li>
+                <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Multilingual guest AI assistant</li>
               </ul>
+              <p className="text-[11px] text-slate-500 leading-normal mb-6">
+                Ongoing AI usage is billed at raw API cost by provider (typically €5–€20/mo).
+              </p>
               <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors text-center">
                 Start with a free review
               </a>
@@ -1166,14 +1240,24 @@ export default function HospitalityPage() {
 
           </div>
 
-          {/* Payment Terms Strip */}
-          <div className="py-5 border-b border-slate-200 flex flex-col sm:flex-row justify-between text-xs sm:text-sm text-[#1C2733] gap-2">
-            <strong className="font-bold">Proposed payment terms</strong>
-            <span className="text-slate-600">50% to start · 50% after staging approval · Invoiced in euros (Wise SEPA)</span>
+          {/* Review Before You Pay Guarantee & Payment Terms */}
+          <div className="p-6 sm:p-8 bg-slate-50 border border-slate-200 rounded-2xl mb-12">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+              <div className="space-y-1.5 max-w-2xl">
+                <h3 className="text-base font-bold text-[#1C2733] flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <span>Review before you pay the balance</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed m-0">
+                  You see the finished site on a private link. If it does not match the agreed scope, we fix it. If we cannot agree, you keep the work done so far and the unpaid balance is cancelled.
+                </p>
+              </div>
+              <div className="text-xs text-slate-600 shrink-0 lg:text-right border-t lg:border-t-0 pt-4 lg:pt-0 w-full lg:w-auto">
+                <strong className="block text-[#1C2733] font-semibold">Payment schedule</strong>
+                50% deposit to start · 50% after approval · Wise SEPA wire
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-slate-500 mt-3 mb-12">
-            Pricing and payment terms are planning estimates, subject to an agreed proposal. Assistant running costs, hosting, revisions and delivery dates are confirmed in writing.
-          </p>
 
           {/* Commission Calculator */}
           <div id="calculator" className="bg-[#F8F9FA] p-8 sm:p-10 rounded-2xl border border-slate-200 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10">
@@ -1528,7 +1612,7 @@ export default function HospitalityPage() {
                 disabled={isSubmitting}
                 className="w-full py-4 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-bold text-sm rounded-lg transition-all cursor-pointer shadow-md mt-3"
               >
-                {isSubmitting ? "Sending..." : "Prepare my free review request"}
+                {isSubmitting ? "Sending..." : "Send my request"}
               </button>
 
               <p className="text-[11px] text-slate-500 text-center mt-2 m-0">
@@ -1569,12 +1653,12 @@ export default function HospitalityPage() {
               </Link>
 
               <p className="text-sm text-slate-600 mb-6 max-w-sm leading-relaxed">
-                Bespoke digital architecture, direct booking engines, and 24/7 autonomous AI guest concierges engineered for independent European boutique stays and ambitious businesses.
+                Websites for independent hotels, with an optional AI assistant for common guest questions. Built and maintained by one person in Jakarta.
               </p>
 
-              <div className="flex items-center gap-2 text-xs font-medium text-slate-500 w-fit">
+              <div className="flex items-center gap-2 text-xs font-medium text-slate-600 w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span>Available for Q2/Q3 European Boutique Deployments</span>
+                <span>Taking 2 founding clients this season.</span>
               </div>
             </div>
 
@@ -1624,19 +1708,19 @@ export default function HospitalityPage() {
                   </a>
                 </li>
                 <li>
-                  <span className="text-slate-500">Staging-First Guarantee</span>
+                  <span className="text-slate-500">Review Before Balance Guarantee</span>
                 </li>
                 <li>
                   <span className="text-slate-500 flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>50/50 Milestone Escrow</span>
+                    <span>50% Start / 50% After Approval</span>
                   </span>
                 </li>
                 <li>
-                  <span className="text-slate-500">European SEPA Bank Wire</span>
+                  <span className="text-slate-500">European SEPA Bank Wire (Wise)</span>
                 </li>
                 <li>
-                  <span className="text-slate-500">You Own 100% of Code & Assets</span>
+                  <span className="text-slate-500">You Own 100% of Your Code</span>
                 </li>
               </ul>
             </div>
@@ -1649,7 +1733,7 @@ export default function HospitalityPage() {
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2.5 text-slate-600">
                   <MapPin size={16} className="text-slate-400 mt-0.5 shrink-0" />
-                  <span>Jakarta Barat, Indonesia <br /><span className="text-xs text-slate-400">Serving Europe & Worldwide</span></span>
+                  <span>Jakarta, Indonesia <br /><span className="text-xs text-slate-400">Serving Europe & Worldwide</span></span>
                 </li>
                 <li className="flex items-center gap-2.5 text-slate-600">
                   <Mail size={16} className="text-slate-400 shrink-0" />
@@ -1671,23 +1755,19 @@ export default function HospitalityPage() {
           {/* Bottom Bar */}
           <div className="border-t border-slate-200/90 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
             <p>
-              &copy; {new Date().getFullYear()} WUUS Studio. Seluruh hak cipta dilindungi. All rights reserved.
+              &copy; {new Date().getFullYear()} WUUS. All rights reserved.
             </p>
             <div className="flex items-center gap-5">
               <Link href="/hospitality/privacy" className="hover:text-slate-900 transition-colors font-medium text-slate-600">
                 Hospitality Privacy & GDPR
               </Link>
               <span>•</span>
-              <Link href="/syarat-ketentuan" className="hover:text-slate-900 transition-colors">
+              <Link href="/hospitality/terms" className="hover:text-slate-900 transition-colors">
                 Terms & Conditions
               </Link>
               <span>•</span>
               <Link href="/" className="hover:text-[#F59E0B] transition-colors">
                 Main Studio (ID)
-              </Link>
-              <span>•</span>
-              <Link href="/admin/inquiries" className="hover:text-slate-900 transition-colors text-slate-400">
-                Admin
               </Link>
             </div>
           </div>
@@ -1695,7 +1775,7 @@ export default function HospitalityPage() {
       </footer>
 
       {/* ─────────────────────────────────────────────────────────────
-          13. INTERACTIVE LIVE CONCEPT DEMO & SIMULATOR MODAL
+          13. INTERACTIVE CONCEPT DEMO & SIMULATOR MODAL
       ────────────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {conceptModalOpen && (
@@ -1719,7 +1799,7 @@ export default function HospitalityPage() {
                 <div>
                   <div className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-1">
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>INTERACTIVE PROTOTYPE & LIVE MOBILE SIMULATOR</span>
+                    <span>INTERACTIVE CONCEPT PROTOTYPE & MOBILE SIMULATOR</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-black text-[#1C2733]">
                     {conceptDatabase[selectedConcept].subtitle}
@@ -1734,7 +1814,7 @@ export default function HospitalityPage() {
                     target="_blank"
                     className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
                   >
-                    <span>Open Full Page Live Demo</span>
+                    <span>Open Full Page Concept Demo</span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-[#F59E0B]" />
                   </Link>
                   <button
@@ -1801,12 +1881,12 @@ export default function HospitalityPage() {
               {/* Interactive Prototype Simulator Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                {/* Left (7 cols): The Live Mockup Phone */}
+                {/* Left (7 cols): The Mockup Phone */}
                 <div className="lg:col-span-7 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200">
                   <div className="flex items-center justify-between mb-3 text-xs">
                     <span className="font-bold text-[#1C2733] flex items-center gap-1.5">
                       <Smartphone className="w-4 h-4 text-[#F59E0B]" />
-                      <span>Live Screen Preview</span>
+                      <span>Concept Screen Preview</span>
                     </span>
                     <span className="text-[10px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">
                       https://{conceptDatabase[selectedConcept].url}

@@ -152,7 +152,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
       <div className="bg-[#1C2733] text-white px-4 sm:px-6 py-2.5 sticky top-0 z-50 border-b border-[#233746] flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex flex-wrap items-center gap-3">
           <span className="font-bold tracking-wider uppercase text-[11px] text-[#F59E0B]">
-            WUUS Live Demo
+            WUUS Concept Demo
           </span>
           <span className="text-slate-500 hidden sm:inline">|</span>
           
@@ -196,7 +196,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
             href="/hospitality#review"
             className="text-slate-200 hover:text-white font-medium transition-colors"
           >
-            Ask Faisal for a Bespoke Build →
+            Ask Faisal about a website →
           </Link>
           <Link
             href="/hospitality#examples"

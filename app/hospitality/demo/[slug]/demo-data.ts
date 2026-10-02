@@ -43,9 +43,9 @@ export interface PropertyData {
   slug: string;
   name: string;
   category: string;
-  ratingScore: number;
-  reviewsCount: number;
-  ratingLabel: string;
+  ratingScore?: number;
+  reviewsCount?: number;
+  ratingLabel?: string;
   location: string;
   locationHighlight: string;
   coords: string;
@@ -73,11 +73,8 @@ export const propertiesData: Record<string, PropertyData> = {
     slug: 'seaside-guesthouse',
     name: 'Artisan Coastal Retreat',
     category: 'Boutique Coastal Sanctuary',
-    ratingScore: 9.8,
-    reviewsCount: 142,
-    ratingLabel: 'Exceptional',
     location: 'Himara, Albanian Riviera · Albania',
-    locationHighlight: '120m from quiet pebble beach · 9.9 Location rating',
+    locationHighlight: '120m from quiet pebble beach',
     coords: '39.8617° N, 19.9822° E',
     motto: 'A quiet stone haven above the turquoise Ionian Sea',
     tagline: 'Handcrafted limestone architecture, morning sea breeze, and homemade courtyard artisan breakfast.',
@@ -87,10 +84,10 @@ export const propertiesData: Record<string, PropertyData> = {
     otaStartingRate: 145,
     directPerk: 'Complimentary chilled local reserve white wine + flexible late check-in',
     host: {
-      names: 'Nikolin & Elena',
-      role: 'Founding Hosts & Caretakers',
+      names: 'Boutique Coastal Retreat',
+      role: 'Property Concept',
       image: '/images/hospitality/host-portrait.jpg',
-      note: 'We restored our family’s 19th-century stone estate so travelers could experience the authentic Albanian coast at their own pace—away from crowded mega-resorts.'
+      note: 'A quiet Mediterranean stone estate concept designed for travelers who appreciate authentic coastal calm.'
     },
     rooms: [
       {
@@ -236,24 +233,21 @@ export const propertiesData: Record<string, PropertyData> = {
     slug: 'lakeside-wine-estate',
     name: 'Savoria Estate & Vineyards',
     category: 'Historic Boutique Winery Estate',
-    ratingScore: 9.9,
-    reviewsCount: 168,
-    ratingLabel: 'Exceptional',
     location: 'Lake Ohrid · North Macedonia',
     locationHighlight: 'Lakefront private dock · 10 min scenic boat to Old Town',
     coords: '41.1172° N, 20.8016° E',
     motto: 'Heritage suites overlooking ancient waters and terraced vineyards',
-    tagline: '150-year-old historic winery estate, organic vineyard breakfast, and private sommelier tastings.',
+    tagline: 'Historic winery estate concept with panoramic lake views and terrace suites.',
     heroImage: '/images/hospitality/savoria-hero-banner.jpg',
     atmosphereImage: '/images/hospitality/savoria-wine-estate.jpg',
     startingRate: 110,
     otaStartingRate: 140,
     directPerk: 'Complimentary cellar tour + welcome bottle of Reserve Vranec wine',
     host: {
-      names: 'Stefan & Maria',
-      role: 'Estate Owners & Winemakers',
+      names: 'Savoria Estate Team',
+      role: 'Estate Concept',
       image: '/images/hospitality/host-portrait.jpg',
-      note: 'Our family has cultivated indigenous Vranec and Stanushina grapes on these terraced slopes for four generations. We welcome guests to experience real wine country hospitality.'
+      note: 'A boutique lakeside retreat concept combining winemaking heritage with restful balcony stays.'
     },
     rooms: [
       {
@@ -398,9 +392,6 @@ export const propertiesData: Record<string, PropertyData> = {
     slug: 'city-apartments',
     name: 'The Metropolitan Loft Suites · Sarajevo',
     category: 'Urban Heritage Luxury Suites',
-    ratingScore: 9.7,
-    reviewsCount: 215,
-    ratingLabel: 'Superb',
     location: 'Sarajevo Old Town · Bosnia and Herzegovina',
     locationHighlight: 'Heart of Old Bazaar · Steps from artisan coppersmiths & cafés',
     coords: '43.8594° N, 18.4318° E',
@@ -412,10 +403,10 @@ export const propertiesData: Record<string, PropertyData> = {
     otaStartingRate: 260,
     directPerk: '24/7 keybox arrival + welcome Bosnian coffee set & neighborhood guide',
     host: {
-      names: 'Dino & Lejla',
-      role: 'Architects & Urban Hosts',
+      names: 'The Metropolitan Loft Team',
+      role: 'Urban Concept',
       image: '/images/hospitality/host-portrait.jpg',
-      note: 'Located right where the Ottoman and Austro-Hungarian quarters meet. Quiet sleep inside double-glazed lofts, yet steps from Sarajevo’s best coffee and culture.'
+      note: 'A city guesthouse concept located where heritage architecture meets modern travel convenience.'
     },
     rooms: [
       {

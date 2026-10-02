@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${property.name} - Live Boutique Hospitality Concept | WUUS`,
-    description: `Interactive live demo of ${property.name} in ${property.location}. Direct booking engine, WhatsApp inquiry, 24/7 AI guest concierge, and 0% OTA commission architecture designed by WUUS.`,
+    title: `${property.name} - Boutique Hospitality Concept Demo | WUUS`,
+    description: `Concept demo of ${property.name} in ${property.location}. Demonstrates a story-led room layout, direct WhatsApp enquiry flow, and transparent direct rates.`,
     robots: {
       index: false,
       follow: true,
