@@ -2,9 +2,11 @@
 
 ## Rutinitas owner
 
-Cek admin + inbox pukul 09.00 dan 17.00 WIB pada hari kerja. Kirim respons pertama dalam satu hari kerja; review yang diterima dalam dua hari kerja. Jika antrean melebihi dua review/hari, beri jadwal baru secara eksplisit. Belum ada notifikasi email otomatis; jangan menganggap inquiry akan datang sebagai email.
+Cek admin + inbox pukul 09.00 dan 17.00 WIB pada hari kerja. Kirim respons pertama dalam satu hari kerja; review yang diterima dalam dua hari kerja. Jika antrean melebihi dua review/hari, beri jadwal baru secara eksplisit. Integrasi notifikasi tersedia; email baru aktif setelah provider/sender/recipient dikonfigurasi dan actual inbox receipt diuji. Lihat NOTIFICATIONS.md; cek antrean gagal secara rutin.
 
 Catat privat: lead ID, negara, niche, sumber, tanggal balas, masalah, langkah berikutnya, tenggat, nilai proposal, deposit diterima, biaya langsung, jam kerja, pelunasan. Status `won` di admin berarti tahap hubungan; **bukan bukti pembayaran**. Uang diterima hanya dicatat setelah bank/payment account mengonfirmasi.
+
+Gunakan tracker Excel di `WUUS/outputs/wuus-readiness-20261007/WUUS-Tracker.xlsx`. Maksimal **dua proyek aktif**, satu **UTAMA** untuk produksi dan satu antrean dengan jadwal disepakati. Formulanya memisahkan currency invoice dari net settlement dan mengecualikan simulasi/bukti belum lengkap. Spreadsheet tidak menggantikan verifikasi bank. Template lengkap tersedia di folder `templates/`; bukti simulation/restore di SIMULATION.md.
 
 ## Katalog scope awal — keputusan internal
 

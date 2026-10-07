@@ -1,6 +1,6 @@
 # WUUS — acuan kesiapan klien pertama
 
-Versi 1 · 7 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
+Versi 2 · 7 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
 
 Tujuan: menerima pemasukan pertama dari jasa website dengan scope terkendali, biaya dibayar dari deposit, dan proses yang bisa dijalankan satu orang. Pendapatan saat ini **0**, anggaran akuisisi **Rp0**. Target pendapatan adalah sasaran, bukan prediksi atau jaminan.
 
@@ -16,6 +16,15 @@ Urutan baca dan kerja:
 8. [Decision log](DECISIONS.md): alasan keputusan supaya arah tidak berganti tanpa bukti.
 9. [Proposal contoh](SAMPLE-PROPOSAL.md): dry-run Starter dengan batas yang konkret.
 10. [Verification](VERIFICATION.md): hasil pengujian dan gate yang belum lulus.
+11. [Fondasi website klien](CLIENT-SITE-FOUNDATION.md): generator, konten terpisah, repository/preview/deployment per klien.
+12. [Notifikasi owner](NOTIFICATIONS.md): outbox, email, retry dan konfigurasi.
+13. [Simulasi delivery](SIMULATION.md): proposal → revisi → handover → rollback/restore yang sudah dijalankan.
+14. [Gate akun produksi](PRODUCTION-BLOCKERS.md): temuan Vercel/DNS/Supabase dan tindakan yang belum dapat dilakukan.
+15. [Roadmap fitur besar](FUTURE-ROADMAP.md): kebutuhan dan pendanaan sebelum portal/PMS/billing/outreach/AI.
+
+Template siap diisi: [onboarding](templates/ONBOARDING.md), [proposal lengkap](templates/PROPOSAL.md), [invoice/receipt](templates/INVOICE.md), [payment verification](templates/PAYMENT-VERIFICATION.md), [scope change](templates/CHANGE-REQUEST.md), [launch/handover](templates/LAUNCH-HANDOVER.md).
+
+Tracker Excel berada di `WUUS/outputs/wuus-readiness-20261007/WUUS-Tracker.xlsx`. Empat tab: Proyek, Pembayaran, Perubahan dan Panduan. Contoh SIMULASI tidak menjadi pemasukan. Maksimal dua proyek aktif dengan satu fokus utama. Simpan salinan yang berisi data nyata secara privat.
 
 Dokumen ini menjadi acuan eksekusi yang menghubungkan audit sebelumnya di `WUUS/docs/audits/2026-10-06/` dengan perubahan pada repositori `webuntukusaha` dan `wuus-ai-builder`. Temuan audit bukan bukti bahwa konfigurasi produksi sudah diperbaiki. Status lokal dan produksi harus dicatat terpisah.
 

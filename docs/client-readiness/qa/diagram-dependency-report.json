@@ -1,0 +1,6 @@
+{
+  "checkedAt": "2026-10-07T14:28:28.246Z",
+  "status": "Passed: workflow SVG and KaTeX math rendered.",
+  "errors": [],
+  "limitation": "Local browser smoke test, no provider/database/AI calls."
+}

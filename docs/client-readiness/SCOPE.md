@@ -2,7 +2,7 @@
 
 ## Tahap 1 — keamanan dan penerimaan inquiry
 
-Deliverable: API server tervalidasi; skema SQL dengan RLS, consent, deduplikasi, rate limit; dua formulir terhubung; admin Auth + allowlist; error state; pause API AI builder dan pembayaran; build tanpa `db push`; pengujian regresi.
+Deliverable: API server tervalidasi; SQL RLS/consent/deduplikasi/rate limit; dua formulir; admin Auth/allowlist/pagination; outbox notifikasi owner dan retry; error state; pause API AI/payment; build tanpa `db push`; pengujian regresi.
 
 Selesai lokal bila acceptance A01–A12 lulus tanpa akses database/provider produksi. Selesai produksi bila migrasi, env, akun owner, dan uji alur lengkap pada preview serta produksi terverifikasi. Akses dashboard masih diperlukan untuk langkah produksi.
 
@@ -14,7 +14,7 @@ Selesai bila public copy sesuai layanan yang benar-benar dapat diserahkan dan QA
 
 ## Tahap 3 — operasi proyek pertama
 
-Deliverable: isi satu proposal contoh dengan aset demo; dry-run brief→preview→revisi→handover; pilih hosting yang mengizinkan komersial dengan biaya tercatat; verifikasi metode pembayaran owner; latihan pemulihan backup. Ini memerlukan beberapa keputusan/akun owner dan tidak dapat dibuktikan hanya dari source code.
+Deliverable: kit hospitality konten terpisah, generator repository sendiri, tracker proyek/pembayaran, template proposal/onboarding/invoice/scope/launch; dry-run fiktif brief→preview→revisi→handover→restore. Hosting komersial, metode pembayaran nyata, inbox receipt dan domain/HTTPS memerlukan akses akun; statusnya dipisahkan dari hasil lokal.
 
 ## Tahap 4 — penjualan terukur
 
@@ -23,7 +23,7 @@ Jalankan satu eksperimen 20 prospek manual, satu niche, maksimal dua pasar pemba
 ## Di luar scope sekarang
 
 - Memperbaiki seluruh produk SaaS AI, ledger kredit dan webhook payment secara end-to-end. Endpoint dipause sampai proyek khusus selesai.
-- Dashboard billing, portal klien, multilingual massal, scraper lead, iklan berbayar, otomasi outreach.
+- Implementasi portal/PMS/booking/analytics lengkap/subscription/outreach massal/AI baru sebelum gate pembeli dan dana. Requirements/roadmap disiapkan sekarang.
 - Redesign semua halaman Indonesia, migrasi seluruh demo, atau fitur yang tidak membantu transaksi pertama.
 - Mengaktifkan/menagih layanan berbayar tanpa anggaran dan keputusan owner.
 

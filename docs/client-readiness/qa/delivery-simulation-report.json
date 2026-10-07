@@ -1,0 +1,34 @@
+{
+  "simulation": true,
+  "performedAt": "2026-10-07T14:10:59.296Z",
+  "projectId": "DEMO-STARTER-001",
+  "actualRevenue": 0,
+  "steps": [
+    "Synthetic WUUS inquiry persisted and read by verified owner (local Auth/PostgREST adapter)",
+    "Fictional needs and fixed scope recorded",
+    "Proposal approval simulated",
+    "Deposit verification step simulated; no real funds",
+    "Materials complete fixture",
+    "Independent client repository built",
+    "Local preview and responsive/browser QA",
+    "Approved in-scope revision committed",
+    "Balance step simulated; no real funds",
+    "Local launch rehearsal only; fictional production build blocked",
+    "Source archive and editing/handover guide prepared",
+    "Separate checkout rebuild, previous release rollback and return verified",
+    "Source ZIP checksum, safe extraction and identical rebuild verified"
+  ],
+  "release": "4386ec0adc1fc105709f959ef0c19c2e9724eec1",
+  "previousRelease": "c8c770c3df81a4fc06f98a3abfc608327418db3b",
+  "firstHtmlSha256": "ed8dbbf0741ad671858636c67b07120f3bc54d5b9e337b1ca0ae87a09bba2cfc",
+  "finalHtmlSha256": "9d2dc86f651c9cf652e93572404af5df961b98661fcae4a99e8f0df1ff89775a",
+  "sourceArchiveSha256": "d0f42bd2452ff2f824f78880e6c607aca18251bc481ca82c3f6509b919f06489",
+  "restoreHtmlSha256": "9d2dc86f651c9cf652e93572404af5df961b98661fcae4a99e8f0df1ff89775a",
+  "limitations": [
+    "No actual bank/payment route confirmation",
+    "No public client domain/HTTPS or commercial hosting provisioned",
+    "No real email or WhatsApp message sent",
+    "No real client acceptance"
+  ],
+  "archiveRestoreHtmlSha256": "9d2dc86f651c9cf652e93572404af5df961b98661fcae4a99e8f0df1ff89775a"
+}

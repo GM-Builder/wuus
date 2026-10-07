@@ -3,7 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useViewportWidth } from "@/lib/use-viewport";
 import { AlertCircle, MousePointerClick, Zap, ChevronRight, Plus } from "lucide-react";
 
 const STEPS = [
@@ -44,16 +45,7 @@ const STEPS = [
 
 export function Storytelling() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useViewportWidth() < 1024;
 
   return (
     <section className="relative h-auto lg:h-[120vh] bg-[#020617] overflow-hidden flex flex-col" id="storytelling">

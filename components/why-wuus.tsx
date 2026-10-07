@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { useRef } from "react";
+import { useViewportWidth } from "@/lib/use-viewport";
 import { Rocket, Gem, Clock, Palette, ShieldCheck, Handshake, HeartHandshake } from "lucide-react";
 
 const reasons = [
@@ -43,7 +44,8 @@ const reasons = [
   },
 ];
 
-function StickyHorizontalCard({ reason, i, scrollX, dims, isMobile }: { reason: any, i: number, scrollX: any, dims: any, isMobile: boolean }) {
+type CardDimensions = { cardW: number; gap: number; startOffset: number; stackOffset: number };
+function StickyHorizontalCard({ reason, i, scrollX, dims, isMobile }: { reason: typeof reasons[number], i: number, scrollX: MotionValue<number>, dims: CardDimensions, isMobile: boolean }) {
   const startPos = dims.startOffset + i * (dims.cardW + dims.gap);
   const stickyOffset = dims.startOffset + i * dims.stackOffset;
 
@@ -90,37 +92,14 @@ function StickyHorizontalCard({ reason, i, scrollX, dims, isMobile }: { reason: 
 
 export function WhyWuus() {
   const targetRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const width = useViewportWidth();
+  const isMobile = width < 768;
 
   const { scrollYProgress } = useScroll({ target: targetRef });
 
-  const [dims, setDims] = useState({ cardW: 500, gap: 48, startOffset: 100, stackOffset: 40 });
-
-  useEffect(() => {
-    const w = window.innerWidth;
-    if (w < 768) {
-      setDims({
-        cardW: w * 0.85,
-        gap: 24,
-        startOffset: 24,
-        stackOffset: 12
-      });
-    } else {
-      setDims({
-        cardW: 500,
-        gap: 48,
-        startOffset: Math.max(60, w * 0.05),
-        stackOffset: 40
-      });
-    }
-  }, [isMobile]);
+  const dims: CardDimensions = isMobile
+    ? { cardW: width * 0.85, gap: 24, startOffset: 24, stackOffset: 12 }
+    : { cardW: 500, gap: 48, startOffset: Math.max(60, width * 0.05), stackOffset: 40 };
 
   // Total scrolling distance calculation
   const maxScroll = (reasons.length - 1) * (dims.cardW + dims.gap);

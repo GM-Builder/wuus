@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { ChevronRight, ArrowLeft, RefreshCcw, CheckCircle2, Store, Megaphone, ShoppingCart, Globe, Layout, TrendingUp } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 
 // --- Components ---
 
@@ -251,7 +250,6 @@ export default function ScoreTestPage() {
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [answers, setAnswers] = useState<number[]>(Array(questions.length).fill(-1));
   const [isFinished, setIsFinished] = useState(false);
-  const [hasTracked, setHasTracked] = useState(false);
 
   const calculateScore = () => {
     const totalRaw = answers.reduce((a, b) => a + (b === -1 ? 0 : b), 0);
@@ -304,36 +302,6 @@ export default function ScoreTestPage() {
       };
     }
   };
-
-  // --- Tracking Logic ---
-  useEffect(() => {
-    if (isFinished && !hasTracked) {
-      const saveScore = async () => {
-        const finalScore = calculateScore();
-        const feedback = getResultFeedback(finalScore);
-        
-        try {
-          const { error } = await supabase
-            .from('business_scores')
-            .insert([
-              { 
-                score: finalScore, 
-                category: feedback.title,
-                created_at: new Date().toISOString()
-              }
-            ]);
-          
-          if (error) throw error;
-          setHasTracked(true);
-          console.log("Score tracked successfully");
-        } catch (err) {
-          console.error("Error tracking score:", err);
-        }
-      };
-
-      saveScore();
-    }
-  }, [isFinished, hasTracked]);
 
   const handleOptionSelect = (optionScore: number) => {
     const newAnswers = [...answers];
@@ -496,6 +464,9 @@ export default function ScoreTestPage() {
                         <p className="text-gray-500 text-lg leading-relaxed max-w-xl">
                           {getResultFeedback(calculateScore()).desc}
                         </p>
+                        <p className="mt-4 text-sm text-gray-500">
+                          Skor dihitung di browser Anda. Jawaban dan hasil tes tidak dikirim ke WUUS.
+                        </p>
                       </div>
                     </div>
 
@@ -611,7 +582,6 @@ export default function ScoreTestPage() {
                           setAnswers(Array(questions.length).fill(-1));
                           setCurrentQuestionIdx(0);
                           setIsFinished(false);
-                          setHasTracked(false);
                         }}
                         className="w-full px-8 py-5 bg-white hover:bg-gray-50 text-primary-navy font-black text-[10px] tracking-[0.2em] transition-all border-2 border-gray-200 hover:border-primary-navy rounded-xl uppercase flex items-center justify-center gap-2"
                       >

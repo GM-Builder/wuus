@@ -174,7 +174,7 @@ export function Pricing() {
     return sum + getItemEffectivePrice(item.id, addonState[item.id] || 0);
   }, 0);
 
-  const selectedPlan = plans.find(p => p.id === selectedPlanId) || (redesignPlans as any[]).find(p => p.id === selectedPlanId);
+  const selectedPlan = plans.find(p => p.id === selectedPlanId) || redesignPlans.find(p => p.id === selectedPlanId);
   const selectedPlanPrice = selectedPlan ? selectedPlan.basePromoPrice : 0;
   const grandTotal = selectedPlanPrice + totalAddonPrice;
 

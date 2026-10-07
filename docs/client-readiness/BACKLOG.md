@@ -9,16 +9,23 @@ Status: TODO = belum mulai; LOCAL = implementasi + verifikasi lokal selesai; PAR
 | W03 | P0 | Auth admin server + pipeline | A07–A08 | LOCAL; Auth asli ACCOUNT |
 | W04 | P0 | Pause semua API builder sebelum side effect | A09 | LOCAL |
 | W05 | P0 | Build tanpa perubahan DB | A10 | LOCAL |
-| W06 | P0 | Dependencies berisiko tinggi dan build | A11 | PARTIAL; runtime high/critical 0, lint baseline/dev advisory tersisa |
+| W06 | P0 | Dependencies berisiko tinggi dan build | A11 | PARTIAL; kedua runtime audit 0; builder full audit 0; website 5 dev-chain advisory tanpa patched braces; website full lint 0 error |
 | W07 | P1 | Canonical apex, sitemap, penawaran AI | A12 | LOCAL |
 | W08 | P0 rilis | Migrasi backup + service key + allowlist owner | A13 | ACCOUNT |
 | W09 | P0 rilis | Preview + produksi test dengan inquiry sintetis | A14 | ACCOUNT |
 | W10 | P0 komersial | Hosting komersial, payment eligibility, inbox | A15 | ACCOUNT |
-| W11 | P1 | Proposal contoh dan dry-run delivery | A16 | PARTIAL; contoh siap, delivery/restore belum |
+| W11 | P1 | Proposal contoh dan dry-run delivery | A16 | LOCAL; revisi, Git rollback dan ZIP restore identik; actual payment/domain/hosting ACCOUNT |
 | W12 | P1 setelah gate | Eksperimen prospek dan pencatatan hasil | SALES-EXPERIMENT.md | TODO |
+| W13 | P1 | Kit hospitality, konten terpisah dan generator repository klien | A18–A19 | LOCAL; client-owned remote/deploy/domain dibuat untuk klien nyata setelah onboarding |
+| W14 | P0 | Outbox owner notification, retry, guard dan status | A17 | LOCAL; sender/provider/inbox/scheduler produksi ACCOUNT |
+| W15 | P1 | Template proposal/onboarding/invoice/payment/CR/launch | A15–A16 | LOCAL; identitas dan ketentuan klien nyata diisi sebelum dipakai |
+| W16 | P1 | Tracker proyek, pembayaran dan perubahan scope | A20 | LOCAL; formula/mata uang/simulasi/bukti missing diuji; tidak terkoneksi bank |
+| W17 | P1 | Persyaratan roadmap portal/PMS/analytics/billing/outreach/AI | FUTURE-ROADMAP.md | LOCAL; implementasi menunggu pembeli dan dana |
+| W18 | P0 | www redirect dan penelusuran akun produksi | A22 | LOCAL redirect; DNS www NXDOMAIN, canonical live masih www; pemilik domain ACCOUNT |
+| W19 | P0 | Hentikan tracking skor browser dan kunci tabel historis | A23 | LOCAL; migration 003 dan denial CRUD/sequence lulus, produksi ACCOUNT |
 
 ## Bukti dan risiko tersisa
 
 Hasil pengujian dicatat di [VERIFICATION.md](VERIFICATION.md). SQL yang disimpan bukan bukti bahwa migrasi sudah diterapkan. Endpoint AI yang dipause bukan bukti bahwa ledger/webhook lama sudah benar. Tidak membuka kembali endpoint hanya untuk membuat demo berjalan.
 
-Pekerjaan berikutnya: W08 → W09 → W10 → sisa W11 → W12. Owner perlu menjawab plan hosting dan akses Supabase, lalu konfigurasi staging/production mengikuti runbook. Belum ada notifikasi email inquiry otomatis. Website tidak dinyatakan siap menerima deposit sebelum payment, hosting dan scope klien verified.
+Pekerjaan berikutnya: akses akun yang benar → W08/W14/W18 → W09 → W10 → W12. Lihat PRODUCTION-BLOCKERS.md: akun Vercel tersambung Hobby tanpa domain apex, www belum hidup, Supabase belum login dan host lokal gagal DNS. Tidak ada klaim produksi siap menerima deposit sebelum payment, hosting, inbox dan scope klien verified.

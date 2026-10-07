@@ -191,7 +191,7 @@ export function BentoFeatures() {
               className="text-2xl text-primary-navy leading-relaxed text-center px-2"
               style={{ fontWeight: 600 }}
             >
-              "Website yang dirancang dengan baik bukan sekadar tampilan, tapi fondasi kepercayaan digital."
+              &ldquo;Website yang dirancang dengan baik bukan sekadar tampilan, tapi fondasi kepercayaan digital.&rdquo;
             </p>
           </div>
         </motion.div>

@@ -161,7 +161,7 @@ export function Hero() {
                 </div>
               </div>
               <p className="text-xs text-slate-600 font-medium italic leading-relaxed">
-                "Pelanggan kami langsung percaya pesan lewat web karena tampilannya sangat rapi dan cepat."
+                Contoh konsep tampilan untuk restoran: menu, lokasi, dan tombol pesan yang mudah ditemukan.
               </p>
             </div>
 

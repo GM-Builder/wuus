@@ -12,11 +12,14 @@ function failure(error: unknown) {
 export async function GET(request: Request) {
   try {
     await requireOwner(request);
+    const rawPage = new URL(request.url).searchParams.get('page') ?? '0';
+    if (!/^\d{1,5}$/.test(rawPage)) throw new RequestError('Invalid page.');
+    const page = Number(rawPage);
     const { data, error } = await serviceClient().from('hospitality_inquiries')
-      .select('id,hotel_name,website_url,contact_name,email,notes,status,created_at,source,request_type,consent_at,consent_version')
-      .order('created_at', { ascending: false }).limit(500);
+      .select('id,request_id,hotel_name,website_url,contact_name,email,notes,status,created_at,source,request_type,consent_at,consent_version')
+      .order('created_at', { ascending: false }).order('id', { ascending: false }).range(page * 100, page * 100 + 100);
     if (error) throw new Error('Read failed.');
-    return jsonResponse({ inquiries: data });
+    return jsonResponse({ inquiries: (data ?? []).slice(0,100), page, hasMore: (data?.length ?? 0) > 100 });
   } catch (error) { return failure(error); }
 }
 

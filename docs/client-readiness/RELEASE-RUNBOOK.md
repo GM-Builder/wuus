@@ -4,9 +4,9 @@ Status: perubahan lokal. Migrasi tersimpan bukan bukti produksi sudah aman. Tida
 
 ## Konfigurasi dan staging
 
-1. Pastikan akses proyek Supabase dan hosting yang benar; catat ID privat. Cek plan komersial. [Vercel Hobby](https://vercel.com/docs/plans/hobby) hanya personal nonkomersial; plan akun belum diketahui. Jangan membeli layanan tanpa pendanaan/keputusan owner.
+1. Pastikan akses proyek Supabase dan hosting pemilik domain; catat ID privat. Akun CLI BinaHub terbukti Hobby, tetapi domain apex tidak ada pada project itu. [Vercel Hobby](https://vercel.com/docs/plans/hobby) hanya personal nonkomersial. Lihat PRODUCTION-BLOCKERS.md; jangan membeli layanan tanpa pendanaan/keputusan owner.
 2. Siapkan staging tanpa PII. Ekspor schema/data/policies/sequence grants lama ke penyimpanan privat. Cocokkan tipe `id`, constraint dan trigger dengan migration. Migrasi mempertahankan record lama tetapi mencabut semua policy lama pada tabel inquiry.
-3. Terapkan `supabase/migrations/202610070001_secure_inquiries.sql`. Jalankan `supabase/tests/inquiries.sql`; semua data sintetis rollback. Uji juga role anon/authenticated langsung REST di Supabase asli.
+3. Jalankan inventory read-only `supabase/tests/security-inventory.sql`; review dependent views dan security-definer routines yang dapat bypass hak tabel. Terapkan migration `202610070001_secure_inquiries.sql`, `202610070002_inquiry_notifications.sql`, lalu `202610070003_retire_score_tracking.sql`. Migration terakhir menutup browser tracking pada tabel `business_scores` jika ada, tanpa menghapus record historis. Jalankan `supabase/tests/inquiries.sql`; data sintetis rollback. Uji anon/authenticated read/insert/update/delete dan RPC lewat REST Supabase asli, outbox/lease/retry serta multi-connection concurrency di staging.
 4. Buat akun Supabase Auth owner dengan email yang dikendalikan owner. Tidak ada signup UI. Nonaktifkan signup provider bila tidak diperlukan dan tidak mengganggu aplikasi lain; aktifkan perlindungan login yang tersedia. Gunakan UUID owner dalam allowlist, bukan email/PIN.
 
 ## Environment
@@ -19,14 +19,18 @@ Status: perubahan lokal. Migrasi tersimpan bukan bukti produksi sudah aman. Tida
 | WUUS_ADMIN_USER_IDS | Server saja | UUID owner, comma-separated |
 | WUUS_RATE_LIMIT_SECRET | Server saja | random secret ≥32 karakter, berbeda per lingkungan |
 | WUUS_ALLOWED_ORIGINS | Server saja | exact preview origins, comma-separated; tanpa wildcard |
+| RESEND_API_KEY | Server saja | key provider email dengan sender domain verified |
+| WUUS_NOTIFICATION_FROM | Server saja | satu plain sender email verified |
+| WUUS_OWNER_EMAIL | Server saja | satu recipient owner yang benar |
+| CRON_SECRET | Server saja | optional scheduler Bearer secret ≥32 karakter |
 
 Apex HTTPS otomatis diizinkan. Localhost:3000/3100 hanya mode development. Local production build/preview harus masuk allowed origins. Origin bukan autentikasi anti-bot. Browser memakai session Supabase SDK; server memverifikasi JWT ke Auth dan allowlist, bukan flag localStorage.
 
-Rate limit lima inquiry baru per network/15 menit; retry identik tidak memakai slot tambahan. Network disimpan sebagai HMAC. Di Vercel `VERCEL=1` memakai [x-vercel-forwarded-for](https://vercel.com/docs/headers/request-headers#x-vercel-forwarded-for); verifikasi header pada deployment tanpa mencetak IP pengunjung. Host lain memakai satu bucket fallback konservatif sampai ada adapter IP tepercaya. Pengunjung berbagi NAT dapat terkena limit; ini bukan pertahanan sempurna terhadap bot terdistribusi. Admin menampilkan 500 inquiry terbaru; tambah pagination saat diperlukan.
+Rate limit lima inquiry baru per network/15 menit; retry identik tidak memakai slot tambahan. Network disimpan sebagai HMAC. Di Vercel `VERCEL=1` memakai [x-vercel-forwarded-for](https://vercel.com/docs/headers/request-headers#x-vercel-forwarded-for); verifikasi header tanpa mencetak IP. Host lain memakai satu bucket fallback sampai adapter IP tepercaya dibuat. Pengunjung berbagi NAT dapat terkena limit. Admin memakai pagination 100/page, pencarian pada halaman aktif dan request ID; record lama tetap bisa dibuka.
 
 ## Verifikasi dan rilis
 
-Website: `npm ci`, `npm test`, `npm run typecheck`, lint file terkait, `npm run build`, `npm audit --omit=dev`.
+Website: `npm ci`, `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, `npm audit --omit=dev`.
 
 Tambahan lokal: `npm run test:integration` sebelum build, tanpa server development lain yang aktif. Fixtures mengganti env Supabase dengan URL loopback/key sintetis dan membersihkan proses serta database memory setelah uji.
 
@@ -40,7 +44,7 @@ Urutan produksi:
 2. Periksa provider builder: nonaktifkan invoice/top-up lama yang masih payable, tangani transaksi tertunda, lalu deploy containment. Webhook 503 dapat diretry provider; tidak membuktikan uang belum diterima.
 3. Terapkan migration, server env, allowlist dan website secara terkoordinasi. Form lama tidak lagi dapat menulis anonim setelah revoke; jangan mempertahankan frontend lama sebagai release aktif.
 4. Verifikasi Apex HTTPS, canonical, sitemap, kedua form, owner read/update, non-owner denial dan RLS produksi dengan data sintetis.
-5. Verifikasi inbox kirim/terima. Belum ada email notification otomatis; owner cek admin dua kali setiap hari kerja.
+5. Konfigurasi sender/recipient email dan scheduler bila dipakai; verifikasi satu synthetic inquiry → satu outbox → provider accepted → inbox owner menerima. Retry tidak menggandakan lead/email; provider outage tidak menghilangkan lead. Ikuti NOTIFICATIONS.md. Owner tetap cek admin/inbox dua kali setiap hari kerja.
 6. Catat deploy ID, waktu, bukti dan pemilik tindakan privat. Baru ubah backlog ke DONE.
 
 ## Pemulihan dan maintenance

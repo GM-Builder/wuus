@@ -1,0 +1,31 @@
+{
+  "simulation": true,
+  "name": "Casa Aurora Guesthouse",
+  "language": "en",
+  "siteUrl": "https://example.com",
+  "tagline": "Slow mornings. A place to feel at home.",
+  "location": "Fictional coastal village · Portugal",
+  "story": "An internal WUUS concept for a small, independently run guesthouse. Every property detail and photo in this example is illustrative; this is not a real accommodation offer.",
+  "hero": { "src": "assets/hero.jpg", "alt": "Illustrative coastal guesthouse concept" },
+  "brand": { "accent": "#315949", "background": "#faf8f3" },
+  "rooms": [
+    { "id": "courtyard", "name": "Courtyard Room", "description": "A restful room with a quiet courtyard outlook. Fictional room information for the internal simulation.", "guests": 2, "bed": "One double bed", "image": { "src": "assets/room.jpg", "alt": "Illustrative courtyard room concept" } },
+    { "id": "terrace", "name": "Terrace Suite", "description": "A little more space to unwind, with a terrace overlooking the garden. Fictional room information.", "guests": 3, "bed": "One double bed and one single bed", "image": { "src": "assets/terrace.jpg", "alt": "Illustrative terrace suite concept" } }
+  ],
+  "gallery": [
+    { "src": "assets/hero.jpg", "alt": "Illustrative property exterior" },
+    { "src": "assets/room.jpg", "alt": "Illustrative room" },
+    { "src": "assets/terrace.jpg", "alt": "Illustrative terrace" }
+  ],
+  "amenities": ["Wi-Fi", "Air conditioning", "Breakfast by arrangement", "Courtyard"],
+  "locationDescription": "This fictional location illustrates how arrival information is presented. Replace it with the client's approved address and directions.",
+  "mapUrl": "https://example.com/location",
+  "faq": [
+    { "question": "How do I request a stay?", "answer": "Prepare an email or WhatsApp inquiry below. Availability and prices are confirmed by the property; sending an inquiry does not create a reservation." },
+    { "question": "What are your arrival and cancellation policies?", "answer": "For this simulation, arrival is from 15:00 and departure by 11:00. The property confirms the applicable cancellation terms before a booking is accepted." }
+  ],
+  "contact": { "email": "stay@example.com", "phone": "", "whatsapp": "", "address": "Fictional property address — internal simulation only" },
+  "bookingUrl": "https://example.com/booking",
+  "bookingLabel": "Open existing booking website",
+  "approval": { "contentReference": "", "assetsReference": "", "approvedAt": "" }
+}
