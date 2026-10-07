@@ -31,16 +31,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.webuntukusaha.com'),
+  metadataBase: new URL('https://webuntukusaha.com'),
   title: "WUUS - Web Design & Digital Solutions",
   description: "Web development and digital design studio by Faisal Alfarizi, building fast and thoughtful websites for businesses and independent hospitality.",
   alternates: {
-    canonical: "https://www.webuntukusaha.com",
+    canonical: "https://webuntukusaha.com",
   },
   openGraph: {
     title: "WUUS Studio - Engineering Next-Gen Digital Platforms",
     description: "Bespoke digital architecture, direct booking engines, and autonomous AI systems built for modern business growth.",
-    url: "https://www.webuntukusaha.com",
+    url: "https://webuntukusaha.com",
     siteName: "WUUS Studio",
     locale: "en_US",
     type: "website",

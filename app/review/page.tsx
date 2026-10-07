@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, Suspense } from 'react';
+import React, { useRef, useState, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import { ArrowRight, Check, Send, ShieldCheck, Mail, PhoneCall, Smartphone } from 'lucide-react';
+import { requestIdentity, submitInquiry } from '@/lib/inquiry-client';
+import { Check, Send } from 'lucide-react';
 
 function ReviewContent() {
   const searchParams = useSearchParams();
@@ -26,36 +26,34 @@ function ReviewContent() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [companyWebsite, setCompanyWebsite] = useState('');
+  const submission = useRef<{ fingerprint: string; id: string } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.consent) {
-      alert("Please agree to the privacy policy to submit your review request.");
-      return;
-    }
+    if (isSubmitting) return;
     setIsSubmitting(true);
+    setFormError('');
 
     try {
-      await supabase.from('hospitality_inquiries').insert([
-        {
-          hotel_name: formData.hotelName,
-          website_url: formData.onlineLink,
-          contact_name: formData.yourName,
-          email: formData.email,
-          notes: `[Source: Cold Email /review landing page] ${formData.notes ? '• ' + formData.notes : ''}`.trim(),
-          created_at: new Date().toISOString()
-        }
-      ]);
+      const payload = {
+        hotelName: formData.hotelName, websiteUrl: formData.onlineLink, contactName: formData.yourName,
+        email: formData.email, notes: formData.notes, consent: formData.consent,
+        requestType: 'review' as const, source: 'review' as const, companyWebsite,
+      };
+      submission.current = requestIdentity(payload, submission.current);
+      await submitInquiry({ ...payload, requestId: submission.current.id });
+      setFormSubmitted(true);
     } catch (err) {
-      console.error("Database save error:", err);
+      setFormError(err instanceof Error ? err.message : 'Your request could not be saved. Please try again or email Faisal directly.');
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
-    setFormSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B] selection:text-[#1C2733]">
+    <div lang="en" className="min-h-screen bg-white text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B] selection:text-[#1C2733]">
       {/* Header */}
       <header className="border-b border-slate-100 py-4 px-6 md:px-12 bg-white sticky top-0 z-40">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
@@ -141,6 +139,10 @@ function ReviewContent() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="review-company">Leave this field empty</label>
+                <input id="review-company" name="companyWebsite" tabIndex={-1} autoComplete="off" value={companyWebsite} onChange={e => setCompanyWebsite(e.target.value)} />
+              </div>
               <div>
                 <label className="block text-xs font-bold text-[#1C2733] mb-1">
                   Hotel name *
@@ -149,7 +151,7 @@ function ReviewContent() {
                   type="text"
                   required
                   placeholder="e.g. Villa Kliment"
-                  value={formData.hotelName}
+                  maxLength={160} aria-label="Hotel name" value={formData.hotelName}
                   onChange={(e) => setFormData({ ...formData, hotelName: e.target.value })}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                 />
@@ -163,7 +165,7 @@ function ReviewContent() {
                   type="text"
                   required
                   placeholder="Website, Booking.com, Instagram, or Google Maps link"
-                  value={formData.onlineLink}
+                  maxLength={2048} aria-label="Hotel link" value={formData.onlineLink}
                   onChange={(e) => setFormData({ ...formData, onlineLink: e.target.value })}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                 />
@@ -181,7 +183,7 @@ function ReviewContent() {
                     type="text"
                     required
                     placeholder="e.g. Elena"
-                    value={formData.yourName}
+                    maxLength={120} aria-label="Your name" value={formData.yourName}
                     onChange={(e) => setFormData({ ...formData, yourName: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
@@ -194,7 +196,7 @@ function ReviewContent() {
                     type="email"
                     required
                     placeholder="elena@example.com"
-                    value={formData.email}
+                    maxLength={254} aria-label="Email" value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
@@ -208,7 +210,7 @@ function ReviewContent() {
                 <textarea
                   rows={2}
                   placeholder="e.g. Many guests view our listing on phones but we get very few direct inquiries."
-                  value={formData.notes}
+                  maxLength={3000} aria-label="Message" value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs sm:text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B] resize-none"
                 />
@@ -246,6 +248,13 @@ function ReviewContent() {
                   </>
                 )}
               </button>
+
+              {formError && (
+                <p role="alert" className="text-sm text-red-700">
+                  {formError}{' '}
+                  <a href="mailto:faisalalfarizi@webuntukusaha.com" className="underline">Email Faisal directly</a>
+                </p>
+              )}
 
               <p className="text-center text-[11px] text-slate-500 mt-2">
                 I read every request myself and reply by email. I won&apos;t call you.

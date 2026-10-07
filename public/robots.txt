@@ -4,4 +4,4 @@ Disallow: /admin/
 Disallow: /admin/*
 Disallow: /hospitality/demo/
 
-Sitemap: https://www.webuntukusaha.com/sitemap.xml
+Sitemap: https://webuntukusaha.com/sitemap.xml

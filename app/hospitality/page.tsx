@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from '@/lib/supabase';
+import { requestIdentity, submitInquiry } from '@/lib/inquiry-client';
+import { calculateCommissionEstimate } from '@/lib/inquiry';
 import { 
   ArrowRight, 
   Check, 
@@ -14,10 +15,7 @@ import {
   PhoneCall, 
   MapPin,
   ShieldCheck,
-  Globe,
   Sparkles,
-  ExternalLink,
-  ChevronDown,
   ArrowUpRight,
   Smartphone,
   Calendar,
@@ -148,8 +146,7 @@ export default function HospitalityPage() {
   const [commission, setCommission] = useState<number>(15);
   const [shift, setShift] = useState<number>(10);
 
-  const totalOtaCommission = Math.round(revenue * (commission / 100));
-  const potentialMonthlySaving = Math.round(totalOtaCommission * (shift / 100));
+  const { commission: totalOtaCommission, saving: potentialMonthlySaving } = calculateCommissionEstimate(revenue, commission, shift);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -163,41 +160,33 @@ export default function HospitalityPage() {
   });
   const [formStatus, setFormStatus] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formFailed, setFormFailed] = useState(false);
+  const [companyWebsite, setCompanyWebsite] = useState('');
+  const submission = useRef<{ fingerprint: string; id: string } | null>(null);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.consent) {
-      alert("Please agree to the privacy statement to submit your review request.");
-      return;
-    }
+    if (isSubmitting) return;
     setIsSubmitting(true);
-    setFormStatus('Preparing your request...');
+    setFormFailed(false);
+    setFormStatus('Sending your request...');
 
     try {
-      await supabase.from('hospitality_inquiries').insert([
-        {
-          hotel_name: formData.hotel,
-          website_url: formData.url,
-          contact_name: formData.name,
-          email: formData.email,
-          notes: `[Request: ${formData.request}] ${formData.message ? '• ' + formData.message : ''}`.trim(),
-          created_at: new Date().toISOString()
-        }
-      ]);
+      const payload = {
+        hotelName: formData.hotel, websiteUrl: formData.url, contactName: formData.name,
+        email: formData.email, notes: formData.message, consent: formData.consent,
+        requestType: formData.request === 'Free 1-page review' ? 'review' as const : 'proposal' as const,
+        source: 'hospitality' as const, companyWebsite,
+      };
+      submission.current = requestIdentity(payload, submission.current);
+      await submitInquiry({ ...payload, requestId: submission.current.id });
+      setFormStatus('Thank you! Your request has been saved. Faisal will reply by email within 2 working days.');
     } catch (err) {
-      console.error("Database save error:", err);
+      setFormFailed(true);
+      setFormStatus(err instanceof Error ? err.message : 'Your request could not be saved. Please try again or email Faisal directly.');
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // Prepare mailto fallback
-    const body = `Hello Faisal,\n\nI'd like: ${formData.request}\nHotel: ${formData.hotel}\nHotel link: ${formData.url}\nName: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message || ''}\n\nI agree to the use of these details to reply to my request.`;
-    
-    setFormStatus('Thank you! Your request has been received. I will email your 1-page review within 2 working days.');
-    setIsSubmitting(false);
-
-    // Open mailto optionally
-    setTimeout(() => {
-      window.location.href = `mailto:faisalalfarizi@webuntukusaha.com?subject=${encodeURIComponent('Hotel review request: ' + formData.hotel)}&body=${encodeURIComponent(body)}`;
-    }, 400);
   };
 
   // Assistant scenarios
@@ -221,7 +210,7 @@ export default function HospitalityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B]/20 selection:text-[#1C2733]">
+    <div lang="en" className="min-h-screen bg-white text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B]/20 selection:text-[#1C2733]">
       <style jsx global>{`
         #floating-ai-builder {
           display: none !important;
@@ -524,7 +513,7 @@ export default function HospitalityPage() {
               </div>
               <p className="text-sm text-slate-600 sm:text-right">
                 A thoughtful website first.<br />
-                An assistant only if you need one.
+                AI examples are concepts for a future service.
               </p>
             </div>
 
@@ -568,13 +557,13 @@ export default function HospitalityPage() {
                 <div>
                   <span className="text-2xl text-[#F59E0B] block mb-4">✦</span>
                   <p className="text-[11px] font-bold tracking-[2px] text-[#F59E0B] uppercase mb-3">
-                    OPTIONAL ADD-ON
+                    FUTURE SERVICE DEMO
                   </p>
                   <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                     A little help after hours.
                   </h3>
                   <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                    An AI assistant for common questions, using the house information you approve.
+                    A concept of an assistant for common questions. Live AI is not available to purchase.
                   </p>
 
                   {/* Language Toggle */}
@@ -604,7 +593,7 @@ export default function HospitalityPage() {
                 </div>
 
                 <p className="text-xs text-slate-400 leading-relaxed m-0">
-                  Illustrative conversation. The assistant does not confirm bookings, availability or payments.
+                  Prepared example responses, not a live AI service. This demo does not confirm bookings, availability or payments.
                 </p>
               </article>
 
@@ -831,7 +820,7 @@ export default function HospitalityPage() {
                   </div>
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span><strong>Opens in under 1 second:</strong> Edge-optimized photography eliminates drop-off on mobile roaming networks.</span>
+                    <span><strong>Designed for fast mobile browsing:</strong> Optimised photography helps keep room browsing practical on mobile networks.</span>
                   </div>
                   <div className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -1088,7 +1077,7 @@ export default function HospitalityPage() {
 
               <div className="mt-8 pt-6 border-t border-[#E8E1D5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <p className="text-xs text-slate-600 m-0">
-                  Reduced founding rates: Starter €390 · Showcase €590 · Showcase + Assistant €1,190.
+                  Reduced founding rates: Starter €390 · Showcase €590. AI is not available to purchase.
                 </p>
                 <a
                   href="#review"
@@ -1220,18 +1209,18 @@ export default function HospitalityPage() {
             <article className="border border-slate-200 rounded-2xl p-8 bg-white flex flex-col shadow-xs">
               <div className="flex justify-between items-center mb-2">
                 <p className="text-[10px] font-bold tracking-[2px] text-[#F59E0B] uppercase">SHOWCASE + ASSISTANT</p>
-                <span className="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">Founding: €1,190</span>
+                <span className="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Concept only</span>
               </div>
               <h3 className="text-xl font-bold text-[#1C2733] mb-1">Help after hours.</h3>
-              <div className="text-3xl font-extrabold text-[#1C2733] tracking-tight my-4">€1,490–1,690</div>
-              <p className="text-xs text-slate-500 mb-6">For recurring guest questions.</p>
+              <div className="text-xl font-extrabold text-[#1C2733] tracking-tight my-4">Not available to purchase</div>
+              <p className="text-xs text-slate-500 mb-6">A demonstration of a future service for recurring guest questions.</p>
               <ul className="space-y-2.5 text-xs text-[#1C2733] mb-4 font-medium">
                 <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Everything in Showcase</li>
                 <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> House info knowledge base setup</li>
                 <li className="flex items-center gap-2"><span className="text-[#F59E0B] font-bold">✓</span> Multilingual guest AI assistant</li>
               </ul>
               <p className="text-[11px] text-slate-500 leading-normal mb-6">
-                Ongoing AI usage is billed at raw API cost by provider (typically €5–€20/mo).
+                The chat examples use prepared responses. A live assistant is not included in website proposals or taking payments.
               </p>
               <a href="#review" className="mt-auto inline-flex items-center justify-center min-h-[46px] border border-slate-300 hover:bg-slate-50 text-[#1C2733] font-bold text-xs rounded-lg transition-colors text-center">
                 Start with a free review
@@ -1239,6 +1228,10 @@ export default function HospitalityPage() {
             </article>
 
           </div>
+
+          <p className="text-xs text-slate-600 mb-6 leading-relaxed">
+            Founding prices apply to the first two signed website projects. Starter includes one English page, up to six sections and six room types. Showcase includes up to five English pages and ten room types. Both include two consolidated revision rounds. You provide approved text and photos. Domain, commercial hosting, translations and ongoing maintenance are quoted separately.
+          </p>
 
           {/* Review Before You Pay Guarantee & Payment Terms */}
           <div className="p-6 sm:p-8 bg-slate-50 border border-slate-200 rounded-2xl mb-12">
@@ -1249,12 +1242,12 @@ export default function HospitalityPage() {
                   <span>Review before you pay the balance</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed m-0">
-                  You see the finished site on a private link. If it does not match the agreed scope, we fix it. If we cannot agree, you keep the work done so far and the unpaid balance is cancelled.
+                  You review a private preview against the written scope. Two consolidated revision rounds are included. Cancellation and payment terms are agreed in your proposal before the deposit.
                 </p>
               </div>
               <div className="text-xs text-slate-600 shrink-0 lg:text-right border-t lg:border-t-0 pt-4 lg:pt-0 w-full lg:w-auto">
                 <strong className="block text-[#1C2733] font-semibold">Payment schedule</strong>
-                50% deposit to start · 50% after approval · Wise SEPA wire
+                50% deposit to start · 50% after approval · Payment method agreed in your proposal
               </div>
             </div>
           </div>
@@ -1315,13 +1308,13 @@ export default function HospitalityPage() {
                 <div>
                   <span className="text-xs text-slate-500 block">Monthly OTA commission</span>
                   <strong className="text-2xl font-bold text-[#1C2733]">
-                    €{totalOtaCommission.toLocaleString()}
+                    €{totalOtaCommission.toLocaleString('en-GB')}
                   </strong>
                 </div>
                 <div>
                   <span className="text-xs text-slate-500 block">Potential monthly saving</span>
                   <strong className="text-2xl font-bold text-[#F59E0B]">
-                    €{potentialMonthlySaving.toLocaleString()}
+                    €{potentialMonthlySaving.toLocaleString('en-GB')}
                   </strong>
                 </div>
               </div>
@@ -1431,7 +1424,7 @@ export default function HospitalityPage() {
                 <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
               <p className="text-sm text-slate-600 mt-3 leading-relaxed">
-                You own the website code and content after the agreed handover. Hosting and optional assistant services are covered separately in your proposal.
+                You receive the website source and agreed content after final payment. Third-party assets and libraries keep their own licences. Domain and hosting costs are listed separately in your proposal.
               </p>
             </details>
 
@@ -1442,7 +1435,7 @@ export default function HospitalityPage() {
                 <span className="text-[#F59E0B] font-bold text-xl hidden group-open:inline">−</span>
               </summary>
               <p className="text-sm text-slate-600 mt-3 leading-relaxed">
-                It answers common questions from information you approve. It can make mistakes and should refer uncertain questions to your team. It does not confirm availability or take bookings.
+                The examples show prepared answers to common questions. A live AI service is not included in our current packages and is not available to purchase.
               </p>
             </details>
 
@@ -1511,6 +1504,10 @@ export default function HospitalityPage() {
 
             {/* Right White Form */}
             <form onSubmit={handleFormSubmit} className="bg-white text-[#1C2733] p-8 sm:p-10 rounded-2xl shadow-2xl space-y-4 border border-slate-100">
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="hospitality-company">Leave this field empty</label>
+                <input id="hospitality-company" name="companyWebsite" tabIndex={-1} autoComplete="off" value={companyWebsite} onChange={e => setCompanyWebsite(e.target.value)} />
+              </div>
               <h3 className="text-2xl font-bold text-[#1C2733] mb-4">Get your free review</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1520,7 +1517,7 @@ export default function HospitalityPage() {
                     type="text"
                     required
                     placeholder="Your hotel or guesthouse"
-                    value={formData.hotel}
+                    maxLength={160} aria-label="Hotel name" value={formData.hotel}
                     onChange={e => setFormData({ ...formData, hotel: e.target.value })}
                     className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
@@ -1531,7 +1528,7 @@ export default function HospitalityPage() {
                     type="text"
                     required
                     placeholder="Your name"
-                    value={formData.name}
+                    maxLength={120} aria-label="Your name" value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                     className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                   />
@@ -1544,7 +1541,7 @@ export default function HospitalityPage() {
                   type="text"
                   required
                   placeholder="Website, Booking.com, Instagram or Google Maps"
-                  value={formData.url}
+                  maxLength={2048} aria-label="Hotel link" value={formData.url}
                   onChange={e => setFormData({ ...formData, url: e.target.value })}
                   className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                 />
@@ -1556,7 +1553,7 @@ export default function HospitalityPage() {
                   type="email"
                   required
                   placeholder="you@yourhotel.com"
-                  value={formData.email}
+                  maxLength={254} aria-label="Email" value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                   className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B]"
                 />
@@ -1571,7 +1568,6 @@ export default function HospitalityPage() {
                 >
                   <option>Free 1-page review</option>
                   <option>A website for my hotel</option>
-                  <option>A website + AI assistant</option>
                   <option>I&apos;m not sure yet</option>
                 </select>
               </label>
@@ -1581,7 +1577,7 @@ export default function HospitalityPage() {
                 <textarea
                   rows={2}
                   placeholder="A question, a concern, an idea…"
-                  value={formData.message}
+                  maxLength={3000} aria-label="Message" value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
                   className="w-full mt-1.5 p-3 border border-slate-300 rounded-lg text-sm text-[#1C2733] focus:outline-hidden focus:border-[#F59E0B] resize-none"
                 />
@@ -1620,8 +1616,9 @@ export default function HospitalityPage() {
               </p>
 
               {formStatus && (
-                <p className="text-xs font-semibold text-emerald-800 bg-emerald-50 p-3 rounded-lg border border-emerald-200 mt-3">
+                <p role={formFailed ? 'alert' : 'status'} aria-live="polite" className={`text-xs font-semibold p-3 rounded-lg border mt-3 ${formFailed ? 'text-red-800 bg-red-50 border-red-200' : 'text-emerald-800 bg-emerald-50 border-emerald-200'}`}>
                   {formStatus}
+                  {formFailed && <> <a href="mailto:faisalalfarizi@webuntukusaha.com" className="underline">Email Faisal directly</a></>}
                 </p>
               )}
             </form>
@@ -1653,7 +1650,7 @@ export default function HospitalityPage() {
               </Link>
 
               <p className="text-sm text-slate-600 mb-6 max-w-sm leading-relaxed">
-                Websites for independent hotels, with an optional AI assistant for common guest questions. Built and maintained by one person in Jakarta.
+                Websites for independent hotels, with clear room details and direct enquiry links. Built by one person in Jakarta.
               </p>
 
               <div className="flex items-center gap-2 text-xs font-medium text-slate-600 w-fit">
@@ -1675,7 +1672,7 @@ export default function HospitalityPage() {
                 </li>
                 <li>
                   <a href="#ai-concierge" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
-                    Multilingual Guest Concierge
+                    AI Assistant Concept
                   </a>
                 </li>
                 <li>
@@ -1704,11 +1701,11 @@ export default function HospitalityPage() {
               <ul className="space-y-2.5 text-sm">
                 <li>
                   <a href="#pricing" className="text-slate-600 hover:text-[#F59E0B] transition-colors">
-                    Three-Tier Scoped Pricing
+                    Website Scope & Pricing
                   </a>
                 </li>
                 <li>
-                  <span className="text-slate-500">Review Before Balance Guarantee</span>
+                  <span className="text-slate-500">Private Preview Before Balance</span>
                 </li>
                 <li>
                   <span className="text-slate-500 flex items-center gap-1.5">
@@ -1717,10 +1714,10 @@ export default function HospitalityPage() {
                   </span>
                 </li>
                 <li>
-                  <span className="text-slate-500">European SEPA Bank Wire (Wise)</span>
+                  <span className="text-slate-500">Payment method agreed in your proposal</span>
                 </li>
                 <li>
-                  <span className="text-slate-500">You Own 100% of Your Code</span>
+                  <span className="text-slate-500">Source Code Handover</span>
                 </li>
               </ul>
             </div>
@@ -1759,7 +1756,7 @@ export default function HospitalityPage() {
             </p>
             <div className="flex items-center gap-5">
               <Link href="/hospitality/privacy" className="hover:text-slate-900 transition-colors font-medium text-slate-600">
-                Hospitality Privacy & GDPR
+                Hospitality Privacy Information
               </Link>
               <span>•</span>
               <Link href="/hospitality/terms" className="hover:text-slate-900 transition-colors">
