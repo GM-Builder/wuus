@@ -6,18 +6,18 @@ Status: TODO = belum mulai; LOCAL = implementasi + verifikasi lokal selesai; PAR
 | --- | --- | --- | --- | --- |
 | W01 | P0 | API inquiry, validation, consent, retry | A01–A05 | PARTIAL; dua form browser produksi success dan tersimpan; positive path + negative guards live, retry/concurrency penuh tetap staging |
 | W02 | P0 | SQL RLS + rate limit persisten | A06 | PARTIAL; owner 24 PASS + project/service key cocok + anon REST tiga tabel 401; authenticated nonowner/concurrency staging pending |
-| W03 | P0 | Auth admin server + pipeline | A07–A08 | PARTIAL; Auth owner/email confirmed, allowlist lokal dan deployment baru live; anon/token palsu ditolak; login owner/status update pending |
+| W03 | P0 | Auth admin server + pipeline | A07–A08 | PARTIAL; owner screenshot dua inquiry terbaca; hospitality review_sent persisted dikonfirmasi MCP; anon/token palsu ditolak; authenticated nonowner masih pending |
 | W04 | P0 | Pause semua API builder sebelum side effect | A09 | DONE; main 560a7de production deployed, 19/19 method/route live 503 BUILDER_PAUSED |
 | W05 | P0 | Build tanpa perubahan DB | A10 | DONE; script generate + build, local checks pass dan production deployment sukses; tidak menjalankan DB push/migration |
 | W06 | P0 | Dependencies berisiko tinggi dan build | A11 | PARTIAL; kedua runtime audit 0; builder full audit 0; website 5 dev-chain advisory tanpa patched braces; website full lint 0 error |
 | W07 | P1 | Canonical apex, sitemap, penawaran AI | A12 | PARTIAL; canonical apex/sitemap/website baru live dan builder pause live; www DNS masih pending |
 | W08 | P0 rilis | Migrasi backup + service key + allowlist owner | A13 | PARTIAL; owner 24 PASS, project/service key cocok, env Vercel owner-reported updated; backup/login owner pending |
-| W09 | P0 rilis | Preview + produksi test dengan inquiry sintetis | A14 | PARTIAL; production deployment/negative checks pass; dua inquiry sintetis tersimpan, dua notifikasi delivered menurut provider; owner read/status/inbox pending |
+| W09 | P0 rilis | Preview + produksi test dengan inquiry sintetis | A14 | PARTIAL; dua form saved, outbox sent/Resend delivered; owner mengonfirmasi inbox dan screenshot admin read, status persisted via MCP; checklist rilis lain tetap terbuka |
 | W10 | P0 komersial | Hosting komersial, payment eligibility, inbox | A15 | ACCOUNT |
 | W11 | P1 | Proposal contoh dan dry-run delivery | A16 | LOCAL; revisi, Git rollback dan ZIP restore identik; actual payment/domain/hosting ACCOUNT |
 | W12 | P1 setelah gate | Eksperimen prospek dan pencatatan hasil | SALES-EXPERIMENT.md | TODO |
 | W13 | P1 | Kit hospitality, konten terpisah dan generator repository klien | A18–A19 | LOCAL; client-owned remote/deploy/domain dibuat untuk klien nyata setelah onboarding |
-| W14 | P0 | Outbox owner notification, retry, guard dan status | A17 | PARTIAL; dua outbox production sent satu attempt tanpa error, Resend delivered; actual inbox/spam owner dan retry failure/scheduler pending |
+| W14 | P0 | Outbox owner notification, retry, guard dan status | A17 | PARTIAL; dua outbox sent satu attempt tanpa error, Resend delivered dan inbox receipt dikonfirmasi owner; retry failure/scheduler pending |
 | W15 | P1 | Template proposal/onboarding/invoice/payment/CR/launch | A15–A16 | LOCAL; identitas dan ketentuan klien nyata diisi sebelum dipakai |
 | W16 | P1 | Tracker proyek, pembayaran dan perubahan scope | A20 | LOCAL; formula/mata uang/simulasi/bukti missing diuji; tidak terkoneksi bank |
 | W17 | P1 | Persyaratan roadmap portal/PMS/analytics/billing/outreach/AI | FUTURE-ROADMAP.md | LOCAL; implementasi menunggu pembeli dan dana |
@@ -30,4 +30,4 @@ Status: TODO = belum mulai; LOCAL = implementasi + verifikasi lokal selesai; PAR
 
 Hasil pengujian dicatat di [VERIFICATION.md](VERIFICATION.md). Owner mengirim hasil apply/verify 24 PASS; ini bukti hasil checker dari owner, belum pemeriksaan REST/Auth/konkurensi independen. Tidak ulang migration. Endpoint AI yang dipause bukan bukti bahwa ledger/webhook lama sudah benar. Tidak membuka kembali endpoint hanya untuk membuat demo berjalan.
 
-Pekerjaan berikutnya menurut OWNER-NEXT-STEPS.md: owner login admin/status update untuk dua inquiry uji yang sudah tersimpan → actual inbox/spam → www dan hosting komersial/payment gate → W12. Website 0d44d11 dan builder f401e2c sudah production deploy; CLI workspace kini akun gm-builder-9019 yang benar. SQL manual owner PASS; tidak apply ulang. Tidak ada klaim seluruh gate atau kesiapan deposit selesai.
+Owner sudah mengonfirmasi inbox/admin dan status hospitality persisted. Pekerjaan berikutnya: archive fixture → gate keamanan/rilis tersisa serta hosting komersial/payment → W12 menurut FIRST-CLIENT-ACTION-PLAN.md. Website 0d44d11 dan builder f401e2c sudah production deploy; CLI workspace akun gm-builder-9019 yang benar. SQL manual owner PASS; tidak apply ulang. Tidak ada klaim seluruh gate atau kesiapan deposit selesai.

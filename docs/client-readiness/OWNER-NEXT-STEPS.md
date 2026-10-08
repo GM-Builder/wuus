@@ -1,5 +1,7 @@
 # Langkah owner sesudah SQL — 8 Oktober 2026
 
+**Status terbaru setelah konfirmasi owner:** email sudah masuk, kedua inquiry tampil di admin dan status hospitality `review_sent` terkonfirmasi tersimpan melalui MCP read-only. Pemeriksaan submit/save/inbox/read/status untuk fixture ini lulus. Tidak perlu mengulang SQL atau submit. Owner dapat archive kedua WUUS TEST. Berikutnya ikuti [rencana klien pertama](FIRST-CLIENT-ACTION-PLAN.md): gate hosting/pembayaran dan checklist keamanan tersisa, satu penawaran, lalu 20 prospek terarah. Catatan bertanggal di bawah menjadi riwayat pemeriksaan.
+
 Database: owner mengirim 24 PASS, inventory awal direview. Paket manual hanya `00-inspect.sql`, `01-apply.sql`, `02-verify.sql`; `01` sudah menggabungkan tiga migration dan mencetak verify setelah commit. Tidak perlu SQL tambahan atau mengulang tiga migration untuk setup awal. Hasil PASS belum membuktikan Auth/API/inbox/deployment.
 
 ## 1. DNS Rumahweb

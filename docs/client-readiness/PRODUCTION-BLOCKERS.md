@@ -1,5 +1,7 @@
 # Gate produksi dan tindakan akun
 
+**Konfirmasi owner terbaru:** notifikasi diterima di email, dua inquiry uji tampil di dashboard, hospitality berstatus Review sent. MCP read-only mengonfirmasi perubahan status persisted. Pending inbox/admin read/status pada riwayat di bawah telah terselesaikan untuk fixture ini; bukan kelulusan semua security/operational gate. Langkah berikutnya [FIRST-CLIENT-ACTION-PLAN.md](FIRST-CLIENT-ACTION-PLAN.md).
+
 Pemeriksaan 7–8 Oktober 2026 ditambah output SQL/screenshot owner. Owner melaporkan database 24 PASS. Perbaikan env dan branding dirilis lewat main repository GM-Builder; website `0d44d11` dan builder `f401e2c` production success. Dua inquiry sintetis tersimpan dan dua notifikasi owner delivered menurut Resend, diverifikasi 06:13 UTC. Agent tidak menjalankan SQL perubahan, mengganti DNS, membeli plan atau mengirim outreach. Bukti dari owner dibedakan dari pemeriksaan akses live oleh agent.
 
 | Gate | Bukti sekarang | Tindakan berikutnya |

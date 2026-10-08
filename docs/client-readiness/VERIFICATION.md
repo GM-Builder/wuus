@@ -20,6 +20,8 @@ Hasil pada branch `codex/client-readiness` di dua repositori. **Agent belum depl
 
 ## Hasil pemeriksaan
 
+Update owner setelah 06:13 UTC: inbox notification diterima menurut owner; screenshot memperlihatkan kedua fixture di admin dan hospitality Review sent. MCP read-only mengonfirmasi hospitality `review_sent` dan review `new`. Admin read/status persistence serta human receipt kini terbukti untuk fixture tersebut; klaim inbox bersumber dari owner, status persistence dari database. Pending owner-read/inbox pada catatan sebelumnya telah terselesaikan. Authenticated nonowner, concurrency, backup/preservation, retry failure/scheduler dan gate hosting/payment masih terpisah.
+
 | Pemeriksaan | Hasil | Batas bukti |
 | --- | --- | --- |
 | Website `npm test` | 37/37 pass, 8 Oktober | Inquiry/Auth/SQL, table + column grants, legacy score-table denial, outbox, kit; 4 manual-bundle cases (fresh/legacy/rollback/exposure guard) |

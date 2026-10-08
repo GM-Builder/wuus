@@ -1,5 +1,7 @@
 # WUUS — acuan kesiapan klien pertama
 
+**Status terkini:** owner mengonfirmasi email masuk dan admin menampilkan kedua inquiry uji. MCP mengonfirmasi perubahan status hospitality tersimpan. Alur dasar inquiry sampai tindak lanjut owner lulus untuk fixture ini. Langkah berikutnya: [rencana klien pertama](FIRST-CLIENT-ACTION-PLAN.md); catatan bertanggal di bawah adalah riwayat, bukan semua kondisi terkini.
+
 Versi 3 · 8 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
 
 Tujuan: menerima pemasukan pertama dari jasa website dengan scope terkendali, biaya dibayar dari deposit, dan proses yang bisa dijalankan satu orang. Pendapatan saat ini **0**, anggaran akuisisi **Rp0**. Target pendapatan adalah sasaran, bukan prediksi atau jaminan.
