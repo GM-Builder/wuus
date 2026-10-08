@@ -137,6 +137,7 @@ export default function HospitalityPage() {
               progress through email and a private preview, at a time that suits
               your property.
             </p>
+            <div className={s.processIllustration} aria-hidden="true" />
           </div>
           <ol className={s.steps}>
             {steps.map(([title, body], index) => (

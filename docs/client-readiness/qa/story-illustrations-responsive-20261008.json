@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-08",
+  "target": "local production build on 127.0.0.1:3110",
+  "checks": [
+    {
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-conversation-v1-mobile.webp\")",
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1-mobile.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 345,
+      "steps": 4,
+      "viewport": 360
+    },
+    {
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1-mobile.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 345,
+      "steps": 4,
+      "viewport": 360
+    },
+    {
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-conversation-v1.webp\")",
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 753,
+      "steps": 4,
+      "viewport": 768
+    },
+    {
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 753,
+      "steps": 4,
+      "viewport": 768
+    },
+    {
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-conversation-v1.webp\")",
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 1425,
+      "steps": 4,
+      "viewport": 1440
+    },
+    {
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 1425,
+      "steps": 4,
+      "viewport": 1440
+    },
+    {
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-conversation-v1.webp\")",
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 3825,
+      "steps": 4,
+      "viewport": 3840
+    },
+    {
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-collaboration-v1.webp\")",
+      "processImagePointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 3825,
+      "steps": 4,
+      "viewport": 3840
+    }
+  ],
+  "noProductionInquiryOrEmailSent": true
+}

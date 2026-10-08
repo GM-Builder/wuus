@@ -148,6 +148,7 @@ export default function Home() {
               Anda berhubungan langsung dengan pembuat website. Materi, batas
               revisi dan biaya layanan pihak ketiga dijelaskan sejak awal.
             </p>
+            <div className={s.processIllustration} aria-hidden="true" />
           </div>
           <ol className={s.steps}>
             {steps.map(([title, body], index) => (
@@ -197,38 +198,44 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section id="contact" className={`${s.section} ${s.contactSection}`}>
-          <div className={s.container}>
-            <div className={s.sectionHead}>
-              <p className={s.eyebrow}>Mulai dari kebutuhan Anda</p>
-              <h2>
-                Ceritakan usaha Anda.
-                <br />
-                Kita tentukan langkah berikutnya.
-              </h2>
-              <p>
-                Kirim jenis usaha, tautan website jika ada, dan hal yang ingin
-                diperbaiki. WUUS akan membalas melalui email dalam dua hari
-                kerja.
+        <section
+          id="contact"
+          className={`${s.section} ${s.contactSection} ${s.needsSection}`}
+        >
+          <div className={`${s.container} ${s.needsStory}`}>
+            <div>
+              <div className={s.sectionHead}>
+                <p className={s.eyebrow}>Mulai dari kebutuhan Anda</p>
+                <h2>
+                  Ceritakan usaha Anda.
+                  <br />
+                  Kita tentukan langkah berikutnya.
+                </h2>
+                <p>
+                  Kirim jenis usaha, tautan website jika ada, dan hal yang ingin
+                  diperbaiki. WUUS akan membalas melalui email dalam dua hari
+                  kerja.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha"
+                  className={s.button}
+                >
+                  Email WUUS
+                </a>
+                <a
+                  href="https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+                  className={s.buttonLight}
+                >
+                  Hubungi via WhatsApp
+                </a>
+              </div>
+              <p className={s.smallPrint}>
+                hallo@webuntukusaha.com · Jakarta, Indonesia
               </p>
             </div>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha"
-                className={s.button}
-              >
-                Email WUUS
-              </a>
-              <a
-                href="https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
-                className={s.buttonLight}
-              >
-                Hubungi via WhatsApp
-              </a>
-            </div>
-            <p className={s.smallPrint}>
-              hallo@webuntukusaha.com · Jakarta, Indonesia
-            </p>
+            <div className={s.needsIllustration} aria-hidden="true" />
           </div>
         </section>
       </main>
