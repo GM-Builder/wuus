@@ -31,6 +31,8 @@ Objective: [guest action/problem]. Deliverables: [numbered page/section list]. E
 
 Price: [amount/currency]. Deposit: 50% before production work. Balance: 50% after preview approval, before production launch/source handover. External costs: [item, payer, renewal]. Payment instructions: [verified provider/account only]. Fees/tax and payable total: [explicit agreement].
 
+Payment recommendation as of 8 October: Wise client→owner Indonesian bank for initial transfer, PayPal Invoice alternative when the client chooses link/card. Select one instruction per invoice; write FX/settlement and fee treatment first. A PayPal invoice marked paid can still have held/unavailable funds. Use PENDING + note until cleared, and avoid spending unavailable DP. See [PAYMENTS.md](PAYMENTS.md).
+
 Revisions: two consolidated rounds within the agreed page/feature scope. Each round is one written list from the approval contact. New pages, languages, features, or a changed design direction require a separate quote and timeline. Client feedback due within [3] working days; delays move the delivery date by agreement.
 
 Acceptance: [links, content, inquiry delivery, responsive widths, ownership checklist]. Bug support: 14 calendar days after launch for defects against this scope; content changes, new functionality, third-party outages and ongoing maintenance quoted separately. Cancellation/refund terms: [written agreement based on work completed and applicable obligations; resolve before deposit]. Governing terms/disputes: [owner/client agree before signing]. No automatic acceptance by silence.

@@ -1,11 +1,14 @@
 -- Retire the browser's unused score-tracking channel. Preserve historical rows.
 -- Back up schema/grants/policies first; review dependent views/routines in staging.
 begin;
-do $$ declare entry record; sequence_name text;
+do $$ declare entry record; sequence_name text; column_names text;
 begin
   if to_regclass('public.business_scores') is not null then
     alter table public.business_scores enable row level security;
     revoke all on table public.business_scores from public, anon, authenticated;
+    select string_agg(format('%I',attname),',') into column_names from pg_attribute
+      where attrelid='public.business_scores'::regclass and attnum>0 and not attisdropped;
+    execute format('revoke all (%s) on table public.business_scores from public, anon, authenticated',column_names);
     for entry in select policyname from pg_policies
       where schemaname='public' and tablename='business_scores'
     loop execute format('drop policy %I on public.business_scores',entry.policyname); end loop;

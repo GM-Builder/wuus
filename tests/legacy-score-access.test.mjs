@@ -14,10 +14,12 @@ test('retired score-table migration preserves data and denies public CRUD even w
       ALTER TABLE public.business_scores ENABLE ROW LEVEL SECURITY;
       CREATE POLICY old_open ON public.business_scores FOR ALL TO public USING(true) WITH CHECK(true);
       GRANT ALL ON public.business_scores TO public,anon,authenticated;
+      GRANT SELECT(score),INSERT(score),UPDATE(score) ON public.business_scores TO public,anon,authenticated;
       GRANT ALL ON SEQUENCE public.business_scores_id_seq TO public,anon,authenticated;`);
     await db.exec(migration); await db.exec(migration);
     assert.equal((await db.query('SELECT score FROM public.business_scores')).rows[0].score,42);
     for(const role of ['anon','authenticated']){
+      assert.equal((await db.query("SELECT has_any_column_privilege($1,'public.business_scores','SELECT,INSERT,UPDATE,REFERENCES') AS allowed",[role])).rows[0].allowed,false);
       await db.exec(`SET ROLE ${role}`);
       for(const sql of ['SELECT * FROM public.business_scores','INSERT INTO public.business_scores(score) VALUES(1)',
         'UPDATE public.business_scores SET score=0 WHERE false','DELETE FROM public.business_scores WHERE false',

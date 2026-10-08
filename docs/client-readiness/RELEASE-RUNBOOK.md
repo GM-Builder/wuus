@@ -2,6 +2,8 @@
 
 Status: perubahan lokal. Migrasi tersimpan bukan bukti produksi sudah aman. Tidak ada test lokal yang memakai database produksi atau provider AI/payment live.
 
+Owner update 8 Oktober 2026: memilih menjalankan SQL lewat dashboard. Gunakan `supabase/manual/README.md`: inspect/backup → `01-apply.sql` satu transaksi berisi migration 001/002/003 → `02-verify.sql`. CLI login tidak diperlukan untuk langkah tersebut. Jangan menerapkan lagi lewat CLI tanpa reconcile manual schema/history. Email inbox Zoho sudah ada; follow EMAIL-SETUP.md. Payment recommendation di PAYMENTS.md tetap memerlukan rekening/rute aktual.
+
 ## Konfigurasi dan staging
 
 1. Pastikan akses proyek Supabase dan hosting pemilik domain; catat ID privat. Akun CLI BinaHub terbukti Hobby, tetapi domain apex tidak ada pada project itu. [Vercel Hobby](https://vercel.com/docs/plans/hobby) hanya personal nonkomersial. Lihat PRODUCTION-BLOCKERS.md; jangan membeli layanan tanpa pendanaan/keputusan owner.

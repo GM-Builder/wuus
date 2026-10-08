@@ -16,6 +16,14 @@ create table if not exists public.wuus_inquiry_notifications (
 alter table public.wuus_inquiry_notifications enable row level security;
 revoke all on public.wuus_inquiry_notifications from public, anon, authenticated;
 grant select on public.wuus_inquiry_notifications to service_role;
+do $$ declare entry record; column_names text;
+begin
+  select string_agg(format('%I',attname),',') into column_names from pg_attribute
+    where attrelid='public.wuus_inquiry_notifications'::regclass and attnum>0 and not attisdropped;
+  execute format('revoke all (%s) on table public.wuus_inquiry_notifications from public, anon, authenticated',column_names);
+  for entry in select policyname from pg_policies where schemaname='public' and tablename='wuus_inquiry_notifications'
+  loop execute format('drop policy %I on public.wuus_inquiry_notifications',entry.policyname); end loop;
+end $$;
 
 create or replace function wuus_private.queue_inquiry_notification()
 returns trigger language plpgsql security definer set search_path = '' as $$

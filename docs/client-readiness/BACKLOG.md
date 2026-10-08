@@ -23,6 +23,8 @@ Status: TODO = belum mulai; LOCAL = implementasi + verifikasi lokal selesai; PAR
 | W17 | P1 | Persyaratan roadmap portal/PMS/analytics/billing/outreach/AI | FUTURE-ROADMAP.md | LOCAL; implementasi menunggu pembeli dan dana |
 | W18 | P0 | www redirect dan penelusuran akun produksi | A22 | LOCAL redirect; DNS www NXDOMAIN, canonical live masih www; pemilik domain ACCOUNT |
 | W19 | P0 | Hentikan tracking skor browser dan kunci tabel historis | A23 | LOCAL; migration 003 dan denial CRUD/sequence lulus, produksi ACCOUNT |
+| W20 | P0 | Paket SQL manual sesuai pilihan owner | A24 | LOCAL; inspect/generated single-transaction apply/verify + 4 guard/preservation tests, owner manual apply ACCOUNT |
+| W21 | P0 operasional | Rumahweb/Zoho/email guide dan payment recommendation | EMAIL-SETUP.md/PAYMENTS.md | LOCAL research + templates; MX Zoho/NS Rumahweb confirmed, sender/inbox/payment route ACCOUNT |
 
 ## Bukti dan risiko tersisa
 

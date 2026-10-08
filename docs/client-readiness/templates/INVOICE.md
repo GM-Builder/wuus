@@ -16,6 +16,11 @@ Verified payment method / payee name / invoice reference: ____.
 Settlement currency and agreed conversion/fee treatment: ____.
 Payment instruction verification reference/date: ____.
 
+Selected method (one active instruction per invoice): ____.
+For Wise→bank: verified legal payee/bank/account details provided privately; recipient currency IDR; agreed recipient amount ____; FX quote source/time ____; valid until ____.
+For PayPal: verified commercial invoice link ____; gross invoice currency ____; supplier fee treatment ____; held/pending funds handled under the agreed cleared-deposit schedule.
+Method change cancels/replaces the old payable instruction only after checking no payment is pending. See [PAYMENTS.md](../PAYMENTS.md).
+
 Status: ISSUED — receipt will be issued after funds are confirmed in the supplier's account.
 Never include guessed bank details, an unverified Wise/SEPA account, or an account belonging to a third party. Store the populated invoice privately and confirm applicable invoice/tax requirements before sending.
 

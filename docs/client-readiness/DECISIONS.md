@@ -15,5 +15,8 @@
 | 2026-10-07 | Dua aktif, satu fokus produksi | Mengikuti arahan owner, menjaga kapasitas solo | Jam aktual/deadline membuktikan kapasitas tambahan |
 | 2026-10-07 | Builder security overrides terarah | Patched deepmerge 8.0.0 dan KaTeX 0.18.2 tersedia; build/Prisma/renderer dicek | Remove override setelah upstream aman; full AI regression sebelum reopen |
 | 2026-10-07 | Fitur besar disiapkan sebagai funded roadmap | Owner meminta persiapan, implementasi setelah kebutuhan pembeli/dana jelas | Buyer, scope, deposit, unit cost/support dan acceptance tercatat |
+| 2026-10-08 | SQL Editor manual untuk Supabase | Owner meminta kode dan akan menjalankan sendiri; bundle satu transaksi + inspect/verify tersedia | CLI deploy di masa depan setelah schema/history reconciled |
+| 2026-10-08 | Zoho inbox, Resend Free sender subdomain | Mailbox sudah ada; adapter aplikasi memiliki queue/idempotency; tidak perlu mengganti Zoho | Actual domain verification/inbox receipt; SMTP diperiksa hanya bila perlu adapter baru |
+| 2026-10-08 | Wise→bank awal, PayPal Invoice alternatif | Bank payout tidak membutuhkan balance Wise owner; PayPal link praktis tetapi ada fee/hold untuk cash flow nol | Verified account/rute/client preference dan margin aktual |
 
 Referensi teknis diverifikasi 7 Oktober 2026: [Supabase API keys](https://supabase.com/docs/guides/getting-started/api-keys), [Supabase getUser](https://supabase.com/docs/reference/javascript/auth-getuser), [Vercel Hobby](https://vercel.com/docs/plans/hobby). Jangan membuka key service_role/secret di browser; keputusan otorisasi memakai identitas hasil verifikasi server.

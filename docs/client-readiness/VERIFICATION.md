@@ -1,4 +1,4 @@
-# Verification — 7 Oktober 2026
+# Verification — 7–8 Oktober 2026
 
 Hasil pada branch `codex/client-readiness` di dua repositori. **Belum deploy, belum migrasi Supabase produksi, belum menerima uang.** Tidak mengirim outreach, membuat transaksi, atau memanggil provider AI live.
 
@@ -16,12 +16,13 @@ Hasil pada branch `codex/client-readiness` di dua repositori. **Belum deploy, be
 - Kit hospitality statis terpisah dari WUUS, generator Git repo per klien, input/URL/photo validation, HTML escaping, approval/fictitious production gate dan fresh build output.
 - Template operasional lengkap, tracker Excel dan simulasi fiktif sampai revisi/handover/Git rollback/ZIP restore. Roadmap fitur besar memakai gate pembeli/dana.
 - Tes skor bisnis hanya menghitung jawaban di browser; anonymous insert `business_scores` dihentikan. Migration 003 opsional-tabel mempertahankan record historis, menutup grants/policies/sequence publik dan lulus denial CRUD kedua role.
+- Owner meminta SQL manual: inspect, generated apply satu transaksi, readonly verify dan guide tersedia di `supabase/manual/`. Column-level grants lama juga dicabut; outbox policies lama ditutup. Bundle cocok dengan sumber migration, preserve legacy rows, no backfill emails, incompatible schema/view chains/callable direct definers berhenti sebelum commit. Unknown indirect/dynamic access tetap manual review.
 
 ## Hasil pemeriksaan
 
 | Pemeriksaan | Hasil | Batas bukti |
 | --- | --- | --- |
-| Website `npm test` | 33/33 pass | Inquiry/Auth/SQL, legacy score-table denial, outbox, provider response/idempotency, kit validation/escaping/build hygiene |
+| Website `npm test` | 37/37 pass, 8 Oktober | Inquiry/Auth/SQL, table + column grants, legacy score-table denial, outbox, kit; 4 manual-bundle cases (fresh/legacy/rollback/exposure guard) |
 | Website integrasi `npm run test:integration` | 29/29 checks pass | API asli + PGlite; Auth/PostgREST simulasi; cron/owner denial, >500 pagination, local www 308 |
 | Website TypeScript | Pass | `tsc --noEmit --incremental false` |
 | Website production build | Pass | Tidak memverifikasi provider/production DB |
@@ -40,6 +41,7 @@ Hasil pada branch `codex/client-readiness` di dua repositori. **Belum deploy, be
 | Builder diagram browser | Workflow SVG dan KaTeX math rendered; console kosong | Smoke test menggunakan DOM asli; belum full AI-workspace regression |
 | Tracker Excel | Formula scenario tests, error scan 0, semua tab dirender/diinspeksi | Simulasi 0 income; missing proof 0; currency mismatch 0; duplicate invoice 0; approved CR/refund benar; bukan bank integration |
 | Delivery/restore | Git clone rebuild, rollback v1/return v2, ZIP extraction rebuild identik | Fictional approvals/payments dan local launch rehearsal; real revenue 0 |
+| DNS/mail 8 Oktober | Apex HTTPS 200, authoritative NS Rumahweb, MX Zoho, www ENOTFOUND, live canonical masih www | Public read-only checks; tidak membuktikan account hosting/inbox receipt |
 
 Bukti tampilan: `WUUS/docs/client-readiness/qa/hospitality-mobile-error.png` dan `review-mobile-error.png`. Isian hanya data sintetis `example.com`; tidak ada data prospek nyata.
 
@@ -56,7 +58,7 @@ Sepuluh lint error website diperbaiki: inferred types, quote JSX dan viewport su
 1. Skema/trigger/policies Supabase asli, migration staging/production dan test REST role belum diverifikasi. Perlu backup dan uji concurrency multi-connection.
 2. Service key server, rate-limit secret, allowlist UUID owner dan preview origin belum diset di deployment. Lokal asli hanya memiliki public URL/anon key.
 3. Akun owner asli, login/non-owner dan alur kedua form sampai status update di preview/production belum diuji.
-4. Akun Vercel tersambung BinaHub memakai **Hobby**, project tidak memiliki domain apex; inspect apex tidak ditemukan di akun itu. DNS www NXDOMAIN dan canonical HTML live masih www. Supabase CLI belum authenticated, host pada config lokal ENOTFOUND. Ini tidak membuktikan Supabase project telah dihapus. Rilis akun pemilik domain tetap perlu akses yang benar.
+4. Akun Vercel tersambung BinaHub memakai **Hobby**, project tidak memiliki domain apex; inspect apex tidak ditemukan di akun itu. Registrar/NS Rumahweb dan MX Zoho confirmed 8 Oktober; www tetap ENOTFOUND, canonical HTML live masih www. Owner memilih SQL Editor manual, sehingga CLI authentication tidak menjadi syarat langkah itu. Project aktif/config perlu dicocokkan; host config lama ENOTFOUND tidak membuktikan project dihapus. Rilis akun pemilik domain tetap perlu konteks yang benar.
 5. Provider/sender/recipient email, inbox receipt/scheduler, payment route/fees/currency/identitas dan invoice builder lama belum verified. Provider spend caps serta ledger/webhook AI adalah gate future roadmap; AI tetap dipause. Production policy/views/security-definer functions dan multiconnection concurrency belum verified.
 
 Bukti tambahan: qa/integration-report.json, qa/delivery-simulation-report.json, qa/client-desktop.png, qa/client-mobile-inquiry.png, qa/diagram-dependency-report.json. Kondisi akun/rilis dirangkum di PRODUCTION-BLOCKERS.md. Kit contoh adalah repo fiktif terpisah; source archive serta restore outputs berada di folder output workspace.

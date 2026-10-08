@@ -19,8 +19,12 @@ alter table public.hospitality_inquiries enable row level security;
 revoke all on table public.hospitality_inquiries from public, anon, authenticated;
 grant select, insert, update, delete on public.hospitality_inquiries to service_role;
 -- Existing public policies are deliberately removed; restore only from reviewed backup.
-do $$ declare entry record;
+do $$ declare entry record; column_names text;
 begin
+  -- Table REVOKE alone does not revoke pre-existing column-level grants.
+  select string_agg(format('%I',attname),',') into column_names from pg_attribute
+    where attrelid='public.hospitality_inquiries'::regclass and attnum>0 and not attisdropped;
+  execute format('revoke all (%s) on table public.hospitality_inquiries from public, anon, authenticated',column_names);
   for entry in select policyname from pg_policies where schemaname = 'public' and tablename = 'hospitality_inquiries'
   loop execute format('drop policy %I on public.hospitality_inquiries', entry.policyname); end loop;
   -- Identity sequence may already exist under a different name.

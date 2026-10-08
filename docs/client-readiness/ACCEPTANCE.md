@@ -25,6 +25,7 @@
 | A21 | Restore | Source ZIP/checksum dan Git previous/final release bisa dibangun ulang identik di folder baru | delivery-simulation-report.json |
 | A22 | www | 308 ke apex dengan path/query utuh; DNS/HTTPS/canonical live benar | Local real Host-header HTTP pass; akun DNS/hosting untuk live |
 | A23 | Tes skor lama | Perhitungan lokal; browser tidak menulis DB; data historis tetap ada; role publik tidak dapat CRUD/sequence | Migration 003 PGlite: tabel tidak ada, policy terbuka, rerun, preservasi dan denial anon/authenticated; inventory views/routines staging |
+| A24 | SQL Editor manual | Bundle identik sumber, satu transaksi, semua postcheck PASS, record lama terjaga, unsafe legacy schema/public dependent objects berhenti; column grants dan outbox policies lama tertutup | 4 PGlite manual-bundle tests + readonly verify; owner backup/inspect/manual apply terkoordinasi dengan release |
 
 QA manual: lebar 360/390/768/1440, keyboard tab/focus/submit, status `aria-live`, double-click, retry setelah timeout, browser back/refresh, email panjang dan notes maksimum. Respons error tidak berisi SQL/key/body. Periksa bahwa logo/demo/link dan navigasi tetap berfungsi. Tidak membuat transaksi keuangan atau memanggil AI live untuk uji lokal.
 

@@ -10,13 +10,14 @@ test('SQL migration, role privileges, deduplication and durable throttle work in
     const migration = await readFile(new URL('../supabase/migrations/202610070001_secure_inquiries.sql', import.meta.url), 'utf8');
     await db.exec(migration);
     // A rerun must preserve an existing lead and close an unsafe old public policy.
-    await db.exec("INSERT INTO public.hospitality_inquiries(hotel_name,website_url,contact_name,email) VALUES ('Legacy QA','https://example.com','QA','qa@example.com'); CREATE POLICY unsafe_old ON public.hospitality_inquiries FOR ALL TO anon USING (true) WITH CHECK (true); GRANT ALL ON public.hospitality_inquiries TO anon;");
+    await db.exec("INSERT INTO public.hospitality_inquiries(hotel_name,website_url,contact_name,email) VALUES ('Legacy QA','https://example.com','QA','qa@example.com'); CREATE POLICY unsafe_old ON public.hospitality_inquiries FOR ALL TO anon USING (true) WITH CHECK (true); GRANT ALL ON public.hospitality_inquiries TO anon; GRANT SELECT(email),INSERT(email),UPDATE(email) ON public.hospitality_inquiries TO public,anon,authenticated;");
     await db.exec(migration);
     assert.equal((await db.query('SELECT count(*)::int AS total FROM public.hospitality_inquiries')).rows[0].total, 1);
     const regression = await readFile(new URL('../supabase/tests/inquiries.sql', import.meta.url), 'utf8');
     await db.exec(regression);
     assert.equal((await db.query('SELECT count(*)::int AS total FROM public.hospitality_inquiries')).rows[0].total, 1);
     for (const role of ['anon', 'authenticated']) {
+      assert.equal((await db.query("SELECT has_any_column_privilege($1,'public.hospitality_inquiries','SELECT,INSERT,UPDATE,REFERENCES') AS allowed",[role])).rows[0].allowed,false);
       await db.exec(`SET ROLE ${role}`);
       await assert.rejects(db.query('SELECT id FROM public.hospitality_inquiries WHERE false'), /permission denied/);
       await assert.rejects(db.query("UPDATE public.hospitality_inquiries SET status = 'won' WHERE false"), /permission denied/);

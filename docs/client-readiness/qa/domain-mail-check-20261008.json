@@ -1,0 +1,11 @@
+{
+  "checkedOnJakarta": "2026-10-08",
+  "methods": ["Windows Resolve-DnsName", "Node dns.resolve4", "HTTPS Invoke-WebRequest"],
+  "nameservers": ["nsid1.rumahweb.com", "nsid2.rumahweb.net", "nsid3.rumahweb.biz", "nsid4.rumahweb.org"],
+  "mailExchanges": ["mx.zoho.com", "mx2.zoho.com", "mx3.zoho.com"],
+  "apexHttpsStatus": 200,
+  "liveCanonical": "https://www.webuntukusaha.com",
+  "wwwDnsCode": "ENOTFOUND",
+  "mutations": false,
+  "limitation": "Public DNS/HTML only. Does not verify owner inbox receipt, domain account access, correct hosting project or newest code deployment."
+}

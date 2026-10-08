@@ -1,6 +1,6 @@
 # WUUS — acuan kesiapan klien pertama
 
-Versi 2 · 7 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
+Versi 3 · 8 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
 
 Tujuan: menerima pemasukan pertama dari jasa website dengan scope terkendali, biaya dibayar dari deposit, dan proses yang bisa dijalankan satu orang. Pendapatan saat ini **0**, anggaran akuisisi **Rp0**. Target pendapatan adalah sasaran, bukan prediksi atau jaminan.
 
@@ -21,6 +21,9 @@ Urutan baca dan kerja:
 13. [Simulasi delivery](SIMULATION.md): proposal → revisi → handover → rollback/restore yang sudah dijalankan.
 14. [Gate akun produksi](PRODUCTION-BLOCKERS.md): temuan Vercel/DNS/Supabase dan tindakan yang belum dapat dilakukan.
 15. [Roadmap fitur besar](FUTURE-ROADMAP.md): kebutuhan dan pendanaan sebelum portal/PMS/billing/outreach/AI.
+16. [SQL manual Supabase](../../supabase/manual/README.md): inspect → satu transaksi apply → verify; owner menjalankan melalui SQL Editor.
+17. [Setup Zoho + Resend](EMAIL-SETUP.md): inbox yang sudah ada, sending subdomain dan environment.
+18. [Pembayaran lintas negara](PAYMENTS.md): Wise ke rekening IDR sebagai opsi awal; PayPal Invoice alternatif, fee/hold dan instruksi klien.
 
 Template siap diisi: [onboarding](templates/ONBOARDING.md), [proposal lengkap](templates/PROPOSAL.md), [invoice/receipt](templates/INVOICE.md), [payment verification](templates/PAYMENT-VERIFICATION.md), [scope change](templates/CHANGE-REQUEST.md), [launch/handover](templates/LAUNCH-HANDOVER.md).
 
