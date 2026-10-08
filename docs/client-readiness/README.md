@@ -10,6 +10,8 @@ Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, notifikasi `
 
 Urutan baca dan kerja:
 
+**Update perbaikan 06:13 UTC:** akses CLI Vercel workspace berhasil sebagai gm-builder-9019. Service-role key Production yang hilang sudah ditambahkan, URL/public key dicocokkan. Website `0d44d11` dan builder `f401e2c` production success; nama pribadi di publik diganti WUUS. Dua inquiry browser sintetis sukses dan tersimpan, dua outbox sent dan Resend melaporkan delivered hallo→admin. Owner perlu memeriksa kedua WUUS TEST di admin, mengubah status dan melihat inbox/spam; tidak perlu submit ulang atau mengulang SQL. Bukti `qa/production-inquiry-fix-20261008.json`. Status historis di paragraf sebelumnya bukan status konfigurasi terkini.
+
 1. [PRD](PRD.md): tujuan produk dan syarat kelulusan.
 2. [Scope dan tahapan](SCOPE.md): batas pekerjaan serta urutan implementasi.
 3. [Backlog](BACKLOG.md): status tiap pekerjaan dan bukti penyelesaiannya.

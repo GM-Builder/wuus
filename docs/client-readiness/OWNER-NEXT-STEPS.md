@@ -92,7 +92,13 @@ Semua penyebutan nama pribadi pada source publik, metadata, pesan form, demo, Wh
 
 Admin yang sudah terautentikasi menerima pesan diagnostik dengan nama variabel server yang hilang dan langkah Production/redeploy. Pengunjung tetap menerima pesan gagal umum dan kontak WUUS; tidak ada key/nilai env dibuka atau secret di-commit.
 
-Validasi lokal: website 37/37 unit, 29/29 integrasi, build/TypeScript pass; targeted lint 0 error dengan 22 warning demo lama. Builder build/TypeScript pass. Perbaikan env memerlukan deployment baru sebelum uji inquiry/admin/inbox diulang.
+Validasi lokal: website 37/37 unit, 29/29 integrasi, build/TypeScript pass; targeted lint 0 error dengan 22 warning demo lama. Builder build/TypeScript pass.
+
+### Hasil perbaikan produksi — 8 Oktober, 06:13 UTC
+
+Website `0d44d11` dan builder `f401e2c` sudah production deploy sukses. Pemeriksaan halaman publik utama, review/hospitality, privacy/terms dan tiga demo tidak menemukan nama pribadi. Dua form dikirim melalui browser dengan data sintetis `qa@example.com`: **WUUS TEST — review — production fix** dan **WUUS TEST — hospitality — production fix**. Keduanya menampilkan pesan sukses; MCP read-only mengonfirmasi satu row inquiry dan satu row outbox per sumber. Kedua outbox berstatus `sent`, satu attempt, tanpa error. Resend melaporkan kedua email dari `hallo` ke `admin` memiliki event `delivered`; belum membuktikan owner melihatnya di inbox atau spam. Bukti: `qa/production-inquiry-fix-20261008.json` serta dua screenshot success.
+
+**Yang perlu owner lakukan sekarang:** refresh `/admin/inquiries`, login dengan Supabase Auth owner, pastikan kedua nama WUUS TEST tersebut terlihat, lalu ubah status salah satu menjadi `audit_prepared`. Setelah pengecekan, archive inquiry uji. Periksa dua notifikasi di Zoho `admin@webuntukusaha.com`, termasuk spam. Tidak perlu mengirim ulang kedua inquiry atau menjalankan ulang SQL. Sesi browser agent masih menampilkan login; akses baca/status melalui sesi owner belum terverifikasi setelah perbaikan env.
 
 Siapkan rilis aman dari branch `codex/client-readiness` di repo website, cocokkan repository/root directory dengan project `wuus`, lalu jalankan runbook. Jangan melakukan Git push ke semua push URL tanpa memilih repository yang benar. Apply SQL sudah dilaporkan selesai; form live lama yang menulis langsung dari browser perlu diganti aplikasi server yang baru. Jangan membuka ulang grants publik supaya form lama dapat menulis.
 

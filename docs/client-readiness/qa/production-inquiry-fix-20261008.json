@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-08T06:13:46Z",
+  "environment": "Production",
+  "url": "https://webuntukusaha.com",
+  "websiteCommit": "0d44d112691b72fe5eba6eec684bc6c67da70ea0",
+  "builderCommit": "f401e2ced8ddcab3163a38f4ec1af754407f8a76",
+  "deploymentStatus": {"website": "success", "builder": "success"},
+  "configurationFix": {
+    "account": "gm-builder-9019",
+    "project": "wuus",
+    "missingVariableAdded": "SUPABASE_SERVICE_ROLE_KEY",
+    "serverSecretTarget": "Production only",
+    "publicSupabaseConfigurationAligned": true,
+    "secretValuesIncluded": false
+  },
+  "syntheticInquiries": [
+    {"source": "review", "browserSuccess": true, "savedCount": 1, "outboxCount": 1, "notificationStatus": "sent", "attempts": 1, "errorCode": null, "providerEvent": "delivered"},
+    {"source": "hospitality", "browserSuccess": true, "savedCount": 1, "outboxCount": 1, "notificationStatus": "sent", "attempts": 1, "errorCode": null, "providerEvent": "delivered"}
+  ],
+  "notificationSender": "hallo@webuntukusaha.com",
+  "notificationRecipient": "admin@webuntukusaha.com",
+  "evidenceMethods": ["Browser production submit with synthetic data", "Supabase MCP read-only aggregate query", "Resend email API read-only delivery event", "GitHub deployment status"],
+  "publicBrandScan": {"personalNameFound": false, "httpStatus": 200, "paths": ["/", "/hospitality", "/review", "/hospitality/privacy", "/hospitality/terms", "/hospitality/demo/seaside-guesthouse", "/hospitality/demo/lakeside-wine-estate", "/hospitality/demo/city-apartments", "/kebijakan-privasi", "/syarat-ketentuan"], "builderRootPersonalNameFound": false},
+  "screenshots": ["production-review-success-20261008.png", "production-hospitality-success-20261008.png"],
+  "localValidation": {"unitTestsPassed": 37, "integrationChecksPassed": 29, "websiteBuild": "pass", "builderBuild": "pass", "targetedLintErrors": 0, "targetedLintBaselineWarnings": 22},
+  "limitations": ["Owner session read/status update after env fix not yet verified", "Human inbox/spam inspection pending; delivered is provider evidence", "Authenticated nonowner and multiconnection concurrency pending", "Notification failure retry/scheduler pending", "www/commercial hosting/payment gates remain separate"],
+  "productionSqlMutationPerformedByAgent": false,
+  "realProspectDataUsed": false,
+  "outreachSent": false
+}
