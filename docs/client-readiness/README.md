@@ -4,7 +4,7 @@ Versi 3 · 8 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
 
 Tujuan: menerima pemasukan pertama dari jasa website dengan scope terkendali, biaya dibayar dari deposit, dan proses yang bisa dijalankan satu orang. Pendapatan saat ini **0**, anggaran akuisisi **Rp0**. Target pendapatan adalah sasaran, bukan prediksi atau jaminan.
 
-Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, penerima notifikasi `admin@webuntukusaha.com`. Screenshot Zoho menunjukkan kedua pengguna aktif; actual inbox receipt belum diuji. Owner melaporkan SQL manual 24 PASS. Screenshot produksi mengidentifikasi gm-builder-9019/project wuus/Hobby; CLI lokal masih akun berbeda. Resend memakai root domain; DNS sending belum ditemukan. Ikuti OWNER-NEXT-STEPS.md. Owner memiliki BRI, Bank Jago dan GoPay; Wise → BRI IDR, Jago cadangan/GoPay domestik. Akun Wise owner tidak diperlukan; detail rekening/rute belum verified dan nomor rekening hanya pada invoice privat.
+Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, notifikasi `admin@webuntukusaha.com`. Zoho kedua pengguna aktif; actual inbox belum diuji. SQL manual owner 24 PASS. Supabase screenshot sudah menunjukkan admin Email user dibuat, login/allowlist belum diuji. Vercel gm-builder-9019/project wuus/Hobby teridentifikasi; CLI masih akun berbeda. Resend root domain: DNS DKIM/CNAME sending kini terkonfirmasi pada tiga nameserver yang merespons, provider Verified/key/env/inbox masih pending. Ikuti OWNER-NEXT-STEPS.md. BRI utama/Jago cadangan/GoPay domestik; akun Wise owner tidak diperlukan, detail rekening/rute hanya invoice privat. Apex tetap URL utama dan www diarahkan ke apex sebagai alamat tambahan.
 
 Urutan baca dan kerja:
 
