@@ -31,33 +31,28 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://webuntukusaha.com'),
+  metadataBase: new URL("https://webuntukusaha.com"),
   title: "WUUS - Web Design & Digital Solutions",
-  description: "WUUS is an independent web development and digital design studio building fast and thoughtful websites for businesses and hospitality.",
+  description:
+    "WUUS is an independent web development and digital design studio building fast and thoughtful websites for businesses and hospitality.",
   alternates: {
     canonical: "https://webuntukusaha.com",
   },
   openGraph: {
-    title: "WUUS Studio - Engineering Next-Gen Digital Platforms",
-    description: "Bespoke digital architecture, direct booking engines, and autonomous AI systems built for modern business growth.",
+    title: "WUUS — Independent web design studio",
+    description:
+      "Clear websites for businesses and independent properties. Written scope, private preview and source code handover.",
     url: "https://webuntukusaha.com",
     siteName: "WUUS Studio",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "WUUS Studio - High-Performance Web & AI Systems",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WUUS Studio - High-Performance Digital Platforms",
-    description: "Bespoke digital architecture, direct booking engines, and autonomous AI systems.",
-    images: ["/og-image.png"],
+    title: "WUUS — Independent web design studio",
+    description:
+      "Websites for businesses and independent properties. Clear scope and a personal point of contact.",
+    images: ["/opengraph-image"],
   },
 };
 
@@ -71,11 +66,6 @@ export default function RootLayout({
       lang="id"
       className={`${satoshi.variable} ${outfit.variable} font-sans antialiased scroll-smooth selection:bg-amber-500/20 selection:text-[#1C2733]`}
     >
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800,900&display=swap" />
-      </head>
       <body className="min-h-full flex flex-col font-sans bg-white text-[#1C2733] antialiased">
         {children}
         <Analytics />

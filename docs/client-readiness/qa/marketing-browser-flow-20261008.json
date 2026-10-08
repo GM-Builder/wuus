@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-08T11:49:20.187Z",
+  "passed": true,
+  "localBrowserSaved": [
+    {
+      "source": "hospitality",
+      "request_type": "proposal",
+      "hotel_name": "WUUS VISUAL QA hospitality"
+    },
+    {
+      "source": "review",
+      "request_type": "review",
+      "hotel_name": "WUUS VISUAL QA review"
+    }
+  ],
+  "productionDatabaseTouched": false,
+  "emailSent": false
+}

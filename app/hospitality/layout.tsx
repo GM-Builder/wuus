@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: "Fast, simple websites for independent hotels. Free 1-page review.",
     url: "https://webuntukusaha.com/hospitality",
     siteName: "WUUS",
-    images: [{ url: "/images/hospitality/coastal-retreat.jpg", width: 1200, height: 630, alt: "Websites for independent hotels" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "WUUS — Independent web design studio" }],
     locale: "en_GB",
     type: "website",
   },
