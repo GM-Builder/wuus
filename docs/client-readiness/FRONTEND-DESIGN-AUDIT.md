@@ -62,3 +62,12 @@ Catatan historis: hero dua panel dan aturan radius pada iterasi ini telah digant
 | AI berbayar dan skor lama | Tetap mengikuti pengamanan/perapihan sebelum iterasi ini; bukan fitur yang dihapus oleh penggantian hero |
 
 Tidak mengirim inquiry/email baru ke produksi dan tidak menjalankan SQL produksi untuk perubahan ini.
+
+## Iterasi visual keempat — gambar material dan glossy selektif
+
+- Dua background dibuat dengan built-in imagegen: ivory glass untuk hero, navy glass untuk bagian studio dan kartu Starter. Gambar hanya dipasang pada area tersebut; layout editorial, logo asli, konten, dan area form tetap dipertahankan.
+- Export WebP desktop berukuran sekitar 22 KB dan 29 KB, dengan versi mobile sekitar 8 KB dan 11 KB pada lebar maksimal 640 px. Resolusi sumber aktual 1672 × 941; tidak melakukan upscale atau mengklaim native 4K. Prompt final, dimensi, lokasi berkas dan penggunaan dicatat di `GENERATED-SURFACES.md`.
+- Glossy berupa highlight statis pada bingkai preview, bar preview, ikon layanan dan tombol Starter, dengan rim tipis pada permukaan navy. Overlay navy menjaga keterbacaan. Lapisan dekoratif preview memakai `pointer-events: none`; tidak menambah animasi, dependency atau JavaScript klien.
+- Build produksi final dan TypeScript lulus. Dua belas pemeriksaan browser pada halaman `/`, `/hospitality`, `/review` dengan lebar 360/768/1440/3840 px memastikan satu H1, tidak ada overflow, radius maksimal 16 px, tiga referensi logo asli dan tidak ada nama pribadi owner. Pemilihan background mobile/desktop diperiksa; showcase tidak mendapat gambar background tambahan.
+- Tampilan hero, studio dan Starter diperiksa secara visual pada desktop dan mobile. Klik preview membuka demo; tombol Discuss Starter menuju inquiry, opsi proposal tersedia, dan form review kosong ditolak dengan fokus ke property name tanpa pesan sukses. Console browser tidak mencatat error/warning. Bukti: `qa/generated-surfaces-responsive-20261008.json`.
+- Perubahan runtime hanya CSS dan aset gambar; submit form, API, autentikasi, database dan notifikasi tidak diubah. Tidak mengirim inquiry/email atau menjalankan SQL produksi.
