@@ -6,6 +6,8 @@ Tujuan: menerima pemasukan pertama dari jasa website dengan scope terkendali, bi
 
 Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, notifikasi `admin@webuntukusaha.com`. Zoho kedua pengguna aktif; actual inbox belum diuji. SQL manual owner 24 PASS. Update 05:24 UTC: API Supabase mengonfirmasi admin UUID/email terkonfirmasi serta tiga tabel menolak akses REST anonim; Resend API mengonfirmasi root domain verified. Env lokal privat dan salinan import Vercel siap, belum dipasang di deployment. MCP Supabase Codex terdaftar untuk proyek WUUS dalam mode read-only dan OAuth berhasil; tool belum termuat dalam chat ini. Vercel gm-builder-9019/project wuus/Hobby teridentifikasi; CLI masih akun berbeda. Ikuti OWNER-NEXT-STEPS.md. BRI utama/Jago cadangan/GoPay domestik; akun Wise owner tidak diperlukan, detail rekening/rute hanya invoice privat. Apex tetap URL utama dan www diarahkan ke apex sebagai alamat tambahan.
 
+**Update rilis 05:38 UTC:** owner melaporkan env Vercel updated dan meminta commit/push. Repository produksi GM-Builder terkonfirmasi lewat GitHub deployments; main website `1bb39a7` dan builder `560a7de` berhasil deploy. Canonical apex dan kontak hallo live; API admin/notification/cron menolak anonymous, form menolak input/origin tidak sah. Builder 19/19 method/route live mengembalikan 503 BUILDER_PAUSED. Langkah owner kini: inquiry uji pada dua form → login admin/status update → actual inbox; lalu www, hosting komersial dan payment gate. Bukti dalam dua qa/production-*-20261008.json; tidak mengklaim seluruh gate selesai.
+
 Urutan baca dan kerja:
 
 1. [PRD](PRD.md): tujuan produk dan syarat kelulusan.

@@ -6,6 +6,8 @@ Owner update 8 Oktober 2026: memilih menjalankan SQL lewat dashboard. Gunakan `s
 
 Update bukti owner: inventory awal direview; owner mengirim 24 PASS pada dua output identik (apply sudah mencetak verify sesudah commit). Jangan ulang apply/migration hanya untuk melanjutkan rilis. Screenshot Vercel mengidentifikasi project `wuus`, akun `gm-builder-9019`, apex Valid Configuration pada Production, plan Hobby. CLI lokal masih `binahubid-7508`: belum mendapat akses akun produksi tersebut. Zoho menunjukkan pengguna admin/hallo aktif; Resend memakai root domain. Lihat [langkah owner berikutnya](OWNER-NEXT-STEPS.md).
 
+**Update rilis 8 Oktober 05:38 UTC:** owner melaporkan env Vercel updated dan mengotorisasi commit/push. GitHub deployments mengonfirmasi repository GM-Builder/wuus dan wuus-builder, branch main; push fast-forward memicu production deploy sukses tanpa memakai CLI Vercel BinaHub. Website canonical/contact/admin denial dan builder 19/19 pause live terverifikasi. Langkah yang masih perlu dilakukan: positive inquiry/owner login/status/inbox, www, commercial hosting serta payment/backup gates. Dua laporan qa/production-*-20261008.json mencatat commit dan batas pemeriksaan. Bagian staging/migrasi di bawah adalah prosedur untuk pekerjaan berikutnya, bukan instruksi apply ulang produksi owner.
+
 ## Konfigurasi dan staging
 
 1. Pastikan akses proyek Supabase dan project `wuus` pada akun produksi owner `gm-builder-9019`; catat project/team IDs privat. CLI lokal BinaHub adalah akun berbeda, jangan menautkan/deploy ke project BinaHub lama. Screenshot akun produksi juga menampilkan Hobby. [Vercel Hobby](https://vercel.com/docs/plans/hobby) hanya personal nonkomersial. Lihat PRODUCTION-BLOCKERS.md; jangan membeli layanan tanpa pendanaan/keputusan owner.

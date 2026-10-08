@@ -60,6 +60,24 @@ MCP `supabase` terdaftar pada konfigurasi Codex global, dibatasi project referen
 
 Langkah berikutnya: import env privat pada **Production** project Vercel yang benar, lalu ikuti pemeriksaan preview/rilis di bawah. Tidak mengimpor secret produksi ke preview publik. Registrasi/OAuth MCP selesai; pemanggilan tool MCP di chat ini belum diuji karena tool belum termuat. Pemeriksaan API di atas menggunakan konfigurasi lokal, bukan klaim keberhasilan tool MCP.
 
+### Rilis produksi — 8 Oktober, 05:38 UTC
+
+Owner melaporkan env Vercel sudah diperbarui. GitHub mengonfirmasi repository produksi: `GM-Builder/wuus` dan `GM-Builder/wuus-builder`, masing-masing branch `main`. Perubahan dikirim secara fast-forward ke dua repository tersebut dan branch `codex/client-readiness`; mirror `faisalfarizi22` tidak diubah. Semua secret lokal tetap diabaikan Git.
+
+Website commit `1bb39a7` berhasil deploy (Vercel `2FXALJySaRdh9m29XN5J4szvfKKj`, GitHub deployment `6928094070`). Apex/hospitality/review HTTPS 200 dan canonical apex. Kontak publik pada homepage/hospitality memakai hallo; tidak menampilkan admin/email personal lama. API admin/notification/cron menolak anonymous 401; admin juga menolak token palsu dan token service-role sebagai user session. Form menolak origin asing 403 dan payload tidak sah 400. Ini tidak membuat lead/email dan belum menguji submit sah atau login owner.
+
+Builder commit `560a7de` berhasil deploy (Vercel `3wed2f5NEydjZxG3oBASDar4Jkkc`, GitHub deployment `6928086601`). Pada `build.webuntukusaha.com`, 19/19 kombinasi method/route mengembalikan 503 `BUILDER_PAUSED`. Tidak ada panggilan ke provider AI/payment dari pemeriksaan ini. Invoice/top-up lama dan settlement di provider masih perlu diperiksa owner.
+
+**Tindakan owner berikutnya:**
+
+1. Buka `https://webuntukusaha.com/hospitality`, kirim satu inquiry fiktif dengan penanda **WUUS TEST — hospitality** dan email milik sendiri. Ulangi pada `/review` dengan penanda **WUUS TEST — review**. Jangan memakai data tamu/prospek asli.
+2. Buka `https://webuntukusaha.com/admin/inquiries`, login dengan Supabase Auth `admin@webuntukusaha.com` dan password yang dibuat saat membuat user tersebut. Password ini dapat berbeda dari password Zoho. Pastikan kedua inquiry terlihat dan ubah status salah satu menjadi `audit_prepared`; setelah pemeriksaan, archive kedua inquiry uji.
+3. Cek inbox/spam `admin@webuntukusaha.com` di Zoho. Notifikasi harus benar-benar diterima; angka Provider accepted pada admin saja belum membuktikan inbox. Jika gagal, gunakan request ID/error/status untuk diagnosis tanpa mengirim password/key di chat.
+4. Tambahkan www dan redirect ke apex lewat project Vercel `wuus` lalu Rumahweb memakai target DNS dari project tersebut. Pemeriksaan 05:37 UTC masih belum menemukan DNS www; domain utama sudah berfungsi.
+5. Selesaikan hosting yang mengizinkan penggunaan komersial dan verifikasi detail/rute pembayaran BRI sebelum menerima DP. Setelah QA form/admin/inbox lulus, mulai batch prospek terarah menurut SALES-EXPERIMENT.md; jangan menambah fitur besar sebelum ada kebutuhan pembeli.
+
+Bukti: `qa/production-website-20261008.json` dan `qa/production-builder-20261008.json`. Hasil tersebut berlaku pada commit/waktu pemeriksaan yang tercatat; tidak mengklaim semua production gate selesai.
+
 Screenshot production menunjukkan **Hobby**, yang dibatasi personal nonkomersial. Pilih hosting/plan yang mengizinkan penggunaan jasa komersial sebelum rilis komersial; tidak membeli plan otomatis dengan budget Rp0. [Vercel Hobby](https://vercel.com/docs/plans/hobby). Pemindahan main app harus mendukung Next server API/Auth, bukan hanya upload kit statis.
 
 ## 3. Rilis dan pemeriksaan

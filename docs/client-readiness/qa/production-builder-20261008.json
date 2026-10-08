@@ -1,0 +1,146 @@
+{
+  "checkedAt": "2026-10-08T05:37:13.8180613Z",
+  "url": "https://build.webuntukusaha.com",
+  "productionCommit": "560a7de862e8e140ef4445b0b63d890b7eebc4d3",
+  "passed": 19,
+  "total": 19,
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/api/stats",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/download",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/credits",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/credits",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/fix-credits",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/create",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/webhook",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/webhook",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/convert-design",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/edit-code",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/edit-prd",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/generate-backend",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/generate-code",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/generate-frontend",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/generate-prd",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/generate-questions",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/generate-stitch",
+      "status": 503,
+      "code": "BUILDER_PAUSED",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Old invoices and pending settlements at the payment provider were not inspected",
+    "No authenticated owner session or AI provider calls"
+  ]
+}

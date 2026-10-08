@@ -1,0 +1,105 @@
+{
+  "checkedAt": "2026-10-08T05:38:08.5444080Z",
+  "productionCommit": "1bb39a793ff932288d792023123f1f7d32e00a16",
+  "githubDeploymentId": 6928094070,
+  "vercelDeploymentId": "2FXALJySaRdh9m29XN5J4szvfKKj",
+  "environment": "Production",
+  "url": "https://webuntukusaha.com",
+  "checks": [
+    {
+      "check": "GET /",
+      "status": 200,
+      "canonical": "https://webuntukusaha.com",
+      "publicHallo": true,
+      "oldPersonalEmail": false,
+      "publicAdminEmail": false
+    },
+    {
+      "check": "GET /hospitality",
+      "status": 200,
+      "canonical": "https://webuntukusaha.com/hospitality",
+      "publicHallo": true,
+      "oldPersonalEmail": false,
+      "publicAdminEmail": false
+    },
+    {
+      "check": "GET /review",
+      "status": 200,
+      "canonical": "https://webuntukusaha.com/review",
+      "publicHallo": false,
+      "oldPersonalEmail": false,
+      "publicAdminEmail": false
+    },
+    {
+      "check": "GET /admin/inquiries",
+      "status": 200,
+      "canonical": "https://webuntukusaha.com",
+      "publicHallo": null,
+      "oldPersonalEmail": false,
+      "publicAdminEmail": null
+    },
+    {
+      "check": "GET /sitemap.xml",
+      "status": 200,
+      "canonical": "",
+      "publicHallo": null,
+      "oldPersonalEmail": false,
+      "publicAdminEmail": null
+    },
+    {
+      "check": "GET /robots.txt",
+      "status": 200,
+      "canonical": "",
+      "publicHallo": null,
+      "oldPersonalEmail": false,
+      "publicAdminEmail": null
+    },
+    {
+      "check": "GET /api/admin/inquiries",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "check": "GET /api/admin/inquiries",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "check": "GET /api/admin/notifications",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "check": "GET /api/cron/notifications",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "check": "POST /api/inquiries",
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "check": "POST /api/inquiries",
+      "status": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "check": "Admin rejects server service-role token as a user session",
+      "status": 401,
+      "expected": 401,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "No valid inquiry submitted: no lead or email created by these checks",
+    "Owner login, actual inbox receipt and authenticated nonowner denial remain pending",
+    "www DNS is still unresolved; commercial hosting eligibility remains pending"
+  ]
+}
