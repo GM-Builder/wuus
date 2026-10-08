@@ -48,6 +48,18 @@ Isi environment **project `wuus` yang benar**, dengan project Supabase yang menj
 
 Password/key/nomor rekening tidak masuk chat/source/Git. Preview memakai data dan secrets staging sendiri. `CRON_SECRET` hanya bila scheduler retry benar-benar dipakai.
 
+### Update konfigurasi lokal dan MCP — 8 Oktober, 05:24 UTC
+
+`.env.local` sudah diisi dengan UUID admin yang cocok dengan Auth proyek `zsodlugndrjtnxoohxht`, sender `hallo`, recipient `admin`, serta dua secret acak berbeda sepanjang 64 karakter. Key Supabase dan Resend yang sudah tersedia dipertahankan. Salinan privat `.env.wuus-vercel.local` berisi hanya 10 variabel WUUS/Supabase/Resend untuk import pada project Vercel `wuus` yang benar; kedua file diabaikan Git. Jangan membagikan file ini atau menggunakannya untuk staging.
+
+`WUUS_ALLOWED_ORIGINS` sengaja kosong: kode selalu mengizinkan `https://webuntukusaha.com`. Tambahkan exact origin preview hanya jika memang diperlukan, dengan data/secret staging terpisah. `CRON_SECRET` sudah dibuat untuk kebutuhan endpoint retry; ini tidak membuat scheduler otomatis.
+
+Pemeriksaan API read-only berhasil: service key mengarah ke proyek yang benar; UUID dan email Auth admin cocok, email terkonfirmasi, tetapi belum pernah login. REST anonim ke `business_scores`, `hospitality_inquiries`, dan `wuus_inquiry_notifications` masing-masing ditolak HTTP 401. API Resend mengonfirmasi domain root berstatus **verified**. Ini belum membuktikan alur form, login owner atau penerimaan email.
+
+MCP `supabase` terdaftar pada konfigurasi Codex global, dibatasi project reference di atas dan `read_only=true`. Perintah Claude tidak dipakai untuk mengonfigurasi Codex. OAuth selesai dengan hasil CLI **Successfully logged in**; owner memilih akun dashboard saat login langsung, sehingga email akun OAuth tidak diverifikasi dari hasil CLI. Akun dashboard berbeda dari akun Auth admin website. Muat ulang koneksi MCP di Codex bila alat belum muncul pada sesi ini. Untuk autentikasi ulang jalankan `codex mcp login supabase` di terminal. SQL produksi tetap dikerjakan manual oleh owner.
+
+Langkah berikutnya: import env privat pada **Production** project Vercel yang benar, lalu ikuti pemeriksaan preview/rilis di bawah. Tidak mengimpor secret produksi ke preview publik. Registrasi/OAuth MCP selesai; pemanggilan tool MCP di chat ini belum diuji karena tool belum termuat. Pemeriksaan API di atas menggunakan konfigurasi lokal, bukan klaim keberhasilan tool MCP.
+
 Screenshot production menunjukkan **Hobby**, yang dibatasi personal nonkomersial. Pilih hosting/plan yang mengizinkan penggunaan jasa komersial sebelum rilis komersial; tidak membeli plan otomatis dengan budget Rp0. [Vercel Hobby](https://vercel.com/docs/plans/hobby). Pemindahan main app harus mendukung Next server API/Auth, bukan hanya upload kit statis.
 
 ## 3. Rilis dan pemeriksaan
