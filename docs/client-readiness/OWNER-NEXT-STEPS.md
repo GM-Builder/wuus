@@ -82,6 +82,18 @@ Screenshot production menunjukkan **Hobby**, yang dibatasi personal nonkomersial
 
 ## 3. Rilis dan pemeriksaan
 
+### Perbaikan setelah tes owner — 8 Oktober 2026
+
+Owner melaporkan kedua form gagal dan admin setelah login menampilkan `Service configuration required`. Pemeriksaan negatif pada rilis sebelumnya tidak membuktikan konfigurasi penyimpanan siap; status form/admin/inbox tetap belum lulus. MCP read-only mengonfirmasi jumlah inquiry masih 0 setelah percobaan owner.
+
+Login Vercel khusus workspace berhasil sebagai `gm-builder-9019`; project `wuus` cocok (`prj_g7RFwbBhecR6cOfZ6ww33WxKWfej`, team `team_sfazP8BGvnup5XwvIzwmysTU`). Daftar env Production mengonfirmasi `SUPABASE_SERVICE_ROLE_KEY` belum ada. Key ditambahkan sebagai Secret hanya untuk Production dari env lokal privat. URL dan publishable key Production diselaraskan dengan proyek Supabase aktif; kedua public variable tetap tersedia pada Preview, sementara service-role key tidak ditambahkan ke Preview. Enam variabel owner/notifikasi lainnya cocok dengan konfigurasi lokal saat pemeriksaan privat.
+
+Semua penyebutan nama pribadi pada source publik, metadata, pesan form, demo, WhatsApp, privacy/terms, serta draft reply admin diganti dengan WUUS. Foto yang sama menggunakan nama asset `studio-designer.jpg` dan alt yang menyebut WUUS. Public terms tetap meminta identitas penyedia jasa dalam proposal sebelum deposit. Builder pause page juga memakai WUUS. Perubahan ini tidak menyatakan studio memiliki pegawai tambahan.
+
+Admin yang sudah terautentikasi menerima pesan diagnostik dengan nama variabel server yang hilang dan langkah Production/redeploy. Pengunjung tetap menerima pesan gagal umum dan kontak WUUS; tidak ada key/nilai env dibuka atau secret di-commit.
+
+Validasi lokal: website 37/37 unit, 29/29 integrasi, build/TypeScript pass; targeted lint 0 error dengan 22 warning demo lama. Builder build/TypeScript pass. Perbaikan env memerlukan deployment baru sebelum uji inquiry/admin/inbox diulang.
+
 Siapkan rilis aman dari branch `codex/client-readiness` di repo website, cocokkan repository/root directory dengan project `wuus`, lalu jalankan runbook. Jangan melakukan Git push ke semua push URL tanpa memilih repository yang benar. Apply SQL sudah dilaporkan selesai; form live lama yang menulis langsung dari browser perlu diganti aplikasi server yang baru. Jangan membuka ulang grants publik supaya form lama dapat menulis.
 
 Periksa preview lalu produksi: inquiry sintetis tersimpan → owner login dan data tampil → status bisa berubah → satu notifikasi diterima di inbox admin. Anonymous/nonowner harus ditolak. Error mempertahankan isian dan menampilkan email manual. Verifikasi www→apex/path/query/HTTPS, canonical apex dan email publik hallo. Regresi database yang menulis banyak fixture hanya di staging.

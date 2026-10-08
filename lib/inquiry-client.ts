@@ -19,7 +19,7 @@ export async function submitInquiry(input: Submission): Promise<void> {
     if (!response.ok || result.received !== true) throw new Error(result.error || 'Your request could not be saved. Please try again.');
   } catch (error) {
     if (error instanceof Error && (error.name === 'TimeoutError' || error.name === 'AbortError' || error instanceof TypeError)) {
-      throw new Error('We could not confirm receipt. Please retry using the same form, or email Faisal directly.');
+      throw new Error('We could not confirm receipt. Please retry using the same form, or email WUUS directly.');
     }
     throw error;
   }

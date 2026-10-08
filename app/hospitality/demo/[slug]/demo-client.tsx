@@ -196,7 +196,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
             href="/hospitality#review"
             className="text-slate-200 hover:text-white font-medium transition-colors"
           >
-            Ask Faisal about a website →
+            Ask WUUS about a website →
           </Link>
           <Link
             href="/hospitality#examples"

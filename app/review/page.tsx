@@ -46,7 +46,7 @@ function ReviewContent() {
       await submitInquiry({ ...payload, requestId: submission.current.id });
       setFormSubmitted(true);
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : 'Your request could not be saved. Please try again or email Faisal directly.');
+      setFormError(err instanceof Error ? err.message : 'Your request could not be saved. Please try again or email WUUS directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -115,12 +115,12 @@ function ReviewContent() {
         {/* Short Who I am block */}
         <div className="bg-white rounded-xl p-5 border border-slate-200 mb-8 flex items-center gap-4 text-xs text-slate-600">
           <div className="w-11 h-11 rounded-full bg-[#1C2733] text-white flex items-center justify-center font-bold text-xs shrink-0">
-            FA
+            WUUS
           </div>
           <div>
-            <p className="font-bold text-slate-900 text-sm">Hi, I&apos;m Faisal</p>
+            <p className="font-bold text-slate-900 text-sm">Your website review by WUUS</p>
             <p className="text-[11px] text-slate-500 mt-0.5">
-              I design and build websites for independent hotels from Jakarta. I read every request myself and send the review by email. I won&apos;t call you.
+              WUUS designs and builds websites for independent hotels from Jakarta. Every request is reviewed personally, with feedback sent by email.
             </p>
           </div>
         </div>
@@ -252,7 +252,7 @@ function ReviewContent() {
               {formError && (
                 <p role="alert" className="text-sm text-red-700">
                   {formError}{' '}
-                  <a href="mailto:hallo@webuntukusaha.com" className="underline">Email Faisal directly</a>
+                  <a href="mailto:hallo@webuntukusaha.com" className="underline">Email WUUS directly</a>
                 </p>
               )}
 

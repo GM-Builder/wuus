@@ -180,10 +180,10 @@ export default function HospitalityPage() {
       };
       submission.current = requestIdentity(payload, submission.current);
       await submitInquiry({ ...payload, requestId: submission.current.id });
-      setFormStatus('Thank you! Your request has been saved. Faisal will reply by email within 2 working days.');
+      setFormStatus('Thank you! Your request has been saved. WUUS will reply by email within 2 working days.');
     } catch (err) {
       setFormFailed(true);
-      setFormStatus(err instanceof Error ? err.message : 'Your request could not be saved. Please try again or email Faisal directly.');
+      setFormStatus(err instanceof Error ? err.message : 'Your request could not be saved. Please try again or email WUUS directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -321,7 +321,7 @@ export default function HospitalityPage() {
               <a href="#examples" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">Examples</a>
               <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">Pricing</a>
               <a href="#calculator" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">Calculator</a>
-              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">About Faisal</a>
+              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">About WUUS</a>
               <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-lg hover:bg-slate-50">FAQ</a>
               <Link href="/" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-slate-500 pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
                 <span>Kembali ke Web Utama (ID)</span>
@@ -420,14 +420,14 @@ export default function HospitalityPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            3. TRUST STRIP (AUTHENTIC WUUS FOUNDER)
+            3. TRUST STRIP (WUUS STUDIO)
         ────────────────────────────────────────────────────────────── */}
         <div className="border-y border-slate-200 bg-white">
           <div className="max-w-[1224px] mx-auto px-6 sm:px-9 py-6 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
             <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border border-slate-200">
               <Image
-                src="/images/hospitality/faisal-founder.jpg"
-                alt="Faisal Alfarizi"
+                src="/images/hospitality/studio-designer.jpg"
+                alt="WUUS website designer"
                 fill
                 sizes="48px"
                 className="object-cover"
@@ -435,7 +435,7 @@ export default function HospitalityPage() {
             </div>
             <div className="text-sm">
               <p className="text-slate-600 m-0">
-                <strong className="text-[#1C2733] font-bold">Hi, I&apos;m Faisal Alfarizi.</strong> I design and build websites from Jakarta, Indonesia.<br className="hidden sm:inline" />
+                <strong className="text-[#1C2733] font-bold">Built by WUUS.</strong> An independent web design studio based in Jakarta, Indonesia.<br className="hidden sm:inline" />
                 You talk directly to the person building your site.
               </p>
             </div>
@@ -1328,7 +1328,7 @@ export default function HospitalityPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            9. ABOUT ME: FAISAL ALFARIZI
+            9. ABOUT WUUS
         ────────────────────────────────────────────────────────────── */}
         <section id="about" className="bg-[#F8F9FA] py-20 lg:py-24 border-y border-slate-200">
           <div className="max-w-[1224px] mx-auto px-6 sm:px-9">
@@ -1347,8 +1347,8 @@ export default function HospitalityPage() {
                 
                 <div className="relative w-52 h-52 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
                   <Image
-                    src="/images/hospitality/faisal-founder.jpg"
-                    alt="Faisal Alfarizi"
+                    src="/images/hospitality/studio-designer.jpg"
+                    alt="WUUS website designer"
                     fill
                     sizes="220px"
                     className="object-cover"
@@ -1358,7 +1358,7 @@ export default function HospitalityPage() {
 
               <div className="space-y-4 text-base text-slate-600 leading-relaxed">
                 <p className="text-lg text-[#1C2733] font-semibold leading-normal">
-                  I&apos;m Faisal Alfarizi, an independent web designer based in Jakarta, Indonesia.
+                  WUUS is an independent web design studio based in Jakarta, Indonesia.
                 </p>
                 <p>
                   You&apos;ll work directly with me, from the first review to the final handover. Most of the work happens through written updates and short video walkthroughs, so you can review things when your hotel&apos;s schedule allows.
@@ -1618,7 +1618,7 @@ export default function HospitalityPage() {
               {formStatus && (
                 <p role={formFailed ? 'alert' : 'status'} aria-live="polite" className={`text-xs font-semibold p-3 rounded-lg border mt-3 ${formFailed ? 'text-red-800 bg-red-50 border-red-200' : 'text-emerald-800 bg-emerald-50 border-emerald-200'}`}>
                   {formStatus}
-                  {formFailed && <> <a href="mailto:hallo@webuntukusaha.com" className="underline">Email Faisal directly</a></>}
+                  {formFailed && <> <a href="mailto:hallo@webuntukusaha.com" className="underline">Email WUUS directly</a></>}
                 </p>
               )}
             </form>

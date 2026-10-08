@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-08T05:32:39.504Z",
+  "checkedAt": "2026-10-08T06:03:47.409Z",
   "passed": 29,
   "checks": [
     "www Host → apex 308 with path and query preserved (local configuration)",

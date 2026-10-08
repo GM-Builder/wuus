@@ -63,6 +63,8 @@ Sepuluh lint error website diperbaiki: inferred types, quote JSX dan viewport su
 
 ## Gate belum lulus
 
+**Temuan tes owner setelah rilis:** kedua form 503 dan admin setelah login `Service configuration required`. Akses Vercel yang benar kini berhasil. Daftar Production env membuktikan service-role key belum ada; Secret ditambahkan Production-only, public URL/key Production diselaraskan, enam env lain cocok lokal. MCP read-only inquiry count masih 0 setelah percobaan. Negative-path checks rilis awal tetap benar, tetapi tidak membuktikan positive-path configuration. Branding publik kini WUUS; source app/components/lib/public tidak menemukan nama pribadi. Unit 37, integration 29, build/typecheck lulus; targeted lint 0 error/22 baseline warnings. Perbaikan save/admin/inbox belum ditandai lulus sebelum deployment baru dan positive-path verification.
+
 1. Owner melaporkan 24 PASS setelah apply manual; project aktif kini cocok dengan URL/service key melalui API, dan REST anonim tiga tabel ditolak 401. Backup/preservation aktual, authenticated nonowner serta concurrency multi-connection tetap perlu dibuktikan. Tidak perlu mengulang migration 001/002/003.
 2. Owner melaporkan env Vercel updated; website server baru live. Token palsu menghasilkan 401, bukan missing-admin-config 503. Save inquiry dan notification config runtime tetap perlu positive-path test. Allowed origins tambahan kosong karena apex built-in; staging memakai data/secret terpisah.
 3. API mengonfirmasi admin Auth/email terkonfirmasi; login owner/authenticated nonowner serta alur kedua form sampai status update belum diuji. Registrasi dan OAuth MCP berhasil; pemanggilan tool dalam chat belum diuji.

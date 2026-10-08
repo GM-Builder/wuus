@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function CtaSection() {
   const whatsappNumber = "6281383521750";
-  const waUrl = `https://wa.me/${whatsappNumber}?text=Hello%20Faisal%20and%20WUUS%20Studio,%20I'd%20like%20to%20discuss%20a%20project.`;
+  const waUrl = `https://wa.me/${whatsappNumber}?text=Hello%20WUUS%20Studio,%20I'd%20like%20to%20discuss%20a%20project.`;
 
   return (
     <section id="cta" className="py-24 md:py-32 bg-[#FAFAFA] relative overflow-hidden">

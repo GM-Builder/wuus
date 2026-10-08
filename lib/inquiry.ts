@@ -116,14 +116,14 @@ export function createInquiryHandler(dependencies: Dependencies) {
     try {
       if (!dependencies.originAllowed(request.headers.get('origin'))) return jsonResponse({ error: 'Request origin not allowed.' }, 403);
       const input = validateInquiry(await readJson(request));
-      if (!dependencies.ready()) return jsonResponse({ error: 'The form is temporarily unavailable. Please email Faisal directly.' }, 503);
+      if (!dependencies.ready()) return jsonResponse({ error: 'The form is temporarily unavailable. Please email WUUS directly.' }, 503);
       const result = await dependencies.save(input, request);
-      if (result === 'limited') return jsonResponse({ error: 'Too many requests. Please wait 15 minutes or email Faisal directly.' }, 429, { 'Retry-After': '900' });
+      if (result === 'limited') return jsonResponse({ error: 'Too many requests. Please wait 15 minutes or email WUUS directly.' }, 429, { 'Retry-After': '900' });
       if (result === 'conflict') return jsonResponse({ error: 'This request changed during a retry. Please refresh and submit again.' }, 409);
       return jsonResponse({ received: true, requestId: input.requestId }, result === 'saved' ? 201 : 200);
     } catch (error) {
       if (error instanceof RequestError) return jsonResponse({ error: error.message }, error.status);
-      return jsonResponse({ error: 'Your request could not be saved. Please try again or email Faisal directly.' }, 503);
+      return jsonResponse({ error: 'Your request could not be saved. Please try again or email WUUS directly.' }, 503);
     }
   };
 }

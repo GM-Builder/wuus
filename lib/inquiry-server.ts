@@ -9,7 +9,10 @@ const timeoutFetch: typeof fetch = (input, init) => fetch(input, { ...init, sign
 export function serviceClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new RequestError('Service configuration required.', 503);
+  if (!url || !key) {
+    const missing = [!url && 'NEXT_PUBLIC_SUPABASE_URL', !key && 'SUPABASE_SERVICE_ROLE_KEY'].filter(Boolean);
+    throw new RequestError(`Service configuration required: ${missing.join(', ')}. Add these variables to the WUUS Vercel Production environment and redeploy.`, 503);
+  }
   return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false }, global: { fetch: timeoutFetch } });
 }
 

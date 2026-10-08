@@ -147,7 +147,7 @@ export default function AdminInquiriesPage() {
 
   async function copyDraft(inquiry: Inquiry) {
     try {
-      await navigator.clipboard.writeText(`Subject: Your website review for ${inquiry.hotel_name}\n\nHi ${inquiry.contact_name},\n\nThanks for requesting a review. Here are the findings:\n[Add the verified findings and review link before sending.]\n\nIf useful, I can send a fixed-scope proposal.\n\nFaisal\nWUUS · https://webuntukusaha.com/hospitality`);
+      await navigator.clipboard.writeText(`Subject: Your website review for ${inquiry.hotel_name}\n\nHi ${inquiry.contact_name},\n\nThanks for requesting a review. Here are the findings:\n[Add the verified findings and review link before sending.]\n\nIf useful, WUUS can send a fixed-scope proposal.\n\nWUUS · https://webuntukusaha.com/hospitality`);
       setNotice('Draft copied. Add findings before sending.');
     } catch { setError('Unable to copy. Please write the reply in your email app.'); }
   }
