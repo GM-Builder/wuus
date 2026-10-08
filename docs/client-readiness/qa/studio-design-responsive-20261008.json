@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-10-08T12:41:40.149Z",
+  "environment": "local production build",
+  "responsive": [
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/",
+      "scrollWidth": 345,
+      "width": 360
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/hospitality",
+      "scrollWidth": 345,
+      "width": 360
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/review",
+      "scrollWidth": 345,
+      "width": 360
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/",
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/hospitality",
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/review",
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/",
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/hospitality",
+      "scrollWidth": 1265,
+      "width": 1280
+    },
+    {
+      "h1Count": 1,
+      "overflowElements": [],
+      "personalNameVisible": false,
+      "route": "/review",
+      "scrollWidth": 1265,
+      "width": 1280
+    }
+  ],
+  "interaction": {
+    "mobileMenuOpened": true,
+    "emptyReviewFormRejected": true,
+    "faqCmsAnswerOpened": true
+  },
+  "backendChanged": false
+}

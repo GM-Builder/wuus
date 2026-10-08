@@ -14,8 +14,8 @@ export default function SocialPreview() {
           justifyContent: "space-between",
           width: "100%",
           height: "100%",
-          background: "#f5f5f7",
-          color: "#1d1d1f",
+          background: "#1c2e43",
+          color: "#ffffff",
           padding: 72,
         }}
       >
@@ -49,14 +49,14 @@ export default function SocialPreview() {
           }}
         >
           <span>Clear websites.</span>
-          <span style={{ color: "#65656b" }}>Personal attention.</span>
+          <span style={{ color: "#f6cf83" }}>Personal attention.</span>
         </div>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             fontSize: 22,
-            color: "#65656b",
+            color: "#f6cf83",
           }}
         >
           <span>Independent web design studio</span>

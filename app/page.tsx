@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MarketingShell, StudioAvatar } from "@/components/marketing/shell";
-import { Examples, WebsitePreview } from "@/components/marketing/examples";
+import { Examples } from "@/components/marketing/examples";
+import { SalesHero } from "@/components/marketing/sales-hero";
 import s from "@/components/marketing/marketing.module.css";
 
 export const metadata: Metadata = {
@@ -55,33 +56,7 @@ export default function Home() {
   return (
     <MarketingShell language="id">
       <main id="main">
-        <section className={`${s.container} ${s.hero}`}>
-          <p className={s.eyebrow}>Desain dan pengembangan website</p>
-          <h1>
-            Website yang rapi.
-            <br />
-            <span className={s.soft}>Untuk usaha Anda.</span>
-          </h1>
-          <p className={s.heroCopy}>
-            Tampilkan layanan, jawab pertanyaan pelanggan, dan beri mereka cara
-            mudah untuk menghubungi Anda.
-          </p>
-          <div className={s.actions}>
-            <a href="#contact" className={s.button}>
-              Bahas website Anda
-            </a>
-            <a href="#examples" className={s.textLink}>
-              Lihat contoh desain <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <p className={s.caption}>
-            Scope dan biaya disepakati sebelum pengerjaan.
-          </p>
-          <WebsitePreview language="id" />
-          <p className={s.caption}>
-            Properti fiktif · Foto konsep dibuat dengan AI · Bukan proyek klien
-          </p>
-        </section>
+        <SalesHero language="id" />
         <div className={`${s.container} ${s.proofLine}`}>
           <span>Nyaman dibuka di ponsel</span>
           <span>Scope dan harga tertulis</span>
@@ -115,8 +90,11 @@ export default function Home() {
                 "Perapihan website",
                 "Evaluasi tampilan mobile, susunan konten dan tombol kontak. Pengerjaan mengikuti kondisi website yang ada.",
               ],
-            ].map(([title, body]) => (
+            ].map(([title, body], index) => (
               <article className={s.feature} key={title}>
+                <span className={s.serviceIndex} aria-hidden="true">
+                  0{index + 1}
+                </span>
                 <h3>{title}</h3>
                 <p>{body}</p>
               </article>
@@ -129,7 +107,7 @@ export default function Home() {
             </Link>
           </div>
         </section>
-        <section id="examples" className={`${s.section} ${s.wash}`}>
+        <section id="examples" className={`${s.section} ${s.blueSection}`}>
           <div className={s.container}>
             <div className={s.sectionHead}>
               <p className={s.eyebrow}>Contoh desain</p>
@@ -175,7 +153,7 @@ export default function Home() {
             ))}
           </ol>
         </section>
-        <section className={`${s.section} ${s.wash}`}>
+        <section className={`${s.section} ${s.darkSection}`}>
           <div className={`${s.container} ${s.about}`}>
             <StudioAvatar />
             <div>
@@ -211,7 +189,7 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section id="contact" className={`${s.section} ${s.wash}`}>
+        <section id="contact" className={`${s.section} ${s.contactSection}`}>
           <div className={s.container}>
             <div className={s.sectionHead}>
               <p className={s.eyebrow}>Mulai dari kebutuhan Anda</p>

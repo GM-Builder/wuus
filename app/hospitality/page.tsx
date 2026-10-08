@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { MarketingShell, StudioAvatar } from "@/components/marketing/shell";
-import { Examples, WebsitePreview } from "@/components/marketing/examples";
+import { Examples } from "@/components/marketing/examples";
 import { InquiryForm } from "@/components/marketing/inquiry-form";
+import { SalesHero } from "@/components/marketing/sales-hero";
 import s from "@/components/marketing/marketing.module.css";
 
 const questions = [
@@ -53,34 +54,7 @@ export default function HospitalityPage() {
   return (
     <MarketingShell>
       <main id="main">
-        <section className={`${s.container} ${s.hero}`}>
-          <p className={s.eyebrow}>Websites for independent hotels</p>
-          <h1>
-            A clear website for your hotel.
-            <br />
-            <span className={s.soft}>An easy way to reach you.</span>
-          </h1>
-          <p className={s.heroCopy}>
-            A website that shows your rooms, answers guests&apos; questions and
-            makes it easy to contact you directly.
-          </p>
-          <div className={s.actions}>
-            <Link href="/review" className={s.button}>
-              Get a free website review
-            </Link>
-            <a href="#examples" className={s.textLink}>
-              Explore the designs <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <p className={s.caption}>
-            A one-page review. By email in two working days. No obligation.
-          </p>
-          <WebsitePreview />
-          <p className={s.caption}>
-            Fictional property · AI-generated concept imagery · Not a client
-            project
-          </p>
-        </section>
+        <SalesHero />
         <div className={`${s.container} ${s.proofLine}`}>
           <span>Designed for mobile</span>
           <span>Written scope and fixed price</span>
@@ -110,15 +84,18 @@ export default function HospitalityPage() {
                 "A website you can keep.",
                 "Separate project code, a private preview and a practical handover when the work is complete.",
               ],
-            ].map(([title, body]) => (
+            ].map(([title, body], index) => (
               <article className={s.feature} key={title}>
+                <span className={s.serviceIndex} aria-hidden="true">
+                  0{index + 1}
+                </span>
                 <h3>{title}</h3>
                 <p>{body}</p>
               </article>
             ))}
           </div>
         </section>
-        <section id="examples" className={`${s.section} ${s.wash}`}>
+        <section id="examples" className={`${s.section} ${s.blueSection}`}>
           <div className={s.container}>
             <div className={s.sectionHead}>
               <p className={s.eyebrow}>Design examples</p>
@@ -179,7 +156,7 @@ export default function HospitalityPage() {
               </p>
             </div>
             <div className={s.prices}>
-              <article className={s.priceCard}>
+              <article className={`${s.priceCard} ${s.priceFeatured}`}>
                 <h3>Starter</h3>
                 <p className={s.priceIntro}>
                   A focused first website for your property.
@@ -231,7 +208,7 @@ export default function HospitalityPage() {
             </p>
           </div>
         </section>
-        <section id="about" className={`${s.container} ${s.section}`}>
+        <section id="about" className={`${s.section} ${s.darkSection}`}>
           <div className={s.about}>
             <StudioAvatar />
             <div>
@@ -272,7 +249,7 @@ export default function HospitalityPage() {
             ))}
           </div>
         </section>
-        <section id="review" className={`${s.section} ${s.wash}`}>
+        <section id="review" className={`${s.section} ${s.contactSection}`}>
           <div className={`${s.container} ${s.split}`}>
             <div>
               <p className={s.eyebrow}>Start with a conversation</p>

@@ -2,7 +2,7 @@
 
 ## Keputusan dan cakupan
 
-Tujuan: calon pelanggan memahami jasa, contoh desain, scope, harga, dan cara menghubungi WUUS melalui tampilan bersih yang terinspirasi prinsip desain Apple. Identitas tetap WUUS: putih/off-white, warna charcoal, tipografi sistem, jarak lapang, dan aksen amber kecil. Tidak menggunakan logo Apple atau meniru asetnya.
+Tujuan: calon pelanggan memahami jasa, contoh desain, scope, harga, dan cara menghubungi WUUS melalui tampilan bersih. Iterasi terbaru mempertahankan kesederhanaan awal serta memakai prinsip komposisi dan kontras dari referensi owner, [Deel](https://www.deel.com/). Identitas WUUS: navy `#1c2e43`, cream, amber `#f6cf83`, biru pucat, tipografi sistem, dan jarak lapang. Aset, merek, serta klaim bisnis referensi tidak digunakan.
 
 Halaman yang diperbarui: `/`, `/hospitality`, `/review`, `/inquiries`, `/score-test`, serta privasi dan ketentuan dalam bahasa Indonesia dan Inggris. Header/footer dan preview tautan mengikuti identitas yang sama. Dashboard admin dan tiga website demo properti mempertahankan alur sebelumnya; demo mempunyai identitas masing-masing dan ditandai sebagai contoh fiktif.
 
@@ -30,3 +30,12 @@ Halaman yang diperbarui: `/`, `/hospitality`, `/review`, `/inquiries`, `/score-t
 Frontend utama siap untuk menunjukkan penawaran dan menerima inquiry setelah deployment produksi diverifikasi. Desain tidak membuktikan konversi penjualan. Demo tetap memakai materi konsep/fiktif yang dilabeli; foto klien produksi harus disediakan atau dilisensikan dengan benar. Bukti proyek/testimoni baru boleh ditambahkan setelah ada pekerjaan nyata dan izin penggunaan.
 
 Email dan dashboard produksi telah dikonfirmasi owner sebelum pekerjaan visual ini. Rilis frontend mempertahankan backend tersebut; pengujian browser sukses pada pekerjaan ini dilakukan terisolasi agar tidak menambahkan inquiry/email produksi baru.
+
+## Iterasi visual kedua — komposisi dan warna
+
+- Hero Indonesia dan hospitality memakai komponen Server Component bersama: panel pesan navy, CTA amber, dan panel cream berisi preview konsep website. Pada tablet dan mobile, panel ditumpuk agar teks dan tombol tetap terbaca.
+- Kartu layanan memakai cream, biru, dan amber pucat. Galeri konsep memiliki bidang biru dan kartu putih; bagian harga memakai cream dengan Starter navy. Profil studio dan footer menggunakan navy. Tidak menambahkan logo pelanggan, angka penjualan, atau testimoni fiktif.
+- Radius utama 10 px untuk detail, 16 px untuk kartu, 24 px untuk panel besar; tombol aksi memakai pill. Panel mobile memakai 16 px. Spasi konten mengikuti unit 8 px; jarak section desktop 96 px dan mobile 64 px.
+- Halaman review memakai hero cream dan panel informasi biru. Overlay pada foto hero membantu keterbacaan teks. Preview sosial dan PNG kompatibilitas mengikuti warna yang sama.
+- Build produksi final, TypeScript, dan ESLint terhadap TSX yang diubah lulus. Sembilan pemeriksaan browser terhadap `/`, `/hospitality`, `/review` pada 360/768/1280 px lulus: satu H1, tanpa overflow elemen/horizontal, tanpa nama pribadi owner. Menu mobile, FAQ CMS, dan penolakan form review kosong diperiksa. Bukti: `qa/studio-design-responsive-20261008.json`.
+- Logika API, autentikasi, database, pembayaran, dan submit form tidak diubah. Tidak ada inquiry atau email produksi baru yang dikirim untuk iterasi CSS/markup ini.
