@@ -1,0 +1,52 @@
+{
+  "ownerEvidenceDate": "2026-10-08",
+  "sqlEvidence": {
+    "source": "owner-supplied inventory and verification outputs",
+    "verificationChecksPerOutput": 24,
+    "passedPerOutput": 24,
+    "identicalOutputs": 2,
+    "initialInquiryIdType": "bigint",
+    "initialInquiryColumnCount": 8,
+    "initialScoreIdType": "uuid",
+    "initialScoreColumnCount": 4,
+    "initialDependentViews": 0,
+    "initialSecurityDefiners": 0,
+    "projectReferenceMatchedToRuntime": false,
+    "independentProductionRestOrAuthTest": false
+  },
+  "screenshots": {
+    "vercelAccountLabel": "gm-builder-9019",
+    "vercelProject": "wuus",
+    "apexConfiguration": "Valid Configuration / Production",
+    "plan": "Hobby",
+    "zohoAdminUserActive": true,
+    "zohoHalloUserActive": true,
+    "resendConfiguredDomain": "webuntukusaha.com",
+    "resendSendingToggle": true,
+    "resendReceivingToggle": false,
+    "inboxReceiptVerified": false
+  },
+  "independentChecks": {
+    "checkedAt": "2026-10-08T04:12:31.637Z",
+    "vercelCliAccount": "binahubid-7508",
+    "authoritativeServer": "nsid1.rumahweb.com",
+    "authoritativeDns": {
+      "resend._domainkey.webuntukusaha.com TXT": "ENOTFOUND",
+      "resend.webuntukusaha.com CNAME": "ENOTFOUND",
+      "send.webuntukusaha.com CNAME": "ENOTFOUND",
+      "www.webuntukusaha.com CNAME": "ENOTFOUND"
+    },
+    "publicResolverWwwA": "ENOTFOUND",
+    "apexMx": [
+      { "exchange": "mx.zoho.com", "priority": 10 },
+      { "exchange": "mx2.zoho.com", "priority": 20 },
+      { "exchange": "mx3.zoho.com", "priority": 50 }
+    ]
+  },
+  "agentActionsExcluded": [
+    "production SQL execution",
+    "DNS changes",
+    "hosting purchase or deployment",
+    "real emails or payments"
+  ]
+}

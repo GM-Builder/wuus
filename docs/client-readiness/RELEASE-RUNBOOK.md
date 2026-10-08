@@ -4,11 +4,13 @@ Status: perubahan lokal. Migrasi tersimpan bukan bukti produksi sudah aman. Tida
 
 Owner update 8 Oktober 2026: memilih menjalankan SQL lewat dashboard. Gunakan `supabase/manual/README.md`: inspect/backup → `01-apply.sql` satu transaksi berisi migration 001/002/003 → `02-verify.sql`. CLI login tidak diperlukan untuk langkah tersebut. Jangan menerapkan lagi lewat CLI tanpa reconcile manual schema/history. Email inbox Zoho sudah ada; follow EMAIL-SETUP.md. Payment recommendation di PAYMENTS.md tetap memerlukan rekening/rute aktual.
 
+Update bukti owner: inventory awal direview; owner mengirim 24 PASS pada dua output identik (apply sudah mencetak verify sesudah commit). Jangan ulang apply/migration hanya untuk melanjutkan rilis. Screenshot Vercel mengidentifikasi project `wuus`, akun `gm-builder-9019`, apex Valid Configuration pada Production, plan Hobby. CLI lokal masih `binahubid-7508`: belum mendapat akses akun produksi tersebut. Zoho menunjukkan pengguna admin/hallo aktif; Resend memakai root domain. Lihat [langkah owner berikutnya](OWNER-NEXT-STEPS.md).
+
 ## Konfigurasi dan staging
 
-1. Pastikan akses proyek Supabase dan hosting pemilik domain; catat ID privat. Akun CLI BinaHub terbukti Hobby, tetapi domain apex tidak ada pada project itu. [Vercel Hobby](https://vercel.com/docs/plans/hobby) hanya personal nonkomersial. Lihat PRODUCTION-BLOCKERS.md; jangan membeli layanan tanpa pendanaan/keputusan owner.
+1. Pastikan akses proyek Supabase dan project `wuus` pada akun produksi owner `gm-builder-9019`; catat project/team IDs privat. CLI lokal BinaHub adalah akun berbeda, jangan menautkan/deploy ke project BinaHub lama. Screenshot akun produksi juga menampilkan Hobby. [Vercel Hobby](https://vercel.com/docs/plans/hobby) hanya personal nonkomersial. Lihat PRODUCTION-BLOCKERS.md; jangan membeli layanan tanpa pendanaan/keputusan owner.
 2. Siapkan staging tanpa PII. Ekspor schema/data/policies/sequence grants lama ke penyimpanan privat. Cocokkan tipe `id`, constraint dan trigger dengan migration. Migrasi mempertahankan record lama tetapi mencabut semua policy lama pada tabel inquiry.
-3. Jalankan inventory read-only `supabase/tests/security-inventory.sql`; review dependent views dan security-definer routines yang dapat bypass hak tabel. Terapkan migration `202610070001_secure_inquiries.sql`, `202610070002_inquiry_notifications.sql`, lalu `202610070003_retire_score_tracking.sql`. Migration terakhir menutup browser tracking pada tabel `business_scores` jika ada, tanpa menghapus record historis. Jalankan `supabase/tests/inquiries.sql`; data sintetis rollback. Uji anon/authenticated read/insert/update/delete dan RPC lewat REST Supabase asli, outbox/lease/retry serta multi-connection concurrency di staging.
+3. Untuk staging/proyek baru, review inventory read-only, dependent views dan security-definer routines. Terapkan **satu** alur: bundle manual `01-apply.sql` atau migration 001/002/003 melalui workflow CLI yang sudah direconcile, bukan keduanya. Proyek owner yang sudah dilaporkan 24 PASS tidak perlu apply ulang. Migration 003 menutup tracking `business_scores` tanpa menghapus record historis. Tes regresi `supabase/tests/inquiries.sql` hanya di staging (rollback). Uji anon/authenticated read/insert/update/delete dan RPC lewat REST Supabase asli, outbox/lease/retry serta multi-connection concurrency di staging.
 4. Buat akun Supabase Auth owner dengan email yang dikendalikan owner. Tidak ada signup UI. Nonaktifkan signup provider bila tidak diperlukan dan tidak mengganggu aplikasi lain; aktifkan perlindungan login yang tersedia. Gunakan UUID owner dalam allowlist, bukan email/PIN.
 
 ## Environment
@@ -22,7 +24,7 @@ Owner update 8 Oktober 2026: memilih menjalankan SQL lewat dashboard. Gunakan `s
 | WUUS_RATE_LIMIT_SECRET | Server saja | random secret ≥32 karakter, berbeda per lingkungan |
 | WUUS_ALLOWED_ORIGINS | Server saja | exact preview origins, comma-separated; tanpa wildcard |
 | RESEND_API_KEY | Server saja | key provider email dengan sender domain verified |
-| WUUS_NOTIFICATION_FROM | Server saja | satu plain sender email verified |
+| WUUS_NOTIFICATION_FROM | Server saja | `hallo@webuntukusaha.com` setelah root domain Resend verified |
 | WUUS_OWNER_EMAIL | Server saja | `admin@webuntukusaha.com`, recipient pilihan owner; uji actual inbox |
 | CRON_SECRET | Server saja | optional scheduler Bearer secret ≥32 karakter |
 

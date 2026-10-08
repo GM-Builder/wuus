@@ -4,7 +4,7 @@ Versi 3 · 8 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
 
 Tujuan: menerima pemasukan pertama dari jasa website dengan scope terkendali, biaya dibayar dari deposit, dan proses yang bisa dijalankan satu orang. Pendapatan saat ini **0**, anggaran akuisisi **Rp0**. Target pendapatan adalah sasaran, bukan prediksi atau jaminan.
 
-Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, penerima notifikasi `admin@webuntukusaha.com`. Kode dan recipient lokal diperbarui; deployment, mailbox/alias dan actual inbox receipt belum diverifikasi. Owner memiliki BRI, Bank Jago dan GoPay. Alur awal: klien memakai Wise → BRI IDR; Jago cadangan, GoPay untuk domestik. Akun Wise owner tidak diperlukan; detail/ownership rekening dan rute transaksi belum verified, nomor rekening hanya pada invoice privat.
+Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, penerima notifikasi `admin@webuntukusaha.com`. Screenshot Zoho menunjukkan kedua pengguna aktif; actual inbox receipt belum diuji. Owner melaporkan SQL manual 24 PASS. Screenshot produksi mengidentifikasi gm-builder-9019/project wuus/Hobby; CLI lokal masih akun berbeda. Resend memakai root domain; DNS sending belum ditemukan. Ikuti OWNER-NEXT-STEPS.md. Owner memiliki BRI, Bank Jago dan GoPay; Wise → BRI IDR, Jago cadangan/GoPay domestik. Akun Wise owner tidak diperlukan; detail rekening/rute belum verified dan nomor rekening hanya pada invoice privat.
 
 Urutan baca dan kerja:
 
@@ -26,6 +26,7 @@ Urutan baca dan kerja:
 16. [SQL manual Supabase](../../supabase/manual/README.md): inspect → satu transaksi apply → verify; owner menjalankan melalui SQL Editor.
 17. [Setup Zoho + Resend](EMAIL-SETUP.md): inbox yang sudah ada, sending subdomain dan environment.
 18. [Pembayaran lintas negara](PAYMENTS.md): Wise ke rekening IDR sebagai opsi awal; PayPal Invoice alternatif, fee/hold dan instruksi klien.
+19. [Langkah owner sesudah SQL](OWNER-NEXT-STEPS.md): DNS Resend/www, akun produksi yang ditemukan, Auth/env dan pemeriksaan rilis.
 
 Template siap diisi: [onboarding](templates/ONBOARDING.md), [proposal lengkap](templates/PROPOSAL.md), [invoice/receipt](templates/INVOICE.md), [payment verification](templates/PAYMENT-VERIFICATION.md), [scope change](templates/CHANGE-REQUEST.md), [launch/handover](templates/LAUNCH-HANDOVER.md).
 

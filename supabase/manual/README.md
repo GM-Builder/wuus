@@ -2,6 +2,8 @@
 
 Owner memilih menjalankan sendiri melalui Supabase SQL Editor. **Tidak perlu login CLI untuk langkah manual ini.** Paket ini menyiapkan database; tidak membuat akun Auth, mengatur secret hosting, mengirim email atau mempublikasikan website.
 
+Update owner 8 Oktober: inventory awal telah direview dan dua output verifikasi yang dikirim identik, masing-masing **24 PASS**. `01-apply.sql` memang menjalankan pemeriksaan yang sama setelah commit; `02-verify.sql` mengulangnya secara read-only. Cukup tiga file `00-inspect`, `01-apply`, `02-verify`; **tidak perlu menjalankan migration 001/002/003 lagi secara terpisah**. Hasil dicatat sebagai laporan owner, belum pemeriksaan REST/Auth independen dari agent. Project reference, backup dan waktu apply disimpan owner secara privat; langkah berikutnya konfigurasi dan pengujian aplikasi.
+
 ## Urutan yang dijalankan
 
 1. Buka **proyek Supabase yang benar → SQL Editor → query baru**. Pastikan proyek aktif. Bila tabel sudah berisi data, simpan backup data/schema dan policy/grants secara privat sebelum perubahan. Hasil inspect bukan backup penuh data. Pertahankan salinan release lama dan jadwalkan perubahan bersama deployment aplikasi aman; form browser versi lama akan berhenti menulis setelah akses langsung dicabut.

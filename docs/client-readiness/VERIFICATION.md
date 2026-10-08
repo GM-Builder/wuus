@@ -1,6 +1,6 @@
 # Verification — 7–8 Oktober 2026
 
-Hasil pada branch `codex/client-readiness` di dua repositori. **Belum deploy, belum migrasi Supabase produksi, belum menerima uang.** Tidak mengirim outreach, membuat transaksi, atau memanggil provider AI live.
+Hasil pada branch `codex/client-readiness` di dua repositori. **Agent belum deploy atau menjalankan SQL produksi; owner telah mengirim hasil manual apply/verify 24 PASS.** Tidak mengirim outreach, menerima uang, membuat transaksi, atau memanggil provider AI live. Output SQL/screenshot owner dibedakan dari pemeriksaan live independen agent.
 
 ## Implementasi
 
@@ -43,6 +43,8 @@ Hasil pada branch `codex/client-readiness` di dua repositori. **Belum deploy, be
 | Delivery/restore | Git clone rebuild, rollback v1/return v2, ZIP extraction rebuild identik | Fictional approvals/payments dan local launch rehearsal; real revenue 0 |
 | DNS/mail 8 Oktober | Apex HTTPS 200, authoritative NS Rumahweb, MX Zoho, www ENOTFOUND, live canonical masih www | Public read-only checks; tidak membuktikan account hosting/inbox receipt |
 | Kontak email 8 Oktober | Build termasuk TypeScript pass; targeted lint 0 error/2 baseline warnings; empat HTML publik memakai `hallo` dan tidak menampilkan `admin`; fallback error `/review` sesuai source; static fallback `node --check` pass | Recipient lokal `admin@webuntukusaha.com`; tidak deploy, membuat mailbox/alias, mengirim email nyata atau membuktikan inbox receipt |
+| Bukti owner SQL/accounts 8 Oktober | Dua output identik 24 PASS; inventory bigint inquiry/UUID score sesuai; screenshot gm-builder-9019/project wuus Production/Hobby, Zoho admin/hallo aktif, Resend root domain ada | USER-REPORTED SQL, belum direct REST/Auth; screenshot tidak memberikan akses CLI/key/env atau inbox receipt |
+| DNS Resend/www 04:12 UTC | Resolver publik + authoritative nsid1.rumahweb.com: resend._domainkey/resend/send/www belum ditemukan; MX root tetap Zoho | Tidak menganggap indikator screenshot sebagai domain sending Verified; exact DNS values diambil owner dari dashboard |
 
 Bukti tampilan: `WUUS/docs/client-readiness/qa/hospitality-mobile-error.png` dan `review-mobile-error.png`. Isian hanya data sintetis `example.com`; tidak ada data prospek nyata.
 
@@ -56,11 +58,11 @@ Sepuluh lint error website diperbaiki: inferred types, quote JSX dan viewport su
 
 ## Gate belum lulus
 
-1. Skema/trigger/policies Supabase asli, migration staging/production dan test REST role belum diverifikasi. Perlu backup dan uji concurrency multi-connection.
+1. Owner melaporkan 24 PASS schema/grants/RPC/trigger setelah apply manual; inventory awal direview. Project reference/backup/preservation aktual belum diverifikasi agent, dan test REST role serta concurrency multi-connection masih diperlukan. Tidak perlu mengulang migration 001/002/003.
 2. Service key server, rate-limit secret, allowlist UUID owner dan preview origin belum diset di deployment. Lokal asli memiliki public URL/anon key dan recipient `WUUS_OWNER_EMAIL=admin@webuntukusaha.com`; key/sender notifikasi belum tersedia.
 3. Akun owner asli, login/non-owner dan alur kedua form sampai status update di preview/production belum diuji.
-4. Akun Vercel tersambung BinaHub memakai **Hobby**, project tidak memiliki domain apex; inspect apex tidak ditemukan di akun itu. Registrar/NS Rumahweb dan MX Zoho confirmed 8 Oktober; www tetap ENOTFOUND, canonical HTML live masih www. Owner memilih SQL Editor manual, sehingga CLI authentication tidak menjadi syarat langkah itu. Project aktif/config perlu dicocokkan; host config lama ENOTFOUND tidak membuktikan project dihapus. Rilis akun pemilik domain tetap perlu konteks yang benar.
-5. Recipient `admin@webuntukusaha.com` dan kontak publik `hallo@webuntukusaha.com` ditentukan owner; mailbox/alias, provider/sender email dan actual inbox receipt/scheduler masih belum verified. Owner menyebut BRI, Jago dan GoPay; dukungan Wise umum terkonfirmasi lewat sumber resmi, BRI menjadi utama/Jago cadangan. Detail/ownership rekening, actual payment route/fees/currency/identitas dan invoice builder lama belum verified. Provider spend caps serta ledger/webhook AI adalah gate future roadmap; AI tetap dipause. Production policy/views/security-definer functions dan multiconnection concurrency belum verified.
+4. Screenshot owner mengidentifikasi akun produksi `gm-builder-9019`, project `wuus`, apex Valid Configuration/Production dengan **Hobby**. CLI lokal masih BinaHub/binahubid-7508; project/team ID, repo/root directory, akses rilis dan hosting komersial belum diselesaikan. Registrar/NS Rumahweb dan MX Zoho confirmed; www ENOTFOUND/canonical live www. SQL manual tidak memerlukan CLI Supabase login; config aktif belum dicocokkan dengan proyek apply.
+5. Zoho screenshot menunjukkan pengguna admin/hallo aktif, namun actual kirim/terima inbox masih belum diuji. Root Resend domain sudah dibuat; authoritative DNS belum menemukan DKIM/CNAME sending. Provider key/env/sender verification/inbox receipt/scheduler belum verified. Owner menyebut BRI, Jago dan GoPay; dukungan Wise umum terkonfirmasi, BRI utama/Jago cadangan. Detail/ownership rekening, actual payment route/fees/currency/identitas dan invoice builder lama belum verified. AI tetap dipause lokal; production indirect access dan multiconnection concurrency belum diuji.
 
 Bukti tambahan: qa/integration-report.json, qa/delivery-simulation-report.json, qa/client-desktop.png, qa/client-mobile-inquiry.png, qa/diagram-dependency-report.json. Kondisi akun/rilis dirangkum di PRODUCTION-BLOCKERS.md. Kit contoh adalah repo fiktif terpisah; source archive serta restore outputs berada di folder output workspace.
 

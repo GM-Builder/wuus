@@ -1,22 +1,24 @@
 # Zoho inbox + notifikasi website — 8 Oktober 2026
 
-Owner sudah memiliki Zoho Mail gratis dan menetapkan `admin@webuntukusaha.com` untuk notifikasi inquiry serta `hallo@webuntukusaha.com` untuk kontak publik. Read-only DNS check: nameserver domain mengarah Rumahweb; MX apex mengarah `mx.zoho.com`, `mx2.zoho.com`, `mx3.zoho.com`. Ini membuktikan konfigurasi DNS publik; keberadaan mailbox/alias masing-masing alamat dan actual inbox delivery masih perlu dicek.
+Owner sudah memiliki Zoho Mail gratis dan menetapkan `admin@webuntukusaha.com` untuk notifikasi inquiry serta `hallo@webuntukusaha.com` untuk kontak publik. Screenshot Zoho owner menunjukkan kedua pengguna aktif; actual kirim/terima inbox masih perlu diuji. Read-only DNS check: nameserver domain mengarah Rumahweb; MX apex mengarah `mx.zoho.com`, `mx2.zoho.com`, `mx3.zoho.com`.
 
 Keputusan awal: Zoho untuk inbox dan balasan manual owner; **Resend Free untuk notifikasi sistem**, memakai adapter yang sudah diuji. Kita tidak memerlukan migrasi mailbox atau implementasi SMTP baru untuk alur ini. Zoho Free pricing menyebut pembatasan IMAP/POP/ActiveSync; itu tidak otomatis membuktikan SMTP account ini mati. SMTP bergantung jenis account/datacenter dan perlu dicek pada server settings bila nanti dipakai. [Zoho plans](https://www.zoho.com/mail/zohomail-pricing.html), [Zoho SMTP](https://www.zoho.com/mail/help/zoho-smtp.html).
 
 Resend Free saat diperiksa menawarkan 3.000 email/bulan dan 100/hari. Notifikasi hanya satu recipient owner; quota failure menyisakan lead/outbox, bukan success palsu pada email. Account eligibility/domain verification masih perlu diselesaikan. [Resend pricing](https://resend.com/pricing).
 
+Update screenshot owner 8 Oktober: Resend sudah dikonfigurasi untuk **root domain `webuntukusaha.com`**, bukan subdomain `notify`. Gunakan domain yang sudah dibuat tersebut untuk tahap awal; sender yang dipilih `hallo@webuntukusaha.com`. Usulan `notify` sebelumnya bukan syarat dan tidak perlu membuat domain tambahan. Resend mendukung verified root domain; subdomain menjadi pilihan pemisahan reputasi kemudian. Screenshot memiliki indikator hijau DKIM, tetapi lookup publik dan authoritative `nsid1.rumahweb.com` pukul 04:12 UTC belum menemukan `resend._domainkey`, `resend`, atau `send`. Belum dianggap Verified sampai DNS dan status domain aktual sesuai. [Resend verified domains](https://resend.com/docs/dashboard/domains/introduction).
+
 ## Langkah owner
 
-1. Pastikan bisa login Zoho dan kirim/terima email manual untuk `admin@webuntukusaha.com` serta `hallo@webuntukusaha.com`. Jika `hallo` belum tersedia, siapkan mailbox/alias di akun Zoho sesuai fitur yang tersedia; kedua alamat boleh masuk inbox owner yang sama. Balasan publik memakai `hallo`; notifikasi sistem masuk `admin`. Password Zoho tidak dibutuhkan oleh adapter ini.
-2. Buat/login Resend pada plan Free, lalu add **sending domain `notify.webuntukusaha.com`**. Ini nama subdomain yang diusulkan, belum dibuat/verified. Resend mendukung dan menyarankan subdomain untuk pengiriman sistem. [Verified domains](https://resend.com/docs/dashboard/domains/introduction).
-3. Pada DNS Rumahweb, tambahkan **hanya record dengan host/type/value/prioritas yang ditampilkan Resend** untuk subdomain tersebut. Record dapat berupa CNAME atau TXT/MX sesuai domain/account; tidak ada nilai rekaan dalam dokumen ini. Pertahankan MX/SPF/DKIM Zoho root, record website/apex dan DMARC yang masih digunakan. Jangan menambahkan dua SPF atau mencampur CNAME dengan record lain pada hostname yang sama, maupun mengganti MX root dengan MX pengirim Resend. [Avoid MX conflicts](https://resend.com/docs/knowledge-base/how-do-i-avoid-conflicting-with-my-mx-records).
-4. Tunggu domain Resend berstatus Verified. Jangan mengaktifkan receiving di root hanya untuk notifikasi; pengiriman dari subdomain tidak memindahkan inbox Zoho.
+1. Login Zoho dan uji kirim/terima email manual untuk `admin@webuntukusaha.com` serta `hallo@webuntukusaha.com`, yang sudah terlihat aktif pada screenshot. Balasan publik memakai `hallo`; notifikasi sistem masuk `admin`. Password Zoho tidak dibutuhkan oleh adapter ini.
+2. Buka domain **`webuntukusaha.com` yang sudah ada** pada akun Resend owner. Tidak perlu mendaftar ulang/membuat `notify` untuk tahap ini. [Verified domains](https://resend.com/docs/dashboard/domains/introduction).
+3. Pada DNS Rumahweb, tambahkan **hanya record dengan host/type/value yang ditampilkan Resend**: screenshot menunjukkan TXT `resend._domainkey`, CNAME `resend`, dan CNAME `send`. Salin content lengkap langsung dari dashboard, bukan teks screenshot yang dipotong `[...]`. Jika Rumahweb meminta FQDN, gunakan host ditambah `.webuntukusaha.com` tepat satu kali; periksa hasil nama record yang tersimpan. Pertahankan MX/SPF/DKIM Zoho root, record website/apex dan DMARC yang masih digunakan. Jangan menambahkan dua SPF atau mencampur CNAME dengan record lain pada hostname yang sama, maupun mengganti MX root dengan MX pengirim Resend. [Avoid MX conflicts](https://resend.com/docs/knowledge-base/how-do-i-avoid-conflicting-with-my-mx-records).
+4. Tunggu domain Resend berstatus **Verified untuk pengiriman**. Pertahankan **Enable Receiving OFF** agar inbox root tetap Zoho. DMARC diikuti sesuai kebijakan domain yang benar; tidak membuat record kedua jika sudah ada. Tidak mengaktifkan notifikasi hanya karena toggle Sending hijau.
 5. Buat API key dengan hak sending untuk domain yang dipilih jika restriction tersebut tersedia. Simpan langsung sebagai server environment pada project hosting yang benar:
 
    ```dotenv
    RESEND_API_KEY=[key privat dari Resend]
-   WUUS_NOTIFICATION_FROM=alerts@notify.webuntukusaha.com
+   WUUS_NOTIFICATION_FROM=hallo@webuntukusaha.com
    WUUS_OWNER_EMAIL=admin@webuntukusaha.com
    ```
 
