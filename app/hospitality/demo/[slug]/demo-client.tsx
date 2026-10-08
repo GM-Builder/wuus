@@ -1,1241 +1,1142 @@
-'use client';
-
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Check, 
-  MapPin, 
-  PhoneCall, 
-  X, 
-  Send, 
-  ShieldCheck, 
-  MessageSquare, 
-  Printer, 
-  Calendar, 
-  Sparkles, 
-  ChevronDown, 
-  ArrowUpRight,
-  Wifi,
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowDown,
+  ArrowRight,
+  BedDouble,
+  CalendarDays,
+  Check,
+  ChevronLeft,
+  ChevronRight,
   Coffee,
-  Wind,
-  Maximize2
-} from 'lucide-react';
-import { PropertyData, Room, RatePlan } from './demo-data';
+  Heart,
+  Images,
+  MapPin,
+  MessageCircle,
+  Minus,
+  Plus,
+  ShieldCheck,
+  SlidersHorizontal,
+  Sparkles,
+  Star,
+  Sun,
+  Users,
+  Wifi,
+  X,
+} from "lucide-react";
+import type { PropertyData, RatePlan, Room } from "./demo-data";
+import { BrandArtwork } from "@/components/marketing/brand-artwork";
+import { BookingFlow } from "@/components/hospitality/booking-flow";
+import { DemoDialog } from "@/components/hospitality/demo-dialog";
+import { DateCalendar } from "@/components/hospitality/date-calendar";
+import {
+  emptyStay,
+  money,
+  quote,
+  roomFits,
+  sampleStay,
+  shortDate,
+  stayNights,
+  validateStay,
+  type Currency,
+  type Stay,
+} from "@/components/hospitality/booking-model";
+import s from "@/components/hospitality/demo.module.css";
 
-export function DemoPropertyClient({ property, slug }: { property: PropertyData; slug: string }) {
-  // Language state
-  const [lang, setLang] = useState<'EN' | 'DE' | 'IT'>('EN');
+const concepts = [
+  { slug: "seaside-guesthouse", name: "Coastal retreat" },
+  { slug: "lakeside-wine-estate", name: "Wine estate" },
+  { slug: "city-apartments", name: "City suites" },
+];
+const themes: Record<
+  string,
+  { key: string; name: string; intro: string; title: string; story: string }
+> = {
+  "seaside-guesthouse": {
+    key: "coast",
+    name: "ARTISAN",
+    intro: "A SLOWER KIND OF SEASIDE",
+    title: "Stay a little closer to the sea.",
+    story:
+      "Salt in the air. Sun on the stone. A small coastal hideaway made for unhurried mornings and finding your own corner of the Riviera.",
+  },
+  "lakeside-wine-estate": {
+    key: "wine",
+    name: "SAVORIA",
+    intro: "LAKE. LAND. A LITTLE HISTORY.",
+    title: "Good days age beautifully.",
+    story:
+      "Wake to the lake, wander through the vines, and linger over something local. An intimate estate where the best plans leave a little room for discovery.",
+  },
+  "city-apartments": {
+    key: "city",
+    name: "METROPOLITAN",
+    intro: "YOUR OWN PIECE OF THE CITY",
+    title: "Check in. Step out. Belong.",
+    story:
+      "A quiet place above the rhythm of the old town. Thoughtful suites, beautiful details, and a neighborhood worth getting a little lost in.",
+  },
+};
+type Gallery = { images: string[]; title: string; index: number };
 
-  // Search Bar / Availability Engine State
-  const [checkIn, setCheckIn] = useState('2026-10-12');
-  const [checkOut, setCheckOut] = useState('2026-10-15');
-  const [adults, setAdults] = useState(2);
-  const [childrenCount, setChildrenCount] = useState(0);
-  const [roomsCount, setRoomsCount] = useState(1);
-  const [guestPickerOpen, setGuestPickerOpen] = useState(false);
-
-  // Dynamic Night Calculation
-  const calculateNights = () => {
-    try {
-      const d1 = new Date(checkIn);
-      const d2 = new Date(checkOut);
-      const diffTime = Math.abs(d2.getTime() - d1.getTime());
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays > 0 ? diffDays : 1;
-    } catch {
-      return 3;
-    }
-  };
-  const nights = calculateNights();
-
-  // Active gallery view for room cards
-  const [activePhoto, setActivePhoto] = useState<Record<string, string>>({
-    [property.rooms[0]?.id || '']: property.rooms[0]?.gallery[0] || property.rooms[0]?.image || '',
-    [property.rooms[1]?.id || '']: property.rooms[1]?.gallery[0] || property.rooms[1]?.image || ''
-  });
-
-  // Filter state for rooms
-  const [roomFilter, setRoomFilter] = useState<'all' | 'breakfast' | 'view'>('all');
-
-  // Booking Checkout Flow State
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [checkoutStep, setCheckoutStep] = useState<1 | 2 | 3>(1);
-  const [selectedRoom, setSelectedRoom] = useState<Room>(property.rooms[0]);
-  const [selectedRatePlan, setSelectedRatePlan] = useState<RatePlan>(
-    property.rooms[0]?.ratePlans?.find(p => p.recommended) || property.rooms[0]?.ratePlans?.[0]
-  );
-
-  // Guest details form state
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [countryCode, setCountryCode] = useState('+49');
-  const [country, setCountry] = useState('Germany');
-  const [arrivalTime, setArrivalTime] = useState('14:00 - 16:00');
-  const [specialRequests, setSpecialRequests] = useState<string[]>([
-    'Quiet room with best view'
-  ]);
-  const [bookingRef, setBookingRef] = useState('WUUS-HM-84920');
-
-  // Digital Concierge chat state
+export function DemoPropertyClient({
+  property,
+  slug,
+}: {
+  property: PropertyData;
+  slug: string;
+}) {
+  const theme = themes[slug];
+  const [currency, setCurrency] = useState<Currency>("EUR");
+  const [saved, setSaved] = useState(false);
+  const [draft, setDraft] = useState<Stay>({ ...emptyStay, childAges: [] });
+  const [stay, setStay] = useState<Stay | null>(null);
+  const [searchError, setSearchError] = useState("");
+  const [guestOpen, setGuestOpen] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [breakfastOnly, setBreakfastOnly] = useState(false);
+  const [flexibleOnly, setFlexibleOnly] = useState(false);
+  const [sort, setSort] = useState("curated");
+  const [gallery, setGallery] = useState<Gallery | null>(null);
+  const [details, setDetails] = useState<Room | null>(null);
+  const [booking, setBooking] = useState<{
+    room: Room;
+    plan: RatePlan;
+    stay: Stay;
+  } | null>(null);
+  const [area, setArea] = useState(0);
   const [conciergeOpen, setConciergeOpen] = useState(false);
-  const [chatMessages, setChatMessages] = useState<Array<{ sender: 'host' | 'user'; text: string }>>([
-    { 
-      sender: 'host', 
-      text: `Hello and welcome to ${property.name}. How can we assist you with parking, arrival times, breakfast, or booking direct today?` 
-    }
-  ]);
-  const [inputQuestion, setInputQuestion] = useState('');
-
-  // Handle Room Selection & Trigger Checkout
-  const handleOpenCheckout = (room: Room, plan?: RatePlan) => {
-    setSelectedRoom(room);
-    setSelectedRatePlan(plan || room.ratePlans?.find(p => p.recommended) || room.ratePlans[0]);
-    const randomNum = Math.floor(10000 + Math.random() * 90000);
-    const prefix = slug === 'seaside-guesthouse' ? 'VR' : slug === 'lakeside-wine-estate' ? 'SO' : 'BH';
-    setBookingRef(`WUUS-${prefix}-${randomNum}`);
-    setCheckoutStep(1);
-    setCheckoutOpen(true);
-  };
-
-  // Price calculations
-  const calculateTotal = (rate: number) => rate * nights;
-  const calculateOtaTotal = (otaRate: number) => otaRate * nights;
-  const savings = calculateOtaTotal(selectedRatePlan.otaRate) - calculateTotal(selectedRatePlan.rate);
-
-  // WhatsApp formatted booking trigger
-  const handleSendWhatsAppBooking = () => {
-    const text = `*DIRECT RESERVATION INQUIRY*\n*Property:* ${property.name}\n*Reference:* ${bookingRef}\n*Guest:* ${firstName} ${lastName}\n*Email:* ${email || 'guest@direct.com'}\n*Phone:* ${countryCode} ${phone || 'Not provided'}\n*Country:* ${country}\n\n*STAY DETAILS:*\n• Room: ${selectedRoom.name}\n• Plan: ${selectedRatePlan.name}\n• Dates: ${checkIn} to ${checkOut} (${nights} nights)\n• Guests: ${adults} Adults${childrenCount > 0 ? `, ${childrenCount} Children` : ''}\n• Est. Arrival: ${arrivalTime}\n\n*RATE (0% OTA COMMISSION):*\n• €${selectedRatePlan.rate} × ${nights} nights = €${calculateTotal(selectedRatePlan.rate)}\n• Direct Savings: €${savings} vs OTA\n• Total to pay upon arrival: €${calculateTotal(selectedRatePlan.rate)}\n\n*INCLUDED:*\n${selectedRatePlan.perks.map(p => `- ${p}`).join('\n')}\n\n*Special Notes:* ${specialRequests.join(', ')}\n\nPlease confirm availability for these dates. Thank you!`;
-    window.open(`https://wa.me/6281383521750?text=${encodeURIComponent(text)}`, '_blank');
-  };
-
-  // Handle Concierge Question
-  const handleAskConcierge = (qText: string) => {
-    if (!qText.trim()) return;
-    const userMsg = qText;
-    setInputQuestion('');
-    setChatMessages(prev => [...prev, { sender: 'user', text: userMsg }]);
-
-    setTimeout(() => {
-      let reply = "Thank you for asking. Our team is also reachable directly on WhatsApp for any custom requests.";
-      const lower = userMsg.toLowerCase();
-      const qa = property.conciergeQA;
-
-      if (lower.includes('park') || lower.includes('car')) reply = qa['parking'] || reply;
-      else if (lower.includes('check') || lower.includes('late') || lower.includes('time') || lower.includes('arrive')) reply = qa['checkin'] || reply;
-      else if (lower.includes('break') || lower.includes('food') || lower.includes('eat')) reply = qa['breakfast'] || reply;
-      else if (lower.includes('perk') || lower.includes('direct') || lower.includes('rate') || lower.includes('price')) reply = qa['directPerks'] || reply;
-      else if (lower.includes('beach') || lower.includes('sea')) reply = qa['beach'] || qa['directPerks'] || reply;
-      else if (lower.includes('taste') || lower.includes('wine') || lower.includes('cellar')) reply = qa['tasting'] || qa['directPerks'] || reply;
-      else if (lower.includes('wifi') || lower.includes('internet') || lower.includes('work')) reply = qa['wifi'] || reply;
-
-      setChatMessages(prev => [...prev, { sender: 'host', text: reply }]);
-    }, 300);
-  };
-
-  // Filtered rooms
-  const filteredRooms = property.rooms.filter(room => {
-    if (roomFilter === 'breakfast') return room.ratePlans.some(p => p.breakfastIncluded);
-    if (roomFilter === 'view') return room.view.toLowerCase().includes('sea') || room.view.toLowerCase().includes('lake') || room.view.toLowerCase().includes('view');
+  const [answer, setAnswer] = useState("");
+  const fmt = (cents: number) => money(cents, currency);
+  const lowest = Math.min(
+    ...property.rooms.flatMap((room) =>
+      room.ratePlans.map((plan) => plan.rate),
+    ),
+  );
+  const photos = [
+    ...new Set([
+      property.heroImage,
+      ...property.rooms.flatMap((room) => room.gallery),
+      property.atmosphereImage,
+    ]),
+  ];
+  const visibleRooms = property.rooms
+    .map((room, index) => ({
+      room,
+      inventory: index === 0 ? 3 : 2,
+      plans: room.ratePlans.filter(
+        (plan) =>
+          (!breakfastOnly || plan.breakfastIncluded) &&
+          (!flexibleOnly || plan.freeCancellation),
+      ),
+    }))
+    .filter(
+      (item) =>
+        item.plans.length &&
+        (!stay || roomFits(item.room, stay, item.inventory)),
+    )
+    .sort((a, b) =>
+      sort === "price"
+        ? Math.min(...a.plans.map((p) => p.rate)) -
+          Math.min(...b.plans.map((p) => p.rate))
+        : sort === "space"
+          ? Number(b.room.size.replace(/[^\d.]/g, "")) -
+            Number(a.room.size.replace(/[^\d.]/g, ""))
+          : 0,
+    );
+  const dirty = stay && JSON.stringify(draft) !== JSON.stringify(stay);
+  function applyStay(value = draft) {
+    const error = validateStay(value);
+    setSearchError(error || "");
+    if (error) return false;
+    setStay({ ...value, childAges: [...value.childAges] });
     return true;
-  });
-
+  }
+  function trySample() {
+    const value = sampleStay();
+    setDraft(value);
+    applyStay(value);
+  }
+  function choose(room: Room, plan: RatePlan) {
+    if (!stay || dirty) {
+      setSearchError(
+        "Apply your dates and guest count before choosing a rate.",
+      );
+      document
+        .getElementById("stay-search")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    setBooking({ room, plan, stay });
+  }
+  function changeGuests(key: "adults" | "children" | "rooms", delta: number) {
+    const value = draft[key] + delta;
+    setDraft({
+      ...draft,
+      [key]: value,
+      childAges:
+        key === "children"
+          ? Array.from(
+              { length: value },
+              (_, index) => draft.childAges[index] ?? 8,
+            )
+          : draft.childAges,
+    });
+  }
+  const facilities = [
+    {
+      icon: Wifi,
+      label: "Fast, complimentary Wi-Fi",
+      note: "Stay connected, when you want to.",
+    },
+    {
+      icon: Coffee,
+      label: "Breakfast worth waking for",
+      note: "Choose a breakfast-inclusive rate.",
+    },
+    {
+      icon: Sun,
+      label:
+        theme.key === "city"
+          ? "A neighborhood at your doorstep"
+          : "Room to enjoy the outdoors",
+      note: property.locationHighlight,
+    },
+    {
+      icon: BedDouble,
+      label: "Comfort in every detail",
+      note: "Beautiful linen and a thoughtful space.",
+    },
+    {
+      icon: ShieldCheck,
+      label: "Simple arrival",
+      note: "Check-in from 14:00 · check-out by 11:00.",
+    },
+    {
+      icon: MapPin,
+      label: "Local recommendations",
+      note: "A few favorite places to start exploring.",
+    },
+  ];
   return (
-    <div className="min-h-screen text-[#1C2733] font-sans antialiased selection:bg-[#F59E0B]/20 selection:text-[#1C2733]">
-      
-      {/* ─────────────────────────────────────────────────────────────
-          1. TOP DEMO INSPECTOR BAR (WUUS STUDIO EVALUATION)
-      ────────────────────────────────────────────────────────────── */}
-      <div className="bg-[#1C2733] text-white px-4 sm:px-6 py-2.5 sticky top-0 z-50 border-b border-[#233746] flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="font-bold tracking-wider uppercase text-[11px] text-[#F59E0B]">
-            WUUS Concept Demo
-          </span>
-          <span className="text-slate-500 hidden sm:inline">|</span>
-          
-          {/* Concept Switcher Tabs */}
-          <div className="flex items-center gap-1 text-xs">
+    <div
+      className={s.site}
+      data-theme={theme.key}
+      lang="en"
+      onClickCapture={(event) => {
+        if (event.target instanceof Element)
+          event.target
+            .closest<HTMLButtonElement>("button")
+            ?.focus({ preventScroll: true });
+      }}
+    >
+      <div className={s.inspector}>
+        <Link
+          href="/hospitality"
+          className={s.wuus}
+          aria-label="WUUS Hospitality"
+        >
+          <BrandArtwork />
+        </Link>
+        <span className={s.conceptLabel}>INTERACTIVE CONCEPT</span>
+        <nav aria-label="Other property concepts">
+          {concepts.map((concept) => (
             <Link
-              href="/hospitality/demo/seaside-guesthouse"
-              className={`px-3 py-1 rounded transition-colors ${
-                slug === 'seaside-guesthouse'
-                  ? 'bg-white/20 text-white font-bold'
-                  : 'text-slate-300 hover:text-white'
-              }`}
+              key={concept.slug}
+              href={`/hospitality/demo/${concept.slug}`}
+              aria-current={slug === concept.slug ? "page" : undefined}
             >
-              Albanian Riviera
+              {concept.name}
             </Link>
-            <Link
-              href="/hospitality/demo/lakeside-wine-estate"
-              className={`px-3 py-1 rounded transition-colors ${
-                slug === 'lakeside-wine-estate'
-                  ? 'bg-white/20 text-white font-bold'
-                  : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Lake Ohrid (Savoria)
-            </Link>
-            <Link
-              href="/hospitality/demo/city-apartments"
-              className={`px-3 py-1 rounded transition-colors ${
-                slug === 'city-apartments'
-                  ? 'bg-white/20 text-white font-bold'
-                  : 'text-slate-300 hover:text-white'
-              }`}
-            >
-              Sarajevo
-            </Link>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Link
-            href="/hospitality#review"
-            className="text-slate-200 hover:text-white font-medium transition-colors"
-          >
-            Ask WUUS about a website →
-          </Link>
-          <Link
-            href="/hospitality#examples"
-            className="text-slate-400 hover:text-slate-200 transition-colors"
-          >
-            Exit demo
-          </Link>
-        </div>
+          ))}
+        </nav>
+        <Link className={s.inspectorCta} href="/hospitality#review">
+          Want this for your property? <ArrowRight size={14} />
+        </Link>
       </div>
-
-      {/* ─────────────────────────────────────────────────────────────
-          2. BESPOKE CONCEPT RENDERINGS
-      ────────────────────────────────────────────────────────────── */}
-
-      {/* ═════════════════════════════════════════════════════════════
-          CONCEPT 02: SAVORIA ESTATE & VINEYARDS (MATCHES MOCKUP 1:1)
-      ══════════════════════════════════════════════════════════════ */}
-      {slug === 'lakeside-wine-estate' && (
-        <div className="bg-[#FAF7F2] text-stone-900 min-h-screen">
-          
-          {/* Panoramic Vineyard Hero matching boutique hotel aesthetic */}
-          <header className="relative w-full h-[260px] sm:h-[300px] md:h-[340px] overflow-hidden">
-            <Image
-              src="/images/hospitality/savoria-hero-banner.jpg"
-              alt="Savoria Estate & Vineyards overlooking blue water"
-              fill
-              priority
-              className="object-cover object-center"
-            />
-            <h1 className="sr-only">
-              SAVORIA ESTATE & VINEYARDS
-            </h1>
-          </header>
-
-          {/* Terracotta Navigation Bar (#A85A44) matching MacBook screen */}
-          <nav className="w-full bg-[#A85A44] text-white py-3 px-4 sm:px-8 shadow-sm sticky top-10 z-40 border-b border-[#964E3A]">
-            <div className="max-w-6xl mx-auto flex items-center justify-between">
-              <div className="hidden md:flex items-center gap-10 text-[11px] sm:text-xs font-serif tracking-[0.25em] uppercase mx-auto">
-                <a href="#stays" className="text-white hover:text-white/80 transition-colors border-b border-white pb-0.5 font-semibold">HOME</a>
-                <a href="#vineyards" className="text-white/90 hover:text-white transition-colors">VINEYARDS</a>
-                <a href="#stays" className="text-white/90 hover:text-white transition-colors">ROOMS</a>
-                <a href="#experiences" className="text-white/90 hover:text-white transition-colors">EXPERIENCES</a>
-                <a href="#contact" className="text-white/90 hover:text-white transition-colors">CONTACT</a>
-              </div>
-              <div className="flex md:hidden items-center justify-center gap-5 text-[10px] tracking-[0.2em] uppercase font-serif w-full">
-                <a href="#stays" className="text-white border-b border-white pb-0.5">HOME</a>
-                <a href="#stays" className="text-white/90">ROOMS</a>
-                <a href="#experiences" className="text-white/90">EXPERIENCES</a>
-                <a href="#contact" className="text-white/90">CONTACT</a>
-              </div>
-            </div>
-          </nav>
-
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-16">
-            
-            {/* ── EXCEPTIONAL STAYS SECTION ── */}
-            <section id="stays" className="space-y-8">
-              <div className="text-center space-y-2">
-                <h2 className="text-2xl sm:text-3xl font-serif uppercase tracking-[0.25em] text-stone-900 font-normal">
-                  EXCEPTIONAL STAYS
-                </h2>
-                <p className="text-xs sm:text-sm text-stone-500 font-serif italic">
-                  Heritage suites surrounded by centuries of winemaking tradition on Lake Ohrid
-                </p>
-              </div>
-
-              {/* CARD 1: THE OLIVE SUITE (Exact 3-Part Layout from Laptop Screen) */}
-              <div className="bg-white rounded-2xl border border-stone-200/90 shadow-md shadow-stone-900/5 overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-                  
-                  {/* Left: Bedroom Photo with exposed wood beams & terracotta floor */}
-                  <div className="lg:col-span-4 relative min-h-[300px] sm:min-h-[360px] lg:min-h-full">
-                    <Image
-                      src="/images/hospitality/savoria-olive-bedroom.jpg"
-                      alt="The Olive Suite Rustic Luxury Bedroom"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="object-cover"
-                    />
-                    <span className="absolute top-3 left-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
-                      Exposed Timber Beams
-                    </span>
-                  </div>
-
-                  {/* Center: Information, Pricing & Green Host Reservation Button */}
-                  <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-[#F8F5EE] border-y lg:border-y-0 lg:border-x border-stone-200">
-                    <div>
-                      <span className="text-xs font-serif text-stone-500 italic block mb-1">
-                        Luxury Suite
-                      </span>
-                      <h3 className="text-2xl sm:text-3xl font-serif uppercase tracking-wide text-stone-900 font-normal">
-                        THE OLIVE SUITE
-                      </h3>
-                      <div className="flex items-baseline gap-2 mt-2">
-                        <span className="text-base sm:text-lg font-serif font-bold text-stone-800">
-                          Rates from €110/night
-                        </span>
-                        <span className="text-[11px] text-stone-500">
-                          (Direct Host Rate · 0% OTA Fee)
-                        </span>
-                      </div>
-                      <p className="text-xs text-stone-600 leading-relaxed mt-2.5">
-                        Exposed chestnut timber beams, handcrafted limestone walls, and private double French doors opening directly to the sunlit vineyard terrace.
-                      </p>
-
-                      {/* Direct Perks */}
-                      <div className="mt-4 pt-4 border-t border-stone-200 space-y-1.5 text-xs text-stone-700">
-                        <div className="flex items-center gap-2">
-                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                          <span>Daily organic vineyard breakfast included</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                          <span>Welcome bottle of estate Reserve Vranec</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                          <span>Direct reservation with winemakers Stefan & Maria</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-6">
-                      <button
-                        onClick={() => handleOpenCheckout(property.rooms[0])}
-                        className="w-full py-3.5 px-6 bg-[#2D5A43] hover:bg-[#234E38] text-white font-medium text-xs sm:text-sm rounded-lg transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
-                      >
-                        <span>Reserve Direct with Host</span>
-                        <span className="text-white/70 text-xs">→</span>
-                      </button>
-                      <p className="text-[11px] text-center text-stone-400 mt-2">
-                        Instant WhatsApp inquiry · Free cancellation up to 48h
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right: French Balcony Doors Opening to Sunny Terraced Vineyard */}
-                  <div className="lg:col-span-3 relative min-h-[260px] sm:min-h-[320px] lg:min-h-full">
-                    <Image
-                      src="/images/hospitality/savoria-olive-view.jpg"
-                      alt="The Olive Suite French Doors to Vineyard Terrace"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 25vw"
-                      className="object-cover"
-                    />
-                    <span className="absolute bottom-3 right-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
-                      French Balcony View
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* CARD 2: THE CELLAR MASTER LOFT */}
-              <div className="bg-white rounded-2xl border border-stone-200/90 shadow-md shadow-stone-900/5 overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-                  
-                  {/* Left: Copper Tub & Loft Photo */}
-                  <div className="lg:col-span-4 relative min-h-[300px] sm:min-h-[360px] lg:min-h-full">
-                    <Image
-                      src="/images/hospitality/palazzo-suites.jpg"
-                      alt="The Cellar Master Loft Freestanding Copper Tub"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="object-cover"
-                    />
-                    <span className="absolute top-3 left-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
-                      Copper Tub & Vaults
-                    </span>
-                  </div>
-
-                  {/* Center: Info & Action */}
-                  <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-[#F8F5EE] border-y lg:border-y-0 lg:border-x border-stone-200">
-                    <div>
-                      <span className="text-xs font-serif text-stone-500 italic block mb-1">
-                        Loft Suite
-                      </span>
-                      <h3 className="text-2xl sm:text-3xl font-serif uppercase tracking-wide text-stone-900 font-normal">
-                        THE CELLAR MASTER LOFT
-                      </h3>
-                      <div className="flex items-baseline gap-2 mt-2">
-                        <span className="text-base sm:text-lg font-serif font-bold text-stone-800">
-                          Rates from €135/night
-                        </span>
-                        <span className="text-[11px] text-stone-500">
-                          (Direct Host Rate · 0% OTA Fee)
-                        </span>
-                      </div>
-                      <p className="text-xs text-stone-600 leading-relaxed mt-2.5">
-                        Located in the historic 1894 east wing above the aging vaults. Features a freestanding copper soaking tub, wrought-iron accents, and private sommelier wine tasting.
-                      </p>
-
-                      <div className="mt-4 pt-4 border-t border-stone-200 space-y-1.5 text-xs text-stone-700">
-                        <div className="flex items-center gap-2">
-                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                          <span>Private barrel tasting in ancient underground vault</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                          <span>Daily gourmet vineyard breakfast included</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Check className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                          <span>Freestanding copper tub with estate herb salts</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-6">
-                      <button
-                        onClick={() => handleOpenCheckout(property.rooms[1] || property.rooms[0])}
-                        className="w-full py-3.5 px-6 bg-[#2D5A43] hover:bg-[#234E38] text-white font-medium text-xs sm:text-sm rounded-lg transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
-                      >
-                        <span>Reserve Direct with Host</span>
-                        <span className="text-white/70 text-xs">→</span>
-                      </button>
-                      <p className="text-[11px] text-center text-stone-400 mt-2">
-                        Direct reservation · No OTA middleman fees
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right: Estate Grounds */}
-                  <div className="lg:col-span-3 relative min-h-[260px] sm:min-h-[320px] lg:min-h-full">
-                    <Image
-                      src="/images/hospitality/savoria-wine-estate.jpg"
-                      alt="Historic Winery Grounds and Terraces"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 25vw"
-                      className="object-cover"
-                    />
-                    <span className="absolute bottom-3 right-3 bg-stone-900/80 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-medium">
-                      Historic Winery Wing
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-            </section>
-
-            {/* ── SAVORIA AVAILABILITY & DATE ENGINE ── */}
-            <section className="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200/80 shadow-xs space-y-4">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-stone-100 pb-4">
-                <div>
-                  <h3 className="text-lg font-serif font-bold text-stone-900 uppercase tracking-wider">
-                    Check Direct Dates & Availability
-                  </h3>
-                  <p className="text-xs text-stone-500">
-                    Guaranteed lowest rate with direct host perks and flexible cancellation.
-                  </p>
-                </div>
-                <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl border border-emerald-200">
-                  Save ~€45 vs Booking.com
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center pt-2">
-                <div className="lg:col-span-3 bg-stone-50 border border-stone-200 rounded-lg p-2.5">
-                  <label className="text-[11px] font-semibold text-stone-500 block mb-0.5">Check-in Date</label>
-                  <input
-                    type="date"
-                    value={checkIn}
-                    onChange={e => setCheckIn(e.target.value)}
-                    className="w-full text-sm font-semibold text-stone-800 bg-transparent outline-hidden cursor-pointer"
-                  />
-                </div>
-                <div className="lg:col-span-3 bg-stone-50 border border-stone-200 rounded-lg p-2.5">
-                  <label className="text-[11px] font-semibold text-stone-500 block mb-0.5">Check-out ({nights} nights)</label>
-                  <input
-                    type="date"
-                    value={checkOut}
-                    onChange={e => setCheckOut(e.target.value)}
-                    className="w-full text-sm font-semibold text-stone-800 bg-transparent outline-hidden cursor-pointer"
-                  />
-                </div>
-                <div className="lg:col-span-4 bg-stone-50 border border-stone-200 rounded-lg p-2.5">
-                  <span className="text-[11px] font-semibold text-stone-500 block mb-0.5">Guests & Rooms</span>
-                  <span className="text-sm font-semibold text-stone-800 block truncate">
-                    {adults} Adults · {roomsCount} Room · {nights} Nights
-                  </span>
-                </div>
-                <div className="lg:col-span-2">
-                  <button
-                    onClick={() => handleOpenCheckout(property.rooms[0])}
-                    className="w-full py-3 bg-[#A85A44] hover:bg-[#924733] text-white font-serif font-medium text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
-                  >
-                    Check Rates
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {/* ── VINEYARD EXPERIENCES ── */}
-            <section id="experiences" className="space-y-6">
-              <div className="text-center space-y-1">
-                <span className="text-xs font-serif uppercase tracking-[0.25em] text-[#A85A44] font-semibold">
-                  Estate Heritage
-                </span>
-                <h3 className="text-2xl font-serif uppercase tracking-wider text-stone-900 font-normal">
-                  Winery & Lake Experiences
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3">
-                  <span className="text-xs font-serif font-bold text-[#A85A44] uppercase tracking-wider block">01 · Tasting</span>
-                  <h4 className="text-lg font-serif font-bold text-stone-900">Underground Barrel Vaults</h4>
-                  <p className="text-xs text-stone-600 leading-relaxed">
-                    Sommelier-guided tasting of four indigenous Vranec and Stanushina vintages inside our 1894 stone cellars, accompanied by local sheep cheeses.
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3">
-                  <span className="text-xs font-serif font-bold text-[#A85A44] uppercase tracking-wider block">02 · Lake Tour</span>
-                  <h4 className="text-lg font-serif font-bold text-stone-900">Private Wooden Boat to Kaneo</h4>
-                  <p className="text-xs text-stone-600 leading-relaxed">
-                    Depart directly from the estate private dock on a traditional wooden boat across ancient Lake Ohrid to cliffside Byzantine churches.
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-2xl border border-stone-200 space-y-3">
-                  <span className="text-xs font-serif font-bold text-[#A85A44] uppercase tracking-wider block">03 · Cuisine</span>
-                  <h4 className="text-lg font-serif font-bold text-stone-900">Organic Vineyard Breakfast</h4>
-                  <p className="text-xs text-stone-600 leading-relaxed">
-                    Morning breakfast served under ancient fig trees featuring warm pastries, farm cheeses, wild mountain honey, and freshly pressed grape juice.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* ── HOST STORY & CONTACT ── */}
-            <section id="contact" className="bg-[#F8F5EE] rounded-2xl p-8 sm:p-10 border border-stone-200/90 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-8 space-y-4">
-                <span className="text-xs font-serif uppercase tracking-[0.25em] text-[#A85A44] font-semibold">
-                  Meet Your Hosts
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-serif text-stone-900 font-normal">
-                  Stefan & Maria · Winemakers & Hosts
-                </h3>
-                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
-                  “Our family has cultivated indigenous Vranec and Stanushina grapes on these terraced slopes for four generations. We restored the estate so travelers could experience authentic wine country living with direct, personal care.”
-                </p>
-                <div className="flex flex-wrap items-center gap-4 pt-2">
-                  <button
-                    onClick={() => setConciergeOpen(true)}
-                    className="px-5 py-2.5 bg-[#2D5A43] hover:bg-[#234E38] text-white font-medium text-xs rounded-lg transition-colors cursor-pointer"
-                  >
-                    Chat with Concierge
-                  </button>
-                  <a
-                    href="https://wa.me/6281383521750?text=Hello%20Stefan%20%26%20Maria,%20I%20am%20inquiring%20about%20Savoria%20Estate%20suites"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-5 py-2.5 bg-white border border-stone-300 text-stone-700 hover:text-stone-900 text-xs font-medium rounded-lg transition-colors"
-                  >
-                    Open Host WhatsApp
-                  </a>
-                </div>
-              </div>
-              <div className="lg:col-span-4 relative h-64 rounded-xl overflow-hidden border border-stone-200">
-                <Image
-                  src="/images/hospitality/savoria-wine-estate.jpg"
-                  alt="Stefan & Maria Estate"
-                  fill
-                  sizes="400px"
-                  className="object-cover"
-                />
-              </div>
-            </section>
-
-          </main>
-        </div>
-      )}
-
-      {/* ═════════════════════════════════════════════════════════════
-          CONCEPT 03: THE METROPOLITAN LOFT SUITES (SARAJEVO MOCKUP)
-      ══════════════════════════════════════════════════════════════ */}
-      {slug === 'city-apartments' && (
-        <div className="bg-[#FAF9F6] text-stone-900 min-h-screen">
-          
-          {/* Header matching urban-loft.jpg */}
-          <header className="bg-white border-b border-stone-200 sticky top-10 z-40">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-xs uppercase tracking-widest font-serif font-bold text-stone-400">WUUS ·</span>
-                <div>
-                  <h1 className="text-lg sm:text-xl font-serif uppercase tracking-[0.2em] text-stone-900 font-bold m-0">
-                    THE METROPOLITAN LOFT SUITES
-                  </h1>
-                  <span className="text-[10px] tracking-[0.3em] uppercase text-stone-500 block">SARAJEVO</span>
-                </div>
-              </div>
-              <button
-                onClick={() => handleOpenCheckout(property.rooms[0])}
-                className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white text-xs font-serif uppercase tracking-wider rounded transition-colors"
-              >
-                Book Direct
-              </button>
-            </div>
-          </header>
-
-          <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-12">
-            
-            {/* Dark Urban Heritage Hero Banner */}
-            <div className="relative h-[280px] sm:h-[340px] rounded-2xl overflow-hidden shadow-sm">
-              <Image
-                src="/images/hospitality/sarajevo-king-suite.jpg"
-                alt="Sarajevo Urban Heritage Loft"
-                fill
-                priority
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-black/45 flex items-center justify-center p-6 text-center">
-                <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif text-white tracking-[0.15em] uppercase font-normal max-w-lg leading-tight">
-                  URBAN HERITAGE LUXURY IN SARAJEVO
-                </h2>
-              </div>
-            </div>
-
-            {/* Discover Our Suites Section Title */}
-            <div className="text-center space-y-1">
-              <h3 className="text-2xl font-serif text-stone-900 font-normal">
-                Discover Our Suites
-              </h3>
-              <p className="text-xs text-stone-500 font-serif italic">
-                Austrian-era brick, high ceilings, and artisan quarter views
+      <div className={s.demoNotice}>
+        Fictional property · AI-generated concept photography · booking and
+        prices are demonstrations
+      </div>
+      <header className={s.propertyNav}>
+        <a href="#overview" className={s.wordmark}>
+          {theme.name}
+          <small>
+            {theme.key === "wine"
+              ? "ESTATE & VINEYARDS"
+              : theme.key === "city"
+                ? "LOFT SUITES · SARAJEVO"
+                : "COASTAL RETREAT"}
+          </small>
+        </a>
+        <nav aria-label="Property navigation">
+          {["Rooms", "Facilities", "Area", "Reviews", "FAQ"].map((label) => (
+            <a key={label} href={`#${label.toLowerCase()}`}>
+              {label}
+            </a>
+          ))}
+        </nav>
+        <label className={s.currency}>
+          <span className={s.srOnly}>Display currency</span>
+          <select
+            aria-label="Display currency"
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value as Currency)}
+          >
+            <option>EUR</option>
+            <option>USD</option>
+            <option>GBP</option>
+          </select>
+        </label>
+        <a className={s.button} href="#stay-search">
+          Find your stay <ArrowRight size={15} />
+        </a>
+      </header>
+      <nav className={s.mobileNav} aria-label="Explore the property">
+        {["Rooms", "Facilities", "Area", "Reviews", "FAQ"].map((label) => (
+          <a key={label} href={`#${label.toLowerCase()}`}>
+            {label}
+          </a>
+        ))}
+      </nav>
+      <main>
+        <section id="overview" className={s.hero}>
+          <div className={s.heroHeading}>
+            <div>
+              <p className={s.eyebrow}>{theme.intro}</p>
+              <h1>{theme.title}</h1>
+              <p className={s.location}>
+                <MapPin size={16} />
+                {property.location}
               </p>
             </div>
-
-            {/* KING SUITE CARD (Matching urban-loft.jpg 1:1) */}
-            <div className="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden p-6 sm:p-8 space-y-6">
-              <div className="relative h-[280px] sm:h-[340px] rounded-xl overflow-hidden">
-                <Image
-                  src="/images/hospitality/sarajevo-king-suite.jpg"
-                  alt="King Suite with exposed brick wall"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <h4 className="text-2xl font-serif uppercase tracking-wider text-stone-900 font-bold m-0">
-                    KING SUITE
-                  </h4>
-                  <span className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-xl uppercase tracking-wider">
-                    TRANSPARENT DIRECT RATE
-                  </span>
-                </div>
-
-                <p className="text-sm text-stone-600 leading-relaxed m-0">
-                  Experience spacious modern comfort with original heritage charm. 40 sqm, historic quarter view.
-                </p>
-
-                {/* Amenities Icons Row matching mockup */}
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 py-3 border-y border-stone-100 text-center text-xs text-stone-700">
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold">🛏 King Bed</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold">📶 300M Wi-Fi</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold">☕ Espresso</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold">🏙 Balcony</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold">📐 40 SQM</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-semibold">❄ AC</span>
-                  </div>
-                </div>
-
-                {/* Pricing & CTA Buttons matching urban-loft.jpg */}
-                <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div>
-                    <span className="text-[11px] uppercase tracking-wider text-stone-400 block font-semibold">FROM</span>
-                    <div className="flex items-baseline gap-1">
-                      <strong className="text-3xl font-serif font-bold text-stone-900">€210</strong>
-                      <span className="text-xs text-stone-500 uppercase tracking-wider">/ NIGHT</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <button
-                      onClick={() => handleOpenCheckout(property.rooms[0])}
-                      className="flex-1 sm:flex-initial px-6 py-3.5 bg-stone-900 hover:bg-stone-800 text-white font-serif uppercase tracking-widest text-xs font-bold rounded-lg transition-colors cursor-pointer"
-                    >
-                      BOOK NOW
-                    </button>
-                    <a
-                      href="https://wa.me/6281383521750?text=Hello,%20I%20am%20inquiring%20about%20the%20King%20Suite%20at%20The%20Metropolitan%20Loft%20Suites%20Sarajevo"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-5 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
-                    >
-                      <PhoneCall className="w-4 h-4" />
-                      <span>WhatsApp Inquiry</span>
-                    </a>
-                  </div>
-                </div>
-
-              </div>
+            <button
+              className={`${s.saveButton} ${saved ? s.saved : ""}`}
+              aria-pressed={saved}
+              onClick={() => setSaved(!saved)}
+            >
+              <Heart size={17} fill={saved ? "currentColor" : "none"} />
+              {saved ? "Saved for this visit" : "Save this stay"}
+            </button>
+          </div>
+          <div className={s.heroPhotos}>
+            <button
+              className={s.mainPhoto}
+              onClick={() =>
+                setGallery({ images: photos, title: "A closer look", index: 0 })
+              }
+              aria-label="View property gallery"
+            >
+              <Image
+                src={property.heroImage}
+                alt={`${property.name} — concept property photography`}
+                fill
+                preload
+                sizes="(max-width: 700px) 100vw, 70vw"
+              />
+              <span className={s.photoCaption}>
+                <span>Some places make you pause.</span>
+                <small>{property.category}</small>
+              </span>
+            </button>
+            <div className={s.sidePhotos}>
+              {property.rooms.slice(0, 2).map((room) => (
+                <button
+                  key={room.id}
+                  onClick={() =>
+                    setGallery({
+                      images: room.gallery,
+                      title: room.name,
+                      index: 0,
+                    })
+                  }
+                  aria-label={`View ${room.name} photos`}
+                >
+                  <Image
+                    src={room.image}
+                    alt={room.name}
+                    fill
+                    sizes="(max-width: 700px) 50vw, 30vw"
+                  />
+                  <span>{room.name}</span>
+                </button>
+              ))}
             </div>
-
-          </main>
-        </div>
-      )}
-
-      {/* ═════════════════════════════════════════════════════════════
-          CONCEPT 01: ARTISAN COASTAL RETREAT (COASTAL MOCKUP)
-      ══════════════════════════════════════════════════════════════ */}
-      {slug === 'seaside-guesthouse' && (
-        <div className="bg-[#FAF7F2] text-stone-900 min-h-screen">
-          
-          {/* Header matching coastal-retreat.jpg */}
-          <header className="bg-[#FAF7F2] border-b border-stone-200/80 sticky top-10 z-40">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-serif tracking-tight text-stone-900 font-normal m-0">
-                  Artisan
-                </h1>
-                <span className="text-[10px] tracking-widest uppercase text-stone-500 block">
-                  Coastal Retreat · Albanian Riviera
-                </span>
-              </div>
-
-              <nav className="hidden md:flex items-center gap-8 text-xs font-serif uppercase tracking-wider text-stone-700">
-                <a href="#suite" className="hover:text-stone-900">Discover</a>
-                <a href="#suite" className="hover:text-stone-900 font-bold border-b border-stone-900 pb-0.5">Stays</a>
-                <a href="#suite" className="hover:text-stone-900">Wellness</a>
-                <a href="#suite" className="hover:text-stone-900">Gallery</a>
-                <a href="#suite" className="hover:text-stone-900">Journal</a>
-              </nav>
-
-              <button
-                onClick={() => handleOpenCheckout(property.rooms[0])}
-                className="px-4 py-2 bg-[#1C2733] hover:bg-[#2A3B4C] text-white text-xs font-serif uppercase tracking-wider rounded transition-colors"
-              >
-                Booking
+            <button
+              className={s.allPhotos}
+              onClick={() =>
+                setGallery({ images: photos, title: "A closer look", index: 0 })
+              }
+            >
+              <Images size={16} />
+              All {photos.length} photos
+            </button>
+          </div>
+          <div id="stay-search" className={s.searchWrap}>
+            <div className={s.searchIntro}>
+              <span>
+                <Sparkles size={16} /> Make yourself at home
+              </span>
+              <button className={s.textButton} onClick={trySample}>
+                Try a sample stay <ArrowRight size={14} />
               </button>
             </div>
-          </header>
-
-          <main className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-12">
-            
-            {/* Featured Ionian Vista Suite matching iPad mockup */}
-            <div id="suite" className="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden p-6 sm:p-10 space-y-6">
-              
-              {/* Featured Villa Pool Photo */}
-              <div className="relative h-[340px] sm:h-[440px] rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/hospitality/artisan-ionian-suite.jpg"
-                  alt="Ionian Vista Suite Stone Villa and Pool over Turquoise Sea"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <h2 className="text-3xl font-serif text-stone-900 font-normal m-0">
-                    Ionian Vista Suite
-                  </h2>
-                  <p className="text-sm text-stone-600 leading-relaxed mt-2 max-w-2xl">
-                    A sanctuary of sophisticated calm overlooking the turquoise Ionian. Features a private terrace, locally sourced stone, and handcrafted olive wood details.
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <span className="text-xs font-serif uppercase tracking-wider font-bold text-stone-900 block mb-1">
-                    Features
-                  </span>
-                  <p className="text-xs text-stone-600">
-                    2 Guests • King Bed • Private Terrace • Sea View
-                  </p>
-                </div>
-
-                {/* Thumbnails row */}
-                <div>
-                  <span className="text-xs font-serif uppercase tracking-wider font-bold text-stone-900 block mb-2">
-                    Details & Amenities
-                  </span>
-                  <div className="grid grid-cols-4 gap-3 max-w-md">
-                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
-                      <Image src="/images/hospitality/artisan-ionian-suite.jpg" alt="Villa Pool" fill className="object-cover" />
-                    </div>
-                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
-                      <Image src="/images/hospitality/stone-suite-main.jpg" alt="Bedroom" fill className="object-cover" />
-                    </div>
-                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
-                      <Image src="/images/hospitality/stone-suite-breakfast.jpg" alt="Breakfast" fill className="object-cover" />
-                    </div>
-                    <div className="relative h-20 rounded-lg overflow-hidden border border-stone-200">
-                      <Image src="/images/hospitality/guesthouse.webp" alt="Courtyard" fill className="object-cover" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Pricing & Check Availability Button */}
-                <div className="pt-4 border-t border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div>
-                    <div className="flex items-baseline gap-1">
-                      <strong className="text-3xl font-serif font-bold text-stone-900">€120</strong>
-                      <span className="text-xs text-stone-500">/ night</span>
-                    </div>
-                    <span className="text-xs text-stone-500 block">
-                      (Including courtyard artisan breakfast & welcome chilled wine)
-                    </span>
-                  </div>
-
-                  <button
-                    onClick={() => handleOpenCheckout(property.rooms[0])}
-                    className="px-8 py-3.5 bg-[#1C2733] hover:bg-[#2A3B4C] text-white font-serif uppercase tracking-widest text-xs font-semibold rounded-lg transition-colors cursor-pointer"
-                  >
-                    Check Availability
-                  </button>
-                </div>
-
-              </div>
-            </div>
-
-          </main>
-        </div>
-      )}
-
-      {/* ─────────────────────────────────────────────────────────────
-          3. CLEAN MULTI-STEP RESERVATION DRAWER (ALL CONCEPTS)
-      ────────────────────────────────────────────────────────────── */}
-      <AnimatePresence>
-        {checkoutOpen && (
-          <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-5">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setCheckoutOpen(false)}
-              className="absolute inset-0 bg-[#1C2733]/70 backdrop-blur-xs"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 10 }}
-              className="relative w-full max-w-xl bg-white rounded-2xl p-6 sm:p-8 z-10 max-h-[92vh] overflow-y-auto shadow-2xl space-y-5"
+            <form
+              className={s.searchBar}
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (applyStay())
+                  document
+                    .getElementById("rooms")
+                    ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              noValidate
             >
-              {/* Header with Steps */}
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <div>
-                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                    Direct Booking Confirmation
-                  </span>
-                  <h3 className="text-xl font-bold text-[#1C2733]">
-                    {property.name}
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setCheckoutOpen(false)}
-                  className="p-2 text-slate-400 hover:text-[#1C2733] rounded-xl hover:bg-slate-100 cursor-pointer"
+              <label>
+                Check-in
+                <input
+                  type="date"
+                  aria-label="Check-in"
+                  value={draft.checkIn}
+                  onChange={(e) =>
+                    setDraft({ ...draft, checkIn: e.target.value })
+                  }
+                />
+              </label>
+              <label>
+                Check-out
+                <input
+                  type="date"
+                  aria-label="Check-out"
+                  value={draft.checkOut}
+                  onChange={(e) =>
+                    setDraft({ ...draft, checkOut: e.target.value })
+                  }
+                />
+              </label>
+              <button
+                className={s.calendarButton}
+                aria-label="Open date calendar"
+                type="button"
+                onClick={() => setCalendarOpen(true)}
+              >
+                <CalendarDays size={20} />
+              </button>
+              <button
+                type="button"
+                className={s.guestTrigger}
+                onClick={() => setGuestOpen(true)}
+              >
+                <span>Guests & rooms</span>
+                <strong>
+                  <Users size={17} />
+                  {draft.adults + draft.children} guests · {draft.rooms}{" "}
+                  {draft.rooms === 1 ? "room" : "rooms"}
+                </strong>
+              </button>
+              <button type="submit" className={s.button}>
+                Check availability <ArrowRight size={17} />
+              </button>
+            </form>
+            {searchError && (
+              <p className={s.error} role="alert">
+                {searchError}
+              </p>
+            )}
+            {dirty && (
+              <p className={s.searchHint}>
+                Your choices changed. Check availability to update room prices.
+              </p>
+            )}
+            <small>
+              Example availability only. Nothing is reserved until connected to
+              a real booking system.{" "}
+              {currency !== "EUR" &&
+                "Currency conversion is fixed for this demo."}
+            </small>
+          </div>
+        </section>
+        <section className={`${s.story} ${s.container}`}>
+          <div>
+            <p className={s.eyebrow}>LESS ORDINARY. MORE YOURS.</p>
+            <h2>
+              A place to settle in.
+              <br />A reason to step outside.
+            </h2>
+          </div>
+          <div>
+            <p>{theme.story}</p>
+            <div className={s.storyHighlights}>
+              <span>
+                <Check size={16} /> Two distinctive room types
+              </span>
+              <span>
+                <Check size={16} /> Flexible example rates
+              </span>
+              <span>
+                <Check size={16} /> A clear price before you book
+              </span>
+            </div>
+          </div>
+        </section>
+        <section id="rooms" className={s.roomsSection}>
+          <div className={s.container}>
+            <div className={s.sectionHeading}>
+              <div>
+                <p className={s.eyebrow}>FIND YOUR FAVORITE</p>
+                <h2>Rooms with a point of view.</h2>
+                <p>
+                  {stay
+                    ? `${shortDate(stay.checkIn)}–${shortDate(stay.checkOut)} · ${stayNights(stay)} nights · ${stay.adults + stay.children} guests · ${stay.rooms} room(s)`
+                    : "A little space, a good night’s sleep, and something to look forward to."}
+                </p>
+              </div>
+              <span className={s.smallBadge}>
+                {visibleRooms.length} room types
+                {stay ? " match" : " to explore"}
+              </span>
+            </div>
+            <div className={s.filters}>
+              <span>
+                <SlidersHorizontal size={16} />
+                Refine your stay
+              </span>
+              <button
+                className={breakfastOnly ? s.activeFilter : ""}
+                aria-pressed={breakfastOnly}
+                onClick={() => setBreakfastOnly(!breakfastOnly)}
+              >
+                <Coffee size={15} />
+                Breakfast included
+              </button>
+              <button
+                className={flexibleOnly ? s.activeFilter : ""}
+                aria-pressed={flexibleOnly}
+                onClick={() => setFlexibleOnly(!flexibleOnly)}
+              >
+                <ShieldCheck size={15} />
+                Free cancellation
+              </button>
+              <label>
+                <span className={s.srOnly}>Sort rooms</span>
+                <select
+                  aria-label="Sort rooms"
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
                 >
-                  <X className="w-5 h-5" />
+                  <option value="curated">Our collection</option>
+                  <option value="price">Lowest price</option>
+                  <option value="space">Most spacious</option>
+                </select>
+              </label>
+            </div>
+            {!stay && (
+              <div className={s.availabilityNote}>
+                <CalendarDays size={19} />
+                <span>Select dates to see the total for your stay.</span>
+                <button className={s.textButton} onClick={trySample}>
+                  Use sample dates
                 </button>
               </div>
-
-              {/* Step Tracker */}
-              <div className="flex items-center justify-between text-xs font-semibold px-3 py-2 bg-slate-50 rounded-lg">
-                <span className={checkoutStep === 1 ? 'text-[#1C2733] font-bold' : 'text-slate-400'}>
-                  1. Room & Rate
-                </span>
-                <span className="text-slate-300">/</span>
-                <span className={checkoutStep === 2 ? 'text-[#1C2733] font-bold' : 'text-slate-400'}>
-                  2. Guest Details
-                </span>
-                <span className="text-slate-300">/</span>
-                <span className={checkoutStep === 3 ? 'text-emerald-700 font-bold' : 'text-slate-400'}>
-                  3. Confirmation
-                </span>
+            )}
+            {visibleRooms.length === 0 && (
+              <div className={s.emptyState}>
+                <BedDouble size={32} />
+                <h3>No matching rooms in this example.</h3>
+                <p>
+                  Try fewer guests or rooms, or clear your filters. Example
+                  inventory is limited to 2–3 units per room type.
+                </p>
+                <button
+                  className={s.secondaryButton}
+                  onClick={() => {
+                    setBreakfastOnly(false);
+                    setFlexibleOnly(false);
+                    setStay(null);
+                    setSearchError("");
+                  }}
+                >
+                  Reset room search
+                </button>
               </div>
-
-              {/* ── STEP 1: REVIEW SELECTION ── */}
-              {checkoutStep === 1 && (
-                <div className="space-y-4">
-                  {/* Room Card Preview */}
-                  <div className="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <div className="relative w-20 h-16 rounded-lg overflow-hidden shrink-0">
-                      <Image src={selectedRoom.image} alt={selectedRoom.name} fill sizes="80px" className="object-cover" />
-                    </div>
-                    <div className="text-xs space-y-0.5">
-                      <strong className="block text-sm text-[#1C2733]">{selectedRoom.name}</strong>
-                      <span className="text-slate-500">{selectedRoom.size} · {selectedRoom.bed}</span>
-                      <p className="text-slate-700 font-medium pt-0.5 m-0">Plan: {selectedRatePlan.name}</p>
-                    </div>
-                  </div>
-
-                  {/* Dates */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Check-in</span>
-                      <strong className="text-[#1C2733]">{checkIn}</strong>
-                    </div>
-                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Check-out</span>
-                      <strong className="text-[#1C2733]">{checkOut}</strong>
-                    </div>
-                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Duration</span>
-                      <strong className="text-[#1C2733]">{nights} Nights</strong>
-                    </div>
-                    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                      <span className="text-[10px] text-slate-400 block uppercase font-semibold">Guests</span>
-                      <strong className="text-[#1C2733]">{adults} Adults</strong>
-                    </div>
-                  </div>
-
-                  {/* Price Breakdown */}
-                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
-                    <div className="flex justify-between text-slate-600">
-                      <span>Rate plan per night</span>
-                      <span>€{selectedRatePlan.rate}</span>
-                    </div>
-                    <div className="flex justify-between text-slate-600">
-                      <span>Stay calculation</span>
-                      <span>€{selectedRatePlan.rate} × {nights} nights</span>
-                    </div>
-                    <div className="flex justify-between text-slate-400 line-through">
-                      <span>OTA comparison rate</span>
-                      <span>€{calculateOtaTotal(selectedRatePlan.otaRate)}</span>
-                    </div>
-                    <div className="flex justify-between text-emerald-800 font-semibold pt-1 border-t border-slate-200">
-                      <span>Direct Booking Benefit</span>
-                      <span>Save €{savings} (0% OTA Commission)</span>
-                    </div>
-                    <div className="flex justify-between text-sm font-bold text-[#1C2733] pt-1">
-                      <span>Total to Pay at Property</span>
-                      <span>€{calculateTotal(selectedRatePlan.rate)}</span>
+            )}
+            <div className={s.roomList}>
+              {visibleRooms.map(({ room, plans }) => (
+                <article key={room.id} className={s.roomCard}>
+                  <div className={s.roomPresentation}>
+                    <button
+                      className={s.roomPhoto}
+                      aria-label={`Open ${room.name} gallery`}
+                      onClick={() =>
+                        setGallery({
+                          images: room.gallery,
+                          title: room.name,
+                          index: 0,
+                        })
+                      }
+                    >
+                      <Image
+                        src={room.image}
+                        alt={room.name}
+                        fill
+                        sizes="(max-width: 700px) 100vw, 440px"
+                      />
+                      <span>
+                        <Images size={15} />
+                        {room.gallery.length} photos
+                      </span>
+                    </button>
+                    <div className={s.roomInfo}>
+                      <small>{room.view}</small>
+                      <h3>{room.name}</h3>
+                      <div className={s.roomSpecs}>
+                        <span>
+                          <BedDouble size={16} />
+                          {room.bed.split(" (")[0]}
+                        </span>
+                        <span>
+                          <Users size={16} />
+                          Up to {room.maxGuests}
+                        </span>
+                        <span>{room.size}</span>
+                      </div>
+                      <p>{room.description}</p>
+                      <div className={s.amenityTags}>
+                        {room.amenities.slice(0, 4).map((item) => (
+                          <span key={item}>{item}</span>
+                        ))}
+                      </div>
+                      <button
+                        className={s.textButton}
+                        onClick={() => setDetails(room)}
+                      >
+                        All room details <ArrowRight size={15} />
+                      </button>
                     </div>
                   </div>
-
-                  {/* Included Direct Benefits */}
-                  <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs space-y-1">
-                    <strong className="text-emerald-900 block font-semibold">Included with your direct booking:</strong>
-                    {selectedRatePlan.perks.map((p, idx) => (
-                      <div key={idx} className="flex items-center gap-1.5 text-emerald-800">
-                        <Check className="w-3.5 h-3.5 shrink-0" />
-                        <span>{p}</span>
+                  <div className={s.rateList}>
+                    {plans.map((plan) => (
+                      <div
+                        key={plan.id}
+                        className={`${s.rateCard} ${plan.recommended ? s.recommendedRate : ""}`}
+                      >
+                        <div className={s.rateDescription}>
+                          {plan.recommended && (
+                            <small className={s.recommendation}>
+                              THE LITTLE EXTRAS
+                            </small>
+                          )}
+                          <h4>
+                            {plan.breakfastIncluded
+                              ? "Stay & breakfast"
+                              : "The room, your way"}
+                          </h4>
+                          <p>{plan.description}</p>
+                          <span>
+                            <Coffee size={14} />
+                            {plan.breakfastIncluded
+                              ? "Breakfast included"
+                              : "Breakfast optional"}
+                          </span>
+                          <span>
+                            <ShieldCheck size={14} />
+                            {plan.freeCancellation
+                              ? "Free cancellation · 48h before arrival"
+                              : "Non-refundable"}
+                          </span>
+                          <span>
+                            <Check size={14} />
+                            Pay-at-property option
+                          </span>
+                        </div>
+                        <div className={s.ratePrice}>
+                          <small>
+                            {stay
+                              ? `${stayNights(stay)} nights · ${stay.rooms} room(s)`
+                              : "Per room, per night"}
+                          </small>
+                          <strong>
+                            {fmt(
+                              stay ? quote(plan, stay).total : plan.rate * 100,
+                            )}
+                          </strong>
+                          <small>
+                            {stay
+                              ? "Includes example 10% tax"
+                              : "Before example 10% tax"}
+                          </small>
+                          <button
+                            className={s.button}
+                            onClick={() => choose(room, plan)}
+                          >
+                            {stay && !dirty ? "Choose rate" : "Choose dates"}
+                            <ArrowRight size={15} />
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
-
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section
+          id="facilities"
+          className={`${s.container} ${s.facilitiesSection}`}
+        >
+          <div className={s.sectionHeading}>
+            <div>
+              <p className={s.eyebrow}>THOUGHTFULLY INCLUDED</p>
+              <h2>The comforts that count.</h2>
+            </div>
+            <p>
+              Everything you need.
+              <br />
+              Space to enjoy the rest.
+            </p>
+          </div>
+          <div className={s.facilitiesGrid}>
+            {facilities.map(({ icon: Icon, label, note }) => (
+              <div key={label}>
+                <Icon size={25} strokeWidth={1.4} />
+                <h3>{label}</h3>
+                <p>{note}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section id="area" className={s.areaSection}>
+          <div className={`${s.container} ${s.areaGrid}`}>
+            <div className={s.areaPhoto}>
+              <Image
+                src={property.atmosphereImage}
+                alt={`The atmosphere of ${property.name}`}
+                fill
+                sizes="(max-width: 700px) 100vw, 50vw"
+              />
+              <span>{property.location}</span>
+            </div>
+            <div>
+              <p className={s.eyebrow}>GO A LITTLE FURTHER</p>
+              <h2>
+                A good stay.
+                <br />A great starting point.
+              </h2>
+              <p className={s.muted}>A few places to put on your map.</p>
+              <div className={s.localPlaces}>
+                {property.localGuide.map((place, index) => (
                   <button
-                    onClick={() => setCheckoutStep(2)}
-                    className="w-full py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
+                    key={place.title}
+                    aria-pressed={index === area}
+                    className={index === area ? s.selectedPlace : ""}
+                    onClick={() => setArea(index)}
                   >
-                    Continue to Guest Details →
+                    <span className={s.placeNumber}>0{index + 1}</span>
+                    <span>
+                      <strong>{place.title}</strong>
+                      <small>
+                        {place.category} · {place.dist}
+                      </small>
+                    </span>
+                    <ArrowRight size={17} />
+                  </button>
+                ))}
+              </div>
+              <div className={s.placeDetail}>
+                <MapPin size={20} />
+                <p>{property.localGuide[area].desc}</p>
+              </div>
+              <small>
+                Neighborhood recommendations and distances are illustrative.
+              </small>
+            </div>
+          </div>
+        </section>
+        <section id="reviews" className={`${s.container} ${s.reviewsSection}`}>
+          <div className={s.sectionHeading}>
+            <div>
+              <p className={s.eyebrow}>THE EXPERIENCE, IN WORDS</p>
+              <h2>Little moments. Lasting memories.</h2>
+              <p>
+                Sample guest feedback for this concept · these are not real
+                reviews.
+              </p>
+            </div>
+            <div className={s.reviewScore}>
+              <strong>9.4</strong>
+              <span>
+                Example rating
+                <br />
+                <small>3 demonstration reviews</small>
+              </span>
+            </div>
+          </div>
+          <div className={s.reviewGrid}>
+            {[
+              {
+                name: "Alex",
+                country: "United Kingdom",
+                title: "An easy place to feel at home.",
+                text: "The room felt considered, the surroundings were beautiful, and choosing a stay was refreshingly simple.",
+              },
+              {
+                name: "Sofia",
+                country: "Italy",
+                title: "The small details made it special.",
+                text: "A slow breakfast, a comfortable bed, and local recommendations that helped us make the most of the day.",
+              },
+              {
+                name: "Jamie",
+                country: "Australia",
+                title: "Exactly the kind of stay we wanted.",
+                text: "A distinctive space and a clear booking experience. Everything we needed was easy to find.",
+              },
+            ].map((review) => (
+              <article key={review.name}>
+                <div className={s.stars} aria-label="Example five-star review">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <Star key={index} size={14} fill="currentColor" />
+                  ))}
+                </div>
+                <h3>{review.title}</h3>
+                <p>“{review.text}”</p>
+                <footer>
+                  <span className={s.avatar}>{review.name[0]}</span>
+                  <span>
+                    <strong>{review.name}</strong>
+                    <small>{review.country} · sample guest</small>
+                  </span>
+                </footer>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section id="faq" className={`${s.container} ${s.faqSection}`}>
+          <div>
+            <p className={s.eyebrow}>BEFORE YOU ARRIVE</p>
+            <h2>
+              A few things
+              <br />
+              worth knowing.
+            </h2>
+            <p>Clear answers, fewer surprises.</p>
+          </div>
+          <div>
+            {[
+              {
+                q: "Is this a real hotel booking?",
+                a: "This is a WUUS website concept for a fictional property. Photos are generated, availability and prices are examples, and the checkout creates a local demonstration only. No room is reserved, no email is sent, and no payment is taken.",
+              },
+              {
+                q: "What is included in the total?",
+                a: "Room price × nights × rooms, any extras you choose, and an illustrative 10% tax. The STAY10 example code discounts only the room price. Prices and currency conversions are for demonstration.",
+              },
+              {
+                q: "Can I change or cancel my stay?",
+                a: "The flexible example rates show free cancellation until 48 hours before arrival. A real property would confirm its cancellation, payment and house rules before launch.",
+              },
+              {
+                q: "What time are check-in and check-out?",
+                a: "For this concept, check-in is from 14:00 and checkout is by 11:00. A late checkout option extends this to 13:00. Arrival preferences and requests are demonstrated without contacting the property.",
+              },
+            ].map((item) => (
+              <details key={item.q}>
+                <summary>
+                  {item.q}
+                  <Plus size={18} />
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+        <section className={s.closing}>
+          <Image src={property.heroImage} alt="" fill sizes="100vw" />
+          <div>
+            <p className={s.eyebrow}>YOUR NEXT CHAPTER</p>
+            <h2>
+              Stay somewhere
+              <br />
+              you’ll remember.
+            </h2>
+            <a className={s.lightButton} href="#stay-search">
+              Find your stay <ArrowRight size={17} />
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer className={`${s.container} ${s.footer}`}>
+        <div className={s.wordmark}>
+          {theme.name}
+          <small>A FICTIONAL HOSPITALITY CONCEPT</small>
+        </div>
+        <span>Photography, reviews and reservations are demonstrations.</span>
+        <Link href="/hospitality">
+          Designed by <strong>WUUS</strong> <ArrowRight size={14} />
+        </Link>
+      </footer>
+      <div className={s.mobileBooking}>
+        <span>
+          <small>Example rates from</small>
+          <strong>
+            {fmt(lowest * 100)} <small>/ night, before tax</small>
+          </strong>
+        </span>
+        <a className={s.button} href="#rooms">
+          Choose a room <ArrowDown size={16} />
+        </a>
+      </div>
+      <button
+        className={s.conciergeButton}
+        aria-expanded={conciergeOpen}
+        aria-label={
+          conciergeOpen ? "Close stay assistant" : "Open stay assistant"
+        }
+        onClick={() => setConciergeOpen(!conciergeOpen)}
+      >
+        {conciergeOpen ? <X size={21} /> : <MessageCircle size={21} />}
+      </button>
+      {conciergeOpen && (
+        <aside className={s.concierge}>
+          <header>
+            <span>
+              <strong>Your stay assistant</strong>
+              <small>Scripted demo · no AI service</small>
+            </span>
+            <button
+              className={s.iconButton}
+              aria-label="Close assistant panel"
+              onClick={() => setConciergeOpen(false)}
+            >
+              <X size={17} />
+            </button>
+          </header>
+          <p>A few quick answers to help you explore.</p>
+          <div>
+            {["Check-in", "Breakfast", "Booking"].map((question) => (
+              <button
+                className={s.secondaryButton}
+                key={question}
+                onClick={() =>
+                  setAnswer(
+                    question === "Check-in"
+                      ? "Example check-in starts at 14:00, with checkout by 11:00. Choose your arrival preference in the demo checkout."
+                      : question === "Breakfast"
+                        ? "Choose a breakfast rate, or add it to room-only stays for €13 per adult and €7 per child, per night."
+                        : "Choose dates, guests and a rate, then try the local checkout. It does not create a reservation or charge.",
+                  )
+                }
+              >
+                {question}
+              </button>
+            ))}
+          </div>
+          {answer && (
+            <p className={s.assistantAnswer} role="status">
+              {answer}
+            </p>
+          )}
+        </aside>
+      )}
+      {calendarOpen && (
+        <DateCalendar
+          start={draft.checkIn}
+          end={draft.checkOut}
+          onClose={() => setCalendarOpen(false)}
+          onApply={(checkIn, checkOut) => {
+            setDraft({ ...draft, checkIn, checkOut });
+            setCalendarOpen(false);
+          }}
+        />
+      )}
+      {guestOpen && (
+        <DemoDialog title="Who’s staying?" onClose={() => setGuestOpen(false)}>
+          <div className={s.dialogBody}>
+            {(
+              [
+                {
+                  key: "adults",
+                  label: "Adults",
+                  hint: "18 years and over",
+                  min: 1,
+                  max: 8,
+                },
+                {
+                  key: "children",
+                  label: "Children",
+                  hint: "Ages 0–17",
+                  min: 0,
+                  max: 4,
+                },
+                {
+                  key: "rooms",
+                  label: "Rooms",
+                  hint: "At least one adult per room",
+                  min: 1,
+                  max: 4,
+                },
+              ] as const
+            ).map((item) => (
+              <div className={s.guestRow} key={item.key}>
+                <span>
+                  <strong>{item.label}</strong>
+                  <small>{item.hint}</small>
+                </span>
+                <div>
+                  <button
+                    className={s.iconButton}
+                    disabled={draft[item.key] <= item.min}
+                    aria-label={`Fewer ${item.label.toLowerCase()}`}
+                    onClick={() => changeGuests(item.key, -1)}
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <strong>{draft[item.key]}</strong>
+                  <button
+                    className={s.iconButton}
+                    disabled={draft[item.key] >= item.max}
+                    aria-label={`More ${item.label.toLowerCase()}`}
+                    onClick={() => changeGuests(item.key, 1)}
+                  >
+                    <Plus size={16} />
                   </button>
                 </div>
-              )}
-
-              {/* ── STEP 2: GUEST DETAILS ── */}
-              {checkoutStep === 2 && (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div>
-                      <label className="font-semibold text-[#1C2733] block mb-1">First Name *</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="John"
-                        value={firstName}
-                        onChange={e => setFirstName(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
-                      />
-                    </div>
-                    <div>
-                      <label className="font-semibold text-[#1C2733] block mb-1">Last Name *</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Doe"
-                        value={lastName}
-                        onChange={e => setLastName(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div>
-                      <label className="font-semibold text-[#1C2733] block mb-1">Email Address *</label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="john.doe@example.com"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
-                      />
-                    </div>
-                    <div>
-                      <label className="font-semibold text-[#1C2733] block mb-1">WhatsApp / Phone *</label>
-                      <div className="flex gap-1.5">
-                        <input
-                          type="text"
-                          value={countryCode}
-                          onChange={e => setCountryCode(e.target.value)}
-                          className="w-16 p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733] text-center"
-                        />
-                        <input
-                          type="tel"
-                          required
-                          placeholder="170 1234567"
-                          value={phone}
-                          onChange={e => setPhone(e.target.value)}
-                          className="flex-1 p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div>
-                      <label className="font-semibold text-[#1C2733] block mb-1">Country of Residence</label>
-                      <select
-                        value={country}
-                        onChange={e => setCountry(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
-                      >
-                        <option value="Germany">Germany</option>
-                        <option value="Italy">Italy</option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="Austria">Austria</option>
-                        <option value="Switzerland">Switzerland</option>
-                        <option value="France">France</option>
-                        <option value="United States">United States</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="font-semibold text-[#1C2733] block mb-1">Estimated Arrival</label>
-                      <select
-                        value={arrivalTime}
-                        onChange={e => setArrivalTime(e.target.value)}
-                        className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-[#1C2733]"
-                      >
-                        <option value="14:00 - 16:00">14:00 – 16:00</option>
-                        <option value="16:00 - 18:00">16:00 – 18:00</option>
-                        <option value="Late Check-in (after 20:00)">Late Check-in (after 20:00)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 pt-2">
-                    <button
-                      onClick={() => setCheckoutStep(1)}
-                      className="px-4 py-2.5 bg-slate-100 text-slate-700 font-semibold text-xs rounded-lg hover:bg-slate-200 cursor-pointer"
-                    >
-                      Back
-                    </button>
-                    <button
-                      onClick={() => setCheckoutStep(3)}
-                      className="flex-1 py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer"
-                    >
-                      Complete & View Voucher →
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* ── STEP 3: VOUCHER & CONFIRMATION ── */}
-              {checkoutStep === 3 && (
-                <div className="space-y-4">
-                  <div className="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-4">
-                    <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                      <div>
-                        <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
-                          Direct Booking Voucher
-                        </span>
-                        <strong className="text-base text-[#1C2733] font-mono">
-                          {bookingRef}
-                        </strong>
-                      </div>
-                      <span className="text-xs font-semibold text-emerald-800 bg-white px-2.5 py-1 rounded border border-slate-200">
-                        Pay on Arrival
-                      </span>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div>
-                        <span className="text-slate-400 block font-medium">Guest</span>
-                        <strong className="text-[#1C2733]">{firstName || 'Guest'} {lastName || ''}</strong>
-                      </div>
-                      <div>
-                        <span className="text-slate-400 block font-medium">Room</span>
-                        <strong className="text-[#1C2733]">{selectedRoom.name}</strong>
-                      </div>
-                      <div>
-                        <span className="text-slate-400 block font-medium">Dates</span>
-                        <strong className="text-[#1C2733]">{checkIn} → {checkOut} ({nights}N)</strong>
-                      </div>
-                      <div>
-                        <span className="text-slate-400 block font-medium">Total Due</span>
-                        <strong className="text-base font-bold text-[#1C2733]">€{calculateTotal(selectedRatePlan.rate)}</strong>
-                      </div>
-                    </div>
-
-                    <div className="pt-2 border-t border-slate-200 text-xs text-slate-500">
-                      Payment is made directly upon check-in. Free cancellation up to 48 hours prior to arrival.
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <button
-                      onClick={handleSendWhatsAppBooking}
-                      className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-                    >
-                      <PhoneCall className="w-4 h-4" />
-                      <span>Send Reservation to Host via WhatsApp</span>
-                    </button>
-                    <p className="text-[11px] text-center text-slate-400">
-                      Opens WhatsApp with your booking details formatted for the host.
-                    </p>
-                  </div>
-
-                  <div className="flex gap-2 pt-1">
-                    <button
-                      onClick={() => setCheckoutStep(2)}
-                      className="px-4 py-2 bg-slate-100 text-slate-600 text-xs font-semibold rounded-lg hover:bg-slate-200 cursor-pointer"
-                    >
-                      Edit Info
-                    </button>
-                    <button
-                      onClick={() => window.print()}
-                      className="flex-1 py-2 bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:bg-slate-50 flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      <Printer className="w-3.5 h-3.5" />
-                      <span>Print Summary</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* ─────────────────────────────────────────────────────────────
-          4. GUEST INQUIRIES CONCIERGE CHAT
-      ────────────────────────────────────────────────────────────── */}
-      <div className="fixed bottom-6 right-6 z-50">
-        {!conciergeOpen ? (
-          <button
-            onClick={() => setConciergeOpen(true)}
-            className="px-4 py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-xl shadow-lg flex items-center gap-2 font-semibold text-xs transition-colors cursor-pointer"
-          >
-            <MessageSquare className="w-4 h-4" />
-            <span>Host Concierge</span>
-          </button>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="w-[340px] sm:w-[360px] bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[460px]"
-          >
-            <div className="bg-[#1C2733] text-white p-4 flex items-center justify-between">
-              <div>
-                <h4 className="text-xs font-bold text-white">Direct Host Concierge</h4>
-                <p className="text-[11px] text-slate-300 m-0">{property.name}</p>
               </div>
-              <button
-                onClick={() => setConciergeOpen(false)}
-                className="text-slate-400 hover:text-white p-1 cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
-              {chatMessages.map((msg, idx) => (
-                <div
-                  key={idx}
-                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+            ))}
+            {draft.childAges.map((age, index) => (
+              <label key={index}>
+                Age of child {index + 1}
+                <select
+                  value={age}
+                  onChange={(e) =>
+                    setDraft({
+                      ...draft,
+                      childAges: draft.childAges.map((value, i) =>
+                        i === index ? Number(e.target.value) : value,
+                      ),
+                    })
+                  }
                 >
-                  <div
-                    className={`max-w-[85%] p-3 rounded-xl leading-relaxed ${
-                      msg.sender === 'user'
-                        ? 'bg-[#1C2733] text-white'
-                        : 'bg-white text-slate-800 border border-slate-200'
-                    }`}
-                  >
-                    {msg.text}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="p-2 bg-white border-t border-slate-100 flex flex-wrap gap-1.5">
-              {[
-                'Free parking?',
-                'Late arrival?',
-                'Breakfast hours?',
-                'Direct booking perks?'
-              ].map((chip, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleAskConcierge(chip)}
-                  className="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded font-medium cursor-pointer transition-colors"
-                >
-                  {chip}
-                </button>
-              ))}
-            </div>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleAskConcierge(inputQuestion);
-              }}
-              className="p-3 bg-white border-t border-slate-100 flex items-center gap-2"
+                  {Array.from({ length: 18 }, (_, i) => (
+                    <option key={i} value={i}>
+                      {i} years
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ))}
+            <button className={s.button} onClick={() => setGuestOpen(false)}>
+              Done <Check size={17} />
+            </button>
+          </div>
+        </DemoDialog>
+      )}
+      {gallery && (
+        <DemoDialog title={gallery.title} onClose={() => setGallery(null)} wide>
+          <div className={s.galleryPhoto}>
+            <Image
+              src={gallery.images[gallery.index]}
+              alt={`${gallery.title} — photo ${gallery.index + 1}`}
+              fill
+              sizes="(max-width: 700px) 95vw, 1000px"
+            />
+          </div>
+          <div className={s.galleryControls}>
+            <button
+              className={s.iconButton}
+              aria-label="Previous photo"
+              onClick={() =>
+                setGallery({
+                  ...gallery,
+                  index:
+                    (gallery.index + gallery.images.length - 1) %
+                    gallery.images.length,
+                })
+              }
             >
-              <input
-                type="text"
-                placeholder="Ask about parking, arrival, breakfast..."
-                value={inputQuestion}
-                onChange={e => setInputQuestion(e.target.value)}
-                className="flex-1 text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-[#1C2733] focus:outline-hidden focus:border-slate-400"
-              />
+              <ChevronLeft size={20} />
+            </button>
+            <span>
+              {gallery.index + 1} / {gallery.images.length} · generated concept
+              photography
+            </span>
+            <button
+              className={s.iconButton}
+              aria-label="Next photo"
+              onClick={() =>
+                setGallery({
+                  ...gallery,
+                  index: (gallery.index + 1) % gallery.images.length,
+                })
+              }
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+          <div className={s.galleryThumbs}>
+            {gallery.images.map((image, index) => (
               <button
-                type="submit"
-                className="p-2.5 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-lg transition-colors cursor-pointer"
+                className={gallery.index === index ? s.selectedThumb : ""}
+                key={image}
+                aria-label={`Show photo ${index + 1}`}
+                aria-pressed={gallery.index === index}
+                onClick={() => setGallery({ ...gallery, index })}
               >
-                <Send className="w-3.5 h-3.5" />
+                <Image src={image} alt="" fill sizes="80px" />
               </button>
-            </form>
-          </motion.div>
-        )}
-      </div>
-
+            ))}
+          </div>
+        </DemoDialog>
+      )}
+      {details && (
+        <DemoDialog title={details.name} onClose={() => setDetails(null)}>
+          <div className={s.dialogBody}>
+            <p>{details.description}</p>
+            <p>
+              <strong>
+                {details.size} · {details.bed} · Up to {details.maxGuests}{" "}
+                guests
+              </strong>
+            </p>
+            <h3>In your room</h3>
+            <div className={s.detailAmenities}>
+              {details.amenities.map((amenity) => (
+                <span key={amenity}>
+                  <Check size={17} />
+                  {amenity}
+                </span>
+              ))}
+            </div>
+            <p>{details.view}</p>
+            <button
+              className={s.button}
+              onClick={() => {
+                setGallery({
+                  images: details.gallery,
+                  title: details.name,
+                  index: 0,
+                });
+                setDetails(null);
+              }}
+            >
+              Explore room photos <Images size={17} />
+            </button>
+          </div>
+        </DemoDialog>
+      )}
+      {booking && (
+        <BookingFlow
+          property={property}
+          room={booking.room}
+          plan={booking.plan}
+          stay={booking.stay}
+          currency={currency}
+          onClose={() => setBooking(null)}
+        />
+      )}
     </div>
   );
 }

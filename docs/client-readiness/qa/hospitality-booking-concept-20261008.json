@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-08",
+  "scope": "Three frontend-only fictional hospitality concepts; no booking backend or payment",
+  "automated": {
+    "tests": "41 passed, 0 failed; includes 4 new booking model tests",
+    "typecheck": "Passed through Next.js production build",
+    "build": "Passed, 22 static pages generated",
+    "lint": "Passed for demo pages, hospitality components and marketing examples",
+    "dateCases": ["impossible calendar date", "past check-in", "reversed stay", "over 30 nights"],
+    "pricingFixture": {"nights": 3, "rooms": 2, "adults": 2, "children": 1, "rateEUR": 120, "roomSubtotalEUR": 720, "roomDiscountEUR": 72, "breakfastEUR": 99, "transferEUR": 35, "lateCheckoutEUR": 50, "taxEUR": 83.20, "totalEUR": 915.20}
+  },
+  "browser": {
+    "environment": "Local production build, Codex in-app browser",
+    "responsive": [
+      {"theme": "coast", "viewportWidth": 360, "documentWidth": 345, "maxRadius": 16},
+      {"theme": "wine", "viewportWidth": 360, "documentWidth": 345, "maxRadius": 16},
+      {"theme": "city", "viewportWidth": 360, "documentWidth": 345, "maxRadius": 16},
+      {"theme": "coast", "viewportWidth": 768, "documentWidth": 753},
+      {"theme": "wine", "viewportWidth": 768, "documentWidth": 753},
+      {"theme": "city", "viewportWidth": 768, "documentWidth": 753},
+      {"theme": "coast", "viewportWidth": 1440, "documentWidth": 1425},
+      {"theme": "wine", "viewportWidth": 1440, "documentWidth": 1425},
+      {"theme": "city", "viewportWidth": 1440, "documentWidth": 1425}
+    ],
+    "flowsPassed": [
+      "Empty dates return a visible validation error instead of checkout",
+      "Calendar selection 20–23 October updates three-night search",
+      "Two adults and one child in one coastal room yield zero results",
+      "Changing to two rooms restores results and doubles base room price",
+      "Breakfast filter reduces four rates to two, price sort puts the courtyard suite first",
+      "USD display shows US$689.70 for a two-room three-night courtyard breakfast stay",
+      "Required guest fields prevent progressing with an empty form",
+      "Example guest details advance to extras",
+      "Invalid promo returns an error; STAY10 discounts rooms only",
+      "Room-only coastal stay with all extras and STAY10 totals EUR508.20 across review and confirmation",
+      "Demo acknowledgment is mandatory before confirming",
+      "Desktop and 360px checkout complete with a DEMO reference and explicit no-reservation/no-email/no-charge copy",
+      "Sample text voucher downloads locally and carries simulation disclosure",
+      "Included breakfast is shown without another charge",
+      "Wine loft breakfast stay opens checkout with EUR495 total",
+      "City studio room-only stay opens checkout with EUR198 total",
+      "Mobile compact quote shows EUR396 and price-details link; dialog width equals scroll width (323px)",
+      "Gallery advances and wraps; detail dialog opens room gallery",
+      "Escape dismisses dialogs; final focus returns to date-calendar trigger and body scroll is restored",
+      "Saved-stay toggle, nearby-place selection, FAQ expansion and scripted assistant respond",
+      "Closing light CTA retains dark readable text; original white WUUS artwork is visible on dark toolbar"
+    ],
+    "consoleErrors": 0,
+    "limitations": ["Reversed-date behavior was confirmed by model tests; browser native date-input automation did not provide a reliable reversed-date fixture.", "No real backend flow was tested or introduced. Inventory, taxes, currency, reviews and photos are demonstration data."]
+  },
+  "media": {"count": 11, "format": "WebP", "source": "Built-in image_gen", "nativeDimensions": "approximately 1672x940–941", "prompts": "../HOSPITALITY-MEDIA-PROMPTS.json"},
+  "screenshots": ["booking-concept-coast-desktop-20261008.png", "booking-concept-wine-desktop-20261008.png", "booking-concept-city-desktop-20261008.png", "booking-concept-coast-mobile-20261008.png", "booking-concept-wine-mobile-20261008.png", "booking-concept-city-mobile-20261008.png", "booking-concept-confirmation-20261008.png", "booking-concept-mobile-confirmation-20261008.png"],
+  "release": {"strategy": "Atomic push to GM-Builder/wuus main and codex/client-readiness, then verify Vercel status and public domain", "verification": "See production screenshot and final delivery report after deployment"}
+}

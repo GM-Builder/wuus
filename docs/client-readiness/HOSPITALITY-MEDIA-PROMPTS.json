@@ -1,0 +1,50 @@
+{
+  "mode": "Built-in image_gen",
+  "generatedAt": "2026-10-08",
+  "assets": [
+    {
+      "path": "public/images/hospitality/booking-concept/coast-terrace.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: luxury independent coastal hotel website hero photograph. Create one professional hospitality architectural photograph, landscape 16:9 full HD or higher, very high detail. A small elegant Mediterranean boutique retreat on the Albanian Riviera: whitewashed stone building, warm sandstone terrace, two understated teak sun loungers with ivory cushions, azure Ionian sea and hazy distant headland, olive tree near the terrace, natural linen and soft shadows, early morning sunshine. A believable inviting actual hotel scene, shot by a professional hotel photographer with a 28mm architectural lens, straight verticals, realistic exposure, natural material detail, refined but accessible. No swimming pool, no people, no lettering, no logos, no watermark, no painted or illustrated effect, no collage. Wide editorial framing with terrace in foreground and building to left, blue water beyond."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/coast-suite.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: coastal boutique hotel room booking photograph. Single landscape 16:9 high resolution professional architectural interior photograph. Mediterranean sea-view king suite in intimate Albanian Riviera stone hotel. King bed clean white linen, oatmeal woven throw, understated timber headboard, limestone accent wall, neutral rug, open French doors reveal small teak furnished balcony and azure sea. Morning light, premium real hotel listing photograph, realistic clean textures and perspective, naturally exposed interior and exterior, no excessive HDR. No people, logos, text, watermark, no illustration, no collage. Frame whole room bed and doors."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/coast-courtyard.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: coastal hotel second room photograph. Single landscape 16:9 Full HD professional hospitality interior photograph. Intimate Mediterranean courtyard suite, Albanian Riviera restored stone inn. Double bed with impeccable white linen and oat throw, pale limestone wall, simple oak nightstands, linen curtains, open window looking into an olive-tree stone courtyard rather than sea, discreet modern walk-in shower glimpse through doorway. Bright soft morning light, professional hotel listing camera, authentic stone and linen detail, straight verticals. Attractive realistic accommodation not a CGI interior. No people, text, watermark, logos, no illustration, no collage."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/wine-estate.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: boutique winery hotel website hero photograph. One landscape 16:9 professional architectural hospitality photograph, Full HD or higher. Historic intimate stone winery estate by Lake Ohrid: chestnut timber pergola, elegant terrace breakfast table set for two with ceramics and linen, olive trees, neatly terraced vines descending toward a still blue lake, distant mountains, restored small stone manor partly visible. Warm late afternoon natural sunlight, premium editorial hotel photography, true stone and timber detail, 28mm lens, straight verticals. Inviting believable accommodation, not an enormous resort. No people, logos, text, watermarks, collage, illustration or watercolor."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/wine-suite.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: boutique vineyard hotel room photo. Single landscape 16:9 Full HD or higher professional interior hospitality photograph. King bed with crisp white linens and olive green throw in restored Lake Ohrid stone estate, exposed chestnut ceiling beams, tasteful limestone walls, warm wood furnishings, double French doors open to balcony with peaceful blue lake and vineyard hillside visible. Discreet ceramic bedside lights, a small desk with a wine bottle and two glasses. Beautiful believable intimate lodging, soft natural afternoon light, editorial architectural photography with straight verticals, true textures, no CGI look. No people, lettering, logos, watermark, illustration or collage."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/wine-loft.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: winery estate spacious loft suite photograph. Single landscape 16:9 high resolution professional hotel interior photograph. Spacious 55-square-metre loft suite above historic wine cellars, warm limestone walls, chestnut beams, super king bed impeccably made with white linen and rust wool throw, lounge with armchair and daybed for third guest, freestanding copper soaking tub visible in open alcove, tall windows facing peaceful courtyard vines. Warm but naturally exposed daylight, elegant genuine hospitality listing photography, straight perspective, fine real linen timber stone metal texture. No people, text, logo, watermark, illustration or collage."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/city-suite.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: urban boutique suites website hero photograph. One landscape 16:9 professional architectural hospitality photograph Full HD or higher. Sophisticated heritage loft hotel living and sleeping space in Sarajevo, warm original brick feature wall and tall arched windows, walnut floor, perfectly made king bed with white linen and muted tobacco throw, refined olive armchair and marble side table with Bosnian coffee tray, daylight and warm bedside lamps, quiet historic neighborhood outside. Professionally styled for a boutique accommodation listing, natural realistic exposure, sharp clean detail, 24mm architectural camera, straight verticals. No people, logos, lettering, watermark, illustration or collage."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/city-studio.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: city boutique guest suite room booking photograph. One landscape 16:9 high resolution professional hospitality interior photo. Compact refined 30-square-metre courtyard studio at heritage Sarajevo accommodation: double bed with white linens and muted olive bedding, oak furnishings, linen blackout curtains, small espresso corner, walk-in shower visible through bathroom doorway, tall window on quiet garden courtyard. Scandinavian meets Balkan heritage, soft daylight, believable attractive independent hotel room, precisely styled but realistic, professional 24mm architectural photography and straight verticals. No people, logos, text, watermark, no illustration, no collage."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/coast-breakfast.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: coastal hotel breakfast and dining photograph. One landscape 16:9 high resolution natural professional hospitality photography, boutique Albanian Riviera limestone courtyard with olive trees, small linen-covered breakfast table for two, understated ceramic plates with fresh figs, bread, yogurt, fruit and coffee, glimpse of blue Ionian sea through stone arch. Professional hotel listing scene, bright morning light, authentic food textures, tasteful restrained styling, realistic documentary photograph, no people, lettering, logos or watermark, no collage, no illustration."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/wine-cellar.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: winery boutique hotel experience gallery photograph. One landscape 16:9 high resolution professional interior architectural photograph of intimate historic wine cellar at small Lake Ohrid stone estate, arched stone vault, aged oak barrels along one side, refined small tasting table with two wine glasses and tasteful simple charcuterie plate, warm natural wood and gentle incandescent lighting, clearly exposed fine stone textures. Inviting premium boutique accommodation marketing photo, realistic not theatrical, true perspective. No people, lettering, branding, watermark, no collage, no illustration."
+    },
+    {
+      "path": "public/images/hospitality/booking-concept/city-lounge.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: urban heritage boutique hotel lounge gallery photograph. One landscape 16:9 high resolution professional hospitality photograph of an intimate guest coffee lounge in restored Sarajevo heritage building, arched tall windows overlooking quiet old-town rooflines, walnut cabinetry, small marble tables, olive upholstered seating, warm old brick walls, copper Bosnian coffee tray, indoor olive tree. Balanced daylight, realistic textures, restrained welcoming premium boutique accommodations listing photo, straight architectural verticals, no people, no logos, no lettering, watermark, illustration or collage."
+    }
+  ]
+}

@@ -4,26 +4,26 @@ import s from "./marketing.module.css";
 const examples = [
   {
     slug: "seaside-guesthouse",
-    image: "guesthouse.webp",
+    image: "booking-concept/coast-terrace.webp",
     title: "Seaside guesthouse",
     idTitle: "Guesthouse tepi laut",
     description:
-      "A photo-led introduction, clear room details and a direct enquiry.",
+      "Coastal photography, room comparison and a complete demo checkout.",
     idDescription:
-      "Foto properti, informasi kamar, dan jalur inquiry yang mudah ditemukan.",
+      "Foto properti, perbandingan kamar, dan checkout booking simulasi.",
   },
   {
     slug: "lakeside-wine-estate",
-    image: "savoria-hero-banner.jpg",
+    image: "booking-concept/wine-estate.webp",
     title: "Lakeside wine estate",
     idTitle: "Penginapan di kebun anggur",
-    description: "Rooms, the estate story and local experiences in one place.",
+    description: "Heritage rooms, local experiences and a stay you can customize.",
     idDescription:
       "Kamar, cerita properti, dan pengalaman sekitar dalam satu website.",
   },
   {
     slug: "city-apartments",
-    image: "urban-loft.jpg",
+    image: "booking-concept/city-suite.webp",
     title: "City apartments",
     idTitle: "Apartemen kota",
     description:
@@ -85,11 +85,11 @@ export function WebsitePreview({
       </div>
       <div className={s.productImage}>
         <Image
-          src="/images/hospitality/guesthouse.webp"
+          src="/images/hospitality/booking-concept/coast-terrace.webp"
           alt={
             en
-              ? "Coastal guesthouse courtyard used in a fictional website concept"
-              : "Halaman guesthouse dalam konsep website fiktif"
+              ? "Generated coastal terrace in a fictional hospitality website concept"
+              : "Foto teras tepi laut hasil generasi dalam konsep website fiktif"
           }
           fill
           sizes="(max-width: 900px) 90vw, (max-width: 1300px) 65vw, 1000px"
@@ -110,8 +110,8 @@ export function WebsitePreview({
           </strong>
           <p>
             {en
-              ? "Room details, a photo gallery and a direct enquiry."
-              : "Informasi kamar, galeri foto, dan inquiry langsung."}
+              ? "Room details, a photo gallery and an interactive booking demo."
+              : "Informasi kamar, galeri foto, dan demo booking interaktif."}
           </p>
         </div>
         <Link

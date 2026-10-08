@@ -1,5 +1,7 @@
 # WUUS — acuan kesiapan klien pertama
 
+**Update konsep frontend 8 Oktober:** [Hospitality booking concept](HOSPITALITY-BOOKING-CONCEPT.md) mendefinisikan tiga demo baru, alur booking simulasi, batas produksi, dan penerimaan. Foto baru serta prompt generasinya: [media prompts](HOSPITALITY-MEDIA-PROMPTS.json). Demo booking tidak membuat reservasi atau pembayaran nyata.
+
 **Status terkini:** owner mengonfirmasi email masuk dan admin menampilkan kedua inquiry uji. MCP mengonfirmasi perubahan status hospitality tersimpan. Alur dasar inquiry sampai tindak lanjut owner lulus untuk fixture ini. Langkah berikutnya: [rencana klien pertama](FIRST-CLIENT-ACTION-PLAN.md); catatan bertanggal di bawah adalah riwayat, bukan semua kondisi terkini.
 
 Versi 3 · 8 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.

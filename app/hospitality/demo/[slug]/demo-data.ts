@@ -78,8 +78,8 @@ export const propertiesData: Record<string, PropertyData> = {
     coords: '39.8617° N, 19.9822° E',
     motto: 'A quiet stone haven above the turquoise Ionian Sea',
     tagline: 'Handcrafted limestone architecture, morning sea breeze, and homemade courtyard artisan breakfast.',
-    heroImage: '/images/hospitality/artisan-ionian-suite.jpg',
-    atmosphereImage: '/images/hospitality/guesthouse.webp',
+    heroImage: '/images/hospitality/booking-concept/coast-terrace.webp',
+    atmosphereImage: '/images/hospitality/booking-concept/coast-breakfast.webp',
     startingRate: 120,
     otaStartingRate: 145,
     directPerk: 'Complimentary chilled local reserve white wine + flexible late check-in',
@@ -98,21 +98,20 @@ export const propertiesData: Record<string, PropertyData> = {
         size: '48 m²',
         bed: 'King Bed (180×200cm)',
         maxGuests: 2,
-        view: 'Turquoise Ionian Sea & Private Pool Terrace',
-        image: '/images/hospitality/artisan-ionian-suite.jpg',
+        view: 'Turquoise Ionian Sea & Private Terrace',
+        image: '/images/hospitality/booking-concept/coast-suite.webp',
         gallery: [
-          '/images/hospitality/artisan-ionian-suite.jpg',
-          '/images/hospitality/stone-suite-main.jpg',
-          '/images/hospitality/stone-suite-breakfast.jpg'
+          '/images/hospitality/booking-concept/coast-suite.webp',
+          '/images/hospitality/booking-concept/coast-terrace.webp'
         ],
         perk: 'Private Terrace, Artisan Breakfast & Airport Transfers',
-        amenities: ['Private Sun Terrace', 'Infinity Pool Access', 'King Bed', 'Ionian Sea View', 'High-speed Wi-Fi', 'Espresso Machine', 'Air Conditioning'],
+        amenities: ['Private Sun Terrace', 'Private Balcony', 'King Bed', 'Ionian Sea View', 'High-speed Wi-Fi', 'Espresso Machine', 'Air Conditioning'],
         description: 'A sanctuary of sophisticated calm overlooking the turquoise Ionian. Features a private terrace, locally sourced stone, and handcrafted olive wood details.',
         ratePlans: [
           {
             id: 'ionian-standard',
             name: 'Room Only Direct',
-            description: 'Direct rate with flexible arrival and pool terrace access.',
+            description: 'A flexible room-only stay with a private sea-view terrace.',
             rate: 120,
             otaRate: 145,
             breakfastIncluded: false,
@@ -126,7 +125,7 @@ export const propertiesData: Record<string, PropertyData> = {
           {
             id: 'ionian-vip',
             name: 'Signature Stay & Breakfast',
-            description: 'Includes courtyard breakfast, welcome reserve wine, and flexible checkout.',
+            description: 'Includes courtyard breakfast and a welcome bottle of local wine.',
             rate: 140,
             otaRate: 175,
             breakfastIncluded: true,
@@ -151,20 +150,19 @@ export const propertiesData: Record<string, PropertyData> = {
         bed: 'King Bed (180×200cm)',
         maxGuests: 2,
         view: 'Olive Garden & Private Patio',
-        image: '/images/hospitality/stone-suite-main.jpg',
+        image: '/images/hospitality/booking-concept/coast-courtyard.webp',
         gallery: [
-          '/images/hospitality/stone-suite-main.jpg',
-          '/images/hospitality/stone-suite-breakfast.jpg',
-          '/images/hospitality/guesthouse.webp'
+          '/images/hospitality/booking-concept/coast-courtyard.webp',
+          '/images/hospitality/booking-concept/coast-terrace.webp'
         ],
         perk: 'Artisan Breakfast & Welcome Chilled Wine',
         amenities: ['High-speed Wi-Fi', 'Artisan Breakfast', 'Rain Shower', 'Espresso Bar', 'Private Patio', 'Eco Toiletries', 'Air Conditioning'],
-        description: 'Native white limestone walls keep the room naturally cool under the Mediterranean sun. Large arched window overlooking centuries-old olive trees and azure sea.',
+        description: 'Native white limestone walls keep the room naturally cool under the Mediterranean sun. Large window overlooking the peaceful olive courtyard.',
         ratePlans: [
           {
             id: 'stone-standard',
             name: 'Room Only Direct',
-            description: 'Room-only flexibility with direct booking rate defense.',
+            description: 'A flexible room-only stay, with space to make the day your own.',
             rate: 85,
             otaRate: 105,
             breakfastIncluded: false,
@@ -238,8 +236,8 @@ export const propertiesData: Record<string, PropertyData> = {
     coords: '41.1172° N, 20.8016° E',
     motto: 'Heritage suites overlooking ancient waters and terraced vineyards',
     tagline: 'Historic winery estate concept with panoramic lake views and terrace suites.',
-    heroImage: '/images/hospitality/savoria-hero-banner.jpg',
-    atmosphereImage: '/images/hospitality/savoria-wine-estate.jpg',
+    heroImage: '/images/hospitality/booking-concept/wine-estate.webp',
+    atmosphereImage: '/images/hospitality/booking-concept/wine-cellar.webp',
     startingRate: 110,
     otaStartingRate: 140,
     directPerk: 'Complimentary cellar tour + welcome bottle of Reserve Vranec wine',
@@ -259,11 +257,10 @@ export const propertiesData: Record<string, PropertyData> = {
         bed: 'King Bed (180×200cm)',
         maxGuests: 2,
         view: 'Lake Ohrid & Terraced Vineyards',
-        image: '/images/hospitality/savoria-olive-bedroom.jpg',
+        image: '/images/hospitality/booking-concept/wine-suite.webp',
         gallery: [
-          '/images/hospitality/savoria-olive-bedroom.jpg',
-          '/images/hospitality/savoria-olive-view.jpg',
-          '/images/hospitality/savoria-hero-banner.jpg'
+          '/images/hospitality/booking-concept/wine-suite.webp',
+          '/images/hospitality/booking-concept/wine-estate.webp'
         ],
         perk: 'Direct French Door Vineyard Terrace, Reserve Wine & Breakfast',
         amenities: ['Private French Door Balcony', 'Chestnut Timber Ceilings', 'Vineyard Breakfast', 'Wine Mini-cellar', 'Fast Wi-Fi', 'Plush Bathrobes'],
@@ -286,7 +283,7 @@ export const propertiesData: Record<string, PropertyData> = {
           {
             id: 'olive-vip',
             name: 'Vineyard Bed & Breakfast Experience',
-            description: 'Includes organic farm breakfast and private cellar tasting tour.',
+            description: 'Includes organic farm breakfast and a welcome bottle of estate wine.',
             rate: 125,
             otaRate: 155,
             breakfastIncluded: true,
@@ -311,11 +308,10 @@ export const propertiesData: Record<string, PropertyData> = {
         bed: 'Super King Bed (200×200cm)',
         maxGuests: 3,
         view: 'Historic Winery Courtyard & Cellars',
-        image: '/images/hospitality/palazzo-suites.jpg',
+        image: '/images/hospitality/booking-concept/wine-loft.webp',
         gallery: [
-          '/images/hospitality/palazzo-suites.jpg',
-          '/images/hospitality/savoria-hero-banner.jpg',
-          '/images/hospitality/savoria-wine-estate.jpg'
+          '/images/hospitality/booking-concept/wine-loft.webp',
+          '/images/hospitality/booking-concept/wine-estate.webp'
         ],
         perk: 'Private Barrel Room Tasting & Late Checkout',
         amenities: ['Freestanding Copper Tub', 'Private Wine Tasting', 'Lounge Seating', 'Super King Bed', 'Garden Access', 'Espresso Bar'],
@@ -324,7 +320,7 @@ export const propertiesData: Record<string, PropertyData> = {
           {
             id: 'cellar-standard',
             name: 'Room Only Direct',
-            description: 'Full loft suite access with direct booking privilege.',
+            description: 'A spacious loft stay with courtyard views.',
             rate: 135,
             otaRate: 165,
             breakfastIncluded: false,
@@ -338,7 +334,7 @@ export const propertiesData: Record<string, PropertyData> = {
           {
             id: 'cellar-vip',
             name: 'Cellar Master Experience',
-            description: 'The ultimate winery escape with private barrel tasting and vineyard breakfast.',
+            description: 'A spacious loft stay with vineyard breakfast and a welcome bottle of estate wine.',
             rate: 150,
             otaRate: 185,
             breakfastIncluded: true,
@@ -397,8 +393,8 @@ export const propertiesData: Record<string, PropertyData> = {
     coords: '43.8594° N, 18.4318° E',
     motto: 'Urban Heritage Luxury in Sarajevo',
     tagline: 'Exposed Austrian-era brick, high-speed fiber WiFi, and seamless contactless keyless entry.',
-    heroImage: '/images/hospitality/sarajevo-king-suite.jpg',
-    atmosphereImage: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=85',
+    heroImage: '/images/hospitality/booking-concept/city-suite.webp',
+    atmosphereImage: '/images/hospitality/booking-concept/city-lounge.webp',
     startingRate: 210,
     otaStartingRate: 260,
     directPerk: '24/7 keybox arrival + welcome Bosnian coffee set & neighborhood guide',
@@ -418,10 +414,10 @@ export const propertiesData: Record<string, PropertyData> = {
         bed: 'King Bed (180×200cm)',
         maxGuests: 2,
         view: 'Old Town Historic Quarter View',
-        image: '/images/hospitality/sarajevo-king-suite.jpg',
+        image: '/images/hospitality/booking-concept/city-suite.webp',
         gallery: [
-          '/images/hospitality/sarajevo-king-suite.jpg',
-          'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=85'
+          '/images/hospitality/booking-concept/city-suite.webp',
+          '/images/hospitality/booking-concept/city-lounge.webp'
         ],
         perk: 'Transparent Direct Rate, 24/7 Keyless Check-in, Coffee Set & Fast Fiber',
         amenities: ['King Bed', 'Wi-Fi', 'Espresso', 'Balcony', '40 SQM', 'AC'],
@@ -469,10 +465,10 @@ export const propertiesData: Record<string, PropertyData> = {
         bed: 'Double Bed (150×200cm)',
         maxGuests: 2,
         view: 'Quiet Inner Courtyard Garden',
-        image: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=85',
+        image: '/images/hospitality/booking-concept/city-studio.webp',
         gallery: [
-          'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=85',
-          'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=85'
+          '/images/hospitality/booking-concept/city-studio.webp',
+          '/images/hospitality/booking-concept/city-lounge.webp'
         ],
         perk: 'Peaceful Courtyard, Neighborhood Map & Espresso',
         amenities: ['Quiet Garden View', 'Walk-in Rain Shower', 'Espresso Bar', 'Fiber Wi-Fi', 'Keyless Access', 'Blackout Blinds'],
