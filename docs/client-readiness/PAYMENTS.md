@@ -1,6 +1,6 @@
 # Pembayaran lintas negara WUUS — 8 Oktober 2026
 
-Rekomendasi untuk kondisi owner solo, anggaran awal Rp0: **Wise milik klien → rekening bank Indonesia owner** sebagai opsi transfer awal. **PayPal Invoice** menjadi alternatif ketika klien memilih tautan/kartu atau tidak ingin memakai Wise. Ini keputusan operasional berdasarkan biaya awal dan kebutuhan cash flow; nama bank, rekening, provider account serta rute aktual belum diverifikasi. Belum ada instruksi pembayaran nyata yang diterbitkan.
+Rekomendasi untuk kondisi owner solo, anggaran awal Rp0: **Wise milik klien → rekening BRI owner dalam IDR** sebagai opsi transfer awal; **Bank Jago menjadi cadangan**. Owner menyatakan memiliki BRI, GoPay dan Bank Jago pada 8 Oktober 2026. **PayPal Invoice** menjadi alternatif ketika klien memilih tautan/kartu atau tidak ingin memakai Wise. Nama layanan telah dikonfirmasi owner; detail/ownership rekening, provider account serta rute transaksi aktual belum diverifikasi. Belum ada instruksi pembayaran nyata yang diterbitkan.
 
 ## Pilihan dan alasan
 
@@ -11,13 +11,25 @@ Rekomendasi untuk kondisi owner solo, anggaran awal Rp0: **Wise milik klien → 
 
 Wise mendukung transfer IDR ke rekening individu/bisnis Indonesia. Wise juga menjelaskan bahwa pembayaran ke bank penerima tidak membutuhkan Wise account penerima; ini berbeda dari memiliki balance/IBAN/SEPA account. Opsi pengirim bergantung negara, currency dan nominal. [IDR guide](https://wise.com/help/articles/2932330/guide-to-idr-transfers), [sending money](https://wise.com/help/articles/86BXb0psaAyZIpMWemqFV/sending-money-with-wise), [recipient account explanation](https://wise.com/us/blog/can-i-open-a-joint-account-wise).
 
+## Rekening yang digunakan
+
+| Layanan milik owner | Peran awal | Bukti dukungan dan batas |
+| --- | --- | --- |
+| BRI | Rekening penerimaan utama untuk DP/pelunasan via Wise dalam IDR | Wise menyediakan rute transfer ke BRI; status rekening, nama payee dan quote negara/currency klien tetap dicek sebelum invoice diterbitkan |
+| Bank Jago | Rekening cadangan bila diperlukan; satu invoice hanya memakai satu rekening aktif | Jago menjelaskan transfer Wise dikonversi dan masuk ke Kantong IDR; gunakan nomor Kantong IDR yang benar, bukan nomor kartu atau nomor wallet |
+| GoPay (dompet elektronik) | Pembayaran/pengeluaran domestik; belum dijadikan instruksi invoice luar negeri | Wise mendukung payout GoPay, tetapi batas transfer wallet serta batas saldo/transaksi akun perlu dicek; belum diketahui apakah akun owner terverifikasi |
+
+Dukungan umum di atas diverifikasi dari [Wise ke BRI](https://wise.com/id/send-money/send-money-to-indonesia/bri), [FAQ Jago menerima dana luar negeri](https://www.jago.com/id/jago/support/faq/adding-money-to-jago/from-overseas/how-to-receive-money-from-abroad) dan [Wise IDR/wallet limits](https://wise.com/help/articles/2932330/guide-to-idr-transfers), diperiksa 8 Oktober 2026. Memakai BRI sebagai utama dan Jago sebagai cadangan adalah keputusan operasional agar instruksi invoice konsisten, bukan klaim satu bank lebih cepat atau lebih murah. Tidak perlu membuka rekening baru atau membuat integrasi pembayaran.
+
+Nama bank sudah cukup untuk tahap ini. Owner mengecek rekening BRI aktif, nama pemilik sesuai identitas legal dan akses mutasi tersedia; nomor rekening disimpan pada invoice privat. Jika ingin beralih ke Jago, revisi instruksi hanya setelah memastikan tidak ada pembayaran ke BRI yang sedang diproses. Dukungan umum bukan bukti rekening owner telah berhasil menerima transfer Wise.
+
 PayPal Invoice tidak mengenakan setup/monthly fee untuk fitur invoice; fee dikenakan saat pembayaran diterima. Pembayaran kartu tanpa PayPal account tersedia pada alur tertentu, dengan variasi market/fitur. Jangan menjanjikannya pasti tersedia untuk setiap client sebelum preview checkout yang sebenarnya. [PayPal Indonesia invoice](https://www.paypal.com/id/business/accept-payments/invoice), [paying an invoice](https://www.paypal.com/id/cshelp/article/how-do-i-pay-a-money-request-or-invoice-help316).
 
 PayPal dapat menahan pembayaran awal penjual baru sampai 21 hari. Karena DP akan membiayai pekerjaan, invoice berstatus dibayar tetapi uang held/pending belum menjadi dana operasional yang bisa dibelanjakan. Jangan meminta klien membayar ulang hanya karena provider menahan uang. Jangan menandai jasa belum selesai sebagai completed untuk mempercepat hold. [PayPal hold guidance](https://www.paypal.com/id/cshelp/article/rekening-paypal-baru-%E2%80%93-pembayaran-ditahan-dan-mengakses-dana-anda-dengan-lebih-cepat-help848).
 
 ## Langkah owner untuk opsi transfer awal
 
-**Owner tidak perlu mendaftar Wise untuk menerima transfer langsung ke rekening bank Indonesia.** Klien memakai akun Wise untuk mengirim; owner menyiapkan rekening dan instruksi invoice privat. Pendaftaran owner baru relevan bila memilih fitur akun Wise sendiri, yang ketersediaannya tidak diasumsikan. Pertanyaan owner yang masih diperlukan sekarang hanya **nama bank Indonesia yang akan digunakan**, bukan nomor rekening atau saldo di chat. [Recipient account explanation](https://wise.com/us/blog/can-i-open-a-joint-account-wise).
+**Owner tidak perlu mendaftar Wise untuk menerima transfer langsung ke rekening bank Indonesia.** Klien memakai akun Wise untuk mengirim; owner menyiapkan rekening BRI dan instruksi invoice privat, dengan Jago sebagai cadangan. Pendaftaran owner baru relevan bila memilih fitur akun Wise sendiri, yang ketersediaannya tidak diasumsikan. Nama bank sudah diberikan; nomor rekening/saldo tidak diminta di chat. [Recipient account explanation](https://wise.com/us/blog/can-i-open-a-joint-account-wise).
 
 1. Pilih rekening Indonesia atas nama payee legal yang benar; pastikan bank mengizinkan penggunaan yang dimaksud. Isi bank/payee/account number pada invoice **privat**, bukan source website, chat atau Git. Nama merek WUUS tidak menggantikan nama pemilik rekening.
 2. Sebelum DP, pilih route sesuai negara/currency client dan bank. Client mengecek quote transfer di Wise; bila route tidak tersedia, pilih alternatif yang telah diverifikasi. Tidak menjanjikan satu fee atau waktu tiba untuk semua negara.

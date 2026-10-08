@@ -17,7 +17,7 @@ Settlement currency and agreed conversion/fee treatment: ____.
 Payment instruction verification reference/date: ____.
 
 Selected method (one active instruction per invoice): ____.
-For Wise→bank: verified legal payee/bank/account details provided privately; recipient currency IDR; agreed recipient amount ____; FX quote source/time ____; valid until ____.
+For Wise→bank: default receiving bank BRI (Bank Rakyat Indonesia); Bank Jago only if selected as the replacement before issuing instructions. Verified legal payee/bank/account details provided privately; recipient currency IDR; agreed recipient amount ____; FX quote source/time ____; valid until ____.
 For PayPal: verified commercial invoice link ____; gross invoice currency ____; supplier fee treatment ____; held/pending funds handled under the agreed cleared-deposit schedule.
 Method change cancels/replaces the old payable instruction only after checking no payment is pending. See [PAYMENTS.md](../PAYMENTS.md).
 

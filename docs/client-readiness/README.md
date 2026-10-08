@@ -4,7 +4,7 @@ Versi 3 · 8 Oktober 2026 · Owner: Faisal · Pelaksana teknis: Codex.
 
 Tujuan: menerima pemasukan pertama dari jasa website dengan scope terkendali, biaya dibayar dari deposit, dan proses yang bisa dijalankan satu orang. Pendapatan saat ini **0**, anggaran akuisisi **Rp0**. Target pendapatan adalah sasaran, bukan prediksi atau jaminan.
 
-Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, penerima notifikasi `admin@webuntukusaha.com`. Kode dan recipient lokal diperbarui; deployment, mailbox/alias dan actual inbox receipt belum diverifikasi. Opsi transfer awal Wise langsung ke bank IDR tidak membutuhkan akun Wise owner. Informasi berikutnya: nama bank yang akan digunakan; detail rekening hanya pada invoice privat.
+Keputusan owner 8 Oktober: kontak publik `hallo@webuntukusaha.com`, penerima notifikasi `admin@webuntukusaha.com`. Kode dan recipient lokal diperbarui; deployment, mailbox/alias dan actual inbox receipt belum diverifikasi. Owner memiliki BRI, Bank Jago dan GoPay. Alur awal: klien memakai Wise → BRI IDR; Jago cadangan, GoPay untuk domestik. Akun Wise owner tidak diperlukan; detail/ownership rekening dan rute transaksi belum verified, nomor rekening hanya pada invoice privat.
 
 Urutan baca dan kerja:
 
