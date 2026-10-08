@@ -148,7 +148,8 @@ export default function Home() {
               Anda berhubungan langsung dengan pembuat website. Materi, batas
               revisi dan biaya layanan pihak ketiga dijelaskan sejak awal.
             </p>
-            <div className={s.processIllustration} aria-hidden="true" />
+            <div className={s.processPhoto} aria-hidden="true" />
+            <p className={s.storyCaption}>Foto ilustratif dibuat dengan AI.</p>
           </div>
           <ol className={s.steps}>
             {steps.map(([title, body], index) => (
@@ -235,7 +236,10 @@ export default function Home() {
                 hallo@webuntukusaha.com · Jakarta, Indonesia
               </p>
             </div>
-            <div className={s.needsIllustration} aria-hidden="true" />
+            <div className={s.needsVisual}>
+              <div className={s.needsPhoto} aria-hidden="true" />
+              <p className={s.storyCaption}>Foto ilustratif dibuat dengan AI.</p>
+            </div>
           </div>
         </section>
       </main>

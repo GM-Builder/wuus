@@ -1,5 +1,7 @@
 # Ilustrasi cerita WUUS — 8 Oktober 2026
 
+Catatan historis: ilustrasi v1 ini sudah digantikan foto profesional v2 atas permintaan owner. Lihat `GENERATED-PROFESSIONAL-PHOTOS.md` untuk aset aktif, prompt dan ukuran export.
+
 Mode: built-in imagegen. Dua ilustrasi baru dengan karakter fiktif dibuat dan diperiksa secara visual; bukan foto owner, tim WUUS atau klien nyata. Ilustrasi dekoratif dipasang sebagai CSS background pada area terpisah dari teks agar tidak mengganggu keterbacaan. Tidak ada nama pribadi atau logo baru di dalam gambar.
 
 ## Aset dan penempatan

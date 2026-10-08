@@ -74,8 +74,19 @@ Tidak mengirim inquiry/email baru ke produksi dan tidak menjalankan SQL produksi
 
 ## Iterasi visual kelima — ilustrasi cerita dengan karakter manusia
 
+Catatan historis: ilustrasi cat air pada iterasi ini digantikan foto pada iterasi keenam di bawah.
+
 - Dua ilustrasi realistis bergaya editorial dibuat dengan built-in imagegen: diskusi layout untuk How we work/Cara kerja pada kedua bahasa, dan pemilik usaha menjelaskan produknya untuk Mulai dari kebutuhan Anda pada halaman Indonesia. Karakter fiktif, bukan foto owner, tim atau klien nyata. Prompt final dan lokasi aset: `GENERATED-STORY-ILLUSTRATIONS.md`.
 - Ilustrasi proses mengisi ruang di bawah pengantar tanpa menimpa empat langkah. Kontak Indonesia memakai dua kolom pada desktop, kemudian ditumpuk pada mobile. Ilustrasi kebutuhan menyatu dengan latar biru melalui tepian lembut. Teks dan kedua tombol kontak tetap berupa elemen HTML yang terpisah dari artwork.
 - PNG sumber 1536 × 1024 diekspor menjadi WebP 1200 × 800 untuk desktop dan 720 × 480 untuk mobile. Aset proses sekitar 101/37 KB; kebutuhan sekitar 74/28 KB. Tidak upscale, tidak mengubah gambar yang sudah disetujui, tidak menambah dependency atau JavaScript klien. Elemen dekoratif memakai `aria-hidden` dan `pointer-events: none`.
 - Build produksi, TypeScript dan ESLint pada kedua halaman yang diubah lulus. Delapan pemeriksaan browser pada `/` dan `/hospitality`, lebar 360/768/1440/3840 px, memastikan tidak ada overflow, radius maksimal 16 px, satu H1, empat langkah, tiga referensi logo asli dan pemilihan background mobile/desktop yang benar. Kontak email dan WhatsApp tetap tepat. Visual proses dan kebutuhan diperiksa pada desktop/mobile; console tidak mencatat error/warning. Bukti: `qa/story-illustrations-responsive-20261008.json`.
 - Inquiry, opsi proposal, admin, API, database, dan notifikasi tidak diubah. Tidak mengirim inquiry/email atau menjalankan SQL produksi.
+
+## Iterasi visual keenam — foto freelancer dan pemilik bisnis
+
+- Dua adegan baru dibuat dengan built-in imagegen bergaya fotografi profesional: review website bersama freelancer/businessman, dan konsultasi kebutuhan usaha. Menggantikan ilustrasi v1 pada proses Inggris/Indonesia serta kontak Indonesia. Foto penuh 16:9 dengan latar ruang kerja; efek mask/cutout cat air dihapus.
+- File desktop final 1920 × 1080 sekitar 189/167 KB; versi mobile 960 × 540 sekitar 59/55 KB. Sumber generator aktual 1672 × 941 diperbesar ringan untuk export Full HD. Tidak mengklaim native Full HD atau tambahan detail dari resize. Prompt, sumber, dimensi dan lokasi final: `GENERATED-PROFESSIONAL-PHOTOS.md`.
+- Caption singkat menyatakan adegan dibuat dengan AI agar foto fiktif tidak dipersepsikan sebagai owner atau klien nyata. Model memakai pakaian smart casual/business; bukan portrait identitas studio. Logo WUUS dan avatar studio tetap asli.
+- Radius foto dan komponen lain tetap maksimal 16 px. Semua halaman tetap Server Components dengan aset CSS; tidak menambah dependency atau JavaScript klien. Empat langkah, kontak dan semua form/API/admin tidak diubah.
+- Build produksi/TypeScript dan ESLint terhadap kedua halaman lulus. Delapan pemeriksaan responsif pada `/` dan `/hospitality`, lebar 360/768/1440/3840 px, memastikan tidak ada overflow, satu H1, empat langkah, tiga referensi logo asli, aspect ratio 16:9 dan background mobile/desktop yang tepat. Desktop dan mobile diperiksa secara visual; console tidak mencatat error/warning. Bukti: `qa/professional-photos-responsive-20261008.json`.
+- Tidak mengirim inquiry/email atau menjalankan SQL produksi.

@@ -1254,13 +1254,16 @@
   background-image: url("/graphics/card-contour.svg");
   background-size: cover;
 }
-.processIllustration {
+.processPhoto {
   width: 100%;
   max-width: 520px;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   margin-top: 32px;
-  background: url("/images/stories/process-collaboration-v1.webp") center / contain
+  background: url("/images/stories/process-consultation-v2.webp") center / cover
     no-repeat;
+  border: 1px solid #1c2e431a;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px -24px #14243866;
   pointer-events: none;
 }
 .needsSection {
@@ -1278,17 +1281,26 @@
 .needsStory .sectionHead {
   margin-bottom: 28px;
 }
-.needsIllustration {
+.needsVisual {
   width: 100%;
   max-width: 560px;
-  aspect-ratio: 3 / 2;
-  background: url("/images/stories/business-conversation-v1.webp") center / contain
+}
+.needsPhoto {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: url("/images/stories/business-consultation-v2.webp") center / cover
     no-repeat;
-  mask-image:
-    linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent),
-    linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
-  mask-composite: intersect;
+  border: 1px solid #1c2e431a;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px -24px #14243866;
   pointer-events: none;
+}
+.storyCaption,
+.split .storyCaption {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
 }
 @media (max-width: 1100px) {
   .salesHero {
@@ -1322,8 +1334,8 @@
   .needsStory {
     gap: 32px;
   }
-  .processIllustration,
-  .needsIllustration {
+  .processPhoto,
+  .needsVisual {
     margin-inline: auto;
   }
   .heroIntro {
@@ -1440,12 +1452,12 @@
       linear-gradient(100deg, #14243899, #14243866),
       url("/images/surfaces/navy-glass-v1-mobile.webp");
   }
-  .processIllustration {
-    background-image: url("/images/stories/process-collaboration-v1-mobile.webp");
+  .processPhoto {
+    background-image: url("/images/stories/process-consultation-v2-mobile.webp");
     margin-top: 24px;
   }
-  .needsIllustration {
-    background-image: url("/images/stories/business-conversation-v1-mobile.webp");
+  .needsPhoto {
+    background-image: url("/images/stories/business-consultation-v2-mobile.webp");
   }
   .exampleImage {
     aspect-ratio: 3 / 2;

@@ -137,7 +137,10 @@ export default function HospitalityPage() {
               progress through email and a private preview, at a time that suits
               your property.
             </p>
-            <div className={s.processIllustration} aria-hidden="true" />
+            <div className={s.processPhoto} aria-hidden="true" />
+            <p className={s.storyCaption}>
+              Illustrative scene generated with AI.
+            </p>
           </div>
           <ol className={s.steps}>
             {steps.map(([title, body], index) => (

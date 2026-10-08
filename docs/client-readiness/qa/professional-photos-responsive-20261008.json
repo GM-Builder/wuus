@@ -1,0 +1,176 @@
+{
+  "date": "2026-10-08",
+  "target": "local production build on 127.0.0.1:3110",
+  "checks": [
+    {
+      "aiCaption": true,
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-consultation-v2-mobile.webp\")",
+      "needsMask": "none",
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2-mobile.webp\")",
+      "processPointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 345,
+      "steps": 4,
+      "viewport": 360
+    },
+    {
+      "aiCaption": true,
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "needsMask": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2-mobile.webp\")",
+      "processPointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 345,
+      "steps": 4,
+      "viewport": 360
+    },
+    {
+      "aiCaption": true,
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-consultation-v2.webp\")",
+      "needsMask": "none",
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2.webp\")",
+      "processPointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 753,
+      "steps": 4,
+      "viewport": 768
+    },
+    {
+      "aiCaption": true,
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "needsMask": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2.webp\")",
+      "processPointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 753,
+      "steps": 4,
+      "viewport": 768
+    },
+    {
+      "aiCaption": true,
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-consultation-v2.webp\")",
+      "needsMask": "none",
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2.webp\")",
+      "processPointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 1425,
+      "steps": 4,
+      "viewport": 1440
+    },
+    {
+      "aiCaption": true,
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "needsMask": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2.webp\")",
+      "processPointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 1425,
+      "steps": 4,
+      "viewport": 1440
+    },
+    {
+      "aiCaption": true,
+      "contactLinks": [
+        "mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha",
+        "https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
+      ],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": "url(\"http://127.0.0.1:3110/images/stories/business-consultation-v2.webp\")",
+      "needsMask": "none",
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2.webp\")",
+      "processPointerEvents": "none",
+      "route": "/",
+      "scrollWidth": 3825,
+      "steps": 4,
+      "viewport": 3840
+    },
+    {
+      "aiCaption": true,
+      "contactLinks": [],
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "needsBackground": null,
+      "needsMask": null,
+      "overflowElements": [],
+      "privateName": false,
+      "processAspectRatio": "16 / 9",
+      "processBackground": "url(\"http://127.0.0.1:3110/images/stories/process-consultation-v2.webp\")",
+      "processPointerEvents": "none",
+      "route": "/hospitality",
+      "scrollWidth": 3825,
+      "steps": 4,
+      "viewport": 3840
+    }
+  ],
+  "sourceDimensions": [
+    1672,
+    941
+  ],
+  "desktopExport": [
+    1920,
+    1080
+  ],
+  "desktopUpscaled": true,
+  "mobileExport": [
+    960,
+    540
+  ],
+  "noProductionInquiryOrEmailSent": true
+}
