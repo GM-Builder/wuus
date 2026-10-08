@@ -6,7 +6,7 @@ Status: TODO = belum mulai; LOCAL = implementasi + verifikasi lokal selesai; PAR
 | --- | --- | --- | --- | --- |
 | W01 | P0 | API inquiry, validation, consent, retry | A01–A05 | LOCAL |
 | W02 | P0 | SQL RLS + rate limit persisten | A06 | PARTIAL; LOCAL + owner-reported 24 PASS schema/grants; runtime project/REST/concurrency ACCOUNT |
-| W03 | P0 | Auth admin server + pipeline | A07–A08 | LOCAL; Auth asli ACCOUNT |
+| W03 | P0 | Auth admin server + pipeline | A07–A08 | PARTIAL; LOCAL + screenshot admin Email user dibuat; login/UUID allowlist/runtime ACCOUNT |
 | W04 | P0 | Pause semua API builder sebelum side effect | A09 | LOCAL |
 | W05 | P0 | Build tanpa perubahan DB | A10 | LOCAL |
 | W06 | P0 | Dependencies berisiko tinggi dan build | A11 | PARTIAL; kedua runtime audit 0; builder full audit 0; website 5 dev-chain advisory tanpa patched braces; website full lint 0 error |
@@ -24,10 +24,10 @@ Status: TODO = belum mulai; LOCAL = implementasi + verifikasi lokal selesai; PAR
 | W18 | P0 | www redirect dan penelusuran akun produksi | A22 | PARTIAL; LOCAL redirect; screenshot gm-builder-9019/project wuus confirmed, CLI masih BinaHub; www NXDOMAIN/canonical live www |
 | W19 | P0 | Hentikan tracking skor browser dan kunci tabel historis | A23 | PARTIAL; LOCAL + owner-reported score RLS/grants PASS; deploy penghentian browser tracking/REST produksi ACCOUNT |
 | W20 | P0 | Paket SQL manual sesuai pilihan owner | A24 | PARTIAL; LOCAL bundle + 4 guard/preservation tests; owner 24 PASS apply/verify, project identity/REST independent belum verified |
-| W21 | P0 operasional | Rumahweb/Zoho/email guide dan payment recommendation | EMAIL-SETUP.md/PAYMENTS.md | PARTIAL; screenshot admin/hallo Zoho aktif dan root domain Resend ada; DNS Resend/inbox/payment route ACCOUNT |
+| W21 | P0 operasional | Rumahweb/Zoho/email guide dan payment recommendation | EMAIL-SETUP.md/PAYMENTS.md | PARTIAL; Zoho admin/hallo aktif; Resend DNS terpublikasi di tiga NS yang merespons; provider Verified/env/inbox/payment route ACCOUNT |
 
 ## Bukti dan risiko tersisa
 
 Hasil pengujian dicatat di [VERIFICATION.md](VERIFICATION.md). Owner mengirim hasil apply/verify 24 PASS; ini bukti hasil checker dari owner, belum pemeriksaan REST/Auth/konkurensi independen. Tidak ulang migration. Endpoint AI yang dipause bukan bukti bahwa ledger/webhook lama sudah benar. Tidak membuka kembali endpoint hanya untuk membuat demo berjalan.
 
-Pekerjaan berikutnya menurut OWNER-NEXT-STEPS.md: DNS Resend/www → akses project wuus dan env/Auth → keputusan hosting komersial → rilis/test live → payment/inbox/scope verified → W12. Akun produksi sudah teridentifikasi melalui screenshot tetapi CLI memakai akun berbeda. Supabase tidak membutuhkan CLI login untuk langkah SQL manual yang sudah dilaporkan PASS; runtime config masih harus dicocokkan. Tidak ada klaim produksi siap menerima deposit sebelum gate tersebut lulus.
+Pekerjaan berikutnya menurut OWNER-NEXT-STEPS.md: cek Verified Resend/www → akses project wuus dan env/UUID Auth user yang sudah dibuat → keputusan hosting komersial → rilis/test live → payment/inbox/scope verified → W12. Akun produksi teridentifikasi tetapi CLI memakai akun berbeda. SQL manual sudah dilaporkan PASS; runtime config masih harus dicocokkan. Tidak ada klaim produksi siap menerima deposit sebelum gate tersebut lulus.

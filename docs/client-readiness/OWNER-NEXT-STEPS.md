@@ -6,6 +6,8 @@ Database: owner mengirim 24 PASS, inventory awal direview. Paket manual hanya `0
 
 Screenshot menunjukkan website apex serta MX/SPF/DKIM Zoho. Pertahankan record tersebut dan record preview/build/Clerk yang sudah dipakai.
 
+Update 04:37 UTC: owner sudah menambahkan ketiga record Resend; DKIM dan dua CNAME terkonfirmasi pada tiga nameserver authoritative yang merespons (satu lainnya timeout). **Jangan menambahkan duplikat**; petunjuk tabel berikut adalah referensi konfigurasi. Langkah saat ini: cek Verified di Resend lalu siapkan key/env dan tes inbox.
+
 Resend root domain `webuntukusaha.com` sudah dibuat pada akun owner. Tambahkan record berikut menggunakan **content lengkap dari dashboard Resend**, bukan string screenshot terpotong:
 
 | Type | Host relatif | Content |
@@ -20,11 +22,15 @@ Tetap **Enable Receiving OFF** pada Resend; MX inbox root tetap Zoho. Pastikan d
 
 Di Vercel project `wuus` → Domains, tambahkan `www.webuntukusaha.com`, pilih redirect permanen ke `https://webuntukusaha.com`, lalu tambahkan CNAME `www` di Rumahweb memakai **target persis dari project/domain Vercel tersebut**. Jangan menyalin target preview/build atau menebak CNAME generik. [Panduan Vercel](https://vercel.com/docs/domains/working-with-domains/add-a-domain).
 
+`www` adalah alamat tambahan, bukan kewajiban memilihnya sebagai alamat utama. WUUS tetap membagikan URL tanpa www; redirect melayani pengunjung/link yang menggunakan www dan menuju halaman setara di apex. Canonical/sitemap memakai apex secara konsisten. [Google canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls).
+
 ## 2. Auth dan konfigurasi project yang benar
 
 Screenshot mengidentifikasi akun `gm-builder-9019`, project `wuus`, apex Valid Configuration pada Production. Nama team UI terpotong; team slug/ID dan repository link masih perlu dibaca dari project asli. CLI saat ini memakai `binahubid-7508` (BinaHub), akun berbeda. Owner login CLI ke akun yang memiliki akses project `wuus` bila rilis memakai CLI; jangan mengirim token/password di chat.
 
 Pada Supabase Authentication → Users, buat/pilih owner login email/password yang berfungsi dan simpan UUID user. Zoho email aktif tidak otomatis membuat Supabase Auth user.
+
+Screenshot terbaru sudah menunjukkan user Email `admin@webuntukusaha.com` dibuat pada Authentication di main/Production. Gunakan user tersebut, tidak membuat duplikat. Last sign-in masih kosong; pastikan password/konfirmasi account sesuai alur pembuatan dan uji login. UUID dari baris user masuk `WUUS_ADMIN_USER_IDS` di server env secara privat; belum menjadi bukti dashboard admin mengizinkan akun itu sebelum env dan runtime proyek cocok.
 
 Isi environment **project `wuus` yang benar**, dengan project Supabase yang menjalankan SQL tadi:
 
