@@ -252,7 +252,7 @@ function ReviewContent() {
               {formError && (
                 <p role="alert" className="text-sm text-red-700">
                   {formError}{' '}
-                  <a href="mailto:faisalalfarizi@webuntukusaha.com" className="underline">Email Faisal directly</a>
+                  <a href="mailto:hallo@webuntukusaha.com" className="underline">Email Faisal directly</a>
                 </p>
               )}
 

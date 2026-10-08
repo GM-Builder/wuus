@@ -42,6 +42,7 @@ Hasil pada branch `codex/client-readiness` di dua repositori. **Belum deploy, be
 | Tracker Excel | Formula scenario tests, error scan 0, semua tab dirender/diinspeksi | Simulasi 0 income; missing proof 0; currency mismatch 0; duplicate invoice 0; approved CR/refund benar; bukan bank integration |
 | Delivery/restore | Git clone rebuild, rollback v1/return v2, ZIP extraction rebuild identik | Fictional approvals/payments dan local launch rehearsal; real revenue 0 |
 | DNS/mail 8 Oktober | Apex HTTPS 200, authoritative NS Rumahweb, MX Zoho, www ENOTFOUND, live canonical masih www | Public read-only checks; tidak membuktikan account hosting/inbox receipt |
+| Kontak email 8 Oktober | Build termasuk TypeScript pass; targeted lint 0 error/2 baseline warnings; empat HTML publik memakai `hallo` dan tidak menampilkan `admin`; fallback error `/review` sesuai source; static fallback `node --check` pass | Recipient lokal `admin@webuntukusaha.com`; tidak deploy, membuat mailbox/alias, mengirim email nyata atau membuktikan inbox receipt |
 
 Bukti tampilan: `WUUS/docs/client-readiness/qa/hospitality-mobile-error.png` dan `review-mobile-error.png`. Isian hanya data sintetis `example.com`; tidak ada data prospek nyata.
 
@@ -56,10 +57,10 @@ Sepuluh lint error website diperbaiki: inferred types, quote JSX dan viewport su
 ## Gate belum lulus
 
 1. Skema/trigger/policies Supabase asli, migration staging/production dan test REST role belum diverifikasi. Perlu backup dan uji concurrency multi-connection.
-2. Service key server, rate-limit secret, allowlist UUID owner dan preview origin belum diset di deployment. Lokal asli hanya memiliki public URL/anon key.
+2. Service key server, rate-limit secret, allowlist UUID owner dan preview origin belum diset di deployment. Lokal asli memiliki public URL/anon key dan recipient `WUUS_OWNER_EMAIL=admin@webuntukusaha.com`; key/sender notifikasi belum tersedia.
 3. Akun owner asli, login/non-owner dan alur kedua form sampai status update di preview/production belum diuji.
 4. Akun Vercel tersambung BinaHub memakai **Hobby**, project tidak memiliki domain apex; inspect apex tidak ditemukan di akun itu. Registrar/NS Rumahweb dan MX Zoho confirmed 8 Oktober; www tetap ENOTFOUND, canonical HTML live masih www. Owner memilih SQL Editor manual, sehingga CLI authentication tidak menjadi syarat langkah itu. Project aktif/config perlu dicocokkan; host config lama ENOTFOUND tidak membuktikan project dihapus. Rilis akun pemilik domain tetap perlu konteks yang benar.
-5. Provider/sender/recipient email, inbox receipt/scheduler, payment route/fees/currency/identitas dan invoice builder lama belum verified. Provider spend caps serta ledger/webhook AI adalah gate future roadmap; AI tetap dipause. Production policy/views/security-definer functions dan multiconnection concurrency belum verified.
+5. Recipient `admin@webuntukusaha.com` dan kontak publik `hallo@webuntukusaha.com` ditentukan owner; mailbox/alias, provider/sender email dan actual inbox receipt/scheduler masih belum verified. Nama bank/payment route/fees/currency/identitas dan invoice builder lama belum verified. Provider spend caps serta ledger/webhook AI adalah gate future roadmap; AI tetap dipause. Production policy/views/security-definer functions dan multiconnection concurrency belum verified.
 
 Bukti tambahan: qa/integration-report.json, qa/delivery-simulation-report.json, qa/client-desktop.png, qa/client-mobile-inquiry.png, qa/diagram-dependency-report.json. Kondisi akun/rilis dirangkum di PRODUCTION-BLOCKERS.md. Kit contoh adalah repo fiktif terpisah; source archive serta restore outputs berada di folder output workspace.
 

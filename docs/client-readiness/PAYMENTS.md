@@ -17,6 +17,8 @@ PayPal dapat menahan pembayaran awal penjual baru sampai 21 hari. Karena DP akan
 
 ## Langkah owner untuk opsi transfer awal
 
+**Owner tidak perlu mendaftar Wise untuk menerima transfer langsung ke rekening bank Indonesia.** Klien memakai akun Wise untuk mengirim; owner menyiapkan rekening dan instruksi invoice privat. Pendaftaran owner baru relevan bila memilih fitur akun Wise sendiri, yang ketersediaannya tidak diasumsikan. Pertanyaan owner yang masih diperlukan sekarang hanya **nama bank Indonesia yang akan digunakan**, bukan nomor rekening atau saldo di chat. [Recipient account explanation](https://wise.com/us/blog/can-i-open-a-joint-account-wise).
+
 1. Pilih rekening Indonesia atas nama payee legal yang benar; pastikan bank mengizinkan penggunaan yang dimaksud. Isi bank/payee/account number pada invoice **privat**, bukan source website, chat atau Git. Nama merek WUUS tidak menggantikan nama pemilik rekening.
 2. Sebelum DP, pilih route sesuai negara/currency client dan bank. Client mengecek quote transfer di Wise; bila route tidak tersedia, pilih alternatif yang telah diverifikasi. Tidak menjanjikan satu fee atau waktu tiba untuk semua negara.
 3. Invoice menetapkan satu currency kontrak. Jika EUR invoice dilunasi melalui IDR, sepakati **jumlah settlement IDR, kurs/sumber/waktu quote dan masa berlaku** secara tertulis. Contoh: EUR 195 DP, settlement IDR [amount disepakati], quote [reference/time], berlaku sampai [date]. Jangan mengisi kurs perkiraan atau memperlakukan angka EUR sebagai IDR.

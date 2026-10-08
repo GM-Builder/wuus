@@ -45,7 +45,7 @@ export function FooterCta() {
                 <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
                   <Mail size={18} className="text-bright-teal" />
                 </div>
-                <span>hello@webuntukusaha.com</span>
+                <a href="mailto:hallo@webuntukusaha.com" className="hover:text-bright-teal transition-colors">hallo@webuntukusaha.com</a>
               </div>
               <div className="flex items-center gap-4 text-gray-300">
                 <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">

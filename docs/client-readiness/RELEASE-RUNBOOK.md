@@ -23,7 +23,7 @@ Owner update 8 Oktober 2026: memilih menjalankan SQL lewat dashboard. Gunakan `s
 | WUUS_ALLOWED_ORIGINS | Server saja | exact preview origins, comma-separated; tanpa wildcard |
 | RESEND_API_KEY | Server saja | key provider email dengan sender domain verified |
 | WUUS_NOTIFICATION_FROM | Server saja | satu plain sender email verified |
-| WUUS_OWNER_EMAIL | Server saja | satu recipient owner yang benar |
+| WUUS_OWNER_EMAIL | Server saja | `admin@webuntukusaha.com`, recipient pilihan owner; uji actual inbox |
 | CRON_SECRET | Server saja | optional scheduler Bearer secret ≥32 karakter |
 
 Apex HTTPS otomatis diizinkan. Localhost:3000/3100 hanya mode development. Local production build/preview harus masuk allowed origins. Origin bukan autentikasi anti-bot. Browser memakai session Supabase SDK; server memverifikasi JWT ke Auth dan allowlist, bukan flag localStorage.

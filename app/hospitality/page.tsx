@@ -1368,10 +1368,10 @@ export default function HospitalityPage() {
                 </p>
                 <div className="pt-2">
                   <a 
-                    href="mailto:faisalalfarizi@webuntukusaha.com"
+                    href="mailto:hallo@webuntukusaha.com"
                     className="text-sm font-bold text-[#1C2733] hover:text-[#F59E0B] border-b border-slate-300 pb-0.5 transition-colors"
                   >
-                    faisalalfarizi@webuntukusaha.com
+                    hallo@webuntukusaha.com
                   </a>
                 </div>
               </div>
@@ -1618,7 +1618,7 @@ export default function HospitalityPage() {
               {formStatus && (
                 <p role={formFailed ? 'alert' : 'status'} aria-live="polite" className={`text-xs font-semibold p-3 rounded-lg border mt-3 ${formFailed ? 'text-red-800 bg-red-50 border-red-200' : 'text-emerald-800 bg-emerald-50 border-emerald-200'}`}>
                   {formStatus}
-                  {formFailed && <> <a href="mailto:faisalalfarizi@webuntukusaha.com" className="underline">Email Faisal directly</a></>}
+                  {formFailed && <> <a href="mailto:hallo@webuntukusaha.com" className="underline">Email Faisal directly</a></>}
                 </p>
               )}
             </form>
@@ -1734,8 +1734,8 @@ export default function HospitalityPage() {
                 </li>
                 <li className="flex items-center gap-2.5 text-slate-600">
                   <Mail size={16} className="text-slate-400 shrink-0" />
-                  <a href="mailto:faisalalfarizi@webuntukusaha.com" className="hover:text-[#F59E0B] transition-colors">
-                    faisalalfarizi@webuntukusaha.com
+                  <a href="mailto:hallo@webuntukusaha.com" className="hover:text-[#F59E0B] transition-colors">
+                    hallo@webuntukusaha.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5 text-slate-600">
