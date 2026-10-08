@@ -1,0 +1,158 @@
+{
+  "environment": "local production build",
+  "checkedAt": "2026-10-08T13:00:04.521Z",
+  "responsive": [
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/",
+      "scrollWidth": 345,
+      "viewport": 360
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/hospitality",
+      "scrollWidth": 345,
+      "viewport": 360
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/review",
+      "scrollWidth": 345,
+      "viewport": 360
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/",
+      "scrollWidth": 753,
+      "viewport": 768
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/hospitality",
+      "scrollWidth": 753,
+      "viewport": 768
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/review",
+      "scrollWidth": 753,
+      "viewport": 768
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/",
+      "scrollWidth": 1425,
+      "viewport": 1440
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/hospitality",
+      "scrollWidth": 1425,
+      "viewport": 1440
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/review",
+      "scrollWidth": 1425,
+      "viewport": 1440
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/",
+      "scrollWidth": 3825,
+      "viewport": 3840
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/hospitality",
+      "scrollWidth": 3825,
+      "viewport": 3840
+    },
+    {
+      "h1Count": 1,
+      "logoReferences": 3,
+      "maxRadius": 16,
+      "overflowElements": [],
+      "privateName": false,
+      "route": "/review",
+      "scrollWidth": 3825,
+      "viewport": 3840
+    }
+  ],
+  "demos": [
+    {
+      "h1": "Artisan",
+      "maxRadius": 16,
+      "route": "/hospitality/demo/seaside-guesthouse",
+      "title": "Artisan Coastal Retreat - Boutique Hospitality Concept Demo | WUUS"
+    },
+    {
+      "h1": "SAVORIA ESTATE & VINEYARDS",
+      "maxRadius": 16,
+      "route": "/hospitality/demo/lakeside-wine-estate",
+      "title": "Savoria Estate & Vineyards - Boutique Hospitality Concept Demo | WUUS"
+    },
+    {
+      "h1": "THE METROPOLITAN LOFT SUITES",
+      "maxRadius": 16,
+      "route": "/hospitality/demo/city-apartments",
+      "title": "The Metropolitan Loft Suites · Sarajevo - Boutique Hospitality Concept Demo | WUUS"
+    }
+  ],
+  "interactions": {
+    "mobileMenu": true,
+    "reviewPrefill": "Villa Mare",
+    "emptyReviewRejected": true,
+    "faqCms": true,
+    "reviewAndProposalOptions": true
+  },
+  "unitTests": {
+    "passed": 37,
+    "failed": 0
+  },
+  "backendAndFormLogicChanged": false
+}

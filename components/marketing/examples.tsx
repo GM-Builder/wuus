@@ -92,7 +92,7 @@ export function WebsitePreview({
               : "Halaman guesthouse dalam konsep website fiktif"
           }
           fill
-          sizes="(max-width: 900px) 90vw, 560px"
+          sizes="(max-width: 900px) 90vw, (max-width: 1300px) 65vw, 1000px"
           preload
         />
         <div className={s.productLabel}>

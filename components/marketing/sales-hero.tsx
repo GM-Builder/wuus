@@ -1,28 +1,32 @@
 import Link from "next/link";
 import { WebsitePreview } from "./examples";
+import { ServiceIcon } from "./service-icon";
 import s from "./marketing.module.css";
 
 export function SalesHero({ language = "en" }: { language?: "en" | "id" }) {
   const en = language === "en";
+  const details = en
+    ? ["Your rooms", "A direct enquiry", "Your own website"]
+    : ["Informasi usaha", "Kontak langsung", "Website milik Anda"];
   return (
     <section className={s.salesHero}>
-      <div className={s.salesCopy}>
+      <div className={s.heroHeading}>
         <p className={s.eyebrow}>
           {en
-            ? "Websites for independent hotels"
-            : "Desain dan pengembangan website"}
+            ? "WUUS / Websites for independent hotels"
+            : "WUUS / Desain dan pengembangan website"}
         </p>
         <h1>
-          {en ? "Your hotel," : "Website yang rapi."}
+          {en ? "A place worth" : "Usaha Anda."}
           <br />
-          <span className={s.soft}>
-            {en ? "clearly presented." : "Untuk usaha Anda."}
-          </span>
+          <span>{en ? "discovering." : "Cerita yang jelas."}</span>
         </h1>
+      </div>
+      <div className={s.heroIntro}>
         <p className={s.heroCopy}>
           {en
-            ? "A website that shows your rooms, answers guests' questions and makes it easy to contact you directly."
-            : "Tampilkan layanan, jawab pertanyaan pelanggan, dan beri mereka cara mudah untuk menghubungi Anda."}
+            ? "Bring your property's character online. Show your rooms, answer guests' questions and make the next step simple."
+            : "Beri usaha Anda ruang di internet. Tampilkan layanan, jawab pertanyaan pelanggan, dan buat mereka mudah menghubungi Anda."}
         </p>
         <div className={s.actions}>
           {en ? (
@@ -43,28 +47,45 @@ export function SalesHero({ language = "en" }: { language?: "en" | "id" }) {
             ? "A one-page review. By email in two working days. No obligation."
             : "Scope dan biaya disepakati sebelum pengerjaan."}
         </p>
-        <div className={s.heroStudio}>
-          <span className={s.studioSymbol} aria-hidden="true">
-            W.
-          </span>
-          <span>
-            {en
-              ? "Independent studio. One point of contact."
-              : "Studio independen. Komunikasi langsung."}
-          </span>
-        </div>
       </div>
-      <div className={s.salesVisual}>
-        <div className={s.visualHeading}>
-          <span>{en ? "A website, in context" : "Desain dalam konteks"}</span>
-          <span aria-hidden="true">↗</span>
+      <div className={s.heroShowcase}>
+        <div className={s.showcaseNotes}>
+          <span className={s.showcaseIndex}>
+            01 / {en ? "A design in context" : "Desain dalam konteks"}
+          </span>
+          <h2>
+            {en
+              ? "A little of your world. Online."
+              : "Karakter usaha. Dalam setiap halaman."}
+          </h2>
+          <p>
+            {en
+              ? "Villa Mare · Fictional guesthouse concept"
+              : "Villa Mare · Konsep guesthouse fiktif"}
+          </p>
+          <ul>
+            {details.map((detail, index) => (
+              <li key={detail}>
+                <ServiceIcon
+                  kind={
+                    index === 0
+                      ? "layout"
+                      : index === 1
+                        ? "message"
+                        : "handover"
+                  }
+                />
+                {detail}
+              </li>
+            ))}
+          </ul>
+          <p className={s.visualCaption}>
+            {en
+              ? "AI-generated concept imagery. Not a client project."
+              : "Foto konsep dibuat dengan AI. Bukan proyek klien."}
+          </p>
         </div>
         <WebsitePreview language={language} />
-        <p className={s.visualCaption}>
-          {en
-            ? "Fictional property · AI-generated concept imagery · Not a client project"
-            : "Properti fiktif · Foto konsep dibuat dengan AI · Bukan proyek klien"}
-        </p>
       </div>
     </section>
   );

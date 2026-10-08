@@ -448,7 +448,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                     Guaranteed lowest rate with direct host perks and flexible cancellation.
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-xl border border-emerald-200">
                   Save ~€45 vs Booking.com
                 </span>
               </div>
@@ -640,7 +640,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                   <h4 className="text-2xl font-serif uppercase tracking-wider text-stone-900 font-bold m-0">
                     KING SUITE
                   </h4>
-                  <span className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                  <span className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-xl uppercase tracking-wider">
                     TRANSPARENT DIRECT RATE
                   </span>
                 </div>
@@ -745,7 +745,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
           <main className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-12">
             
             {/* Featured Ionian Vista Suite matching iPad mockup */}
-            <div id="suite" className="bg-white rounded-3xl border border-stone-200/90 shadow-sm overflow-hidden p-6 sm:p-10 space-y-6">
+            <div id="suite" className="bg-white rounded-2xl border border-stone-200/90 shadow-sm overflow-hidden p-6 sm:p-10 space-y-6">
               
               {/* Featured Villa Pool Photo */}
               <div className="relative h-[340px] sm:h-[440px] rounded-2xl overflow-hidden">
@@ -857,7 +857,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
                 </div>
                 <button
                   onClick={() => setCheckoutOpen(false)}
-                  className="p-2 text-slate-400 hover:text-[#1C2733] rounded-full hover:bg-slate-100 cursor-pointer"
+                  className="p-2 text-slate-400 hover:text-[#1C2733] rounded-xl hover:bg-slate-100 cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1151,7 +1151,7 @@ export function DemoPropertyClient({ property, slug }: { property: PropertyData;
         {!conciergeOpen ? (
           <button
             onClick={() => setConciergeOpen(true)}
-            className="px-4 py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-full shadow-lg flex items-center gap-2 font-semibold text-xs transition-colors cursor-pointer"
+            className="px-4 py-3 bg-[#1C2733] hover:bg-[#F59E0B] hover:text-[#1C2733] text-white rounded-xl shadow-lg flex items-center gap-2 font-semibold text-xs transition-colors cursor-pointer"
           >
             <MessageSquare className="w-4 h-4" />
             <span>Host Concierge</span>

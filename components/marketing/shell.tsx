@@ -1,18 +1,18 @@
 import Link from "next/link";
+import { BrandArtwork } from "./brand-artwork";
 import s from "./marketing.module.css";
 type Language = "en" | "id";
 export function Brand({ href = "/hospitality" }: { href?: string }) {
   return (
     <Link href={href} className={s.brand} aria-label="WUUS home">
-      WUUS
-      <span className={s.brandDot} aria-hidden="true" />
+      <BrandArtwork className={s.brandArtwork} />
     </Link>
   );
 }
 export function StudioAvatar() {
   return (
-    <div className={s.avatar} role="img" aria-label="WUUS studio monogram">
-      WUUS
+    <div className={s.avatar} role="img" aria-label="WUUS studio logo">
+      <BrandArtwork className={s.brandArtwork} />
     </div>
   );
 }

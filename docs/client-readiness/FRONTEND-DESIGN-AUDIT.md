@@ -2,7 +2,7 @@
 
 ## Keputusan dan cakupan
 
-Tujuan: calon pelanggan memahami jasa, contoh desain, scope, harga, dan cara menghubungi WUUS melalui tampilan bersih. Iterasi terbaru mempertahankan kesederhanaan awal serta memakai prinsip komposisi dan kontras dari referensi owner, [Deel](https://www.deel.com/). Identitas WUUS: navy `#1c2e43`, cream, amber `#f6cf83`, biru pucat, tipografi sistem, dan jarak lapang. Aset, merek, serta klaim bisnis referensi tidak digunakan.
+Tujuan: calon pelanggan memahami jasa, contoh desain, scope, harga, dan cara menghubungi WUUS melalui tampilan bersih. Iterasi terbaru memakai satu kanvas editorial dan preview website panoramik, menggantikan hero dua panel yang tidak disukai owner. Identitas WUUS: logo asli, navy `#1c2e43`, cream, amber `#f6cf83`, biru pucat, tipografi sistem, dan motif garis SVG. Referensi [Deel](https://www.deel.com/) hanya menjadi bagian eksplorasi sebelumnya; komposisi hero sekarang dibuat khusus untuk WUUS.
 
 Halaman yang diperbarui: `/`, `/hospitality`, `/review`, `/inquiries`, `/score-test`, serta privasi dan ketentuan dalam bahasa Indonesia dan Inggris. Header/footer dan preview tautan mengikuti identitas yang sama. Dashboard admin dan tiga website demo properti mempertahankan alur sebelumnya; demo mempunyai identitas masing-masing dan ditandai sebagai contoh fiktif.
 
@@ -33,9 +33,32 @@ Email dan dashboard produksi telah dikonfirmasi owner sebelum pekerjaan visual i
 
 ## Iterasi visual kedua — komposisi dan warna
 
+Catatan historis: hero dua panel dan aturan radius pada iterasi ini telah digantikan iterasi ketiga di bawah.
+
 - Hero Indonesia dan hospitality memakai komponen Server Component bersama: panel pesan navy, CTA amber, dan panel cream berisi preview konsep website. Pada tablet dan mobile, panel ditumpuk agar teks dan tombol tetap terbaca.
 - Kartu layanan memakai cream, biru, dan amber pucat. Galeri konsep memiliki bidang biru dan kartu putih; bagian harga memakai cream dengan Starter navy. Profil studio dan footer menggunakan navy. Tidak menambahkan logo pelanggan, angka penjualan, atau testimoni fiktif.
 - Radius utama 10 px untuk detail, 16 px untuk kartu, 24 px untuk panel besar; tombol aksi memakai pill. Panel mobile memakai 16 px. Spasi konten mengikuti unit 8 px; jarak section desktop 96 px dan mobile 64 px.
 - Halaman review memakai hero cream dan panel informasi biru. Overlay pada foto hero membantu keterbacaan teks. Preview sosial dan PNG kompatibilitas mengikuti warna yang sama.
 - Build produksi final, TypeScript, dan ESLint terhadap TSX yang diubah lulus. Sembilan pemeriksaan browser terhadap `/`, `/hospitality`, `/review` pada 360/768/1280 px lulus: satu H1, tanpa overflow elemen/horizontal, tanpa nama pribadi owner. Menu mobile, FAQ CMS, dan penolakan form review kosong diperiksa. Bukti: `qa/studio-design-responsive-20261008.json`.
 - Logika API, autentikasi, database, pembayaran, dan submit form tidak diubah. Tidak ada inquiry atau email produksi baru yang dikirim untuk iterasi CSS/markup ini.
+
+## Iterasi visual ketiga — kanvas WUUS dan radius maksimal 16 px
+
+- Hero memakai satu bidang cream: judul besar, pengantar dan CTA, lalu preview panoramik dengan catatan konsep di sampingnya. Mobile menumpuk konten dan meringkas catatan dekoratif agar preview lebih cepat terlihat. Tidak mengklaim desain ini belum pernah ada di seluruh internet.
+- Artwork asli `/logo-tanpa-bg.png` dipakai melalui framing SVG pada header, footer, dan identitas studio. Framing membuang margin kosong saat tampil tanpa mengubah berkas logo. Versi pada latar terang diberi filter gelap agar terbaca.
+- Background `public/graphics/studio-contour.svg` dan `card-contour.svg`, serta ikon layout/message/handover dibuat sebagai vektor. Motif tetap tajam saat diperbesar; foto konsep dan logo memakai resolusi sumber yang tersedia, bukan klaim seluruh media merupakan foto 4K.
+- Radius sudut maksimum 16 px berlaku pada halaman pemasaran dan ketiga demo. Tombol memakai 10–16 px; pill lama dihapus. Lima perubahan kelas radius demo tidak mengubah logika booking/concierge simulasi.
+- Build final dan TypeScript lulus; ESLint tanpa error. File demo memiliki 22 warning unused-variable yang sudah ada sebelum perubahan kelas radius. Tidak menambah dependency atau JavaScript klien untuk artwork.
+- 37 tes yang sudah ada lulus, termasuk validasi, otorisasi, database lokal dan notifikasi. Dua belas pemeriksaan responsif pada 360/768/1440/3840 px lulus; ketiga demo tampil dengan radius maksimum 16 px. Menu mobile, prefill review `?h=Villa-Mare`, penolakan form kosong, FAQ CMS, dan opsi review/proposal diperiksa. Bukti: `qa/canvas-design-responsive-20261008.json`.
+
+### Fitur yang dipertahankan
+
+| Area | Status pada perubahan visual ini |
+| --- | --- |
+| Inquiry/review dan opsi proposal | Tetap tersedia; komponen submit dan request identity tidak diubah |
+| Database, auth admin, pipeline lead, notifikasi owner | Kode backend tidak berubah dibanding `c0e9661`; akses produksi terverifikasi owner pada tahap sebelumnya |
+| Tiga demo, harga €390/€590, FAQ, email/WhatsApp, privasi/terms | Tetap tersedia |
+| Pembayaran | Tetap invoice/pencatatan manual; tidak mengklaim checkout baru |
+| AI berbayar dan skor lama | Tetap mengikuti pengamanan/perapihan sebelum iterasi ini; bukan fitur yang dihapus oleh penggantian hero |
+
+Tidak mengirim inquiry/email baru ke produksi dan tidak menjalankan SQL produksi untuk perubahan ini.

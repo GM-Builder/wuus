@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MarketingShell, StudioAvatar } from "@/components/marketing/shell";
 import { Examples } from "@/components/marketing/examples";
 import { InquiryForm } from "@/components/marketing/inquiry-form";
+import { ServiceIcon } from "@/components/marketing/service-icon";
 import { SalesHero } from "@/components/marketing/sales-hero";
 import s from "@/components/marketing/marketing.module.css";
 
@@ -86,9 +87,16 @@ export default function HospitalityPage() {
               ],
             ].map(([title, body], index) => (
               <article className={s.feature} key={title}>
-                <span className={s.serviceIndex} aria-hidden="true">
-                  0{index + 1}
-                </span>
+                <ServiceIcon
+                  kind={
+                    index === 0
+                      ? "layout"
+                      : index === 1
+                        ? "message"
+                        : "handover"
+                  }
+                  className={s.serviceIcon}
+                />
                 <h3>{title}</h3>
                 <p>{body}</p>
               </article>
