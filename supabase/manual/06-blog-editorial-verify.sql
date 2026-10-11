@@ -1,0 +1,3 @@
+select 'editorial capability v2' check_name, case when public.wuus_blog_capabilities()->>'editorialVersion'='2' then 'PASS' else 'FAIL' end result
+union all select 'capability service only', case when has_function_privilege('service_role','public.wuus_blog_capabilities()','EXECUTE') and not has_function_privilege('anon','public.wuus_blog_capabilities()','EXECUTE') and not has_function_privilege('authenticated','public.wuus_blog_capabilities()','EXECUTE') then 'PASS' else 'FAIL' end
+union all select 'blog RLS enabled', case when relrowsecurity then 'PASS' else 'FAIL' end from pg_class where oid='public.wuus_blog_posts'::regclass;

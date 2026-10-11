@@ -6,6 +6,7 @@ export const maxDuration=30;
 const handler=createBlogPublisher({
   secret:()=>process.env.WUUS_BLOG_PUBLISH_KEY,
   ready:()=>blogDatabaseConfigured(true),
+  editorialReady:async()=>{const {data,error}=await blogDatabase(true).rpc('wuus_blog_capabilities');return !error&&data?.editorialVersion===2;},
   save:async(p:BlogPublication)=>{
     const {data,error}=await blogDatabase(true).rpc('publish_wuus_blog',{p_payload:p});
     if(error||!data)throw Error('BLOG_WRITE_FAILED');return data;
