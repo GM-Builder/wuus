@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/blog/*": ["./content/blog/*.md"],
+  },
   turbopack: {
     root: path.resolve("."),
   },

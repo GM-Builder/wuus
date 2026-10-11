@@ -31,12 +31,14 @@ export function MarketingHeader({
         ["Pricing", `${home}#pricing`],
         ["Process", `${home}#process`],
         ["FAQ", `${home}#faq`],
+        ["Blog", "/blog"],
       ]
     : [
         ["Layanan", "/#services"],
         ["Contoh desain", "/#examples"],
         ["Cara kerja", "/#process"],
         ["FAQ", "/#faq"],
+        ["Blog (English)", "/blog"],
       ];
   return (
     <header className={s.header}>
@@ -109,6 +111,7 @@ export function MarketingFooter({ language = "en" }: { language?: Language }) {
             </p>
           </div>
           <div className={s.footerLinks}>
+            <Link href="/blog">{en ? "Blog" : "Blog (English)"}</Link>
             <a href="mailto:hallo@webuntukusaha.com">hallo@webuntukusaha.com</a>
             <Link href={en ? "/" : "/hospitality"}>
               {en ? "Bahasa Indonesia" : "Hospitality · English"}

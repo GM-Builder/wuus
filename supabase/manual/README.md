@@ -39,3 +39,7 @@ Notifikasi owner: lanjutkan [panduan Zoho + Resend](../../docs/client-readiness/
 `01-apply.sql` dihasilkan oleh `node scripts/build-manual-supabase-sql.mjs` dari migration 001/002/003, safety checks dan verify; SHA-256 masing-masing sumber dicantumkan. Unit test memastikan bundle tidak menyimpang dari sumber. Tidak ada SQL reset/drop tabel, default admin password atau penempatan service key dalam script.
 
 Owner mencatat manual apply date/project/bundle commit privat. Paket tidak mengubah tabel internal `supabase_migrations`. Supabase menjelaskan bahwa perubahan lewat SQL Editor melewati migration history; sebelum memakai `db push` pada proyek ini di kemudian hari, reconcile schema/history terhadap tiga file sumber dahulu. Jangan langsung reset database. [Database migrations](https://supabase.com/docs/guides/deployment/database-migrations).
+
+## Tambahan blog — 11 Oktober 2026
+
+Untuk publikasi artikel langsung dari Office: jalankan **03-blog-apply.sql** sekali, lalu **04-blog-verify.sql** (semua PASS). SQL 00–02 inquiry yang sudah selesai tidak perlu diulang. Set key khusus API publikasi pada Vercel Production lalu deploy kode lewat GitHub sekali. Artikel berikutnya tidak membutuhkan SQL atau deployment. Ikuti [panduan blog database](../../docs/client-readiness/BLOG-DATABASE-PUBLISHING.md).
