@@ -1,56 +1,58 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { MarketingShell, StudioAvatar } from "@/components/marketing/shell";
-import { Examples } from "@/components/marketing/examples";
+import { UmkmExamples } from "@/components/marketing/umkm-examples";
 import { ServiceIcon } from "@/components/marketing/service-icon";
 import { SalesHero } from "@/components/marketing/sales-hero";
+import { UmkmPricing } from "@/components/marketing/umkm-pricing";
 import s from "@/components/marketing/marketing.module.css";
 
 export const metadata: Metadata = {
-  title: "WUUS — Website yang jelas untuk usaha Anda",
+  title: "Jasa Website UMKM & Sistem Usaha Mulai Rp750 Ribu | WUUS",
   description:
-    "Studio website independen di Jakarta. Desain yang rapi, informasi yang jelas, dan cara mudah bagi pelanggan untuk menghubungi usaha Anda.",
+    "Jasa pembuatan website UMKM mulai Rp750 ribu dan sistem operasional sederhana. Melayani seluruh Indonesia dengan cakupan pekerjaan dan total biaya yang disepakati sejak awal.",
   openGraph: {
-    title: "WUUS — Website yang jelas untuk usaha Anda",
+    title: "Website UMKM & Sistem Usaha | WUUS",
     description:
-      "Desain website, scope tertulis, preview dan source-code handover.",
+      "Website mulai Rp750 ribu untuk UMKM seluruh Indonesia. Cakupan pekerjaan, total biaya, pratinjau dan serah terima kode dijelaskan sejak awal.",
     locale: "id_ID",
   },
 };
 const steps = [
   [
     "Bahas kebutuhan",
-    "Ceritakan usaha dan tujuan website. Kirim tautan website yang ada jika tersedia.",
+    "Ceritakan jenis usaha, kebutuhan utama dan anggaran Anda. Jika sudah memiliki website atau alat kerja, sertakan tautannya.",
   ],
   [
     "Setujui penawaran",
-    "Sepakati scope, biaya, jadwal dan ketentuan. Produksi dimulai setelah DP terverifikasi dan materi lengkap.",
+    "Periksa cakupan pekerjaan, total biaya, jadwal dan ketentuan pembayaran. Pengerjaan dimulai setelah uang muka diterima dan materi lengkap.",
   ],
   [
-    "Lihat preview",
-    "Periksa website pada tautan preview. Revisi mengikuti jumlah ronde yang disepakati.",
+    "Periksa pratinjau",
+    "Tinjau tampilan dan fungsi melalui tautan pratinjau. Sampaikan masukan dalam tahap revisi yang termasuk dalam paket.",
   ],
   [
-    "Launch dan serah terima",
-    "Setelah persetujuan dan pelunasan, website diluncurkan serta kode dan panduan diserahkan.",
+    "Peluncuran dan serah terima",
+    "Setelah hasil disetujui dan pembayaran dilunasi, website atau sistem diluncurkan. Anda menerima kode sumber dan panduan penggunaan.",
   ],
 ];
 const questions = [
   [
     "Berapa biaya pembuatan website?",
-    "Biaya mengikuti jumlah halaman, fitur, materi dan kebutuhan usaha. Penawaran tertulis menjelaskan total biaya serta domain, hosting dan layanan lain sebelum DP. Penawaran hospitality dapat dilihat pada halaman berbahasa Inggris.",
+    "Website Mulai Rp750.000, Website Tumbuh Rp1.750.000 dan Sistem Satu Alur Rp3.500.000 untuk biaya pengerjaan. Domain, hosting dan biaya wajib lainnya dirinci sebelum pembayaran uang muka. Total awal paket UMKM dibatasi Rp4.750.000; kebutuhan disesuaikan dengan anggaran Anda.",
   ],
+  ["Apakah melayani luar Jawa?", "Ya, WUUS melayani UMKM seluruh Indonesia secara jarak jauh. Diskusi, pratinjau, revisi dan serah terima dilakukan secara online. Jadwal disepakati setelah kebutuhan dan kesiapan materi diketahui."],
+  ["Bagaimana kalau belum perlu sistem khusus?", "Kita mulai dari masalah usaha Anda. Jika katalog, formulir atau alat siap pakai sudah cukup, WUUS akan menyarankannya. Sistem khusus hanya dibuat untuk alur yang kebutuhannya sudah jelas."],
   [
     "Siapa yang menyiapkan materi?",
-    "Anda menyiapkan teks, informasi usaha dan foto yang boleh digunakan. Bantuan konten atau bahasa tambahan dibahas dalam scope.",
+    "Anda menyiapkan teks, informasi usaha dan foto yang boleh digunakan. Bantuan penulisan konten atau bahasa tambahan dibahas dalam penawaran.",
   ],
   [
     "Apakah saya bisa mengedit sendiri?",
-    "CMS dan fitur edit mandiri disiapkan jika disepakati dalam scope. Tanpa CMS, perubahan konten dapat dikerjakan WUUS dengan biaya yang disetujui.",
+    "Panel pengelolaan konten (CMS) dan fitur edit mandiri tersedia jika termasuk dalam penawaran. Jika tidak, perubahan konten dapat dibantu WUUS dengan biaya yang disepakati terlebih dahulu.",
   ],
   [
     "Apakah website menjadi milik saya?",
-    "Kode dan konten sesuai scope diserahkan setelah pelunasan. Domain dan hosting sebaiknya berada pada akun Anda. Lisensi aset pihak ketiga tetap berlaku.",
+    "Kode sumber dan konten sesuai kesepakatan diserahkan setelah pelunasan. Domain dan hosting sebaiknya berada pada akun Anda. Lisensi aset pihak ketiga tetap berlaku.",
   ],
 ];
 export default function Home() {
@@ -60,36 +62,36 @@ export default function Home() {
         <SalesHero language="id" />
         <div className={`${s.container} ${s.proofLine}`}>
           <span>Nyaman dibuka di ponsel</span>
-          <span>Scope dan harga tertulis</span>
-          <span>Preview sebelum pelunasan</span>
+          <span>Cakupan dan harga tertulis</span>
+          <span>Pratinjau sebelum pelunasan</span>
           <span>Serah terima kode website</span>
         </div>
         <section id="services" className={`${s.container} ${s.section}`}>
           <div className={s.sectionHead}>
             <p className={s.eyebrow}>Layanan WUUS</p>
             <h2>
-              Informasi yang dibutuhkan.
+              Apa yang ingin Anda
               <br />
-              Tampilan yang tertata.
+              benahi di usaha Anda?
             </h2>
             <p>
-              Mulai dari kebutuhan usaha Anda. Jumlah halaman, fitur, materi dan
-              jadwal ditulis dalam penawaran.
+              Bisa mulai dari website sederhana, katalog produk, atau pencatatan
+              pesanan. Kita pilih yang paling dibutuhkan dulu.
             </p>
           </div>
           <div className={s.three}>
             {[
               [
                 "Website usaha",
-                "Profil, layanan, galeri, lokasi dan kontak agar pelanggan dapat mengenal usaha Anda.",
+                "Sajikan profil, produk, layanan, lokasi dan kontak dalam satu tempat yang mudah diakses pelanggan.",
               ],
               [
-                "Website hospitality",
-                "Kamar, fasilitas, informasi properti, inquiry dan tautan ke booking engine yang sudah Anda gunakan.",
+                "Sistem operasional sederhana",
+                "Kelola satu alur kerja, seperti pencatatan pesanan, status pengerjaan atau tindak lanjut pelanggan, berdasarkan kebutuhan yang dipetakan bersama.",
               ],
               [
-                "Perapihan website",
-                "Evaluasi tampilan mobile, susunan konten dan tombol kontak. Pengerjaan mengikuti kondisi website yang ada.",
+                "Penyempurnaan website",
+                "Perbaiki tampilan di ponsel, susunan informasi dan kemudahan menghubungi usaha Anda. Cakupan ditentukan setelah website diperiksa.",
               ],
             ].map(([title, body], index) => (
               <article className={s.feature} key={title}>
@@ -108,29 +110,23 @@ export default function Home() {
               </article>
             ))}
           </div>
-          <div className="mt-8">
-            <Link href="/hospitality" className={s.textLink}>
-              Hotel atau guesthouse? Lihat penawaran hospitality{" "}
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
         </section>
+        <UmkmPricing />
         <section id="examples" className={`${s.section} ${s.blueSection}`}>
           <div className={s.container}>
             <div className={s.sectionHead}>
               <p className={s.eyebrow}>Contoh desain</p>
               <h2>
-                Lihat bentuknya.
+                Untuk yang jual produk,
                 <br />
-                Coba alurnya.
+                maupun yang menawarkan jasa.
               </h2>
               <p>
-                Tiga konsep hospitality untuk memperlihatkan susunan konten dan
-                alur inquiry. Properti dan foto merupakan contoh fiktif, bukan
-                hasil proyek klien.
+                Setiap usaha punya informasi yang berbeda. Pilih contoh di bawah
+                untuk melihat bagaimana menu, layanan atau katalog bisa disusun.
               </p>
             </div>
-            <Examples language="id" />
+            <UmkmExamples />
           </div>
         </section>
         <section
@@ -140,13 +136,14 @@ export default function Home() {
           <div>
             <p className={s.eyebrow}>Cara kerja</p>
             <h2>
-              Dari kebutuhan
+              Prosesnya bisa Anda
               <br />
-              ke website yang siap diserahkan.
+              ikuti dari awal.
             </h2>
             <p>
-              Anda berhubungan langsung dengan pembuat website. Materi, batas
-              revisi dan biaya layanan pihak ketiga dijelaskan sejak awal.
+              Anda berkomunikasi langsung dengan penanggung jawab proyek.
+              Kebutuhan materi, batas revisi dan biaya layanan pihak ketiga
+              dijelaskan sejak awal.
             </p>
             <div className={s.processPhoto} aria-hidden="true" />
             <p className={s.storyCaption}>Foto ilustratif dibuat dengan AI.</p>
@@ -169,9 +166,9 @@ export default function Home() {
             <div>
               <p className={s.eyebrow}>Tentang studio</p>
               <h2>
-                Satu penanggung jawab.
+                Diskusi langsung
                 <br />
-                Komunikasi langsung.
+                dengan yang mengerjakan.
               </h2>
               <p>
                 WUUS adalah studio website independen yang dijalankan satu orang
@@ -179,8 +176,10 @@ export default function Home() {
                 dan membangun website.
               </p>
               <p>
-                Kepercayaan dibangun melalui scope yang jelas, update tertulis,
-                preview yang bisa diperiksa, dan serah terima yang rapi.
+                Sebelum mulai, Anda tahu apa yang dikerjakan dan berapa biayanya.
+                Selama prosesnya, Anda mendapat kabar perkembangan dan tautan
+                untuk memeriksa hasil. Setelah selesai, kode dan panduannya
+                diserahkan kepada Anda.
               </p>
             </div>
           </div>
@@ -188,7 +187,7 @@ export default function Home() {
         <section id="faq" className={`${s.container} ${s.section} ${s.split}`}>
           <div>
             <p className={s.eyebrow}>Sebelum mulai</p>
-            <h2>Yang perlu Anda tahu.</h2>
+            <h2>Pertanyaan sebelum memulai.</h2>
           </div>
           <div className={s.faq}>
             {questions.map(([question, answer]) => (
@@ -210,12 +209,12 @@ export default function Home() {
                 <h2>
                   Ceritakan usaha Anda.
                   <br />
-                  Kita tentukan langkah berikutnya.
+                  Mulai dari yang paling dibutuhkan.
                 </h2>
                 <p>
-                  Kirim jenis usaha, tautan website jika ada, dan hal yang ingin
-                  diperbaiki. WUUS akan membalas melalui email dalam dua hari
-                  kerja.
+                  Kirim jenis usaha, kota atau provinsi, kebutuhan utama dan
+                  kisaran anggaran. Kami akan membantu menentukan layanan
+                  yang sesuai melalui email atau WhatsApp.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
@@ -223,13 +222,13 @@ export default function Home() {
                   href="mailto:hallo@webuntukusaha.com?subject=Diskusi%20website%20usaha"
                   className={s.button}
                 >
-                  Email WUUS
+                  Kirim kebutuhan via email
                 </a>
                 <a
                   href="https://wa.me/6281383521750?text=Halo%20WUUS%2C%20saya%20ingin%20membahas%20website%20usaha."
                   className={s.buttonLight}
                 >
-                  Hubungi via WhatsApp
+                  Konsultasi via WhatsApp
                 </a>
               </div>
               <p className={s.smallPrint}>

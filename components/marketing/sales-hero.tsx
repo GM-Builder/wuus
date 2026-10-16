@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { WebsitePreview } from "./examples";
+import { UmkmExamples } from "./umkm-examples";
 import { ServiceIcon } from "./service-icon";
 import s from "./marketing.module.css";
 
@@ -17,16 +18,16 @@ export function SalesHero({ language = "en" }: { language?: "en" | "id" }) {
             : "WUUS / Desain dan pengembangan website"}
         </p>
         <h1>
-          {en ? "A place worth" : "Usaha Anda."}
+          {en ? "A place worth" : "Butuh website"}
           <br />
-          <span>{en ? "discovering." : "Cerita yang jelas."}</span>
+          <span>{en ? "discovering." : "untuk usaha Anda?"}</span>
         </h1>
       </div>
       <div className={s.heroIntro}>
         <p className={s.heroCopy}>
           {en
             ? "Bring your property's character online. Show your rooms, answer guests' questions and make the next step simple."
-            : "Beri usaha Anda ruang di internet. Tampilkan layanan, jawab pertanyaan pelanggan, dan buat mereka mudah menghubungi Anda."}
+            : "Kami bantu buatkan, mulai Rp750 ribu. Bisa untuk menampilkan produk, menjelaskan layanan, atau menerima pertanyaan pelanggan. Kalau pencatatan pesanan juga perlu dibenahi, kita bahas sistem yang sesuai."}
         </p>
         <div className={s.actions}>
           {en ? (
@@ -34,8 +35,8 @@ export function SalesHero({ language = "en" }: { language?: "en" | "id" }) {
               Get a free website review <span aria-hidden="true">↗</span>
             </Link>
           ) : (
-            <a className={s.button} href="#contact">
-              Bahas website Anda <span aria-hidden="true">↗</span>
+            <a className={s.button} href="#pricing">
+              Lihat paket UMKM <span aria-hidden="true">↗</span>
             </a>
           )}
           <a href="#examples" className={s.textLink}>
@@ -45,7 +46,7 @@ export function SalesHero({ language = "en" }: { language?: "en" | "id" }) {
         <p className={s.caption}>
           {en
             ? "A one-page review. By email in two working days. No obligation."
-            : "Scope dan biaya disepakati sebelum pengerjaan."}
+            : "Melayani seluruh Indonesia · Uang muka 50% · Total biaya disepakati sejak awal."}
         </p>
       </div>
       <div className={s.heroShowcase}>
@@ -56,12 +57,12 @@ export function SalesHero({ language = "en" }: { language?: "en" | "id" }) {
           <h2>
             {en
               ? "A little of your world. Online."
-              : "Karakter usaha. Dalam setiap halaman."}
+              : "Pelanggan bisa lihat dulu, lalu menghubungi Anda."}
           </h2>
           <p>
             {en
               ? "Villa Mare · Fictional guesthouse concept"
-              : "Villa Mare · Konsep guesthouse fiktif"}
+              : "Menu, daftar layanan, katalog produk dan kontak usaha bisa dikumpulkan di satu tempat."}
           </p>
           <ul>
             {details.map((detail, index) => (
@@ -82,10 +83,10 @@ export function SalesHero({ language = "en" }: { language?: "en" | "id" }) {
           <p className={s.visualCaption}>
             {en
               ? "AI-generated concept imagery. Not a client project."
-              : "Foto konsep dibuat dengan AI. Bukan proyek klien."}
+              : "Contoh susunan website. Nama usaha dan isinya fiktif."}
           </p>
         </div>
-        <WebsitePreview language={language} />
+        {en ? <WebsitePreview language={language} /> : <UmkmExamples compact />}
       </div>
     </section>
   );

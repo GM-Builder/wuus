@@ -10,7 +10,7 @@ const examples = [
     description:
       "Coastal photography, room comparison and a complete demo checkout.",
     idDescription:
-      "Foto properti, perbandingan kamar, dan checkout booking simulasi.",
+      "Konsep foto properti, perbandingan kamar dan simulasi pemesanan.",
   },
   {
     slug: "lakeside-wine-estate",
@@ -111,7 +111,7 @@ export function WebsitePreview({
           <p>
             {en
               ? "Room details, a photo gallery and an interactive booking demo."
-              : "Informasi kamar, galeri foto, dan demo booking interaktif."}
+              : "Informasi kamar, galeri foto dan simulasi pemesanan interaktif."}
           </p>
         </div>
         <Link

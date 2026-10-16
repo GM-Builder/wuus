@@ -401,6 +401,47 @@
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
+.umkmPrices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.businessExamples { min-width: 0; width: 100%; }
+.businessChoices { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.businessChoices button { padding: 12px 18px; border: 1px solid var(--ink); border-radius: 12px; color: var(--ink); background: transparent; cursor: pointer; font: inherit; }
+.businessChoices button[aria-pressed="true"] { background: var(--ink); color: white; }
+.businessChoices button:hover { text-decoration: underline; }
+.businessPreview { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: white; }
+.businessBar { display: flex; justify-content: space-between; gap: 12px; padding: 18px 24px; border-bottom: 1px solid var(--line); font-size: 13px; }
+.businessBar span { color: var(--muted); }
+.businessBody { padding: clamp(24px, 4vw, 48px); }
+.businessBody > h3 { font-size: clamp(25px, 3vw, 38px); letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 16px; }
+.businessBody > p { color: var(--muted); max-width: 65ch; }
+.businessProducts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 32px 0; }
+.businessProducts > div { padding: 20px 0; border-block: 1px solid var(--line); }
+.businessProducts h4 { font-weight: 600; margin-bottom: 8px; }
+.businessProducts p { font-size: 14px; color: var(--muted); }
+.businessBottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; font-size: 13px; color: var(--muted); }
+@media (max-width: 640px) {
+  .businessProducts { grid-template-columns: 1fr; gap: 0; }
+  .businessProducts > div + div { border-top: 0; }
+  .businessBar { flex-wrap: wrap; }
+}
+.umkmPrices .priceCard { display: flex; flex-direction: column; }
+.umkmPrices .price { font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.03em; }
+.umkmPrices .priceCard ul { flex: 1; }
+.umkmPrices .priceCard .button { margin-top: 20px; }
+.umkmTerms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+.umkmTerms h3 { font-size: 20px; margin-bottom: 12px; }
+.umkmTerms p { color: var(--muted); max-width: 70ch; }
+@media (max-width: 900px) {
+  .umkmPrices, .umkmTerms { grid-template-columns: 1fr; }
+}
 .priceCard {
   background: #fff;
   border: 1px solid #e7e7ea;

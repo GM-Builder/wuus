@@ -35,6 +35,7 @@ export function MarketingHeader({
       ]
     : [
         ["Layanan", "/#services"],
+        ["Harga UMKM", "/#pricing"],
         ["Contoh desain", "/#examples"],
         ["Cara kerja", "/#process"],
         ["FAQ", "/#faq"],
@@ -76,7 +77,7 @@ export function MarketingHeader({
               review ? "/hospitality#examples" : en ? "/review" : "/#contact"
             }
           >
-            {review ? "View examples" : en ? "Free review" : "Bahas website"}
+            {review ? "View examples" : en ? "Free review" : "Konsultasi"}
           </Link>
           <details className={s.mobileNav}>
             <summary>Menu</summary>
