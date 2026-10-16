@@ -407,6 +407,14 @@
   gap: 24px;
 }
 .businessExamples { min-width: 0; width: 100%; }
+.curatedExample { display: grid; grid-template-columns: 1.2fr 1fr; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
+.curatedPhoto { position: relative; display: block; min-height: 320px; }
+.curatedPhoto img { object-fit: cover; }
+.curatedCopy { padding: clamp(24px, 3vw, 40px); align-self: center; }
+.curatedCopy > span { font-size: 12px; color: var(--muted); }
+.curatedCopy h3 { font-size: 32px; line-height: 1.2; margin: 14px 0; letter-spacing: -.03em; }
+.curatedCopy p { color: var(--muted); margin-bottom: 24px; font-size: 14px; }
+@media (max-width: 900px) { .curatedExample { grid-template-columns: 1fr; } .curatedPhoto { min-height: 280px; } }
 .businessChoices { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
 .businessChoices button { padding: 12px 18px; border: 1px solid var(--ink); border-radius: 12px; color: var(--ink); background: transparent; cursor: pointer; font: inherit; }
 .businessChoices button[aria-pressed="true"] { background: var(--ink); color: white; }
