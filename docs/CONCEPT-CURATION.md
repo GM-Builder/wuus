@@ -5,8 +5,13 @@
 ## Urutan kurasi
 
 1. **Dapur Saji**, kuliner/katering — dibangun pertama: /contoh/dapur-saji.
-2. **Bersih Laundry**, jasa lokal — konsep antrian berikutnya, bukan website selesai.
-3. **Ruang Kayu**, furnitur/pemasok — konsep antrian berikutnya, bukan website selesai.
+2. **Bersih Laundry**, jasa lokal — website lengkap kedua: /contoh/bersih-laundry.
+3. **Ruang Kayu**, furnitur — /contoh/ruang-kayu, katalog dan konfigurator ukuran/material.
+4. **Titik Potong**, barbershop — /contoh/titik-potong, pilihan layanan/barber/jadwal.
+5. **Putaran Motor**, bengkel — /contoh/putaran-motor, rencana servis dan informasi kendaraan.
+6. **Kelopak**, florist — /contoh/kelopak, pilihan buket/ukuran dan keranjang.
+7. **Langkah Belajar**, kursus — /contoh/langkah-belajar, program/tingkat/sesi dan jadwal.
+8. **Sela Wear**, fashion — /contoh/sela-wear, katalog serta keranjang per varian ukuran/warna.
 
 Satu konsep dianggap siap jika seluruh halaman dan perjalanan pengguna selesai, ada visual yang relevan, layout desktop/mobile, keyboard, empty state, batas input, hitungan, metadata dan hasil uji. Baru setelah itu dipajang sebagai contoh yang bisa dibuka. Jangan membuat contoh sekadar kartu placeholder lalu mengklaim full website.
 
@@ -23,3 +28,13 @@ Satu konsep dianggap siap jika seluruh halaman dan perjalanan pengguna selesai, 
 ## Kejujuran penyajian
 
 Kontrol tetap bisa dicoba, tetapi ringkasan menyatakan belum ada kiriman. Tidak ada nomor telepon/alamat/jam buka/klaim pengiriman nyata untuk usaha fiktif. CTA kembali WUUS untuk kebutuhan website dipisahkan dari pemilihan menu. Label asal foto ada pada footer. Source/prompt aset disimpan bersama image ledger.
+
+## Bersih Laundry — surface contract
+
+- Scope/Purpose: website penuh jasa laundry, Persuade dengan estimator dan rencana jemput lokal. Owner17Oktober2026 meminta contoh berikutnya modern, tidak flat. Label publik Contoh desain.
+- Audience/Task: usaha jasa melihat website lengkap; pengunjung memilih layanan dan waktu, memperkirakan biaya, membuat ringkasan serta mencoba status cucian. Tidak ada permintaan/pembayaran aktual.
+- Content/Proof: layanan kiloan/satuan, harga/minimum/durasi ilustratif, estimator, form jadwal, tracking dua nomor contoh, cerita perawatan, proses, FAQ dan footer. Tiga fotoAI khusus. Tidak ada ulasan/omzet/cabang/pelanggan fiktif.
+- Direction/First viewport: biru kobalt, putih hangat, foto interiorstainlesssteel dengan cahaya nyata; bidanghero biru berlapis, panel fotoberperspektif, tiketmengambang dan navutilitas. Dimensi lewat material/cahaya/elevasi, bukan ikonberulangataudekorasiglitter. Satoshi/Outfitexisting. Berbeda dari DapurSaji warmeditorial.
+- Signature interaction: layanan kg/satuan mengubah minimum/step dan eligibilityexpress; berat .5kg; estimator onchangemenghitung express+50% dan biaya antarjemputcontoh15ribu. Form menyusun ringkasan lokal. Tracking hanya BL-1024/BL-1025, bukan pencarian database nyata. Invalid/empty states, stale summaryreset, clipboardfallback.
+- Constraints/Quality: noindex, canonical sendiri, boundedqty50, unitvalid, requiredtanggal nonpast/area conditional, fungsi desktop1440/mobile390, keyboard/focus/reducedmotion, nooverflow. CTAWUUS terpisah. Tidak mengarang jaminan nodahilang/bebasalergen/keberhasilan layanan.
+- Build path: code-led, latestuserdirectionmodernnonflat pinsmaterialdepth; scopedconcept, tidak mengubahidentitasmarketingWUUS.

@@ -1,0 +1,8 @@
+{
+  "name": "hero",
+  "origin": "OpenAI built-in image_gen, 17 October 2026",
+  "source": "exec-da9083c5-cf74-4ee7-8d46-6ae2e22da9e6.png",
+  "prompt": "Premium architectural commercial photograph, wide landscape 3:2, a meticulously designed contemporary Indonesian neighborhood laundry studio, deep cobalt blue recessed built-in cabinets with brushed stainless steel circular front loading washing machines, rounded white counter in foreground with neatly folded ivory towels and a soft blue cotton shirt, daylight from a tall side window and warm under-cabinet lighting, tactile brushed steel reflections and real cotton fabric texture. Slightly low cinematic camera angle, layered foreground and background, spatial depth, premium but approachable everyday business interior, restrained ice blue and ivory palette, photorealistic, extremely clean without looking sterile. No text, no signage, no logos, no people, no watermark. Website hero asset, focal machinery towards center right with open negative space left.",
+  "processing": "proportional resize and WebP encoding only",
+  "inspected": true
+}

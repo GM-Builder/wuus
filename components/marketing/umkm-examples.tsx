@@ -1,36 +1,11 @@
 "use client";
-
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import s from "./marketing.module.css";
-
-const concepts = [
-  { name: "Kuliner & produk", brand: "Dapur Saji", title: "Menu untuk acara Anda", intro: "Lihat pilihan menu, porsi dan cara pemesanan tanpa harus menanyakan semuanya lewat chat.", items: [["Paket makan siang", "Isi menu dan pilihan porsi"], ["Snack box", "Pilihan kue dan jumlah pesanan"], ["Menu acara", "Pilihan menu sesuai kebutuhan"]], note: "Katalog, informasi pesanan dan tombol WhatsApp." },
-  { name: "Jasa & layanan", brand: "Bersih Laundry", title: "Pilih layanan yang Anda butuhkan", intro: "Informasi layanan, jam buka dan area antar jemput tersedia dalam satu halaman.", items: [["Cuci & setrika", "Rincian layanan dan estimasi waktu"], ["Laundry satuan", "Daftar barang dan ketentuan"], ["Antar jemput", "Area layanan dan jadwal"]], note: "Daftar layanan, ketentuan dan kontak usaha." },
-  { name: "Usaha & pemasok", brand: "Ruang Kayu", title: "Furnitur sesuai kebutuhan ruang", intro: "Bandingkan bahan dan ukuran, lalu kirim kebutuhan Anda untuk mendapatkan penawaran.", items: [["Meja kerja", "Pilihan bahan dan ukuran"], ["Rak penyimpanan", "Spesifikasi dan pilihan finishing"], ["Pesanan khusus", "Formulir kebutuhan dan konsultasi"]], note: "Katalog produk, spesifikasi dan permintaan penawaran." },
-];
-
-export function UmkmExamples({ compact = false }: { compact?: boolean }) {
-  const [selected, setSelected] = useState(0);
-  const concept = concepts[selected];
-  return (
-    <div className={s.businessExamples}>
-      {!compact && <div className={s.businessChoices} role="group" aria-label="Pilih contoh jenis usaha">
-        {concepts.map((item, index) => <button key={item.name} type="button" aria-pressed={selected === index} onClick={() => setSelected(index)}>{item.name}</button>)}
-      </div>}
-      {selected===0 ? <div className={s.curatedExample}>
-        <Link href="/contoh/dapur-saji" className={s.curatedPhoto} aria-label="Buka contoh desain Dapur Saji"><Image src="/images/concepts/dapur-saji/hero.webp" alt="Konsep Dapur Saji, katering masakan Indonesia" fill sizes="(max-width:800px) 100vw, 60vw"/></Link>
-        <div className={s.curatedCopy}><span>Contoh desain · Kuliner</span><h3>Dapur Saji</h3><p>Website katering lengkap dengan katalog menu, pilihan jumlah dan ringkasan pesanan.</p><Link href="/contoh/dapur-saji" className={s.button}>Lihat website Dapur Saji <span aria-hidden="true">↗</span></Link></div>
-      </div> : <div className={s.businessPreview} aria-live="polite">
-        <div className={s.businessBar}><strong>{concept.brand}</strong><span>Contoh website usaha</span></div>
-        <div className={s.businessBody}>
-          <h3>{concept.title}</h3><p>{concept.intro}</p>
-          <div className={s.businessProducts}>{concept.items.map(([title, detail]) => <div key={title}><h4>{title}</h4><p>{detail}</p></div>)}</div>
-          <div className={s.businessBottom}><span>Dalam kurasi. Website lengkap untuk konsep ini belum tersedia.</span></div>
-        </div>
-      </div>}
-      {!compact && <p className={s.smallPrint}>Kami membangun contoh desain ini satu per satu. Nama usaha dan isinya fiktif, bukan portofolio proyek klien. Tampilan dan fitur untuk usaha Anda mengikuti paket yang disepakati.</p>}
-    </div>
-  );
+import {useState} from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import {conceptCatalog} from '@/lib/concept-catalog';
+import s from './marketing.module.css';
+export function UmkmExamples({compact=false}:{compact?:boolean}){
+ const [filter,setFilter]=useState('Semua'); const first=conceptCatalog[0];
+ if(compact)return <div className={s.businessExamples}><div className={s.curatedExample}><Link href={`/contoh/${first.slug}`} className={s.curatedPhoto} aria-label={`Buka contoh desain ${first.name}`}><Image src={`/images/concepts/${first.slug}/${first.image}`} alt={`Contoh desain ${first.name}`} fill sizes="(max-width:800px) 100vw, 60vw"/></Link><div className={s.curatedCopy}><span>Contoh desain · {first.category}</span><h3>{first.name}</h3><p>{first.description}</p><Link href={`/contoh/${first.slug}`} className={s.button}>Lihat website {first.name} <span aria-hidden="true">↗</span></Link></div></div></div>;
+ return <div className={s.businessExamples}><div className={s.businessChoices} role="group" aria-label="Saring contoh desain">{['Semua','Kuliner','Jasa','Produk','Pendidikan'].map(category=><button key={category} type="button" aria-pressed={filter===category} onClick={()=>setFilter(category)}>{category}</button>)}</div><div className={s.conceptGallery}>{conceptCatalog.filter(item=>filter==='Semua'||item.category===filter).map(item=><article className={s.conceptTile} key={item.slug}><Link className={s.conceptPhoto} href={`/contoh/${item.slug}`} aria-label={`Buka contoh desain ${item.name}`}><Image src={`/images/concepts/${item.slug}/${item.image}`} alt={`Contoh desain ${item.name}`} fill sizes="(max-width:650px) 90vw, (max-width:1000px) 45vw, 30vw"/></Link><div className={s.conceptInfo}><span>{item.category}</span><h3>{item.name}</h3><p>{item.description}</p><Link href={`/contoh/${item.slug}`} className={s.textLink}>Lihat website <span aria-hidden="true">↗</span><span className="sr-only"> {item.name}</span></Link></div></article>)}</div><p className={s.smallPrint}>Semua contoh dapat dibuka dan dicoba. Nama usaha, produk dan isinya fiktif, bukan portofolio proyek klien. Fitur untuk usaha Anda mengikuti paket yang disepakati.</p></div>;
 }

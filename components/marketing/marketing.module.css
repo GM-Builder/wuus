@@ -407,6 +407,18 @@
   gap: 24px;
 }
 .businessExamples { min-width: 0; width: 100%; }
+.conceptGallery { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; }
+.conceptTile { min-width: 0; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 28px -22px #1c2e4359; }
+.conceptPhoto { display: block; position: relative; aspect-ratio: 1.45; overflow: hidden; }
+.conceptPhoto img { object-fit: cover; transition: transform .3s; }
+.conceptPhoto:hover img { transform: scale(1.025); }
+.conceptInfo { padding: 24px; }
+.conceptInfo > span { font-size: 12px; color: var(--muted); }
+.conceptInfo h3 { font-size: 24px; line-height: 1.2; letter-spacing: -.03em; margin: 10px 0; }
+.conceptInfo p { font-size: 14px; color: var(--muted); margin-bottom: 22px; }
+@media(max-width:1000px){ .conceptGallery { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:650px){ .conceptGallery { grid-template-columns: 1fr; } }
+@media(prefers-reduced-motion:reduce){ .conceptPhoto img { transition:none; } }
 .curatedExample { display: grid; grid-template-columns: 1.2fr 1fr; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
 .curatedPhoto { position: relative; display: block; min-height: 320px; }
 .curatedPhoto img { object-fit: cover; }
